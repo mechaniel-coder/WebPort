@@ -1,0 +1,370 @@
+<!doctype html>
+<html lang="en" data-color-scheme="dark">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Platform — Northwind</title>
+    <meta name="description" content="How the three signals fit together: one collector, one store, one query language. Redaction happens before data leaves your network.">
+    <link rel="canonical" href="https://example.com/northwind/platform/">
+    <meta name="theme-color" content="#0b0e14">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Northwind">
+    <meta property="og:title" content="Platform — Northwind">
+    <meta property="og:description" content="How the three signals fit together: one collector, one store, one query language. Redaction happens before data leaves your network.">
+    <meta property="og:url" content="https://example.com/northwind/platform/">
+    <meta property="og:image" content="https://example.com/northwind/assets/social-card.svg">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Platform — Northwind">
+    <meta name="twitter:description" content="How the three signals fit together: one collector, one store, one query language. Redaction happens before data leaves your network.">
+    <meta name="twitter:image" content="https://example.com/northwind/assets/social-card.svg">
+    <link rel="icon" href="data:image/svg+xml,%3Csvg%20viewBox%3D%220%200%2032%2032%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20aria-hidden%3D%22true%22%3E%20%3Crect%20width%3D%2232%22%20height%3D%2232%22%20rx%3D%227%22%20fill%3D%22%230b0e14%22%2F%3E%20%3Cpath%20d%3D%22M6%2023V10l10%2010%2010-10v13%22%20fill%3D%22none%22%20stroke%3D%22%234f8ff7%22%20stroke-width%3D%222.6%22%2F%3E%20%3C%2Fsvg%3E">
+    <link rel="stylesheet" href="/shared/reset.css">
+    <link rel="stylesheet" href="/northwind/assets/northwind.css">
+    <script type="application/ld+json">{"@context":"https://schema.org","@type":"SoftwareApplication","name":"Northwind","description":"Metrics, traces and logs in one query language, priced on what you actually\n    ingest rather than per seat.","url":"https://example.com/northwind/","applicationCategory":"DeveloperApplication","operatingSystem":"Web","offers":{"@type":"AggregateOffer","priceCurrency":"USD","lowPrice":"0","highPrice":"499","offerCount":3}}</script>
+    <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Northwind","item":"https://example.com/northwind/"},{"@type":"ListItem","position":2,"name":"Platform","item":"https://example.com/northwind/platform/"}]}</script>
+  </head>
+  <body class="site-northwind">
+    <a class="skip-link" href="#main">Skip to main content</a>
+    <header class="topbar">
+      <div class="topbar__inner">
+        <a class="logo" href="/northwind/">
+          <span class="logo__mark" aria-hidden="true"><svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg"
+  aria-hidden="true" focusable="false">
+  <path d="M5 24V8l11 11 11-11v16" fill="none" stroke="currentColor" stroke-width="2.6"
+        stroke-linecap="square"/>
+</svg></span>
+          <span class="logo__text">Northwind</span>
+        </a>
+
+        <button class="topbar__toggle" type="button" aria-expanded="false"
+                aria-controls="nw-nav" data-nav-toggle>
+          <span class="topbar__bars" aria-hidden="true"><i></i><i></i><i></i></span>
+          <span class="visually-hidden">Menu</span>
+        </button>
+
+        <nav class="topbar__nav" id="nw-nav" aria-label="Primary" data-nav
+             data-nav-breakpoint="64em">
+          <ul>
+            <li><a href="/northwind/platform/" aria-current="page">Platform</a></li>
+<li><a href="/northwind/pricing/">Pricing</a></li>
+<li><a href="/northwind/customers/">Customers</a></li>
+<li><a href="/northwind/docs/">Docs</a></li>
+<li><a href="/northwind/security/">Security</a></li>
+          </ul>
+          <div class="topbar__actions">
+            <a class="btn btn--ghost btn--sm" href="/northwind/docs/">Read the docs</a>
+            <a class="btn btn--sm" href="/northwind/demo/">Book a demo</a>
+          </div>
+        </nav>
+      </div>
+    </header>
+    <main id="main" tabindex="-1">
+
+<section class="page-head">
+    <div class="shell">
+      <nav class="crumbs" aria-label="Breadcrumb">
+    <ol>
+      <li><a href="/northwind/">Northwind</a></li>
+<li><span aria-current="page">Platform</span></li>
+    </ol>
+  </nav>
+      <p class="kicker">Platform</p>
+      <h1 class="h1 page-head__title">One pipeline, three signals.</h1>
+      <p class="lede">Metrics, traces and logs share a collector, a storage engine and a query language.
+    That is the whole architecture, and it is why correlating them does not require exporting
+    anything.</p>
+      
+    </div>
+  </section>
+
+<section class="section section--tight">
+  <div class="shell">
+    <figure style="margin:0">
+      <svg class="diagram" viewBox="0 0 900 190"
+    xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet"
+    role="img">
+    <title>The Northwind ingest path: your services send to a collector, which redacts, samples and batches before forwarding to the Northwind columnar store, which is queried with NWQL.</title>
+    <text x="0" y="26" fill="#7b88a0" font-size="11.5" letter-spacing="1.6"
+      font-family="ui-monospace, Menlo, monospace">INGEST PATH</text>
+    <g stroke="#39435a" stroke-width="1.5" fill="none">
+        <line x1="192" y1="96" x2="226" y2="96"/>
+        <path d="M 226 96 l -6 -4 v 8 Z" fill="#39435a" stroke="none"/>
+      </g><g stroke="#39435a" stroke-width="1.5" fill="none">
+        <line x1="430" y1="96" x2="464" y2="96"/>
+        <path d="M 464 96 l -6 -4 v 8 Z" fill="#39435a" stroke="none"/>
+      </g><g stroke="#39435a" stroke-width="1.5" fill="none">
+        <line x1="668" y1="96" x2="702" y2="96"/>
+        <path d="M 702 96 l -6 -4 v 8 Z" fill="#39435a" stroke="none"/>
+      </g>
+    <g>
+        <rect x="0" y="58" width="186" height="76" rx="9"
+          fill="#161d2a"
+          stroke="#2a3345" stroke-width="1.5"/>
+        <text x="93" y="89" text-anchor="middle"
+          fill="#f2f5fa" font-size="15" font-weight="600"
+          font-family="system-ui, sans-serif">Your services</text>
+        <text x="93" y="111" text-anchor="middle"
+          fill="#7b88a0" font-size="11.5"
+          font-family="ui-monospace, Menlo, monospace">OTLP · Prometheus · syslog</text>
+      </g><g>
+        <rect x="238" y="58" width="186" height="76" rx="9"
+          fill="#161d2a"
+          stroke="#2a3345" stroke-width="1.5"/>
+        <text x="331" y="89" text-anchor="middle"
+          fill="#f2f5fa" font-size="15" font-weight="600"
+          font-family="system-ui, sans-serif">Collector</text>
+        <text x="331" y="111" text-anchor="middle"
+          fill="#7b88a0" font-size="11.5"
+          font-family="ui-monospace, Menlo, monospace">Redact · sample · batch</text>
+      </g><g>
+        <rect x="476" y="58" width="186" height="76" rx="9"
+          fill="rgba(79,143,247,0.14)"
+          stroke="#4f8ff7" stroke-width="1.5"/>
+        <text x="569" y="89" text-anchor="middle"
+          fill="#f2f5fa" font-size="15" font-weight="600"
+          font-family="system-ui, sans-serif">Northwind</text>
+        <text x="569" y="111" text-anchor="middle"
+          fill="#7b88a0" font-size="11.5"
+          font-family="ui-monospace, Menlo, monospace">Columnar store</text>
+      </g><g>
+        <rect x="714" y="58" width="186" height="76" rx="9"
+          fill="#161d2a"
+          stroke="#2a3345" stroke-width="1.5"/>
+        <text x="807" y="89" text-anchor="middle"
+          fill="#f2f5fa" font-size="15" font-weight="600"
+          font-family="system-ui, sans-serif">Query</text>
+        <text x="807" y="111" text-anchor="middle"
+          fill="#7b88a0" font-size="11.5"
+          font-family="ui-monospace, Menlo, monospace">NWQL · dashboards · alerts</text>
+      </g>
+    <text x="0" y="182" fill="#7b88a0" font-size="11.5"
+      font-family="ui-monospace, Menlo, monospace">
+      Redaction happens before data leaves your network
+    </text>
+  </svg>
+    </figure>
+  </div>
+</section>
+
+<section class="section" aria-labelledby="collector-heading">
+  <div class="shell">
+    <div class="grid grid--2" style="gap:var(--space-2xl);align-items:start">
+      <div>
+        <div class="section-head">
+    <div>
+      <p class="kicker">Collector</p>
+      <h2 class="h2" id="collector-heading">The boundary is yours, not ours.</h2>
+      
+    </div>
+    
+  </div>
+        <p class="lede">The collector runs inside your network. Redaction, sampling and
+          batching all happen before anything crosses the boundary, which means a sensitive
+          field is never transmitted and then scrubbed — it is never transmitted.</p>
+        <ul class="checks" style="margin-top:var(--space-m)">
+          <li>Standard OpenTelemetry Collector with one Northwind exporter</li>
+          <li>Redaction rules are ordinary processor config, reviewable in your repo</li>
+          <li>Buffers to disk if we are unreachable, so a Northwind outage is not yours</li>
+          <li>No proprietary agent, no kernel module, no sidecar requirement</li>
+        </ul>
+      </div>
+
+      <div class="code">
+    <div class="code__head">
+      <span>otel-collector.yaml</span>
+      <span>yaml</span>
+    </div>
+    <pre><code><span class="tok-com"># The whole integration. Eleven lines.</span>
+<span class="tok-key">processors</span>:
+  <span class="tok-key">redact</span>:
+    <span class="tok-com"># Never leaves the VPC unredacted</span>
+    <span class="tok-key">blocked_key_patterns</span>: [<span class="tok-str">&quot;patient_.*&quot;</span>, <span class="tok-str">&quot;.*_ssn&quot;</span>]
+
+<span class="tok-key">exporters</span>:
+  <span class="tok-key">northwind</span>:
+    <span class="tok-key">endpoint</span>: <span class="tok-str">&quot;ingest.northwind.example&quot;</span>
+    <span class="tok-key">api_key</span>: <span class="tok-str">&quot;${NORTHWIND_API_KEY}&quot;</span>
+    <span class="tok-key">compression</span>: zstd</code></pre>
+  </div>
+    </div>
+  </div>
+</section>
+
+<section class="section section--raised" aria-labelledby="signals-heading">
+  <div class="shell">
+    <div class="section-head">
+    <div>
+      <p class="kicker">Signals</p>
+      <h2 class="h2" id="signals-heading">Three ways in, one way out.</h2>
+      <p class="lede" style="margin-top:var(--space-xs)">Each signal has its own ingest path and its own trade-offs. They share a query language.</p>
+    </div>
+    
+  </div>
+
+    <div class="grid grid--3">
+      <a class="card card--link"
+        href="/northwind/features/metrics/">
+        <p class="kicker">Time series</p>
+        <h3 class="card__title" style="margin-top:var(--space-2xs)">Metrics</h3>
+        <p class="card__body">Ten-second resolution, kept at full fidelity for as long as you pay to keep it.</p>
+        <table class="spec-table" style="margin-top:var(--space-m)">
+          <caption class="visually-hidden">Metrics specifications</caption>
+          <tbody>
+            <tr><th scope="row">Resolution</th><td>10 seconds</td></tr>
+<tr><th scope="row">Ingest protocols</th><td>Prometheus remote-write, OTLP, StatsD</td></tr>
+          </tbody>
+        </table>
+        <p class="arrow-link" style="margin-top:var(--space-s)">Metrics in detail</p>
+      </a>
+<a class="card card--link"
+        href="/northwind/features/traces/">
+        <p class="kicker">Distributed tracing</p>
+        <h3 class="card__title" style="margin-top:var(--space-2xs)">Traces</h3>
+        <p class="card__body">Tail-based sampling that keeps the traces you actually needed.</p>
+        <table class="spec-table" style="margin-top:var(--space-m)">
+          <caption class="visually-hidden">Traces specifications</caption>
+          <tbody>
+            <tr><th scope="row">Sampling</th><td>Tail-based, policy-driven</td></tr>
+<tr><th scope="row">Ingest protocols</th><td>OTLP gRPC and HTTP, Jaeger, Zipkin</td></tr>
+          </tbody>
+        </table>
+        <p class="arrow-link" style="margin-top:var(--space-s)">Traces in detail</p>
+      </a>
+<a class="card card--link"
+        href="/northwind/features/logs/">
+        <p class="kicker">Log management</p>
+        <h3 class="card__title" style="margin-top:var(--space-2xs)">Logs</h3>
+        <p class="card__body">Structured search over everything, without an index tax on every field.</p>
+        <table class="spec-table" style="margin-top:var(--space-m)">
+          <caption class="visually-hidden">Logs specifications</caption>
+          <tbody>
+            <tr><th scope="row">Storage</th><td>Columnar, compressed ~11:1</td></tr>
+<tr><th scope="row">Indexed fields</th><td>Metadata only</td></tr>
+          </tbody>
+        </table>
+        <p class="arrow-link" style="margin-top:var(--space-s)">Logs in detail</p>
+      </a>
+    </div>
+  </div>
+</section>
+
+<section class="section" aria-labelledby="query-heading">
+  <div class="shell">
+    <div class="grid grid--2" style="gap:var(--space-2xl);align-items:start">
+      <div class="code">
+    <div class="code__head">
+      <span>One query, three signals</span>
+      <span>nwql</span>
+    </div>
+    <pre><code><span class="tok-com"># p95 latency by endpoint, last hour</span>
+metric(<span class="tok-str">&quot;http.server.duration&quot;</span>)
+  | where service == <span class="tok-str">&quot;checkout-api&quot;</span>
+  | percentile(<span class="tok-num">95</span>) by endpoint
+  | over(<span class="tok-num">1h</span>)
+
+<span class="tok-com"># The traces behind the worst endpoint</span>
+trace()
+  | where service == <span class="tok-str">&quot;checkout-api&quot;</span>
+    and endpoint == <span class="tok-str">&quot;/v1/charge&quot;</span>
+    and duration &gt; <span class="tok-num">800ms</span>
+
+<span class="tok-com"># And the logs those traces emitted</span>
+log() | where trace_id in above()</code></pre>
+  </div>
+
+      <div>
+        <div class="section-head">
+    <div>
+      <p class="kicker">NWQL</p>
+      <h2 class="h2" id="query-heading">Stop translating between dialects.</h2>
+      
+    </div>
+    
+  </div>
+        <p class="lede">During an incident nobody has the working memory to hold three query
+          syntaxes at once. NWQL is one language across all three signals, and
+          <span class="mono">above()</span> chains a result into the next query.</p>
+        <ul class="checks" style="margin-top:var(--space-m)">
+          <li>PromQL runs unmodified, so existing dashboards and rules keep working</li>
+          <li>Joins across signals on shared resource attributes</li>
+          <li>Query results are addressable, so a chain is one expression rather than four tabs</li>
+        </ul>
+        <a class="arrow-link" style="margin-top:var(--space-m)"
+           href="/northwind/docs/">Read the NWQL reference</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="cta">
+    <div class="shell cta__inner">
+      <h2 class="h2">See it against your own traffic.</h2>
+      <p class="lede">A demo is a working account with your collector pointed at it, not a slide deck.</p>
+      <div class="hero__actions">
+        <a class="btn btn--lg" href="/northwind/demo/">Book a demo</a>
+        <a class="btn btn--ghost btn--lg" href="/northwind/pricing/">See pricing</a>
+      </div>
+    </div>
+  </section>
+
+    </main>
+    <footer class="footer">
+      <div class="footer__inner">
+        <div class="footer__brand">
+          <span class="footer__mark" aria-hidden="true"><svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg"
+  aria-hidden="true" focusable="false">
+  <path d="M5 24V8l11 11 11-11v16" fill="none" stroke="currentColor" stroke-width="2.6"
+        stroke-linecap="square"/>
+</svg></span>
+          <p class="footer__tagline">Observability for systems that are not allowed to go down.</p>
+          <p class="footer__meta">
+            1,840 engineering teams ·
+            4.1 trillion events a day
+          </p>
+        </div>
+
+        <nav class="footer__group" aria-label="Product">
+          <h2 class="footer__heading">Product</h2>
+          <ul>
+            <li><a href="/northwind/platform/">Platform overview</a></li>
+<li><a href="/northwind/features/metrics/">Metrics</a></li>
+<li><a href="/northwind/features/traces/">Traces</a></li>
+<li><a href="/northwind/features/logs/">Logs</a></li>
+<li><a href="/northwind/pricing/">Pricing</a></li>
+          </ul>
+        </nav>
+<nav class="footer__group" aria-label="Resources">
+          <h2 class="footer__heading">Resources</h2>
+          <ul>
+            <li><a href="/northwind/docs/">Documentation</a></li>
+<li><a href="/northwind/changelog/">Changelog</a></li>
+<li><a href="/northwind/customers/">Customers</a></li>
+          </ul>
+        </nav>
+<nav class="footer__group" aria-label="Company">
+          <h2 class="footer__heading">Company</h2>
+          <ul>
+            <li><a href="/northwind/security/">Security</a></li>
+<li><a href="/northwind/demo/">Book a demo</a></li>
+          </ul>
+        </nav>
+
+        <div class="footer__legal">
+          <p>
+            Northwind is a fictional product, designed and built by
+            <a href="/work/northwind/">Studio Meridian</a>
+            to demonstrate technical marketing design. The dashboard runs on generated
+            data, no account exists, and no form submits anywhere.
+          </p>
+          <p class="footer__status">
+            <span class="status-dot" data-tone="good" aria-hidden="true"></span>
+            All systems operational
+          </p>
+        </div>
+      </div>
+    </footer>
+    <script type="module" src="/northwind/assets/ui.js"></script>
+  </body>
+</html>

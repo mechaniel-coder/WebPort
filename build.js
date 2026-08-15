@@ -193,9 +193,10 @@ async function main() {
   let total = 0;
   for (const key of siteKeys) total += await buildSite(key, routes);
 
-  // Shared reset, copied rather than duplicated per site.
+  // Shared assets, copied once rather than duplicated into every site.
   await mkdir(join(outDir, 'shared'), { recursive: true });
   await cp(join(srcDir, '_lib', 'reset.css'), join(outDir, 'shared', 'reset.css'));
+  await cp(join(srcDir, '_lib', 'widgets.js'), join(outDir, 'shared', 'widgets.js'));
 
   await writeSitemap(routes);
 

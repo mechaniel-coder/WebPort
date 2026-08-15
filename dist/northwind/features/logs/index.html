@@ -1,0 +1,273 @@
+<!doctype html>
+<html lang="en" data-color-scheme="dark">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Logs — Northwind</title>
+    <meta name="description" content="Structured search over everything, without an index tax on every field.">
+    <link rel="canonical" href="https://example.com/northwind/features/logs/">
+    <meta name="theme-color" content="#0b0e14">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Northwind">
+    <meta property="og:title" content="Logs — Northwind">
+    <meta property="og:description" content="Structured search over everything, without an index tax on every field.">
+    <meta property="og:url" content="https://example.com/northwind/features/logs/">
+    <meta property="og:image" content="https://example.com/northwind/assets/social-card.svg">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Logs — Northwind">
+    <meta name="twitter:description" content="Structured search over everything, without an index tax on every field.">
+    <meta name="twitter:image" content="https://example.com/northwind/assets/social-card.svg">
+    <link rel="icon" href="data:image/svg+xml,%3Csvg%20viewBox%3D%220%200%2032%2032%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20aria-hidden%3D%22true%22%3E%20%3Crect%20width%3D%2232%22%20height%3D%2232%22%20rx%3D%227%22%20fill%3D%22%230b0e14%22%2F%3E%20%3Cpath%20d%3D%22M6%2023V10l10%2010%2010-10v13%22%20fill%3D%22none%22%20stroke%3D%22%234f8ff7%22%20stroke-width%3D%222.6%22%2F%3E%20%3C%2Fsvg%3E">
+    <link rel="stylesheet" href="/shared/reset.css">
+    <link rel="stylesheet" href="/northwind/assets/northwind.css">
+    <script type="application/ld+json">{"@context":"https://schema.org","@type":"SoftwareApplication","name":"Northwind","description":"Metrics, traces and logs in one query language, priced on what you actually\n    ingest rather than per seat.","url":"https://example.com/northwind/","applicationCategory":"DeveloperApplication","operatingSystem":"Web","offers":{"@type":"AggregateOffer","priceCurrency":"USD","lowPrice":"0","highPrice":"499","offerCount":3}}</script>
+    <script type="application/ld+json">{"@context":"https://schema.org","@type":"TechArticle","headline":"Logs — Northwind","description":"Structured search over everything, without an index tax on every field.","mainEntityOfPage":"https://example.com/northwind/features/logs/"}</script>
+    <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Northwind","item":"https://example.com/northwind/"},{"@type":"ListItem","position":2,"name":"Platform","item":"https://example.com/northwind/platform/"},{"@type":"ListItem","position":3,"name":"Logs","item":"https://example.com/northwind/features/logs/"}]}</script>
+  </head>
+  <body class="site-northwind">
+    <a class="skip-link" href="#main">Skip to main content</a>
+    <header class="topbar">
+      <div class="topbar__inner">
+        <a class="logo" href="/northwind/">
+          <span class="logo__mark" aria-hidden="true"><svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg"
+  aria-hidden="true" focusable="false">
+  <path d="M5 24V8l11 11 11-11v16" fill="none" stroke="currentColor" stroke-width="2.6"
+        stroke-linecap="square"/>
+</svg></span>
+          <span class="logo__text">Northwind</span>
+        </a>
+
+        <button class="topbar__toggle" type="button" aria-expanded="false"
+                aria-controls="nw-nav" data-nav-toggle>
+          <span class="topbar__bars" aria-hidden="true"><i></i><i></i><i></i></span>
+          <span class="visually-hidden">Menu</span>
+        </button>
+
+        <nav class="topbar__nav" id="nw-nav" aria-label="Primary" data-nav
+             data-nav-breakpoint="64em">
+          <ul>
+            <li><a href="/northwind/platform/">Platform</a></li>
+<li><a href="/northwind/pricing/">Pricing</a></li>
+<li><a href="/northwind/customers/">Customers</a></li>
+<li><a href="/northwind/docs/">Docs</a></li>
+<li><a href="/northwind/security/">Security</a></li>
+          </ul>
+          <div class="topbar__actions">
+            <a class="btn btn--ghost btn--sm" href="/northwind/docs/">Read the docs</a>
+            <a class="btn btn--sm" href="/northwind/demo/">Book a demo</a>
+          </div>
+        </nav>
+      </div>
+    </header>
+    <main id="main" tabindex="-1">
+
+<section class="page-head">
+  <div class="shell">
+    <nav class="crumbs" aria-label="Breadcrumb">
+    <ol>
+      <li><a href="/northwind/">Northwind</a></li>
+<li><a href="/northwind/platform/">Platform</a></li>
+<li><span aria-current="page">Logs</span></li>
+    </ol>
+  </nav>
+    <p class="kicker">Log management</p>
+    <h1 class="h1 page-head__title">Logs</h1>
+    <p class="lede">Indexing every field is why log platforms cost more than the infrastructure they
+      watch. Northwind indexes metadata and scans the rest, quickly.</p>
+  </div>
+</section>
+
+<section class="section section--tight">
+  <div class="shell">
+    <figure style="margin:0">
+      <svg class="diagram" viewBox="0 0 900 210"
+    xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet"
+    role="img">
+    <title>Two cost bars. An index-everything platform spends 72% of cost on the index; Northwind spends 14%, indexing metadata only and scanning bodies from compressed columns.</title>
+    <text x="0" y="20" fill="#7b88a0" font-size="11.5" letter-spacing="1.6"
+      font-family="ui-monospace, Menlo, monospace">WHERE THE COST GOES</text>
+    <g>
+      <text x="0" y="70" fill="#f2f5fa" font-size="13"
+        font-family="system-ui, sans-serif">Index-everything</text>
+      <rect x="250" y="48" width="401.2" height="34" rx="4"
+          fill="#d95926" fill-opacity="1"/>
+        <text x="450.6" y="70" text-anchor="middle" fill="#0b0e14"
+                 font-size="11.5" font-weight="620"
+                 font-family="ui-monospace, Menlo, monospace">index</text><rect x="653.2" y="48" width="154.8" height="34" rx="4"
+          fill="#3987e5" fill-opacity="1"/>
+        <text x="730.6" y="70" text-anchor="middle" fill="#0b0e14"
+                 font-size="11.5" font-weight="620"
+                 font-family="ui-monospace, Menlo, monospace">storage</text>
+    </g>
+    <g>
+      <text x="0" y="132" fill="#f2f5fa" font-size="13"
+        font-family="system-ui, sans-serif">Northwind</text>
+      <rect x="250" y="110" width="76.4" height="34" rx="4"
+          fill="#d95926" fill-opacity="1"/>
+        <text x="288.2" y="132" text-anchor="middle" fill="#0b0e14"
+                 font-size="11.5" font-weight="620"
+                 font-family="ui-monospace, Menlo, monospace">index</text><rect x="328.4" y="110" width="188.4" height="34" rx="4"
+          fill="#3987e5" fill-opacity="1"/>
+        <text x="422.59999999999997" y="132" text-anchor="middle" fill="#0b0e14"
+                 font-size="11.5" font-weight="620"
+                 font-family="ui-monospace, Menlo, monospace">storage</text>
+    </g>
+    <text x="250" y="180" fill="#7b88a0" font-size="11.5"
+      font-family="ui-monospace, Menlo, monospace">
+      Metadata is indexed; bodies are scanned from compressed columns
+    </text>
+  </svg>
+    </figure>
+  </div>
+</section>
+
+<section class="section" aria-labelledby="detail-heading">
+  <div class="shell">
+    <h2 class="visually-hidden" id="detail-heading">How logs works</h2>
+    <div class="grid grid--3">
+      <div>
+        <h3 class="h3">Index metadata, scan the body</h3>
+        <p class="card__body" style="font-size:var(--step-0)">Service, host, level and trace ID are indexed. Message bodies are scanned
+          from columnar storage, which is fast enough that the difference does not show.</p>
+      </div>
+<div>
+        <h3 class="h3">One query language</h3>
+        <p class="card__body" style="font-size:var(--step-0)">The same NWQL expression filters logs, traces and metrics. You stop
+          translating between three dialects during an incident.</p>
+      </div>
+<div>
+        <h3 class="h3">Live tail that survives volume</h3>
+        <p class="card__body" style="font-size:var(--step-0)">Streaming tail with server-side filtering, so a noisy deploy does not turn
+          the console into a firehose you have to close.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section section--raised" aria-labelledby="specs-heading">
+  <div class="shell">
+    <div class="grid grid--2" style="gap:var(--space-2xl);align-items:start">
+      <div>
+        <div class="section-head">
+    <div>
+      <p class="kicker">Specification</p>
+      <h2 class="h2" id="specs-heading">The numbers that matter.</h2>
+      
+    </div>
+    
+  </div>
+        <p class="lede">Published rather than discovered during a proof of concept.</p>
+      </div>
+
+      <table class="spec-table">
+        <caption class="visually-hidden">Logs specifications</caption>
+        <tbody>
+          <tr><th scope="row">Storage</th><td>Columnar, compressed ~11:1</td></tr>
+<tr><th scope="row">Indexed fields</th><td>Metadata only</td></tr>
+<tr><th scope="row">Live tail latency</th><td>Under 2 seconds</td></tr>
+<tr><th scope="row">Max line length</th><td>256 KB</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<section class="section" aria-labelledby="others-heading">
+  <div class="shell">
+    <div class="section-head">
+    <div>
+      <p class="kicker">Also on the platform</p>
+      <h2 class="h2" id="others-heading">The other two signals.</h2>
+      
+    </div>
+    
+  </div>
+    <div class="grid grid--2">
+      <a class="card card--link"
+        href="/northwind/features/metrics/">
+        <p class="kicker">Time series</p>
+        <h3 class="card__title" style="margin-top:var(--space-2xs)">Metrics</h3>
+        <p class="card__body">Ten-second resolution, kept at full fidelity for as long as you pay to keep it.</p>
+      </a>
+<a class="card card--link"
+        href="/northwind/features/traces/">
+        <p class="kicker">Distributed tracing</p>
+        <h3 class="card__title" style="margin-top:var(--space-2xs)">Traces</h3>
+        <p class="card__body">Tail-based sampling that keeps the traces you actually needed.</p>
+      </a>
+    </div>
+  </div>
+</section>
+
+<section class="cta">
+    <div class="shell cta__inner">
+      <h2 class="h2">See logs on your own data.</h2>
+      
+      <div class="hero__actions">
+        <a class="btn btn--lg" href="/northwind/demo/">Book a demo</a>
+        <a class="btn btn--ghost btn--lg" href="/northwind/pricing/">See pricing</a>
+      </div>
+    </div>
+  </section>
+
+    </main>
+    <footer class="footer">
+      <div class="footer__inner">
+        <div class="footer__brand">
+          <span class="footer__mark" aria-hidden="true"><svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg"
+  aria-hidden="true" focusable="false">
+  <path d="M5 24V8l11 11 11-11v16" fill="none" stroke="currentColor" stroke-width="2.6"
+        stroke-linecap="square"/>
+</svg></span>
+          <p class="footer__tagline">Observability for systems that are not allowed to go down.</p>
+          <p class="footer__meta">
+            1,840 engineering teams ·
+            4.1 trillion events a day
+          </p>
+        </div>
+
+        <nav class="footer__group" aria-label="Product">
+          <h2 class="footer__heading">Product</h2>
+          <ul>
+            <li><a href="/northwind/platform/">Platform overview</a></li>
+<li><a href="/northwind/features/metrics/">Metrics</a></li>
+<li><a href="/northwind/features/traces/">Traces</a></li>
+<li><a href="/northwind/features/logs/">Logs</a></li>
+<li><a href="/northwind/pricing/">Pricing</a></li>
+          </ul>
+        </nav>
+<nav class="footer__group" aria-label="Resources">
+          <h2 class="footer__heading">Resources</h2>
+          <ul>
+            <li><a href="/northwind/docs/">Documentation</a></li>
+<li><a href="/northwind/changelog/">Changelog</a></li>
+<li><a href="/northwind/customers/">Customers</a></li>
+          </ul>
+        </nav>
+<nav class="footer__group" aria-label="Company">
+          <h2 class="footer__heading">Company</h2>
+          <ul>
+            <li><a href="/northwind/security/">Security</a></li>
+<li><a href="/northwind/demo/">Book a demo</a></li>
+          </ul>
+        </nav>
+
+        <div class="footer__legal">
+          <p>
+            Northwind is a fictional product, designed and built by
+            <a href="/work/northwind/">Studio Meridian</a>
+            to demonstrate technical marketing design. The dashboard runs on generated
+            data, no account exists, and no form submits anywhere.
+          </p>
+          <p class="footer__status">
+            <span class="status-dot" data-tone="good" aria-hidden="true"></span>
+            All systems operational
+          </p>
+        </div>
+      </div>
+    </footer>
+    <script type="module" src="/northwind/assets/ui.js"></script>
+  </body>
+</html>

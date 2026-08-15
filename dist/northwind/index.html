@@ -1,0 +1,1032 @@
+<!doctype html>
+<html lang="en" data-color-scheme="dark">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Northwind — observability for systems that cannot go down</title>
+    <meta name="description" content="Metrics, traces and logs in one query language, priced on ingest rather than per seat. Ten-second resolution kept at full fidelity for the whole retention window.">
+    <link rel="canonical" href="https://example.com/northwind/">
+    <meta name="theme-color" content="#0b0e14">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Northwind">
+    <meta property="og:title" content="Northwind — observability for systems that cannot go down">
+    <meta property="og:description" content="Metrics, traces and logs in one query language, priced on ingest rather than per seat. Ten-second resolution kept at full fidelity for the whole retention window.">
+    <meta property="og:url" content="https://example.com/northwind/">
+    <meta property="og:image" content="https://example.com/northwind/assets/social-card.svg">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Northwind — observability for systems that cannot go down">
+    <meta name="twitter:description" content="Metrics, traces and logs in one query language, priced on ingest rather than per seat. Ten-second resolution kept at full fidelity for the whole retention window.">
+    <meta name="twitter:image" content="https://example.com/northwind/assets/social-card.svg">
+    <link rel="icon" href="data:image/svg+xml,%3Csvg%20viewBox%3D%220%200%2032%2032%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20aria-hidden%3D%22true%22%3E%20%3Crect%20width%3D%2232%22%20height%3D%2232%22%20rx%3D%227%22%20fill%3D%22%230b0e14%22%2F%3E%20%3Cpath%20d%3D%22M6%2023V10l10%2010%2010-10v13%22%20fill%3D%22none%22%20stroke%3D%22%234f8ff7%22%20stroke-width%3D%222.6%22%2F%3E%20%3C%2Fsvg%3E">
+    <link rel="stylesheet" href="/shared/reset.css">
+    <link rel="stylesheet" href="/northwind/assets/northwind.css">
+    <link rel="stylesheet" href="/northwind/assets/dashboard.css">
+    <script type="application/ld+json">{"@context":"https://schema.org","@type":"SoftwareApplication","name":"Northwind","description":"Metrics, traces and logs in one query language, priced on what you actually\n    ingest rather than per seat.","url":"https://example.com/northwind/","applicationCategory":"DeveloperApplication","operatingSystem":"Web","offers":{"@type":"AggregateOffer","priceCurrency":"USD","lowPrice":"0","highPrice":"499","offerCount":3}}</script>
+  </head>
+  <body class="site-northwind">
+    <a class="skip-link" href="#main">Skip to main content</a>
+    <header class="topbar">
+      <div class="topbar__inner">
+        <a class="logo" href="/northwind/" aria-current="page">
+          <span class="logo__mark" aria-hidden="true"><svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg"
+  aria-hidden="true" focusable="false">
+  <path d="M5 24V8l11 11 11-11v16" fill="none" stroke="currentColor" stroke-width="2.6"
+        stroke-linecap="square"/>
+</svg></span>
+          <span class="logo__text">Northwind</span>
+        </a>
+
+        <button class="topbar__toggle" type="button" aria-expanded="false"
+                aria-controls="nw-nav" data-nav-toggle>
+          <span class="topbar__bars" aria-hidden="true"><i></i><i></i><i></i></span>
+          <span class="visually-hidden">Menu</span>
+        </button>
+
+        <nav class="topbar__nav" id="nw-nav" aria-label="Primary" data-nav
+             data-nav-breakpoint="64em">
+          <ul>
+            <li><a href="/northwind/platform/">Platform</a></li>
+<li><a href="/northwind/pricing/">Pricing</a></li>
+<li><a href="/northwind/customers/">Customers</a></li>
+<li><a href="/northwind/docs/">Docs</a></li>
+<li><a href="/northwind/security/">Security</a></li>
+          </ul>
+          <div class="topbar__actions">
+            <a class="btn btn--ghost btn--sm" href="/northwind/docs/">Read the docs</a>
+            <a class="btn btn--sm" href="/northwind/demo/">Book a demo</a>
+          </div>
+        </nav>
+      </div>
+    </header>
+    <main id="main" tabindex="-1">
+
+<section class="hero">
+  <div class="shell">
+    <p class="kicker">Metrics · Traces · Logs</p>
+    <h1 class="h1 hero__title" style="margin-top:var(--space-xs)">
+      Observability that does not roll up your data the week you need it.</h1>
+    <p class="lede" style="margin-top:var(--space-m)">
+      Metrics, traces and logs in one query language, priced on what you actually
+    ingest rather than per seat. Ten-second resolution stays ten-second resolution for the whole
+      retention window — including the 87th day, which is when the incident review happens.
+    </p>
+    <div class="hero__actions">
+      <a class="btn btn--lg" href="/northwind/demo/">Book a demo</a>
+      <a class="btn btn--ghost btn--lg" href="/northwind/docs/">
+        Read the docs</a>
+    </div>
+    <p class="hero__note">Free up to 5 GB a month. No card, no seat count, no sales call.</p>
+  </div>
+</section>
+
+<section class="section--tight" aria-labelledby="demo-heading">
+  <div class="shell">
+    <h2 class="visually-hidden" id="demo-heading">Live dashboard demonstration</h2>
+    <div class="dashboard" data-dashboard data-range="24h">
+    <div class="dash-bar">
+      <p class="dash-bar__title">
+        <span class="status-dot" aria-hidden="true"></span>
+        Production
+        <span class="dash-bar__env">us-east-1</span>
+      </p>
+
+      <div class="segmented" role="group" aria-label="Time range">
+        <button type="button" data-range-button="24h"
+          aria-pressed="true">
+          <span class="visually-hidden">Last 24 hours</span>
+          <span aria-hidden="true">24h</span>
+        </button>
+<button type="button" data-range-button="7d"
+          aria-pressed="false">
+          <span class="visually-hidden">Last 7 days</span>
+          <span aria-hidden="true">7d</span>
+        </button>
+<button type="button" data-range-button="30d"
+          aria-pressed="false">
+          <span class="visually-hidden">Last 30 days</span>
+          <span aria-hidden="true">30d</span>
+        </button>
+      </div>
+
+      <button class="live-toggle" type="button" aria-pressed="false" data-live>
+        <span class="live-toggle__dot" aria-hidden="true"></span>
+        <span>Live</span>
+      </button>
+    </div>
+
+    <div class="stats" data-stats><div class="stat" data-stat="ingest">
+      <p class="stat__label">Events per second</p>
+      <div class="stat__row">
+        <p class="stat__value">3.1M</p>
+        <svg class="spark" viewBox="0 0 96 28" width="96" height="28"
+    preserveAspectRatio="none" aria-hidden="true" focusable="false">
+    <path d="M 0.0 5.4 L 8.7 12.1 L 17.5 7.6 L 26.2 15.0 L 34.9 11.2 L 43.6 19.3 L 52.4 20.4 L 61.1 19.4 L 69.8 21.8 L 78.5 22.6 L 87.3 21.5 L 96.0 24.5" fill="none" stroke="var(--series-1)" stroke-width="2"
+      stroke-linejoin="round" stroke-linecap="round" vector-effect="non-scaling-stroke"/>
+    <circle cx="96.0" cy="24.5" r="2.5"
+      fill="var(--series-1)"/>
+  </svg>
+      </div>
+      <p class="stat__delta" data-sentiment="bad">
+        <span aria-hidden="true">↓</span>
+        40.1%
+        <span class="visually-hidden">down, which is
+          not good,</span>
+        <span style="color:var(--text-muted)">vs previous period</span>
+      </p>
+    </div>
+<div class="stat" data-stat="latency">
+      <p class="stat__label">p95 latency</p>
+      <div class="stat__row">
+        <p class="stat__value">104 ms</p>
+        <svg class="spark" viewBox="0 0 96 28" width="96" height="28"
+    preserveAspectRatio="none" aria-hidden="true" focusable="false">
+    <path d="M 0.0 19.1 L 8.7 20.7 L 17.5 19.7 L 26.2 20.2 L 34.9 3.5 L 43.6 22.2 L 52.4 23.1 L 61.1 23.6 L 69.8 25.6 L 78.5 26.9 L 87.3 26.2 L 96.0 26.0" fill="none" stroke="var(--series-2)" stroke-width="2"
+      stroke-linejoin="round" stroke-linecap="round" vector-effect="non-scaling-stroke"/>
+    <circle cx="96.0" cy="26.0" r="2.5"
+      fill="var(--series-2)"/>
+  </svg>
+      </div>
+      <p class="stat__delta" data-sentiment="good">
+        <span aria-hidden="true">↓</span>
+        34.2%
+        <span class="visually-hidden">down, which is
+          good,</span>
+        <span style="color:var(--text-muted)">vs previous period</span>
+      </p>
+    </div>
+<div class="stat" data-stat="errors">
+      <p class="stat__label">Errors in window</p>
+      <div class="stat__row">
+        <p class="stat__value">1.8K</p>
+        <svg class="spark" viewBox="0 0 96 28" width="96" height="28"
+    preserveAspectRatio="none" aria-hidden="true" focusable="false">
+    <path d="M 0.0 11.0 L 8.7 10.2 L 17.5 11.1 L 26.2 15.4 L 34.9 14.8 L 43.6 20.3 L 52.4 18.0 L 61.1 20.2 L 69.8 21.8 L 78.5 4.3 L 87.3 14.4 L 96.0 25.9" fill="none" stroke="var(--series-3)" stroke-width="2"
+      stroke-linejoin="round" stroke-linecap="round" vector-effect="non-scaling-stroke"/>
+    <circle cx="96.0" cy="25.9" r="2.5"
+      fill="var(--series-3)"/>
+  </svg>
+      </div>
+      <p class="stat__delta" data-sentiment="good">
+        <span aria-hidden="true">↓</span>
+        12.4%
+        <span class="visually-hidden">down, which is
+          good,</span>
+        <span style="color:var(--text-muted)">vs previous period</span>
+      </p>
+    </div>
+<div class="stat" data-stat="uptime">
+      <p class="stat__label">Availability</p>
+      <div class="stat__row">
+        <p class="stat__value">99.982%</p>
+        <svg class="spark" viewBox="0 0 96 28" width="96" height="28"
+    preserveAspectRatio="none" aria-hidden="true" focusable="false">
+    <path d="M 0.0 6.4 L 8.7 4.2 L 17.5 8.7 L 26.2 7.6 L 34.9 13.0 L 43.6 16.1 L 52.4 14.7 L 61.1 18.5 L 69.8 20.9 L 78.5 23.4 L 87.3 21.9 L 96.0 26.0" fill="none" stroke="var(--series-1)" stroke-width="2"
+      stroke-linejoin="round" stroke-linecap="round" vector-effect="non-scaling-stroke"/>
+    <circle cx="96.0" cy="26.0" r="2.5"
+      fill="var(--series-1)"/>
+  </svg>
+      </div>
+      <p class="stat__delta" data-sentiment="good">
+        <span aria-hidden="true">↑</span>
+        0.0%
+        <span class="visually-hidden">up, which is
+          good,</span>
+        <span style="color:var(--text-muted)">vs previous period</span>
+      </p>
+    </div></div>
+
+    <div class="panels">
+      <section class="panel" aria-labelledby="p-latency">
+    <div class="panel__head">
+      <h3 class="panel__title" id="p-latency">Request latency</h3>
+      <p class="panel__sub" data-range-label>milliseconds ·
+        last 24 hours</p>
+    </div>
+
+    <figure class="panel__figure" data-figure="latency" tabindex="0" role="group"
+            aria-label="Request latency over time. Use arrow keys to read values.">
+      <svg class="chart" viewBox="0 0 720 260" width="720" height="260"
+    preserveAspectRatio="xMidYMid meet" role="img"
+    aria-labelledby="p-latency"
+    data-chart="line" data-max="500"
+    data-plot="46,16,702,234">
+    <line x1="46" y1="234.0" x2="702" y2="234.0"
+          stroke="var(--chart-grid)" stroke-width="1"/>
+        <text x="38" y="238.0" text-anchor="end"
+          class="chart__tick">0</text><line x1="46" y1="179.5" x2="702" y2="179.5"
+          stroke="var(--chart-grid)" stroke-width="1"/>
+        <text x="38" y="183.5" text-anchor="end"
+          class="chart__tick">125</text><line x1="46" y1="125.0" x2="702" y2="125.0"
+          stroke="var(--chart-grid)" stroke-width="1"/>
+        <text x="38" y="129.0" text-anchor="end"
+          class="chart__tick">250</text><line x1="46" y1="70.5" x2="702" y2="70.5"
+          stroke="var(--chart-grid)" stroke-width="1"/>
+        <text x="38" y="74.5" text-anchor="end"
+          class="chart__tick">375</text><line x1="46" y1="16.0" x2="702" y2="16.0"
+          stroke="var(--chart-grid)" stroke-width="1"/>
+        <text x="38" y="20.0" text-anchor="end"
+          class="chart__tick">500</text>
+    <text x="46.0" y="252" text-anchor="start"
+        class="chart__tick">12:30</text><text x="157.7" y="252" text-anchor="middle"
+        class="chart__tick">16:30</text><text x="269.3" y="252" text-anchor="middle"
+        class="chart__tick">20:30</text><text x="381.0" y="252" text-anchor="middle"
+        class="chart__tick">00:30</text><text x="492.6" y="252" text-anchor="middle"
+        class="chart__tick">04:30</text><text x="604.3" y="252" text-anchor="middle"
+        class="chart__tick">08:30</text><text x="702.0" y="252" text-anchor="end"
+        class="chart__tick">12:00</text>
+    <line x1="46" y1="234" x2="702" y2="234"
+      stroke="var(--chart-axis)" stroke-width="1"/>
+    <g>
+        <path d="M 46.0 219.8 L 60.0 219.6 L 73.9 217.7 L 87.9 218.2 L 101.8 217.5 L 115.8 217.1 L 129.7 214.5 L 143.7 215.1 L 157.7 213.7 L 171.6 213.7 L 185.6 212.4 L 199.5 212.2 L 213.5 212.2 L 227.4 212.3 L 241.4 214.1 L 255.4 213.4 L 269.3 215.0 L 283.3 215.4 L 297.2 216.0 L 311.2 217.0 L 325.1 218.0 L 339.1 218.3 L 353.1 218.9 L 367.0 219.7 L 381.0 218.6 L 394.9 218.5 L 408.9 218.8 L 422.9 218.5 L 436.8 217.4 L 450.8 216.7 L 464.7 214.1 L 478.7 214.3 L 492.6 213.3 L 506.6 212.2 L 520.6 212.2 L 534.5 212.1 L 548.5 212.4 L 562.4 212.7 L 576.4 213.1 L 590.3 213.7 L 604.3 215.0 L 618.3 215.8 L 632.2 216.8 L 646.2 217.4 L 660.1 217.3 L 674.1 217.6 L 688.0 219.2 L 702.0 219.4" fill="none" stroke="var(--series-1)"
+          stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/>
+        <circle cx="702.0" cy="219.4" r="4"
+                 fill="var(--series-1)"
+                 stroke="var(--chart-surface)" stroke-width="2"/>
+      </g><g>
+        <path d="M 46.0 128.8 L 60.0 193.0 L 73.9 186.5 L 87.9 187.8 L 101.8 182.3 L 115.8 181.4 L 129.7 182.3 L 143.7 171.3 L 157.7 170.9 L 171.6 166.1 L 185.6 171.9 L 199.5 165.2 L 213.5 166.5 L 227.4 171.6 L 241.4 172.9 L 255.4 172.4 L 269.3 177.7 L 283.3 180.6 L 297.2 175.5 L 311.2 184.3 L 325.1 185.8 L 339.1 188.6 L 353.1 189.9 L 367.0 189.6 L 381.0 191.8 L 394.9 194.4 L 408.9 191.0 L 422.9 189.5 L 436.8 184.2 L 450.8 182.9 L 464.7 179.8 L 478.7 172.6 L 492.6 167.7 L 506.6 168.5 L 520.6 170.6 L 534.5 165.3 L 548.5 163.5 L 562.4 169.6 L 576.4 166.0 L 590.3 167.6 L 604.3 106.4 L 618.3 175.0 L 632.2 178.3 L 646.2 180.2 L 660.1 187.6 L 674.1 192.1 L 688.0 189.7 L 702.0 188.8" fill="none" stroke="var(--series-2)"
+          stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/>
+        <circle cx="702.0" cy="188.8" r="4"
+                 fill="var(--series-2)"
+                 stroke="var(--chart-surface)" stroke-width="2"/>
+      </g><g>
+        <path d="M 46.0 140.7 L 60.0 142.1 L 73.9 144.7 L 87.9 147.1 L 101.8 86.7 L 115.8 119.7 L 129.7 121.5 L 143.7 110.6 L 157.7 105.4 L 171.6 108.5 L 185.6 103.6 L 199.5 93.8 L 213.5 78.3 L 227.4 80.7 L 241.4 105.3 L 255.4 102.4 L 269.3 106.6 L 283.3 113.2 L 297.2 120.4 L 311.2 129.5 L 325.1 133.2 L 339.1 131.7 L 353.1 146.6 L 367.0 157.1 L 381.0 145.1 L 394.9 141.5 L 408.9 139.8 L 422.9 128.5 L 436.8 132.2 L 450.8 110.6 L 464.7 105.5 L 478.7 112.7 L 492.6 95.1 L 506.6 85.4 L 520.6 87.4 L 534.5 90.1 L 548.5 83.9 L 562.4 80.8 L 576.4 84.4 L 590.3 102.6 L 604.3 100.0 L 618.3 122.9 L 632.2 113.5 L 646.2 122.7 L 660.1 129.0 L 674.1 55.9 L 688.0 98.5 L 702.0 146.4" fill="none" stroke="var(--series-3)"
+          stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/>
+        <circle cx="702.0" cy="146.4" r="4"
+                 fill="var(--series-3)"
+                 stroke="var(--chart-surface)" stroke-width="2"/>
+      </g>
+    <g class="chart__crosshair" hidden>
+      <line y1="16" y2="234" stroke="var(--chart-axis)" stroke-width="1"/>
+      <circle r="4" fill="var(--series-1)"
+            stroke="var(--chart-surface)" stroke-width="2"/><circle r="4" fill="var(--series-2)"
+            stroke="var(--chart-surface)" stroke-width="2"/><circle r="4" fill="var(--series-3)"
+            stroke="var(--chart-surface)" stroke-width="2"/>
+    </g>
+  </svg>
+      <div class="chart-tip" data-tip hidden></div>
+    </figure>
+
+    <div class="panel__legend">
+      <ul class="legend">
+    <li class="legend__item">
+        <span class="legend__key legend__key--line" style="--key: var(--series-1)"
+          aria-hidden="true"></span>
+        <span>p50</span>
+      </li><li class="legend__item">
+        <span class="legend__key legend__key--line" style="--key: var(--series-2)"
+          aria-hidden="true"></span>
+        <span>p95</span>
+      </li><li class="legend__item">
+        <span class="legend__key legend__key--line" style="--key: var(--series-3)"
+          aria-hidden="true"></span>
+        <span>p99</span>
+      </li>
+  </ul>
+      <button class="table-toggle" type="button" data-table-toggle="latency"
+              aria-expanded="false" aria-controls="table-latency">Table view</button>
+    </div>
+
+    <div class="table-wrap" id="table-latency" data-table="latency" hidden>
+      <table class="data-table">
+    <caption>Request latency by percentile</caption>
+    <thead><tr><th scope="col">Time</th><th scope="col">p50 (ms)</th><th scope="col">p95 (ms)</th><th scope="col">p99 (ms)</th></tr></thead>
+    <tbody><tr>
+      <th scope="row">12:30</th>
+      <td>33</td><td>241</td><td>214</td>
+    </tr><tr>
+      <th scope="row">13:00</th>
+      <td>33</td><td>94</td><td>211</td>
+    </tr><tr>
+      <th scope="row">13:30</th>
+      <td>37</td><td>109</td><td>205</td>
+    </tr><tr>
+      <th scope="row">14:00</th>
+      <td>36</td><td>106</td><td>199</td>
+    </tr><tr>
+      <th scope="row">14:30</th>
+      <td>38</td><td>118</td><td>338</td>
+    </tr><tr>
+      <th scope="row">15:00</th>
+      <td>39</td><td>121</td><td>262</td>
+    </tr><tr>
+      <th scope="row">15:30</th>
+      <td>45</td><td>119</td><td>258</td>
+    </tr><tr>
+      <th scope="row">16:00</th>
+      <td>43</td><td>144</td><td>283</td>
+    </tr><tr>
+      <th scope="row">16:30</th>
+      <td>47</td><td>145</td><td>295</td>
+    </tr><tr>
+      <th scope="row">17:00</th>
+      <td>47</td><td>156</td><td>288</td>
+    </tr><tr>
+      <th scope="row">17:30</th>
+      <td>50</td><td>142</td><td>299</td>
+    </tr><tr>
+      <th scope="row">18:00</th>
+      <td>50</td><td>158</td><td>321</td>
+    </tr><tr>
+      <th scope="row">18:30</th>
+      <td>50</td><td>155</td><td>357</td>
+    </tr><tr>
+      <th scope="row">19:00</th>
+      <td>50</td><td>143</td><td>352</td>
+    </tr><tr>
+      <th scope="row">19:30</th>
+      <td>46</td><td>140</td><td>295</td>
+    </tr><tr>
+      <th scope="row">20:00</th>
+      <td>47</td><td>141</td><td>302</td>
+    </tr><tr>
+      <th scope="row">20:30</th>
+      <td>43</td><td>129</td><td>292</td>
+    </tr><tr>
+      <th scope="row">21:00</th>
+      <td>43</td><td>122</td><td>277</td>
+    </tr><tr>
+      <th scope="row">21:30</th>
+      <td>41</td><td>134</td><td>260</td>
+    </tr><tr>
+      <th scope="row">22:00</th>
+      <td>39</td><td>114</td><td>240</td>
+    </tr><tr>
+      <th scope="row">22:30</th>
+      <td>37</td><td>111</td><td>231</td>
+    </tr><tr>
+      <th scope="row">23:00</th>
+      <td>36</td><td>104</td><td>235</td>
+    </tr><tr>
+      <th scope="row">23:30</th>
+      <td>35</td><td>101</td><td>201</td>
+    </tr><tr>
+      <th scope="row">00:00</th>
+      <td>33</td><td>102</td><td>176</td>
+    </tr><tr>
+      <th scope="row">00:30</th>
+      <td>35</td><td>97</td><td>204</td>
+    </tr><tr>
+      <th scope="row">01:00</th>
+      <td>36</td><td>91</td><td>212</td>
+    </tr><tr>
+      <th scope="row">01:30</th>
+      <td>35</td><td>99</td><td>216</td>
+    </tr><tr>
+      <th scope="row">02:00</th>
+      <td>36</td><td>102</td><td>242</td>
+    </tr><tr>
+      <th scope="row">02:30</th>
+      <td>38</td><td>114</td><td>234</td>
+    </tr><tr>
+      <th scope="row">03:00</th>
+      <td>40</td><td>117</td><td>283</td>
+    </tr><tr>
+      <th scope="row">03:30</th>
+      <td>46</td><td>124</td><td>295</td>
+    </tr><tr>
+      <th scope="row">04:00</th>
+      <td>45</td><td>141</td><td>278</td>
+    </tr><tr>
+      <th scope="row">04:30</th>
+      <td>47</td><td>152</td><td>319</td>
+    </tr><tr>
+      <th scope="row">05:00</th>
+      <td>50</td><td>150</td><td>341</td>
+    </tr><tr>
+      <th scope="row">05:30</th>
+      <td>50</td><td>145</td><td>336</td>
+    </tr><tr>
+      <th scope="row">06:00</th>
+      <td>50</td><td>158</td><td>330</td>
+    </tr><tr>
+      <th scope="row">06:30</th>
+      <td>49</td><td>162</td><td>344</td>
+    </tr><tr>
+      <th scope="row">07:00</th>
+      <td>49</td><td>148</td><td>351</td>
+    </tr><tr>
+      <th scope="row">07:30</th>
+      <td>48</td><td>156</td><td>343</td>
+    </tr><tr>
+      <th scope="row">08:00</th>
+      <td>46</td><td>152</td><td>301</td>
+    </tr><tr>
+      <th scope="row">08:30</th>
+      <td>43</td><td>293</td><td>307</td>
+    </tr><tr>
+      <th scope="row">09:00</th>
+      <td>42</td><td>135</td><td>255</td>
+    </tr><tr>
+      <th scope="row">09:30</th>
+      <td>39</td><td>128</td><td>276</td>
+    </tr><tr>
+      <th scope="row">10:00</th>
+      <td>38</td><td>124</td><td>255</td>
+    </tr><tr>
+      <th scope="row">10:30</th>
+      <td>38</td><td>106</td><td>241</td>
+    </tr><tr>
+      <th scope="row">11:00</th>
+      <td>38</td><td>96</td><td>409</td>
+    </tr><tr>
+      <th scope="row">11:30</th>
+      <td>34</td><td>102</td><td>311</td>
+    </tr><tr>
+      <th scope="row">12:00</th>
+      <td>34</td><td>104</td><td>201</td>
+    </tr></tbody>
+  </table>
+    </div>
+  </section>
+      <section class="panel" aria-labelledby="p-errors">
+    <div class="panel__head">
+      <h3 class="panel__title" id="p-errors">Errors by endpoint</h3>
+      <p class="panel__sub">5xx responses</p>
+    </div>
+
+    <figure class="panel__figure" data-figure="errors">
+      <svg class="chart chart--bars" viewBox="0 0 460 160"
+    preserveAspectRatio="xMinYMin meet" role="list"
+    aria-labelledby="p-errors">
+    <g class="chart__bar" data-label="GET /v1/dashboards"
+          data-value="618" tabindex="0" role="listitem"
+          aria-label="GET /v1/dashboards: 618">
+        <rect x="0" y="-4" width="460" height="26" fill="transparent"/>
+        <text x="0" y="14" class="chart__bar-label">GET /v1/dashboards</text>
+        <path d="M 128 0 h 276 a 4 4 0 0 1 4 4 v 10 a 4 4 0 0 1 -4 4 h -276 Z" fill="var(--series-1)"/>
+        <text x="416" y="14"
+          class="chart__bar-value">618</text>
+      </g><g class="chart__bar" data-label="POST /v1/traces"
+          data-value="529" tabindex="0" role="listitem"
+          aria-label="POST /v1/traces: 529">
+        <rect x="0" y="28" width="460" height="26" fill="transparent"/>
+        <text x="0" y="46" class="chart__bar-label">POST /v1/traces</text>
+        <path d="M 128 32 h 235.67637540453075 a 4 4 0 0 1 4 4 v 10 a 4 4 0 0 1 -4 4 h -235.67637540453075 Z" fill="var(--series-1)"/>
+        <text x="375.67637540453075" y="46"
+          class="chart__bar-value">529</text>
+      </g><g class="chart__bar" data-label="GET /v1/query"
+          data-value="325" tabindex="0" role="listitem"
+          aria-label="GET /v1/query: 325">
+        <rect x="0" y="60" width="460" height="26" fill="transparent"/>
+        <text x="0" y="78" class="chart__bar-label">GET /v1/query</text>
+        <path d="M 128 64 h 143.24919093851133 a 4 4 0 0 1 4 4 v 10 a 4 4 0 0 1 -4 4 h -143.24919093851133 Z" fill="var(--series-1)"/>
+        <text x="283.24919093851133" y="78"
+          class="chart__bar-value">325</text>
+      </g><g class="chart__bar" data-label="POST /v1/ingest"
+          data-value="202" tabindex="0" role="listitem"
+          aria-label="POST /v1/ingest: 202">
+        <rect x="0" y="92" width="460" height="26" fill="transparent"/>
+        <text x="0" y="110" class="chart__bar-label">POST /v1/ingest</text>
+        <path d="M 128 96 h 87.52103559870551 a 4 4 0 0 1 4 4 v 10 a 4 4 0 0 1 -4 4 h -87.52103559870551 Z" fill="var(--series-1)"/>
+        <text x="227.5210355987055" y="110"
+          class="chart__bar-value">202</text>
+      </g><g class="chart__bar" data-label="POST /v1/alerts"
+          data-value="146" tabindex="0" role="listitem"
+          aria-label="POST /v1/alerts: 146">
+        <rect x="0" y="124" width="460" height="26" fill="transparent"/>
+        <text x="0" y="142" class="chart__bar-label">POST /v1/alerts</text>
+        <path d="M 128 128 h 62.14886731391586 a 4 4 0 0 1 4 4 v 10 a 4 4 0 0 1 -4 4 h -62.14886731391586 Z" fill="var(--series-1)"/>
+        <text x="202.14886731391584" y="142"
+          class="chart__bar-value">146</text>
+      </g>
+  </svg>
+    </figure>
+
+    <div class="panel__legend">
+      <p class="panel__sub">Top 5 of 214 endpoints</p>
+      <button class="table-toggle" type="button" data-table-toggle="errors"
+              aria-expanded="false" aria-controls="table-errors">Table view</button>
+    </div>
+
+    <div class="table-wrap" id="table-errors" data-table="errors" hidden>
+      <table class="data-table">
+        <caption>5xx responses by endpoint</caption>
+        <thead><tr><th scope="col">Endpoint</th><th scope="col">Errors</th></tr></thead>
+        <tbody>
+          <tr><th scope="row">GET /v1/dashboards</th><td>618</td></tr>
+<tr><th scope="row">POST /v1/traces</th><td>529</td></tr>
+<tr><th scope="row">GET /v1/query</th><td>325</td></tr>
+<tr><th scope="row">POST /v1/ingest</th><td>202</td></tr>
+<tr><th scope="row">POST /v1/alerts</th><td>146</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+      <section class="panel panel--wide" aria-labelledby="p-throughput">
+    <div class="panel__head">
+      <h3 class="panel__title" id="p-throughput">Ingest by signal</h3>
+      <p class="panel__sub">events per second</p>
+    </div>
+
+    <figure class="panel__figure" data-figure="throughput" tabindex="0" role="group"
+            aria-label="Ingest volume by signal type over time. Use arrow keys to read values.">
+      <svg class="chart" viewBox="0 0 1200 300" width="1200" height="300"
+    preserveAspectRatio="xMidYMid meet" role="img"
+    aria-labelledby="p-throughput"
+    data-chart="area" data-max="10000000"
+    data-plot="46,16,1182,274">
+    <line x1="46" y1="274.0" x2="1182" y2="274.0"
+          stroke="var(--chart-grid)" stroke-width="1"/>
+        <text x="38" y="278.0" text-anchor="end"
+          class="chart__tick">0</text><line x1="46" y1="209.5" x2="1182" y2="209.5"
+          stroke="var(--chart-grid)" stroke-width="1"/>
+        <text x="38" y="213.5" text-anchor="end"
+          class="chart__tick">2.5M</text><line x1="46" y1="145.0" x2="1182" y2="145.0"
+          stroke="var(--chart-grid)" stroke-width="1"/>
+        <text x="38" y="149.0" text-anchor="end"
+          class="chart__tick">5M</text><line x1="46" y1="80.5" x2="1182" y2="80.5"
+          stroke="var(--chart-grid)" stroke-width="1"/>
+        <text x="38" y="84.5" text-anchor="end"
+          class="chart__tick">7.5M</text><line x1="46" y1="16.0" x2="1182" y2="16.0"
+          stroke="var(--chart-grid)" stroke-width="1"/>
+        <text x="38" y="20.0" text-anchor="end"
+          class="chart__tick">10M</text>
+    <text x="46.0" y="292" text-anchor="start"
+        class="chart__tick">12:30</text><text x="239.4" y="292" text-anchor="middle"
+        class="chart__tick">16:30</text><text x="432.7" y="292" text-anchor="middle"
+        class="chart__tick">20:30</text><text x="626.1" y="292" text-anchor="middle"
+        class="chart__tick">00:30</text><text x="819.4" y="292" text-anchor="middle"
+        class="chart__tick">04:30</text><text x="1012.8" y="292" text-anchor="middle"
+        class="chart__tick">08:30</text><text x="1182.0" y="292" text-anchor="end"
+        class="chart__tick">12:00</text>
+    <line x1="46" y1="274" x2="1182" y2="274"
+      stroke="var(--chart-axis)" stroke-width="1"/>
+    <g>
+        <path d="M 46.0 233.1 L 70.2 233.6 L 94.3 234.4 L 118.5 236.4 L 142.7 231.4 L 166.9 228.4 L 191.0 224.2 L 215.2 224.3 L 239.4 222.1 L 263.5 215.8 L 287.7 217.3 L 311.9 213.6 L 336.0 217.9 L 360.2 219.9 L 384.4 215.2 L 408.6 218.0 L 432.7 224.6 L 456.9 224.9 L 481.1 227.4 L 505.2 227.2 L 529.4 234.6 L 553.6 232.3 L 577.7 231.9 L 601.9 234.8 L 626.1 239.3 L 650.3 236.9 L 674.4 235.3 L 698.6 228.5 L 722.8 227.1 L 746.9 228.8 L 771.1 221.3 L 795.3 222.2 L 819.4 216.5 L 843.6 218.9 L 867.8 217.7 L 892.0 218.4 L 916.1 214.0 L 940.3 221.3 L 964.5 216.4 L 988.6 224.6 L 1012.8 220.3 L 1037.0 229.4 L 1061.1 230.6 L 1085.3 229.5 L 1109.5 232.1 L 1133.7 233.0 L 1157.8 231.8 L 1182.0 235.1 L 1182.0 274.0 L 1157.8 274.0 L 1133.7 274.0 L 1109.5 274.0 L 1085.3 274.0 L 1061.1 274.0 L 1037.0 274.0 L 1012.8 274.0 L 988.6 274.0 L 964.5 274.0 L 940.3 274.0 L 916.1 274.0 L 892.0 274.0 L 867.8 274.0 L 843.6 274.0 L 819.4 274.0 L 795.3 274.0 L 771.1 274.0 L 746.9 274.0 L 722.8 274.0 L 698.6 274.0 L 674.4 274.0 L 650.3 274.0 L 626.1 274.0 L 601.9 274.0 L 577.7 274.0 L 553.6 274.0 L 529.4 274.0 L 505.2 274.0 L 481.1 274.0 L 456.9 274.0 L 432.7 274.0 L 408.6 274.0 L 384.4 274.0 L 360.2 274.0 L 336.0 274.0 L 311.9 274.0 L 287.7 274.0 L 263.5 274.0 L 239.4 274.0 L 215.2 274.0 L 191.0 274.0 L 166.9 274.0 L 142.7 274.0 L 118.5 274.0 L 94.3 274.0 L 70.2 274.0 L 46.0 274.0 Z" fill="var(--series-1)" fill-opacity="0.22"/>
+        <path d="M 46.0 233.1 L 70.2 233.6 L 94.3 234.4 L 118.5 236.4 L 142.7 231.4 L 166.9 228.4 L 191.0 224.2 L 215.2 224.3 L 239.4 222.1 L 263.5 215.8 L 287.7 217.3 L 311.9 213.6 L 336.0 217.9 L 360.2 219.9 L 384.4 215.2 L 408.6 218.0 L 432.7 224.6 L 456.9 224.9 L 481.1 227.4 L 505.2 227.2 L 529.4 234.6 L 553.6 232.3 L 577.7 231.9 L 601.9 234.8 L 626.1 239.3 L 650.3 236.9 L 674.4 235.3 L 698.6 228.5 L 722.8 227.1 L 746.9 228.8 L 771.1 221.3 L 795.3 222.2 L 819.4 216.5 L 843.6 218.9 L 867.8 217.7 L 892.0 218.4 L 916.1 214.0 L 940.3 221.3 L 964.5 216.4 L 988.6 224.6 L 1012.8 220.3 L 1037.0 229.4 L 1061.1 230.6 L 1085.3 229.5 L 1109.5 232.1 L 1133.7 233.0 L 1157.8 231.8 L 1182.0 235.1" fill="none" stroke="var(--chart-surface)"
+          stroke-width="2" stroke-linejoin="round"/>
+        <path d="M 46.0 233.1 L 70.2 233.6 L 94.3 234.4 L 118.5 236.4 L 142.7 231.4 L 166.9 228.4 L 191.0 224.2 L 215.2 224.3 L 239.4 222.1 L 263.5 215.8 L 287.7 217.3 L 311.9 213.6 L 336.0 217.9 L 360.2 219.9 L 384.4 215.2 L 408.6 218.0 L 432.7 224.6 L 456.9 224.9 L 481.1 227.4 L 505.2 227.2 L 529.4 234.6 L 553.6 232.3 L 577.7 231.9 L 601.9 234.8 L 626.1 239.3 L 650.3 236.9 L 674.4 235.3 L 698.6 228.5 L 722.8 227.1 L 746.9 228.8 L 771.1 221.3 L 795.3 222.2 L 819.4 216.5 L 843.6 218.9 L 867.8 217.7 L 892.0 218.4 L 916.1 214.0 L 940.3 221.3 L 964.5 216.4 L 988.6 224.6 L 1012.8 220.3 L 1037.0 229.4 L 1061.1 230.6 L 1085.3 229.5 L 1109.5 232.1 L 1133.7 233.0 L 1157.8 231.8 L 1182.0 235.1" fill="none" stroke="var(--series-1)"
+          stroke-width="2" stroke-linejoin="round" stroke-opacity="0.85"/>
+      </g><g>
+        <path d="M 46.0 215.7 L 70.2 214.8 L 94.3 216.2 L 118.5 216.0 L 142.7 208.7 L 166.9 204.2 L 191.0 199.8 L 215.2 198.7 L 239.4 196.5 L 263.5 187.7 L 287.7 186.2 L 311.9 183.0 L 336.0 189.1 L 360.2 189.6 L 384.4 187.4 L 408.6 188.3 L 432.7 199.0 L 456.9 199.6 L 481.1 205.0 L 505.2 203.9 L 529.4 215.0 L 553.6 212.7 L 577.7 213.0 L 601.9 215.2 L 626.1 220.5 L 650.3 218.1 L 674.4 215.6 L 698.6 206.6 L 722.8 206.2 L 746.9 205.3 L 771.1 196.5 L 795.3 195.2 L 819.4 186.6 L 843.6 187.9 L 867.8 186.4 L 892.0 187.0 L 916.1 183.4 L 940.3 191.7 L 964.5 187.4 L 988.6 196.9 L 1012.8 194.0 L 1037.0 204.3 L 1061.1 207.6 L 1085.3 207.3 L 1109.5 211.1 L 1133.7 215.6 L 1157.8 214.3 L 1182.0 216.6 L 1182.0 235.1 L 1157.8 231.8 L 1133.7 233.0 L 1109.5 232.1 L 1085.3 229.5 L 1061.1 230.6 L 1037.0 229.4 L 1012.8 220.3 L 988.6 224.6 L 964.5 216.4 L 940.3 221.3 L 916.1 214.0 L 892.0 218.4 L 867.8 217.7 L 843.6 218.9 L 819.4 216.5 L 795.3 222.2 L 771.1 221.3 L 746.9 228.8 L 722.8 227.1 L 698.6 228.5 L 674.4 235.3 L 650.3 236.9 L 626.1 239.3 L 601.9 234.8 L 577.7 231.9 L 553.6 232.3 L 529.4 234.6 L 505.2 227.2 L 481.1 227.4 L 456.9 224.9 L 432.7 224.6 L 408.6 218.0 L 384.4 215.2 L 360.2 219.9 L 336.0 217.9 L 311.9 213.6 L 287.7 217.3 L 263.5 215.8 L 239.4 222.1 L 215.2 224.3 L 191.0 224.2 L 166.9 228.4 L 142.7 231.4 L 118.5 236.4 L 94.3 234.4 L 70.2 233.6 L 46.0 233.1 Z" fill="var(--series-2)" fill-opacity="0.22"/>
+        <path d="M 46.0 215.7 L 70.2 214.8 L 94.3 216.2 L 118.5 216.0 L 142.7 208.7 L 166.9 204.2 L 191.0 199.8 L 215.2 198.7 L 239.4 196.5 L 263.5 187.7 L 287.7 186.2 L 311.9 183.0 L 336.0 189.1 L 360.2 189.6 L 384.4 187.4 L 408.6 188.3 L 432.7 199.0 L 456.9 199.6 L 481.1 205.0 L 505.2 203.9 L 529.4 215.0 L 553.6 212.7 L 577.7 213.0 L 601.9 215.2 L 626.1 220.5 L 650.3 218.1 L 674.4 215.6 L 698.6 206.6 L 722.8 206.2 L 746.9 205.3 L 771.1 196.5 L 795.3 195.2 L 819.4 186.6 L 843.6 187.9 L 867.8 186.4 L 892.0 187.0 L 916.1 183.4 L 940.3 191.7 L 964.5 187.4 L 988.6 196.9 L 1012.8 194.0 L 1037.0 204.3 L 1061.1 207.6 L 1085.3 207.3 L 1109.5 211.1 L 1133.7 215.6 L 1157.8 214.3 L 1182.0 216.6" fill="none" stroke="var(--chart-surface)"
+          stroke-width="2" stroke-linejoin="round"/>
+        <path d="M 46.0 215.7 L 70.2 214.8 L 94.3 216.2 L 118.5 216.0 L 142.7 208.7 L 166.9 204.2 L 191.0 199.8 L 215.2 198.7 L 239.4 196.5 L 263.5 187.7 L 287.7 186.2 L 311.9 183.0 L 336.0 189.1 L 360.2 189.6 L 384.4 187.4 L 408.6 188.3 L 432.7 199.0 L 456.9 199.6 L 481.1 205.0 L 505.2 203.9 L 529.4 215.0 L 553.6 212.7 L 577.7 213.0 L 601.9 215.2 L 626.1 220.5 L 650.3 218.1 L 674.4 215.6 L 698.6 206.6 L 722.8 206.2 L 746.9 205.3 L 771.1 196.5 L 795.3 195.2 L 819.4 186.6 L 843.6 187.9 L 867.8 186.4 L 892.0 187.0 L 916.1 183.4 L 940.3 191.7 L 964.5 187.4 L 988.6 196.9 L 1012.8 194.0 L 1037.0 204.3 L 1061.1 207.6 L 1085.3 207.3 L 1109.5 211.1 L 1133.7 215.6 L 1157.8 214.3 L 1182.0 216.6" fill="none" stroke="var(--series-2)"
+          stroke-width="2" stroke-linejoin="round" stroke-opacity="0.85"/>
+      </g><g>
+        <path d="M 46.0 189.5 L 70.2 186.8 L 94.3 188.5 L 118.5 185.7 L 142.7 178.9 L 166.9 167.5 L 191.0 161.0 L 215.2 157.4 L 239.4 152.8 L 263.5 141.4 L 287.7 138.0 L 311.9 135.3 L 336.0 141.9 L 360.2 140.3 L 384.4 142.6 L 408.6 146.4 L 432.7 160.0 L 456.9 162.3 L 481.1 168.2 L 505.2 168.4 L 529.4 182.1 L 553.6 184.2 L 577.7 188.0 L 601.9 190.8 L 626.1 193.1 L 650.3 192.9 L 674.4 189.9 L 698.6 179.1 L 722.8 172.1 L 746.9 172.7 L 771.1 158.1 L 795.3 152.7 L 819.4 142.9 L 843.6 141.7 L 867.8 141.7 L 892.0 141.2 L 916.1 137.8 L 940.3 143.5 L 964.5 144.3 L 988.6 152.7 L 1012.8 155.9 L 1037.0 169.8 L 1061.1 171.4 L 1085.3 175.5 L 1109.5 182.1 L 1133.7 189.4 L 1157.8 186.3 L 1182.0 193.3 L 1182.0 216.6 L 1157.8 214.3 L 1133.7 215.6 L 1109.5 211.1 L 1085.3 207.3 L 1061.1 207.6 L 1037.0 204.3 L 1012.8 194.0 L 988.6 196.9 L 964.5 187.4 L 940.3 191.7 L 916.1 183.4 L 892.0 187.0 L 867.8 186.4 L 843.6 187.9 L 819.4 186.6 L 795.3 195.2 L 771.1 196.5 L 746.9 205.3 L 722.8 206.2 L 698.6 206.6 L 674.4 215.6 L 650.3 218.1 L 626.1 220.5 L 601.9 215.2 L 577.7 213.0 L 553.6 212.7 L 529.4 215.0 L 505.2 203.9 L 481.1 205.0 L 456.9 199.6 L 432.7 199.0 L 408.6 188.3 L 384.4 187.4 L 360.2 189.6 L 336.0 189.1 L 311.9 183.0 L 287.7 186.2 L 263.5 187.7 L 239.4 196.5 L 215.2 198.7 L 191.0 199.8 L 166.9 204.2 L 142.7 208.7 L 118.5 216.0 L 94.3 216.2 L 70.2 214.8 L 46.0 215.7 Z" fill="var(--series-3)" fill-opacity="0.22"/>
+        <path d="M 46.0 189.5 L 70.2 186.8 L 94.3 188.5 L 118.5 185.7 L 142.7 178.9 L 166.9 167.5 L 191.0 161.0 L 215.2 157.4 L 239.4 152.8 L 263.5 141.4 L 287.7 138.0 L 311.9 135.3 L 336.0 141.9 L 360.2 140.3 L 384.4 142.6 L 408.6 146.4 L 432.7 160.0 L 456.9 162.3 L 481.1 168.2 L 505.2 168.4 L 529.4 182.1 L 553.6 184.2 L 577.7 188.0 L 601.9 190.8 L 626.1 193.1 L 650.3 192.9 L 674.4 189.9 L 698.6 179.1 L 722.8 172.1 L 746.9 172.7 L 771.1 158.1 L 795.3 152.7 L 819.4 142.9 L 843.6 141.7 L 867.8 141.7 L 892.0 141.2 L 916.1 137.8 L 940.3 143.5 L 964.5 144.3 L 988.6 152.7 L 1012.8 155.9 L 1037.0 169.8 L 1061.1 171.4 L 1085.3 175.5 L 1109.5 182.1 L 1133.7 189.4 L 1157.8 186.3 L 1182.0 193.3" fill="none" stroke="var(--chart-surface)"
+          stroke-width="2" stroke-linejoin="round"/>
+        <path d="M 46.0 189.5 L 70.2 186.8 L 94.3 188.5 L 118.5 185.7 L 142.7 178.9 L 166.9 167.5 L 191.0 161.0 L 215.2 157.4 L 239.4 152.8 L 263.5 141.4 L 287.7 138.0 L 311.9 135.3 L 336.0 141.9 L 360.2 140.3 L 384.4 142.6 L 408.6 146.4 L 432.7 160.0 L 456.9 162.3 L 481.1 168.2 L 505.2 168.4 L 529.4 182.1 L 553.6 184.2 L 577.7 188.0 L 601.9 190.8 L 626.1 193.1 L 650.3 192.9 L 674.4 189.9 L 698.6 179.1 L 722.8 172.1 L 746.9 172.7 L 771.1 158.1 L 795.3 152.7 L 819.4 142.9 L 843.6 141.7 L 867.8 141.7 L 892.0 141.2 L 916.1 137.8 L 940.3 143.5 L 964.5 144.3 L 988.6 152.7 L 1012.8 155.9 L 1037.0 169.8 L 1061.1 171.4 L 1085.3 175.5 L 1109.5 182.1 L 1133.7 189.4 L 1157.8 186.3 L 1182.0 193.3" fill="none" stroke="var(--series-3)"
+          stroke-width="2" stroke-linejoin="round" stroke-opacity="0.85"/>
+      </g>
+    <g class="chart__crosshair" hidden>
+      <line y1="16" y2="274" stroke="var(--chart-axis)" stroke-width="1"/>
+    </g>
+  </svg>
+      <div class="chart-tip" data-tip hidden></div>
+    </figure>
+
+    <div class="panel__legend">
+      <ul class="legend">
+    <li class="legend__item">
+        <span class="legend__key legend__key--rect" style="--key: var(--series-1)"
+          aria-hidden="true"></span>
+        <span>Metrics</span>
+      </li><li class="legend__item">
+        <span class="legend__key legend__key--rect" style="--key: var(--series-2)"
+          aria-hidden="true"></span>
+        <span>Traces</span>
+      </li><li class="legend__item">
+        <span class="legend__key legend__key--rect" style="--key: var(--series-3)"
+          aria-hidden="true"></span>
+        <span>Logs</span>
+      </li>
+  </ul>
+      <button class="table-toggle" type="button" data-table-toggle="throughput"
+              aria-expanded="false" aria-controls="table-throughput">Table view</button>
+    </div>
+
+    <div class="table-wrap" id="table-throughput" data-table="throughput" hidden>
+      <table class="data-table">
+    <caption>Ingest by signal type</caption>
+    <thead><tr><th scope="col">Time</th><th scope="col">Metrics (eps)</th><th scope="col">Traces (eps)</th><th scope="col">Logs (eps)</th></tr></thead>
+    <tbody><tr>
+      <th scope="row">12:30</th>
+      <td>1.6M</td><td>671K</td><td>1M</td>
+    </tr><tr>
+      <th scope="row">13:00</th>
+      <td>1.6M</td><td>729K</td><td>1.1M</td>
+    </tr><tr>
+      <th scope="row">13:30</th>
+      <td>1.5M</td><td>703K</td><td>1.1M</td>
+    </tr><tr>
+      <th scope="row">14:00</th>
+      <td>1.5M</td><td>794K</td><td>1.2M</td>
+    </tr><tr>
+      <th scope="row">14:30</th>
+      <td>1.7M</td><td>879K</td><td>1.2M</td>
+    </tr><tr>
+      <th scope="row">15:00</th>
+      <td>1.8M</td><td>937K</td><td>1.4M</td>
+    </tr><tr>
+      <th scope="row">15:30</th>
+      <td>1.9M</td><td>945K</td><td>1.5M</td>
+    </tr><tr>
+      <th scope="row">16:00</th>
+      <td>1.9M</td><td>995K</td><td>1.6M</td>
+    </tr><tr>
+      <th scope="row">16:30</th>
+      <td>2M</td><td>992K</td><td>1.7M</td>
+    </tr><tr>
+      <th scope="row">17:00</th>
+      <td>2.3M</td><td>1.1M</td><td>1.8M</td>
+    </tr><tr>
+      <th scope="row">17:30</th>
+      <td>2.2M</td><td>1.2M</td><td>1.9M</td>
+    </tr><tr>
+      <th scope="row">18:00</th>
+      <td>2.3M</td><td>1.2M</td><td>1.8M</td>
+    </tr><tr>
+      <th scope="row">18:30</th>
+      <td>2.2M</td><td>1.1M</td><td>1.8M</td>
+    </tr><tr>
+      <th scope="row">19:00</th>
+      <td>2.1M</td><td>1.2M</td><td>1.9M</td>
+    </tr><tr>
+      <th scope="row">19:30</th>
+      <td>2.3M</td><td>1.1M</td><td>1.7M</td>
+    </tr><tr>
+      <th scope="row">20:00</th>
+      <td>2.2M</td><td>1.1M</td><td>1.6M</td>
+    </tr><tr>
+      <th scope="row">20:30</th>
+      <td>1.9M</td><td>992K</td><td>1.5M</td>
+    </tr><tr>
+      <th scope="row">21:00</th>
+      <td>1.9M</td><td>980K</td><td>1.4M</td>
+    </tr><tr>
+      <th scope="row">21:30</th>
+      <td>1.8M</td><td>869K</td><td>1.4M</td>
+    </tr><tr>
+      <th scope="row">22:00</th>
+      <td>1.8M</td><td>906K</td><td>1.4M</td>
+    </tr><tr>
+      <th scope="row">22:30</th>
+      <td>1.5M</td><td>762K</td><td>1.3M</td>
+    </tr><tr>
+      <th scope="row">23:00</th>
+      <td>1.6M</td><td>760K</td><td>1.1M</td>
+    </tr><tr>
+      <th scope="row">23:30</th>
+      <td>1.6M</td><td>732K</td><td>968K</td>
+    </tr><tr>
+      <th scope="row">00:00</th>
+      <td>1.5M</td><td>759K</td><td>948K</td>
+    </tr><tr>
+      <th scope="row">00:30</th>
+      <td>1.3M</td><td>729K</td><td>1.1M</td>
+    </tr><tr>
+      <th scope="row">01:00</th>
+      <td>1.4M</td><td>730K</td><td>977K</td>
+    </tr><tr>
+      <th scope="row">01:30</th>
+      <td>1.5M</td><td>766K</td><td>994K</td>
+    </tr><tr>
+      <th scope="row">02:00</th>
+      <td>1.8M</td><td>850K</td><td>1.1M</td>
+    </tr><tr>
+      <th scope="row">02:30</th>
+      <td>1.8M</td><td>813K</td><td>1.3M</td>
+    </tr><tr>
+      <th scope="row">03:00</th>
+      <td>1.8M</td><td>910K</td><td>1.3M</td>
+    </tr><tr>
+      <th scope="row">03:30</th>
+      <td>2M</td><td>961K</td><td>1.5M</td>
+    </tr><tr>
+      <th scope="row">04:00</th>
+      <td>2M</td><td>1M</td><td>1.6M</td>
+    </tr><tr>
+      <th scope="row">04:30</th>
+      <td>2.2M</td><td>1.2M</td><td>1.7M</td>
+    </tr><tr>
+      <th scope="row">05:00</th>
+      <td>2.1M</td><td>1.2M</td><td>1.8M</td>
+    </tr><tr>
+      <th scope="row">05:30</th>
+      <td>2.2M</td><td>1.2M</td><td>1.7M</td>
+    </tr><tr>
+      <th scope="row">06:00</th>
+      <td>2.2M</td><td>1.2M</td><td>1.8M</td>
+    </tr><tr>
+      <th scope="row">06:30</th>
+      <td>2.3M</td><td>1.2M</td><td>1.8M</td>
+    </tr><tr>
+      <th scope="row">07:00</th>
+      <td>2M</td><td>1.1M</td><td>1.9M</td>
+    </tr><tr>
+      <th scope="row">07:30</th>
+      <td>2.2M</td><td>1.1M</td><td>1.7M</td>
+    </tr><tr>
+      <th scope="row">08:00</th>
+      <td>1.9M</td><td>1.1M</td><td>1.7M</td>
+    </tr><tr>
+      <th scope="row">08:30</th>
+      <td>2.1M</td><td>1M</td><td>1.5M</td>
+    </tr><tr>
+      <th scope="row">09:00</th>
+      <td>1.7M</td><td>974K</td><td>1.3M</td>
+    </tr><tr>
+      <th scope="row">09:30</th>
+      <td>1.7M</td><td>891K</td><td>1.4M</td>
+    </tr><tr>
+      <th scope="row">10:00</th>
+      <td>1.7M</td><td>859K</td><td>1.2M</td>
+    </tr><tr>
+      <th scope="row">10:30</th>
+      <td>1.6M</td><td>813K</td><td>1.1M</td>
+    </tr><tr>
+      <th scope="row">11:00</th>
+      <td>1.6M</td><td>676K</td><td>1M</td>
+    </tr><tr>
+      <th scope="row">11:30</th>
+      <td>1.6M</td><td>679K</td><td>1.1M</td>
+    </tr><tr>
+      <th scope="row">12:00</th>
+      <td>1.5M</td><td>716K</td><td>903K</td>
+    </tr></tbody>
+  </table>
+    </div>
+
+    <h4 class="panel__title" style="margin-top:var(--space-m)">Recent activity</h4>
+    <ul class="feed" style="margin-top:var(--space-2xs)">
+      <li>
+        <span class="feed__when">14:02</span>
+        <span class="feed__what">
+          <span class="feed__badge">
+            <span class="status-dot" data-tone="good" aria-hidden="true"></span>
+            <span class="visually-hidden">good:</span>
+          </span>
+          <strong>checkout-api</strong> recovered — p95 back under 200 ms
+        </span>
+      </li>
+<li>
+        <span class="feed__when">13:58</span>
+        <span class="feed__what">
+          <span class="feed__badge">
+            <span class="status-dot" data-tone="warning" aria-hidden="true"></span>
+            <span class="visually-hidden">warning:</span>
+          </span>
+          <strong>checkout-api</strong> p95 above objective for 4 min
+        </span>
+      </li>
+<li>
+        <span class="feed__when">13:31</span>
+        <span class="feed__what">
+          <span class="feed__badge">
+            <span class="status-dot" data-tone="good" aria-hidden="true"></span>
+            <span class="visually-hidden">good:</span>
+          </span>
+          Deploy <strong>v2026.8.3</strong> completed across 3 regions
+        </span>
+      </li>
+<li>
+        <span class="feed__when">12:47</span>
+        <span class="feed__what">
+          <span class="feed__badge">
+            <span class="status-dot" data-tone="good" aria-hidden="true"></span>
+            <span class="visually-hidden">good:</span>
+          </span>
+          <strong>ingest-eu</strong> autoscaled 18 → 24 nodes
+        </span>
+      </li>
+<li>
+        <span class="feed__when">11:20</span>
+        <span class="feed__what">
+          <span class="feed__badge">
+            <span class="status-dot" data-tone="critical" aria-hidden="true"></span>
+            <span class="visually-hidden">critical:</span>
+          </span>
+          <strong>trace-store</strong> shard 7 failover, 41 s of degraded writes
+        </span>
+      </li>
+    </ul>
+  </section>
+    </div>
+  </div>
+    <p class="hero__note" style="margin-top:var(--space-s)">
+      A working dashboard running on generated data — switch the range, hover or arrow
+      through the series, or open any chart's table view. Nothing here is a screenshot.
+    </p>
+  </div>
+</section>
+
+<section class="section--tight" aria-label="Customers">
+  <div class="shell">
+    <p class="kicker" style="margin-bottom:var(--space-s)">
+      Trusted by 1,840 engineering teams</p>
+    <ul class="logos">
+      <li>Harbourline</li>
+<li>Meridian Health</li>
+<li>Corvus Pay</li>
+<li>Tessellate</li>
+<li>Bright Meadow</li>
+<li>Ardent Labs</li>
+    </ul>
+  </div>
+</section>
+
+<section class="section section--raised" aria-labelledby="signals-heading">
+  <div class="shell">
+    <div class="section-head section-head--split">
+    <div>
+      <p class="kicker">One platform</p>
+      <h2 class="h2" id="signals-heading">Three signals, one query language.</h2>
+      <p class="lede" style="margin-top:var(--space-xs)">You stop translating between three dialects during an incident, because the same
+        NWQL expression filters all of them.</p>
+    </div>
+    <a class="arrow-link" href="/northwind/platform/">How it fits together</a>
+  </div>
+
+    <div class="grid grid--3">
+      <a class="card card--link" href="/northwind/features/metrics/">
+        <p class="kicker">Time series</p>
+        <h3 class="card__title" style="margin-top:var(--space-2xs)">Metrics</h3>
+        <p class="card__body">Ten-second resolution, kept at full fidelity for as long as you pay to keep it.</p>
+        <p class="arrow-link" style="margin-top:var(--space-s)">Read more</p>
+      </a>
+<a class="card card--link" href="/northwind/features/traces/">
+        <p class="kicker">Distributed tracing</p>
+        <h3 class="card__title" style="margin-top:var(--space-2xs)">Traces</h3>
+        <p class="card__body">Tail-based sampling that keeps the traces you actually needed.</p>
+        <p class="arrow-link" style="margin-top:var(--space-s)">Read more</p>
+      </a>
+<a class="card card--link" href="/northwind/features/logs/">
+        <p class="kicker">Log management</p>
+        <h3 class="card__title" style="margin-top:var(--space-2xs)">Logs</h3>
+        <p class="card__body">Structured search over everything, without an index tax on every field.</p>
+        <p class="arrow-link" style="margin-top:var(--space-s)">Read more</p>
+      </a>
+    </div>
+  </div>
+</section>
+
+<section class="section" aria-labelledby="pricing-heading">
+  <div class="shell">
+    <div class="grid grid--2" style="align-items:center;gap:var(--space-2xl)">
+      <div>
+        <div class="section-head">
+    <div>
+      <p class="kicker">Pricing</p>
+      <h2 class="h2" id="pricing-heading">Billed on bytes, not on people.</h2>
+      
+    </div>
+    
+  </div>
+        <p class="lede">Charging per seat pushes teams to share logins, which is the
+          opposite of what a security team wants. Every plan includes unlimited users,
+          dashboards and alerts.</p>
+        <ul class="checks" style="margin-top:var(--space-m)">
+          <li>Ingest measured in compressed bytes, so one unit covers all three signals</li>
+          <li>Overage billed at the plan rate, or hard-capped if you prefer a ceiling</li>
+          <li>Twenty percent off for annual, including the overage rates</li>
+        </ul>
+        <a class="btn" style="margin-top:var(--space-l)"
+           href="/northwind/pricing/">Work out your bill</a>
+      </div>
+
+      <div class="card">
+        <p class="kicker">Typical</p>
+        <p style="font-size:var(--step-4);font-weight:660;letter-spacing:-0.035em;line-height:1;
+                  margin-top:var(--space-2xs)">$233<span
+          style="font-size:var(--step-0);color:var(--text-muted);font-weight:400">/month</span></p>
+        <p class="card__body">A fifteen-engineer team on the Team plan: 130 GB of ingest,
+          22 hosts, 30-day retention.</p>
+        <hr style="border:0;border-top:1px solid var(--border);margin-block:var(--space-s)">
+        <p class="card__body">The same configuration on a per-host vendor at $23 a host
+          runs about $506 before a single byte of log storage.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section section--raised" aria-labelledby="proof-heading">
+  <div class="shell">
+    <div class="section-head section-head--split">
+    <div>
+      <p class="kicker">Customers</p>
+      <h2 class="h2" id="proof-heading">What changed after the migration.</h2>
+      
+    </div>
+    <a class="arrow-link" href="/northwind/customers/">All case studies</a>
+  </div>
+
+    <div class="grid grid--2">
+      <a class="card card--link"
+        href="/northwind/customers/harbourline/">
+        <p class="kicker">Logistics</p>
+        <h3 class="card__title" style="margin-top:var(--space-2xs)">Harbourline</h3>
+        <p class="card__body">Cut observability spend by 63% while tripling the volume they keep.</p>
+        <ul class="metrics" style="margin-top:var(--space-m)">
+          <li>
+            <p class="metrics__value" style="font-size:var(--step-2)">63%</p>
+            <p class="metrics__label">lower monthly bill</p>
+          </li>
+<li>
+            <p class="metrics__value" style="font-size:var(--step-2)">3.1×</p>
+            <p class="metrics__label">more data retained</p>
+          </li>
+<li>
+            <p class="metrics__value" style="font-size:var(--step-2)">11 min</p>
+            <p class="metrics__label">median time to detect</p>
+          </li>
+        </ul>
+      </a>
+<a class="card card--link"
+        href="/northwind/customers/meridian-health/">
+        <p class="kicker">Healthcare</p>
+        <h3 class="card__title" style="margin-top:var(--space-2xs)">Meridian Health</h3>
+        <p class="card__body">Passed a HITRUST audit with observability in scope, in one cycle.</p>
+        <ul class="metrics" style="margin-top:var(--space-m)">
+          <li>
+            <p class="metrics__value" style="font-size:var(--step-2)">1 cycle</p>
+            <p class="metrics__label">to audit sign-off</p>
+          </li>
+<li>
+            <p class="metrics__value" style="font-size:var(--step-2)">100%</p>
+            <p class="metrics__label">PHI redacted at source</p>
+          </li>
+<li>
+            <p class="metrics__value" style="font-size:var(--step-2)">15 mo</p>
+            <p class="metrics__label">retention in region</p>
+          </li>
+        </ul>
+      </a>
+    </div>
+  </div>
+</section>
+
+<section class="cta">
+    <div class="shell cta__inner">
+      <h2 class="h2">Point a collector at it and see.</h2>
+      <p class="lede">Five gigabytes a month free, forever. The collector config is eleven lines.</p>
+      <div class="hero__actions">
+        <a class="btn btn--lg" href="/northwind/demo/">Book a demo</a>
+        <a class="btn btn--ghost btn--lg" href="/northwind/docs/">Read the quickstart</a>
+      </div>
+    </div>
+  </section>
+
+    </main>
+    <footer class="footer">
+      <div class="footer__inner">
+        <div class="footer__brand">
+          <span class="footer__mark" aria-hidden="true"><svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg"
+  aria-hidden="true" focusable="false">
+  <path d="M5 24V8l11 11 11-11v16" fill="none" stroke="currentColor" stroke-width="2.6"
+        stroke-linecap="square"/>
+</svg></span>
+          <p class="footer__tagline">Observability for systems that are not allowed to go down.</p>
+          <p class="footer__meta">
+            1,840 engineering teams ·
+            4.1 trillion events a day
+          </p>
+        </div>
+
+        <nav class="footer__group" aria-label="Product">
+          <h2 class="footer__heading">Product</h2>
+          <ul>
+            <li><a href="/northwind/platform/">Platform overview</a></li>
+<li><a href="/northwind/features/metrics/">Metrics</a></li>
+<li><a href="/northwind/features/traces/">Traces</a></li>
+<li><a href="/northwind/features/logs/">Logs</a></li>
+<li><a href="/northwind/pricing/">Pricing</a></li>
+          </ul>
+        </nav>
+<nav class="footer__group" aria-label="Resources">
+          <h2 class="footer__heading">Resources</h2>
+          <ul>
+            <li><a href="/northwind/docs/">Documentation</a></li>
+<li><a href="/northwind/changelog/">Changelog</a></li>
+<li><a href="/northwind/customers/">Customers</a></li>
+          </ul>
+        </nav>
+<nav class="footer__group" aria-label="Company">
+          <h2 class="footer__heading">Company</h2>
+          <ul>
+            <li><a href="/northwind/security/">Security</a></li>
+<li><a href="/northwind/demo/">Book a demo</a></li>
+          </ul>
+        </nav>
+
+        <div class="footer__legal">
+          <p>
+            Northwind is a fictional product, designed and built by
+            <a href="/work/northwind/">Studio Meridian</a>
+            to demonstrate technical marketing design. The dashboard runs on generated
+            data, no account exists, and no form submits anywhere.
+          </p>
+          <p class="footer__status">
+            <span class="status-dot" data-tone="good" aria-hidden="true"></span>
+            All systems operational
+          </p>
+        </div>
+      </div>
+    </footer>
+    <script type="module" src="/northwind/assets/ui.js"></script>
+    <script type="module" src="/northwind/assets/dashboard.js"></script>
+  </body>
+</html>

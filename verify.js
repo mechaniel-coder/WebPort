@@ -176,15 +176,24 @@ function checkDocument(file, html, name) {
   }
 
   // --- Form labelling ------------------------------------------------------
-  for (const tag of matchAll(html, /(<input\b[^>]*>)/gi)) {
+  // A control is labelled explicitly (<label for>), implicitly (wrapped in a
+  // <label> that has text), or via ARIA. All three are valid.
+  const labelBlocks = [...html.matchAll(/<label\b[^>]*>([\s\S]*?)<\/label>/gi)].filter(
+    (match) => textOf(match[1]),
+  );
+
+  for (const tag of matchAll(html, /(<(?:input|select|textarea)\b[^>]*>)/gi)) {
     const type = (attrOf(tag, 'type') || 'text').toLowerCase();
     if (['hidden', 'submit', 'button', 'reset', 'image'].includes(type)) continue;
+
     const id = attrOf(tag, 'id');
     const labelled =
       (id && new RegExp(`<label[^>]*\\sfor="${id}"`, 'i').test(html)) ||
+      labelBlocks.some((match) => match[0].includes(tag)) ||
       attrOf(tag, 'aria-label') ||
       attrOf(tag, 'aria-labelledby');
-    if (!labelled) fail(name, `input has no associated label: ${tag.slice(0, 90)}`);
+
+    if (!labelled) fail(name, `form control has no associated label: ${tag.slice(0, 90)}`);
   }
 
   // --- Internal links ------------------------------------------------------

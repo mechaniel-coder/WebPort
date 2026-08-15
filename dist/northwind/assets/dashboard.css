@@ -1,0 +1,361 @@
+/**
+ * The live dashboard demo.
+ *
+ * Filters sit in one row above everything they scope, and every chart pairs a
+ * legend with a table view — so no number on this page is reachable only by
+ * hovering, and identity never rests on colour alone.
+ */
+
+.dashboard {
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--surface-1);
+  overflow: hidden;
+}
+
+/* ── Toolbar ───────────────────────────────────────────────────────────────── */
+
+.dash-bar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-s);
+  padding: var(--space-xs) var(--space-s);
+  border-bottom: 1px solid var(--border);
+  background: var(--surface-2);
+}
+
+.dash-bar__title {
+  font-size: var(--step--1);
+  font-weight: 600;
+  margin-right: auto;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.dash-bar__env {
+  font-family: var(--font-mono);
+  font-size: var(--step--2);
+  color: var(--text-muted);
+  border: 1px solid var(--border);
+  border-radius: 100px;
+  padding: 0.1rem 0.55rem;
+}
+
+/* Segmented date-range control — presets first, as a real dashboard would. */
+.segmented {
+  display: inline-flex;
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+}
+
+.segmented button {
+  padding: 0.35rem 0.7rem;
+  font-size: var(--step--2);
+  font-family: var(--font-mono);
+  color: var(--text-secondary);
+  border-right: 1px solid var(--border);
+  transition: background 0.15s var(--ease), color 0.15s var(--ease);
+}
+
+.segmented button:last-child {
+  border-right: 0;
+}
+
+.segmented button:hover {
+  background: var(--surface-3);
+  color: var(--text-primary);
+}
+
+.segmented button[aria-pressed='true'] {
+  background: var(--accent);
+  color: var(--accent-ink);
+  font-weight: 600;
+}
+
+.live-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  font-size: var(--step--2);
+  font-family: var(--font-mono);
+  color: var(--text-secondary);
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius-sm);
+  padding: 0.35rem 0.7rem;
+}
+
+.live-toggle[aria-pressed='true'] {
+  color: var(--text-primary);
+}
+
+.live-toggle__dot {
+  width: 0.45rem;
+  height: 0.45rem;
+  border-radius: 50%;
+  background: var(--text-muted);
+}
+
+.live-toggle[aria-pressed='true'] .live-toggle__dot {
+  background: var(--status-good);
+  animation: pulse 2s var(--ease) infinite;
+}
+
+@keyframes pulse {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.35;
+  }
+}
+
+/* ── Stat tiles ────────────────────────────────────────────────────────────── */
+
+.stats {
+  display: grid;
+  gap: 1px;
+  background: var(--border);
+  border-bottom: 1px solid var(--border);
+}
+
+@media (min-width: 34em) {
+  .stats {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 60em) {
+  .stats {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+.stat {
+  background: var(--surface-1);
+  padding: var(--space-s);
+  display: grid;
+  gap: 0.3rem;
+}
+
+.stat__label {
+  font-size: var(--step--2);
+  color: var(--text-muted);
+}
+
+.stat__row {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: var(--space-s);
+}
+
+/* Proportional figures: tabular-nums makes a large standalone number look loose. */
+.stat__value {
+  font-size: var(--step-3);
+  font-weight: 640;
+  letter-spacing: -0.03em;
+  line-height: 1;
+}
+
+.stat__delta {
+  font-size: var(--step--2);
+  font-family: var(--font-mono);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  color: var(--text-secondary);
+}
+
+/* Direction and sentiment are carried by the arrow glyph and the label, not by
+   colour alone. */
+.stat__delta[data-sentiment='good'] {
+  color: #35c635;
+}
+
+.stat__delta[data-sentiment='bad'] {
+  color: #ef8b8b;
+}
+
+/* ── Chart cards ───────────────────────────────────────────────────────────── */
+
+.panels {
+  display: grid;
+  gap: 1px;
+  background: var(--border);
+}
+
+@media (min-width: 68em) {
+  .panels {
+    grid-template-columns: 1.55fr 1fr;
+  }
+  .panel--wide {
+    grid-column: 1 / -1;
+  }
+}
+
+.panel {
+  background: var(--surface-1);
+  padding: var(--space-s) var(--space-s) var(--space-m);
+  min-width: 0;
+}
+
+.panel__head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--space-s);
+  flex-wrap: wrap;
+  margin-bottom: var(--space-2xs);
+}
+
+.panel__title {
+  font-size: var(--step--1);
+  font-weight: 600;
+}
+
+.panel__sub {
+  font-size: var(--step--2);
+  color: var(--text-muted);
+}
+
+.panel__legend {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-s);
+  flex-wrap: wrap;
+  margin-top: var(--space-2xs);
+}
+
+.panel__figure {
+  position: relative;
+  margin: 0;
+}
+
+.table-toggle {
+  font-size: var(--step--2);
+  font-family: var(--font-mono);
+  color: var(--text-secondary);
+  text-decoration: underline;
+  text-underline-offset: 0.2em;
+}
+
+.table-toggle:hover {
+  color: var(--text-primary);
+}
+
+/* ── Tooltip ───────────────────────────────────────────────────────────────── */
+
+.chart-tip {
+  position: absolute;
+  z-index: 5;
+  min-width: 9rem;
+  padding: 0.5rem 0.65rem;
+  background: var(--surface-3);
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius-sm);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.45);
+  font-size: var(--step--2);
+  pointer-events: none;
+  transform: translate(-50%, calc(-100% - 12px));
+  transition: opacity 0.1s linear;
+}
+
+.chart-tip[hidden] {
+  display: none;
+}
+
+.chart-tip__when {
+  color: var(--text-muted);
+  font-family: var(--font-mono);
+  margin-bottom: 0.3rem;
+}
+
+.chart-tip__row {
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+  padding-block: 0.1rem;
+}
+
+/* Value leads, series name follows — the legend's hierarchy inverted, because
+   here the reader already has the series and wants the number. */
+.chart-tip__value {
+  font-family: var(--font-mono);
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-left: auto;
+}
+
+.chart-tip__name {
+  color: var(--text-secondary);
+}
+
+.chart-tip__key {
+  width: 0.75rem;
+  height: 2px;
+  border-radius: 1px;
+  flex: none;
+  background: var(--key);
+}
+
+/* ── Incident feed ─────────────────────────────────────────────────────────── */
+
+.feed {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  gap: 0.55rem;
+  font-size: var(--step--2);
+}
+
+.feed li {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 0.55rem;
+  align-items: start;
+  padding-bottom: 0.55rem;
+  border-bottom: 1px solid var(--border);
+}
+
+.feed li:last-child {
+  border-bottom: 0;
+  padding-bottom: 0;
+}
+
+.feed__when {
+  font-family: var(--font-mono);
+  color: var(--text-muted);
+  white-space: nowrap;
+}
+
+.feed__what {
+  color: var(--text-secondary);
+}
+
+.feed__what strong {
+  color: var(--text-primary);
+  font-weight: 550;
+}
+
+.feed__badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  font-family: var(--font-mono);
+  font-size: 0.92em;
+  color: var(--text-primary);
+}
+
+/* ── Reduced motion ────────────────────────────────────────────────────────── */
+
+@media (prefers-reduced-motion: reduce) {
+  .live-toggle[aria-pressed='true'] .live-toggle__dot {
+    animation: none;
+  }
+}

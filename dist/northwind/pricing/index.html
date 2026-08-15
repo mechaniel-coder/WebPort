@@ -1,0 +1,497 @@
+<!doctype html>
+<html lang="en" data-color-scheme="dark">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Pricing — Northwind</title>
+    <meta name="description" content="Billed on ingest rather than per seat. Free to 5 GB a month, then $89 for Team and $499 for Business — work out your exact bill with the calculator.">
+    <link rel="canonical" href="https://example.com/northwind/pricing/">
+    <meta name="theme-color" content="#0b0e14">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Northwind">
+    <meta property="og:title" content="Pricing — Northwind">
+    <meta property="og:description" content="Billed on ingest rather than per seat. Free to 5 GB a month, then $89 for Team and $499 for Business — work out your exact bill with the calculator.">
+    <meta property="og:url" content="https://example.com/northwind/pricing/">
+    <meta property="og:image" content="https://example.com/northwind/assets/social-card.svg">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Pricing — Northwind">
+    <meta name="twitter:description" content="Billed on ingest rather than per seat. Free to 5 GB a month, then $89 for Team and $499 for Business — work out your exact bill with the calculator.">
+    <meta name="twitter:image" content="https://example.com/northwind/assets/social-card.svg">
+    <link rel="icon" href="data:image/svg+xml,%3Csvg%20viewBox%3D%220%200%2032%2032%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20aria-hidden%3D%22true%22%3E%20%3Crect%20width%3D%2232%22%20height%3D%2232%22%20rx%3D%227%22%20fill%3D%22%230b0e14%22%2F%3E%20%3Cpath%20d%3D%22M6%2023V10l10%2010%2010-10v13%22%20fill%3D%22none%22%20stroke%3D%22%234f8ff7%22%20stroke-width%3D%222.6%22%2F%3E%20%3C%2Fsvg%3E">
+    <link rel="stylesheet" href="/shared/reset.css">
+    <link rel="stylesheet" href="/northwind/assets/northwind.css">
+    <link rel="stylesheet" href="/northwind/assets/pricing.css">
+    <script type="application/ld+json">{"@context":"https://schema.org","@type":"SoftwareApplication","name":"Northwind","description":"Metrics, traces and logs in one query language, priced on what you actually\n    ingest rather than per seat.","url":"https://example.com/northwind/","applicationCategory":"DeveloperApplication","operatingSystem":"Web","offers":{"@type":"AggregateOffer","priceCurrency":"USD","lowPrice":"0","highPrice":"499","offerCount":3}}</script>
+    <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"What counts as an event?","acceptedAnswer":{"@type":"Answer","text":"Ingest is billed on compressed bytes received, not on event counts. A metric point, a span and a log line all cost what their bytes cost, so you never have to model three different units."}},{"@type":"Question","name":"What happens if I go over?","acceptedAnswer":{"@type":"Answer","text":"Nothing breaks. Overage is billed at the plan rate at the end of the month, and you can set a hard cap that starts dropping the lowest-priority data instead if you would rather have a ceiling than a bill."}},{"@type":"Question","name":"Do you charge per seat?","acceptedAnswer":{"@type":"Answer","text":"No. Every plan includes unlimited users, dashboards and alerts. Charging per seat encourages teams to share logins, which is the opposite of what a security team wants."}},{"@type":"Question","name":"Can I change plans mid-month?","acceptedAnswer":{"@type":"Answer","text":"Yes, in either direction. Upgrades take effect immediately and are prorated; downgrades take effect at the next billing cycle so you keep what you paid for."}},{"@type":"Question","name":"Is there a discount for paying annually?","acceptedAnswer":{"@type":"Answer","text":"Twenty percent off the platform fee and all overage rates. Annual plans can still burst above their committed volume without renegotiating."}}]}</script>
+    <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Northwind","item":"https://example.com/northwind/"},{"@type":"ListItem","position":2,"name":"Pricing","item":"https://example.com/northwind/pricing/"}]}</script>
+  </head>
+  <body class="site-northwind">
+    <a class="skip-link" href="#main">Skip to main content</a>
+    <header class="topbar">
+      <div class="topbar__inner">
+        <a class="logo" href="/northwind/">
+          <span class="logo__mark" aria-hidden="true"><svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg"
+  aria-hidden="true" focusable="false">
+  <path d="M5 24V8l11 11 11-11v16" fill="none" stroke="currentColor" stroke-width="2.6"
+        stroke-linecap="square"/>
+</svg></span>
+          <span class="logo__text">Northwind</span>
+        </a>
+
+        <button class="topbar__toggle" type="button" aria-expanded="false"
+                aria-controls="nw-nav" data-nav-toggle>
+          <span class="topbar__bars" aria-hidden="true"><i></i><i></i><i></i></span>
+          <span class="visually-hidden">Menu</span>
+        </button>
+
+        <nav class="topbar__nav" id="nw-nav" aria-label="Primary" data-nav
+             data-nav-breakpoint="64em">
+          <ul>
+            <li><a href="/northwind/platform/">Platform</a></li>
+<li><a href="/northwind/pricing/" aria-current="page">Pricing</a></li>
+<li><a href="/northwind/customers/">Customers</a></li>
+<li><a href="/northwind/docs/">Docs</a></li>
+<li><a href="/northwind/security/">Security</a></li>
+          </ul>
+          <div class="topbar__actions">
+            <a class="btn btn--ghost btn--sm" href="/northwind/docs/">Read the docs</a>
+            <a class="btn btn--sm" href="/northwind/demo/">Book a demo</a>
+          </div>
+        </nav>
+      </div>
+    </header>
+    <main id="main" tabindex="-1">
+
+<script type="application/json" id="pricing-data">{"plans":[{"id":"starter","name":"Starter","base":0,"includedGb":5,"includedHosts":3,"gbRate":0,"hostRate":0,"maxGb":5,"maxHosts":3,"retention":[7]},{"id":"team","name":"Team","base":8900,"includedGb":50,"includedHosts":10,"gbRate":180,"hostRate":1200,"maxGb":2000,"maxHosts":200,"retention":[7,30,90]},{"id":"business","name":"Business","base":49900,"includedGb":500,"includedHosts":75,"gbRate":120,"hostRate":900,"maxGb":50000,"maxHosts":5000,"retention":[7,30,90,365]}],"retention":[{"days":7,"label":"7 days","multiplier":1},{"days":30,"label":"30 days","multiplier":1},{"days":90,"label":"90 days","multiplier":1.25},{"days":365,"label":"15 months","multiplier":1.9}],"annualDiscount":0.2}</script>
+
+<section class="page-head">
+    <div class="shell">
+      <nav class="crumbs" aria-label="Breadcrumb">
+    <ol>
+      <li><a href="/northwind/">Northwind</a></li>
+<li><span aria-current="page">Pricing</span></li>
+    </ol>
+  </nav>
+      <p class="kicker">Pricing</p>
+      <h1 class="h1 page-head__title">Billed on bytes, not on people.</h1>
+      <p class="lede">Unlimited users, dashboards and alerts on every plan. You pay for what you ingest
+    and how long you keep it, and both numbers are on this page.</p>
+      
+    </div>
+  </section>
+
+<section class="section section--tight">
+  <div class="shell">
+    <ul class="plans" style="list-style:none;padding:0;margin:0">
+      <li class="plan" data-popular="false">
+        
+        <h2 class="plan__name">Starter</h2>
+        <p class="plan__price">
+          <span class="plan__amount">$0</span>
+          <span class="plan__period">forever</span>
+        </p>
+        <p class="plan__blurb">Everything working, at a volume where the bill should be zero.</p>
+        <ul class="checks">
+          <li>5 GB ingest per month</li>
+<li>3 monitored hosts</li>
+<li>7-day retention</li>
+<li>Metrics, traces and logs</li>
+<li>Community support</li>
+        </ul>
+        <a class="btn btn--ghost" style="margin-top:var(--space-2xs)"
+           href="/northwind/demo/">
+          Start free</a>
+      </li>
+<li class="plan" data-popular="true">
+        <span class="plan__flag">Most chosen</span>
+        <h2 class="plan__name">Team</h2>
+        <p class="plan__price">
+          <span class="plan__amount">$89</span>
+          <span class="plan__period">per month</span>
+        </p>
+        <p class="plan__blurb">The plan most engineering teams under fifty people end up on.</p>
+        <ul class="checks">
+          <li>50 GB ingest included, then $1.80/GB</li>
+<li>10 hosts included, then $12/host</li>
+<li>Up to 90-day retention</li>
+<li>Unlimited dashboards and alerts</li>
+<li>SSO and audit log</li>
+<li>Email support, 1 business day</li>
+        </ul>
+        <a class="btn" style="margin-top:var(--space-2xs)"
+           href="/northwind/demo/">
+          Choose Team</a>
+      </li>
+<li class="plan" data-popular="false">
+        
+        <h2 class="plan__name">Business</h2>
+        <p class="plan__price">
+          <span class="plan__amount">$499</span>
+          <span class="plan__period">per month</span>
+        </p>
+        <p class="plan__blurb">Volume pricing, longer retention, and someone who answers the phone.</p>
+        <ul class="checks">
+          <li>500 GB ingest included, then $1.20/GB</li>
+<li>75 hosts included, then $9/host</li>
+<li>Up to 15-month retention</li>
+<li>SAML, SCIM and fine-grained RBAC</li>
+<li>Private data regions</li>
+<li>99.95% uptime SLA</li>
+<li>Shared Slack channel, 1-hour response</li>
+        </ul>
+        <a class="btn btn--ghost" style="margin-top:var(--space-2xs)"
+           href="/northwind/demo/">
+          Choose Business</a>
+      </li>
+    </ul>
+
+    <p class="hero__note" style="margin-top:var(--space-m)">
+      Beyond 50,000 GB or
+      5,000 hosts it becomes an Enterprise
+      conversation — volume commit, private regions and a named engineer.
+      <a href="/northwind/demo/">Talk to us</a>.
+    </p>
+  </div>
+</section>
+
+<section class="section" aria-labelledby="calc-heading">
+  <div class="shell">
+    <div class="section-head">
+    <div>
+      <p class="kicker">Calculator</p>
+      <h2 class="h2" id="calc-heading">Work out your actual bill.</h2>
+      <p class="lede" style="margin-top:var(--space-xs)">Real tiered arithmetic against the rates above — including the crossover where
+        Business stops being the expensive option.</p>
+    </div>
+    
+  </div>
+
+    <div class="calculator" data-calculator>
+      <div class="calculator__grid">
+        <div class="calculator__controls">
+          <div class="control">
+            <div class="control__head">
+              <label class="control__label" for="calc-gb">Monthly ingest</label>
+              <output class="control__value" data-output="gb" for="calc-gb">100 GB</output>
+            </div>
+            <input id="calc-gb" type="range" min="0" max="11" step="1" value="5"
+                   data-input="gb" aria-describedby="calc-gb-scale">
+            <p class="control__scale" id="calc-gb-scale"><span>1 GB</span><span>10 TB</span></p>
+          </div>
+
+          <div class="control">
+            <div class="control__head">
+              <label class="control__label" for="calc-hosts">Monitored hosts</label>
+              <output class="control__value" data-output="hosts" for="calc-hosts">25</output>
+            </div>
+            <input id="calc-hosts" type="range" min="0" max="10" step="1" value="4"
+                   data-input="hosts" aria-describedby="calc-hosts-scale">
+            <p class="control__scale" id="calc-hosts-scale"><span>1</span><span>1,000</span></p>
+          </div>
+
+          <fieldset class="control" style="border:0;padding:0;margin-top:var(--space-m)">
+            <legend class="control__label" style="padding:0;margin-bottom:0.4rem">Retention</legend>
+            <div class="radio-row">
+              <label class="radio-chip">
+                <input type="radio" name="retention" value="7"
+                       >
+                <span>7 days</span>
+              </label>
+<label class="radio-chip">
+                <input type="radio" name="retention" value="30"
+                       checked>
+                <span>30 days</span>
+              </label>
+<label class="radio-chip">
+                <input type="radio" name="retention" value="90"
+                       >
+                <span>90 days</span>
+              </label>
+<label class="radio-chip">
+                <input type="radio" name="retention" value="365"
+                       >
+                <span>15 months</span>
+              </label>
+            </div>
+          </fieldset>
+
+          <div class="control">
+            <label class="switch">
+              <input type="checkbox" data-input="annual">
+              <span class="switch__track" aria-hidden="true"></span>
+              <span>Billed annually — save 20%</span>
+            </label>
+          </div>
+        </div>
+
+        <div class="calculator__output">
+          <h3 class="panel__title" style="margin-bottom:var(--space-s)">Monthly cost</h3>
+          <div class="results" data-results role="status"></div>
+          <div class="recommendation" data-recommendation></div>
+        </div>
+      </div>
+    </div>
+
+    <noscript>
+      <p class="form-status" style="margin-top:var(--space-m)">
+        The calculator needs JavaScript. The rates it uses are published in full in the
+        comparison table below, so the arithmetic can be done by hand.
+      </p>
+    </noscript>
+  </div>
+</section>
+
+<section class="section section--raised" aria-labelledby="compare-heading">
+  <div class="shell">
+    <div class="section-head">
+    <div>
+      <p class="kicker">Comparison</p>
+      <h2 class="h2" id="compare-heading">Every rate, in one table.</h2>
+      
+    </div>
+    
+  </div>
+
+    <div class="compare-wrap">
+      <table class="compare">
+        <caption class="visually-hidden">Plan limits and rates</caption>
+        <thead>
+          <tr>
+            <th scope="col">&nbsp;</th>
+            <th scope="col">Starter</th>
+<th scope="col">Team</th>
+<th scope="col">Business</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th scope="row">Platform fee</th>
+            <td>$0/mo</td>
+<td>$89/mo</td>
+<td>$499/mo</td>
+          </tr>
+<tr>
+            <th scope="row">Included ingest</th>
+            <td>5 GB</td>
+<td>50 GB</td>
+<td>500 GB</td>
+          </tr>
+<tr>
+            <th scope="row">Ingest overage</th>
+            <td>—</td>
+<td>$2/GB</td>
+<td>$1/GB</td>
+          </tr>
+<tr>
+            <th scope="row">Included hosts</th>
+            <td>3</td>
+<td>10</td>
+<td>75</td>
+          </tr>
+<tr>
+            <th scope="row">Host overage</th>
+            <td>—</td>
+<td>$12/host</td>
+<td>$9/host</td>
+          </tr>
+<tr>
+            <th scope="row">Max ingest</th>
+            <td>5 GB</td>
+<td>2,000 GB</td>
+<td>50,000 GB</td>
+          </tr>
+<tr>
+            <th scope="row">Max hosts</th>
+            <td>3</td>
+<td>200</td>
+<td>5,000</td>
+          </tr>
+<tr>
+            <th scope="row">Retention options</th>
+            <td>7 days</td>
+<td>7 days, 30 days, 90 days</td>
+<td>7 days, 30 days, 90 days, 15 months</td>
+          </tr>
+<tr>
+            <th scope="row">Users</th>
+            <td>Unlimited</td>
+<td>Unlimited</td>
+<td>Unlimited</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p class="hero__note" style="margin-top:var(--space-m)">
+      Retention beyond 30 days multiplies the storage component only:
+      90 days ×1.25, 15 months ×1.9. The platform fee and per-host charge are unaffected.
+    </p>
+  </div>
+</section>
+
+<section class="section" aria-labelledby="faq-heading">
+  <div class="shell" style="max-width:52rem">
+    <div class="section-head">
+    <div>
+      <p class="kicker">Questions</p>
+      <h2 class="h2" id="faq-heading">Before you commit.</h2>
+      
+    </div>
+    
+  </div>
+    <div class="accordion" data-accordion>
+    <div class="accordion__item">
+      <h3>
+        <button class="accordion__trigger" type="button"
+                id="pfaq-t-0" aria-expanded="false"
+                aria-controls="pfaq-p-0" data-accordion-trigger>
+          <span>What counts as an event?</span>
+          <span class="accordion__icon" aria-hidden="true"></span>
+        </button>
+      </h3>
+      <div class="accordion__panel" id="pfaq-p-0" role="region"
+           aria-labelledby="pfaq-t-0">
+        <p>Ingest is billed on compressed bytes received, not on event counts. A metric
+      point, a span and a log line all cost what their bytes cost, so you never have to
+      model three different units.</p>
+      </div>
+    </div>
+<div class="accordion__item">
+      <h3>
+        <button class="accordion__trigger" type="button"
+                id="pfaq-t-1" aria-expanded="false"
+                aria-controls="pfaq-p-1" data-accordion-trigger>
+          <span>What happens if I go over?</span>
+          <span class="accordion__icon" aria-hidden="true"></span>
+        </button>
+      </h3>
+      <div class="accordion__panel" id="pfaq-p-1" role="region"
+           aria-labelledby="pfaq-t-1">
+        <p>Nothing breaks. Overage is billed at the plan rate at the end of the month, and
+      you can set a hard cap that starts dropping the lowest-priority data instead if you
+      would rather have a ceiling than a bill.</p>
+      </div>
+    </div>
+<div class="accordion__item">
+      <h3>
+        <button class="accordion__trigger" type="button"
+                id="pfaq-t-2" aria-expanded="false"
+                aria-controls="pfaq-p-2" data-accordion-trigger>
+          <span>Do you charge per seat?</span>
+          <span class="accordion__icon" aria-hidden="true"></span>
+        </button>
+      </h3>
+      <div class="accordion__panel" id="pfaq-p-2" role="region"
+           aria-labelledby="pfaq-t-2">
+        <p>No. Every plan includes unlimited users, dashboards and alerts. Charging per
+      seat encourages teams to share logins, which is the opposite of what a security
+      team wants.</p>
+      </div>
+    </div>
+<div class="accordion__item">
+      <h3>
+        <button class="accordion__trigger" type="button"
+                id="pfaq-t-3" aria-expanded="false"
+                aria-controls="pfaq-p-3" data-accordion-trigger>
+          <span>Can I change plans mid-month?</span>
+          <span class="accordion__icon" aria-hidden="true"></span>
+        </button>
+      </h3>
+      <div class="accordion__panel" id="pfaq-p-3" role="region"
+           aria-labelledby="pfaq-t-3">
+        <p>Yes, in either direction. Upgrades take effect immediately and are prorated;
+      downgrades take effect at the next billing cycle so you keep what you paid for.</p>
+      </div>
+    </div>
+<div class="accordion__item">
+      <h3>
+        <button class="accordion__trigger" type="button"
+                id="pfaq-t-4" aria-expanded="false"
+                aria-controls="pfaq-p-4" data-accordion-trigger>
+          <span>Is there a discount for paying annually?</span>
+          <span class="accordion__icon" aria-hidden="true"></span>
+        </button>
+      </h3>
+      <div class="accordion__panel" id="pfaq-p-4" role="region"
+           aria-labelledby="pfaq-t-4">
+        <p>Twenty percent off the platform fee and all overage rates. Annual plans can
+      still burst above their committed volume without renegotiating.</p>
+      </div>
+    </div>
+  </div>
+  </div>
+</section>
+
+<section class="cta">
+    <div class="shell cta__inner">
+      <h2 class="h2">Start on the free tier.</h2>
+      <p class="lede">Five gigabytes a month, three hosts, no card. Move up when the bill would be worth paying.</p>
+      <div class="hero__actions">
+        <a class="btn btn--lg" href="/northwind/demo/">Book a demo</a>
+        <a class="btn btn--ghost btn--lg" href="/northwind/docs/">Read the docs</a>
+      </div>
+    </div>
+  </section>
+
+    </main>
+    <footer class="footer">
+      <div class="footer__inner">
+        <div class="footer__brand">
+          <span class="footer__mark" aria-hidden="true"><svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg"
+  aria-hidden="true" focusable="false">
+  <path d="M5 24V8l11 11 11-11v16" fill="none" stroke="currentColor" stroke-width="2.6"
+        stroke-linecap="square"/>
+</svg></span>
+          <p class="footer__tagline">Observability for systems that are not allowed to go down.</p>
+          <p class="footer__meta">
+            1,840 engineering teams ·
+            4.1 trillion events a day
+          </p>
+        </div>
+
+        <nav class="footer__group" aria-label="Product">
+          <h2 class="footer__heading">Product</h2>
+          <ul>
+            <li><a href="/northwind/platform/">Platform overview</a></li>
+<li><a href="/northwind/features/metrics/">Metrics</a></li>
+<li><a href="/northwind/features/traces/">Traces</a></li>
+<li><a href="/northwind/features/logs/">Logs</a></li>
+<li><a href="/northwind/pricing/">Pricing</a></li>
+          </ul>
+        </nav>
+<nav class="footer__group" aria-label="Resources">
+          <h2 class="footer__heading">Resources</h2>
+          <ul>
+            <li><a href="/northwind/docs/">Documentation</a></li>
+<li><a href="/northwind/changelog/">Changelog</a></li>
+<li><a href="/northwind/customers/">Customers</a></li>
+          </ul>
+        </nav>
+<nav class="footer__group" aria-label="Company">
+          <h2 class="footer__heading">Company</h2>
+          <ul>
+            <li><a href="/northwind/security/">Security</a></li>
+<li><a href="/northwind/demo/">Book a demo</a></li>
+          </ul>
+        </nav>
+
+        <div class="footer__legal">
+          <p>
+            Northwind is a fictional product, designed and built by
+            <a href="/work/northwind/">Studio Meridian</a>
+            to demonstrate technical marketing design. The dashboard runs on generated
+            data, no account exists, and no form submits anywhere.
+          </p>
+          <p class="footer__status">
+            <span class="status-dot" data-tone="good" aria-hidden="true"></span>
+            All systems operational
+          </p>
+        </div>
+      </div>
+    </footer>
+    <script type="module" src="/northwind/assets/ui.js"></script>
+    <script type="module" src="/northwind/assets/pricing.js"></script>
+  </body>
+</html>

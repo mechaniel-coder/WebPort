@@ -1,0 +1,223 @@
+<!doctype html>
+<html lang="en" data-color-scheme="dark">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Changelog — Northwind</title>
+    <meta name="description" content="What shipped, when. Private data regions, NWQL joins across signals, tail sampling policies and SCIM provisioning — the last four releases in full.">
+    <link rel="canonical" href="https://example.com/northwind/changelog/">
+    <meta name="theme-color" content="#0b0e14">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Northwind">
+    <meta property="og:title" content="Changelog — Northwind">
+    <meta property="og:description" content="What shipped, when. Private data regions, NWQL joins across signals, tail sampling policies and SCIM provisioning — the last four releases in full.">
+    <meta property="og:url" content="https://example.com/northwind/changelog/">
+    <meta property="og:image" content="https://example.com/northwind/assets/social-card.svg">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Changelog — Northwind">
+    <meta name="twitter:description" content="What shipped, when. Private data regions, NWQL joins across signals, tail sampling policies and SCIM provisioning — the last four releases in full.">
+    <meta name="twitter:image" content="https://example.com/northwind/assets/social-card.svg">
+    <link rel="icon" href="data:image/svg+xml,%3Csvg%20viewBox%3D%220%200%2032%2032%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20aria-hidden%3D%22true%22%3E%20%3Crect%20width%3D%2232%22%20height%3D%2232%22%20rx%3D%227%22%20fill%3D%22%230b0e14%22%2F%3E%20%3Cpath%20d%3D%22M6%2023V10l10%2010%2010-10v13%22%20fill%3D%22none%22%20stroke%3D%22%234f8ff7%22%20stroke-width%3D%222.6%22%2F%3E%20%3C%2Fsvg%3E">
+    <link rel="stylesheet" href="/shared/reset.css">
+    <link rel="stylesheet" href="/northwind/assets/northwind.css">
+    <script type="application/ld+json">{"@context":"https://schema.org","@type":"SoftwareApplication","name":"Northwind","description":"Metrics, traces and logs in one query language, priced on what you actually\n    ingest rather than per seat.","url":"https://example.com/northwind/","applicationCategory":"DeveloperApplication","operatingSystem":"Web","offers":{"@type":"AggregateOffer","priceCurrency":"USD","lowPrice":"0","highPrice":"499","offerCount":3}}</script>
+    <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Northwind","item":"https://example.com/northwind/"},{"@type":"ListItem","position":2,"name":"Changelog","item":"https://example.com/northwind/changelog/"}]}</script>
+  </head>
+  <body class="site-northwind">
+    <a class="skip-link" href="#main">Skip to main content</a>
+    <header class="topbar">
+      <div class="topbar__inner">
+        <a class="logo" href="/northwind/">
+          <span class="logo__mark" aria-hidden="true"><svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg"
+  aria-hidden="true" focusable="false">
+  <path d="M5 24V8l11 11 11-11v16" fill="none" stroke="currentColor" stroke-width="2.6"
+        stroke-linecap="square"/>
+</svg></span>
+          <span class="logo__text">Northwind</span>
+        </a>
+
+        <button class="topbar__toggle" type="button" aria-expanded="false"
+                aria-controls="nw-nav" data-nav-toggle>
+          <span class="topbar__bars" aria-hidden="true"><i></i><i></i><i></i></span>
+          <span class="visually-hidden">Menu</span>
+        </button>
+
+        <nav class="topbar__nav" id="nw-nav" aria-label="Primary" data-nav
+             data-nav-breakpoint="64em">
+          <ul>
+            <li><a href="/northwind/platform/">Platform</a></li>
+<li><a href="/northwind/pricing/">Pricing</a></li>
+<li><a href="/northwind/customers/">Customers</a></li>
+<li><a href="/northwind/docs/">Docs</a></li>
+<li><a href="/northwind/security/">Security</a></li>
+          </ul>
+          <div class="topbar__actions">
+            <a class="btn btn--ghost btn--sm" href="/northwind/docs/">Read the docs</a>
+            <a class="btn btn--sm" href="/northwind/demo/">Book a demo</a>
+          </div>
+        </nav>
+      </div>
+    </header>
+    <main id="main" tabindex="-1">
+
+<section class="page-head">
+    <div class="shell">
+      <nav class="crumbs" aria-label="Breadcrumb">
+    <ol>
+      <li><a href="/northwind/">Northwind</a></li>
+<li><span aria-current="page">Changelog</span></li>
+    </ol>
+  </nav>
+      <p class="kicker">Changelog</p>
+      <h1 class="h1 page-head__title">What shipped, when.</h1>
+      <p class="lede">Monthly releases, written by the engineers who did the work. Breaking changes get
+    ninety days&#39; notice and never arrive in a patch.</p>
+      
+    </div>
+  </section>
+
+<section class="section section--tight">
+  <div class="shell" style="max-width:56rem">
+    <article class="release">
+      <div class="release__meta">
+        <p class="release__version">2026.8</p>
+        <p class="release__date">
+          <time datetime="2026-08-04">August 4, 2026</time>
+        </p>
+        <p class="release__tag">Platform</p>
+      </div>
+      <div class="release__body">
+        <h2 class="h3">Private data regions in three more clouds</h2>
+        <ul class="checks" style="margin-top:var(--space-s)">
+          <li>Private regions available in GCP europe-west4, AWS ap-south-1 and Azure uksouth.</li>
+<li>Region is now selectable per data type, so logs can stay in region while metrics go global.</li>
+<li>Fixed a case where cross-region trace assembly could drop the final span of a trace.</li>
+        </ul>
+      </div>
+    </article>
+<article class="release">
+      <div class="release__meta">
+        <p class="release__version">2026.7</p>
+        <p class="release__date">
+          <time datetime="2026-07-09">July 9, 2026</time>
+        </p>
+        <p class="release__tag">Query</p>
+      </div>
+      <div class="release__body">
+        <h2 class="h3">NWQL joins across signals</h2>
+        <ul class="checks" style="margin-top:var(--space-s)">
+          <li>A single NWQL expression can now join metrics to traces on shared resource attributes.</li>
+<li>Query editor gained inline result previews for sub-expressions.</li>
+<li>Reduced p99 query latency on log scans by 41% via improved column pruning.</li>
+        </ul>
+      </div>
+    </article>
+<article class="release">
+      <div class="release__meta">
+        <p class="release__version">2026.6</p>
+        <p class="release__date">
+          <time datetime="2026-06-11">June 11, 2026</time>
+        </p>
+        <p class="release__tag">Traces</p>
+      </div>
+      <div class="release__body">
+        <h2 class="h3">Tail sampling policies</h2>
+        <ul class="checks" style="margin-top:var(--space-s)">
+          <li>Sampling policies can now key on any span attribute, not just status and duration.</li>
+<li>Added a policy simulator that replays yesterday’s traffic against a draft policy.</li>
+<li>OTLP ingest now accepts gzip and zstd compression.</li>
+        </ul>
+      </div>
+    </article>
+<article class="release">
+      <div class="release__meta">
+        <p class="release__version">2026.5</p>
+        <p class="release__date">
+          <time datetime="2026-05-14">May 14, 2026</time>
+        </p>
+        <p class="release__tag">Security</p>
+      </div>
+      <div class="release__body">
+        <h2 class="h3">SCIM provisioning</h2>
+        <ul class="checks" style="margin-top:var(--space-s)">
+          <li>SCIM 2.0 user and group provisioning for Okta, Entra ID and JumpCloud.</li>
+<li>Audit log now records dashboard and alert changes with a full diff.</li>
+<li>Session lifetime is configurable per organisation.</li>
+        </ul>
+      </div>
+    </article>
+  </div>
+</section>
+
+<section class="cta">
+    <div class="shell cta__inner">
+      <h2 class="h2">Subscribe to the release feed.</h2>
+      <p class="lede">Or just book a demo and we will tell you what is coming.</p>
+      <div class="hero__actions">
+        <a class="btn btn--lg" href="/northwind/demo/">Book a demo</a>
+        <a class="btn btn--ghost btn--lg" href="/northwind/docs/">Read the docs</a>
+      </div>
+    </div>
+  </section>
+
+    </main>
+    <footer class="footer">
+      <div class="footer__inner">
+        <div class="footer__brand">
+          <span class="footer__mark" aria-hidden="true"><svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg"
+  aria-hidden="true" focusable="false">
+  <path d="M5 24V8l11 11 11-11v16" fill="none" stroke="currentColor" stroke-width="2.6"
+        stroke-linecap="square"/>
+</svg></span>
+          <p class="footer__tagline">Observability for systems that are not allowed to go down.</p>
+          <p class="footer__meta">
+            1,840 engineering teams ·
+            4.1 trillion events a day
+          </p>
+        </div>
+
+        <nav class="footer__group" aria-label="Product">
+          <h2 class="footer__heading">Product</h2>
+          <ul>
+            <li><a href="/northwind/platform/">Platform overview</a></li>
+<li><a href="/northwind/features/metrics/">Metrics</a></li>
+<li><a href="/northwind/features/traces/">Traces</a></li>
+<li><a href="/northwind/features/logs/">Logs</a></li>
+<li><a href="/northwind/pricing/">Pricing</a></li>
+          </ul>
+        </nav>
+<nav class="footer__group" aria-label="Resources">
+          <h2 class="footer__heading">Resources</h2>
+          <ul>
+            <li><a href="/northwind/docs/">Documentation</a></li>
+<li><a href="/northwind/changelog/">Changelog</a></li>
+<li><a href="/northwind/customers/">Customers</a></li>
+          </ul>
+        </nav>
+<nav class="footer__group" aria-label="Company">
+          <h2 class="footer__heading">Company</h2>
+          <ul>
+            <li><a href="/northwind/security/">Security</a></li>
+<li><a href="/northwind/demo/">Book a demo</a></li>
+          </ul>
+        </nav>
+
+        <div class="footer__legal">
+          <p>
+            Northwind is a fictional product, designed and built by
+            <a href="/work/northwind/">Studio Meridian</a>
+            to demonstrate technical marketing design. The dashboard runs on generated
+            data, no account exists, and no form submits anywhere.
+          </p>
+          <p class="footer__status">
+            <span class="status-dot" data-tone="good" aria-hidden="true"></span>
+            All systems operational
+          </p>
+        </div>
+      </div>
+    </footer>
+    <script type="module" src="/northwind/assets/ui.js"></script>
+  </body>
+</html>

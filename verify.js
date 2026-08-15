@@ -16,7 +16,7 @@ import { existsSync, statSync } from 'node:fs';
 import { dirname, join, relative, resolve, sep } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
-import { basePath } from './site.config.js';
+import { basePath, origin } from './site.config.js';
 
 const root = dirname(fileURLToPath(import.meta.url));
 const outDir = join(root, 'dist');
@@ -64,6 +64,9 @@ function attrOf(tag, name) {
  */
 function toDiskPath(href) {
   if (!href) return null;
+  // Canonical, Open Graph and sitemap URLs are absolute but point at our own
+  // output, so resolve them rather than dismissing them as external.
+  if (href.startsWith(`${origin}/`)) href = href.slice(origin.length);
   if (/^(?:[a-z][a-z0-9+.-]*:|\/\/)/i.test(href)) return null; // external, mailto, tel, data
   if (href.startsWith('#')) return { path: null, fragment: href.slice(1) };
   if (!href.startsWith('/')) return null; // relative paths are not used by this build
@@ -93,7 +96,10 @@ function checkDocument(file, html, name) {
     fail(name, 'missing <html lang="…">');
   }
 
-  const titles = matchAll(html, /<title>([\s\S]*?)<\/title>/gi);
+  // Scope the title check to <head>. Inline SVG legitimately uses <title> for
+  // accessible names, and those must not be counted as document titles.
+  const headHtml = html.slice(0, html.search(/<\/head>/i) + 1 || html.length);
+  const titles = matchAll(headHtml, /<title>([\s\S]*?)<\/title>/gi);
   if (titles.length !== 1) fail(name, `expected exactly 1 <title>, found ${titles.length}`);
   else if (!titles[0].trim()) fail(name, 'empty <title>');
   else if (titles[0].length > 70) warn(name, `<title> is ${titles[0].length} chars (>70 may truncate in SERPs)`);
@@ -188,6 +194,9 @@ function checkDocument(file, html, name) {
     ...matchAll(html, /<script\b[^>]*\ssrc="([^"]+)"/gi),
     ...matchAll(html, /<img\b[^>]*\ssrc="([^"]+)"/gi),
     ...matchAll(html, /<(?:use|image)\b[^>]*\shref="([^"]+)"/gi),
+    // Social card images are referenced only from meta tags, so a missing one is
+    // invisible until a link is shared somewhere. Resolve them like any other asset.
+    ...matchAll(html, /<meta\b[^>]*\s(?:property|name)="(?:og|twitter):image"[^>]*\scontent="([^"]+)"/gi),
   ];
 
   for (const href of references) {

@@ -59,7 +59,10 @@ export function head({ site, page, path }) {
 
     // Styles. Shared reset first, then the site's own design system.
     `<link rel="stylesheet" href="${esc(url('/shared/reset.css'))}">`,
-    ...(site.styles || []).map((file) => `<link rel="stylesheet" href="${esc(site.asset(file))}">`),
+    // Site-wide styles, then any stylesheet a single page opts into.
+    ...[...(site.styles || []), ...(page.styles || [])].map(
+      (file) => `<link rel="stylesheet" href="${esc(site.asset(file))}">`,
+    ),
 
     ...records.map(
       (record) => `<script type="application/ld+json">${escJson(record)}</script>`,

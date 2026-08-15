@@ -11,6 +11,8 @@
     "build": "node build.js",
     "serve": "node serve.js",
     "verify": "node verify.js",
-    "check": "node build.js && node verify.js"
+    "check": "node build.js && node verify.js",
+    "check:browser": "node build.js && node browser-check.js",
+    "screenshots": "node build.js && node browser-check.js --shots"
   }
 }

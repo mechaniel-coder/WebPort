@@ -1,0 +1,345 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Rooms and rates — Aurelia</title>
+    <meta name="description" content="Twenty-two rooms in three types — ocean-facing suites, two-bedroom cliff houses and courtyard rooms. Rates, sizes and what is actually in each one.">
+    <link rel="canonical" href="https://example.com/aurelia/rooms/">
+    <meta name="theme-color" content="#23201c">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Aurelia">
+    <meta property="og:title" content="Rooms and rates — Aurelia">
+    <meta property="og:description" content="Twenty-two rooms in three types — ocean-facing suites, two-bedroom cliff houses and courtyard rooms. Rates, sizes and what is actually in each one.">
+    <meta property="og:url" content="https://example.com/aurelia/rooms/">
+    <meta property="og:image" content="https://example.com/aurelia/assets/social-card.svg">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Rooms and rates — Aurelia">
+    <meta name="twitter:description" content="Twenty-two rooms in three types — ocean-facing suites, two-bedroom cliff houses and courtyard rooms. Rates, sizes and what is actually in each one.">
+    <meta name="twitter:image" content="https://example.com/aurelia/assets/social-card.svg">
+    <link rel="icon" href="data:image/svg+xml,%3Csvg%20viewBox%3D%220%200%2032%2032%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20aria-hidden%3D%22true%22%3E%20%3Crect%20width%3D%2232%22%20height%3D%2232%22%20rx%3D%226%22%20fill%3D%22%2323201c%22%2F%3E%20%3Cpath%20d%3D%22M7%2026V16a9%209%200%200%201%2018%200v10%22%20fill%3D%22none%22%20stroke%3D%22%23efe9df%22%20stroke-width%3D%222.2%22%2F%3E%20%3C%2Fsvg%3E">
+    <link rel="stylesheet" href="/shared/reset.css">
+    <link rel="stylesheet" href="/aurelia/assets/aurelia.css">
+    <script type="application/ld+json">{"@context":"https://schema.org","@type":"Hotel","name":"Aurelia Coast Retreat","description":"A twenty-two room retreat on the northern Sonoma coast.","url":"https://example.com/aurelia/","telephone":"+1 (707) 555-0142","email":"stay@example.com","numberOfRooms":22,"priceRange":"$$$$","checkinTime":"16:00","checkoutTime":"11:00","address":{"@type":"PostalAddress","streetAddress":"4180 Shoreline Highway","addressLocality":"Sea Ranch","addressRegion":"CA","postalCode":"95497","addressCountry":"US"},"geo":{"@type":"GeoCoordinates","latitude":38.7096,"longitude":-123.4569},"amenityFeature":[{"@type":"LocationFeatureSpecification","name":"Restaurant","value":true},{"@type":"LocationFeatureSpecification","name":"Sauna","value":true},{"@type":"LocationFeatureSpecification","name":"Ocean view","value":true},{"@type":"LocationFeatureSpecification","name":"Free breakfast","value":true},{"@type":"LocationFeatureSpecification","name":"Free parking","value":true}]}</script>
+    <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Aurelia","item":"https://example.com/aurelia/"},{"@type":"ListItem","position":2,"name":"Rooms","item":"https://example.com/aurelia/rooms/"}]}</script>
+  </head>
+  <body class="site-aurelia">
+    <a class="skip-link" href="#main">Skip to main content</a>
+    <header class="masthead" data-masthead>
+      <div class="masthead__inner">
+        <a class="brand" href="/aurelia/">
+          <span class="brand__mark" aria-hidden="true"><svg viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg"
+  aria-hidden="true" focusable="false">
+  <path d="M6 34V19a14 14 0 0 1 28 0v15" fill="none" stroke="currentColor" stroke-width="2.4"/>
+  <path d="M20 34V6" stroke="currentColor" stroke-width="2.4" opacity="0.45"/>
+</svg></span>
+          <span class="brand__name">Aurelia</span>
+        </a>
+
+        <button class="masthead__toggle" type="button"
+                aria-expanded="false" aria-controls="primary-nav" data-nav-toggle>
+          <span class="masthead__toggle-bars" aria-hidden="true"><i></i><i></i></span>
+          <span class="masthead__toggle-label">Menu</span>
+        </button>
+
+        <nav class="masthead__nav" id="primary-nav" aria-label="Primary" data-nav>
+          <ul>
+            <li><a href="/aurelia/rooms/" aria-current="page">Rooms</a></li>
+<li><a href="/aurelia/dining/">Dining</a></li>
+<li><a href="/aurelia/experiences/">Experiences</a></li>
+<li><a href="/aurelia/journal/">Journal</a></li>
+<li><a href="/aurelia/story/">Story</a></li>
+<li><a href="/aurelia/contact/">Contact</a></li>
+          </ul>
+          <a class="button button--sm" href="/aurelia/book/">Check availability</a>
+        </nav>
+      </div>
+    </header>
+    <main id="main" tabindex="-1">
+
+<section class="page-head">
+    <div class="shell">
+      <nav class="crumbs" aria-label="Breadcrumb">
+    <ol>
+      <li><a href="/aurelia/">Aurelia</a></li>
+<li><span aria-current="page">Rooms</span></li>
+    </ol>
+  </nav>
+      <p class="eyebrow">22 rooms</p>
+      <h1 class="display-2 page-head__title">Three kinds of room.</h1>
+      <p class="lede page-head__lede">Eight ocean-facing suites, three freestanding cliff houses, and eleven courtyard
+    rooms on the sheltered side. Every rate includes breakfast, the sauna, and parking.</p>
+    </div>
+  </section>
+
+<section class="section">
+  <div class="shell">
+    <ul class="rooms">
+      <li class="room-card">
+        <a href="/aurelia/rooms/dune-suite/">
+          <div class="room-card__art">
+            <svg class="art art--arch " viewBox="0 0 600 800"
+    xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice"
+    aria-hidden="true" focusable="false">
+    
+    <defs>
+      <clipPath id="arch-1fzzq1y-clip">
+        <path d="M0 300 A 300 300 0 0 1 600 300
+                 L 600 800 L 0 800 Z"/>
+      </clipPath>
+      <linearGradient id="arch-1fzzq1y-sky" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0" stop-color="#f6e3d2"/>
+        <stop offset="1" stop-color="#efc9ad"/>
+      </linearGradient>
+    </defs>
+    <g clip-path="url(#arch-1fzzq1y-clip)">
+      <rect width="600" height="800" fill="url(#arch-1fzzq1y-sky)"/>
+      <circle cx="396" cy="272"
+              r="66" fill="#e8996b"/>
+      <path d="M 0.00 472.16 C 11.11 471.17, 44.44 469.27, 66.67 466.23 C 88.89 463.19, 111.11 457.20, 133.33 453.92 C 155.56 450.64, 177.78 442.90, 200.00 446.56 C 222.22 450.23, 244.44 464.50, 266.67 475.88 C 288.89 487.27, 311.11 507.80, 333.33 514.87 C 355.56 521.94, 377.78 520.40, 400.00 518.32 C 422.22 516.24, 444.44 506.11, 466.67 502.38 C 488.89 498.65, 511.11 499.77, 533.33 495.92 C 555.56 492.07, 588.89 482.06, 600.00 479.28 L 600 800 L 0 800 Z" fill="#c9a184"/><path d="M 0.00 539.00 C 11.11 538.53, 44.44 537.15, 66.67 536.18 C 88.89 535.21, 111.11 534.85, 133.33 533.18 C 155.56 531.51, 177.78 528.49, 200.00 526.16 C 222.22 523.82, 244.44 520.06, 266.67 519.17 C 288.89 518.28, 311.11 518.08, 333.33 520.81 C 355.56 523.55, 377.78 529.32, 400.00 535.57 C 422.22 541.82, 444.44 551.32, 466.67 558.29 C 488.89 565.27, 511.11 573.12, 533.33 577.40 C 555.56 581.69, 588.89 582.91, 600.00 584.02 L 600 800 L 0 800 Z" fill="#a87f66"/><path d="M 0.00 600.29 C 11.11 600.89, 44.44 600.94, 66.67 603.85 C 88.89 606.77, 111.11 612.18, 133.33 617.79 C 155.56 623.40, 177.78 632.13, 200.00 637.51 C 222.22 642.89, 244.44 648.49, 266.67 650.06 C 288.89 651.64, 311.11 649.86, 333.33 646.96 C 355.56 644.06, 377.78 637.31, 400.00 632.68 C 422.22 628.04, 444.44 622.45, 466.67 619.14 C 488.89 615.83, 511.11 614.43, 533.33 612.79 C 555.56 611.16, 588.89 609.90, 600.00 609.32 L 600 800 L 0 800 Z" fill="#7e5f4e"/><path d="M 0.00 672.59 C 11.11 672.47, 44.44 672.47, 66.67 671.90 C 88.89 671.33, 111.11 670.21, 133.33 669.17 C 155.56 668.13, 177.78 666.29, 200.00 665.65 C 222.22 665.00, 244.44 664.33, 266.67 665.30 C 288.89 666.27, 311.11 668.39, 333.33 671.46 C 355.56 674.53, 377.78 679.37, 400.00 683.73 C 422.22 688.09, 444.44 693.70, 466.67 697.60 C 488.89 701.51, 511.11 705.27, 533.33 707.17 C 555.56 709.07, 588.89 708.71, 600.00 709.01 L 600 800 L 0 800 Z" fill="#57443a"/><path d="M 0.00 755.13 C 11.11 754.09, 44.44 750.28, 66.67 748.86 C 88.89 747.44, 111.11 747.69, 133.33 746.59 C 155.56 745.50, 177.78 744.13, 200.00 742.31 C 222.22 740.48, 244.44 736.98, 266.67 735.65 C 288.89 734.32, 311.11 732.97, 333.33 734.31 C 355.56 735.66, 377.78 739.72, 400.00 743.74 C 422.22 747.76, 444.44 754.49, 466.67 758.43 C 488.89 762.37, 511.11 766.01, 533.33 767.38 C 555.56 768.75, 588.89 766.78, 600.00 766.66 L 600 800 L 0 800 Z" fill="#332924"/>
+    </g>
+  </svg>
+          </div>
+          <div class="room-card__body">
+            <h2 class="room-card__name">Dune Suite</h2>
+            <p class="room-card__meta">
+              <span>One king</span><span>620 sq ft</span>
+              <span>Open ocean</span><span>Sleeps 2</span>
+            </p>
+            <p class="text-soft">Ocean-facing, private terrace</p>
+            <p class="room-card__rate">$534
+              <span>per night, from</span></p>
+          </div>
+        </a>
+      </li>
+<li class="room-card">
+        <a href="/aurelia/rooms/cliff-house/">
+          <div class="room-card__art">
+            <svg class="art art--arch " viewBox="0 0 600 800"
+    xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice"
+    aria-hidden="true" focusable="false">
+    
+    <defs>
+      <clipPath id="arch-k4zwx4-clip">
+        <path d="M0 300 A 300 300 0 0 1 600 300
+                 L 600 800 L 0 800 Z"/>
+      </clipPath>
+      <linearGradient id="arch-k4zwx4-sky" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0" stop-color="#f0d9c4"/>
+        <stop offset="1" stop-color="#d9a689"/>
+      </linearGradient>
+    </defs>
+    <g clip-path="url(#arch-k4zwx4-clip)">
+      <rect width="600" height="800" fill="url(#arch-k4zwx4-sky)"/>
+      <circle cx="396" cy="272"
+              r="66" fill="#c96f4e"/>
+      <path d="M 0.00 511.05 C 11.11 506.82, 44.44 491.38, 66.67 485.62 C 88.89 479.86, 111.11 480.75, 133.33 476.51 C 155.56 472.27, 177.78 466.09, 200.00 460.17 C 222.22 454.26, 244.44 441.31, 266.67 441.01 C 288.89 440.71, 311.11 448.58, 333.33 458.38 C 355.56 468.18, 377.78 490.33, 400.00 499.80 C 422.22 509.27, 444.44 513.95, 466.67 515.19 C 488.89 516.43, 511.11 508.80, 533.33 507.24 C 555.56 505.69, 588.89 506.07, 600.00 505.84 L 600 800 L 0 800 Z" fill="#a9765f"/><path d="M 0.00 556.50 C 11.11 554.49, 44.44 547.17, 66.67 544.43 C 88.89 541.69, 111.11 542.20, 133.33 540.06 C 155.56 537.92, 177.78 535.13, 200.00 531.59 C 222.22 528.06, 244.44 521.23, 266.67 518.85 C 288.89 516.46, 311.11 514.30, 333.33 517.27 C 355.56 520.23, 377.78 528.72, 400.00 536.63 C 422.22 544.54, 444.44 557.48, 466.67 564.75 C 488.89 572.01, 511.11 578.11, 533.33 580.21 C 555.56 582.31, 588.89 577.83, 600.00 577.36 L 600 800 L 0 800 Z" fill="#87594b"/><path d="M 0.00 599.52 C 11.11 599.52, 44.44 597.80, 66.67 599.55 C 88.89 601.30, 111.11 604.82, 133.33 610.02 C 155.56 615.21, 177.78 624.43, 200.00 630.73 C 222.22 637.03, 244.44 644.88, 266.67 647.82 C 288.89 650.76, 311.11 650.54, 333.33 648.38 C 355.56 646.22, 377.78 639.45, 400.00 634.89 C 422.22 630.33, 444.44 624.39, 466.67 621.02 C 488.89 617.64, 511.11 616.42, 533.33 614.63 C 555.56 612.84, 588.89 611.01, 600.00 610.28 L 600 800 L 0 800 Z" fill="#65403a"/><path d="M 0.00 674.39 C 11.11 674.17, 44.44 674.02, 66.67 673.08 C 88.89 672.14, 111.11 670.26, 133.33 668.73 C 155.56 667.20, 177.78 664.00, 200.00 663.90 C 222.22 663.80, 244.44 664.75, 266.67 668.13 C 288.89 671.51, 311.11 678.56, 333.33 684.18 C 355.56 689.81, 377.78 697.80, 400.00 701.86 C 422.22 705.91, 444.44 708.33, 466.67 708.53 C 488.89 708.73, 511.11 705.29, 533.33 703.04 C 555.56 700.79, 588.89 696.35, 600.00 695.01 L 600 800 L 0 800 Z" fill="#452c2a"/><path d="M 0.00 742.02 C 11.11 741.82, 44.44 741.51, 66.67 740.81 C 88.89 740.12, 111.11 738.32, 133.33 737.86 C 155.56 737.40, 177.78 736.72, 200.00 738.05 C 222.22 739.39, 244.44 742.38, 266.67 745.87 C 288.89 749.35, 311.11 755.06, 333.33 758.95 C 355.56 762.84, 377.78 767.28, 400.00 769.22 C 422.22 771.16, 444.44 771.36, 466.67 770.60 C 488.89 769.85, 511.11 766.78, 533.33 764.71 C 555.56 762.64, 588.89 759.25, 600.00 758.16 L 600 800 L 0 800 Z" fill="#281b1c"/>
+    </g>
+  </svg>
+          </div>
+          <div class="room-card__body">
+            <h2 class="room-card__name">Cliff House</h2>
+            <p class="room-card__meta">
+              <span>One king, one queen</span><span>1100 sq ft</span>
+              <span>Ocean and headland</span><span>Sleeps 4</span>
+            </p>
+            <p class="text-soft">Two bedrooms, private garden</p>
+            <p class="room-card__rate">$897
+              <span>per night, from</span></p>
+          </div>
+        </a>
+      </li>
+<li class="room-card">
+        <a href="/aurelia/rooms/garden-room/">
+          <div class="room-card__art">
+            <svg class="art art--arch " viewBox="0 0 600 800"
+    xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice"
+    aria-hidden="true" focusable="false">
+    
+    <defs>
+      <clipPath id="arch-160l8i4-clip">
+        <path d="M0 300 A 300 300 0 0 1 600 300
+                 L 600 800 L 0 800 Z"/>
+      </clipPath>
+      <linearGradient id="arch-160l8i4-sky" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0" stop-color="#eeeade"/>
+        <stop offset="1" stop-color="#d7d8c3"/>
+      </linearGradient>
+    </defs>
+    <g clip-path="url(#arch-160l8i4-clip)">
+      <rect width="600" height="800" fill="url(#arch-160l8i4-sky)"/>
+      <circle cx="396" cy="272"
+              r="66" fill="#f4f1e4"/>
+      <path d="M 0.00 462.07 C 11.11 460.94, 44.44 456.76, 66.67 455.27 C 88.89 453.78, 111.11 446.72, 133.33 453.13 C 155.56 459.54, 177.78 481.76, 200.00 493.71 C 222.22 505.67, 244.44 522.60, 266.67 524.84 C 288.89 527.08, 311.11 512.81, 333.33 507.14 C 355.56 501.48, 377.78 495.90, 400.00 490.86 C 422.22 485.83, 444.44 484.74, 466.67 476.93 C 488.89 469.12, 511.11 448.95, 533.33 444.02 C 555.56 439.09, 588.89 446.78, 600.00 447.34 L 600 800 L 0 800 Z" fill="#b2b494"/><path d="M 0.00 585.25 C 11.11 582.11, 44.44 571.78, 66.67 566.39 C 88.89 561.00, 111.11 556.21, 133.33 552.92 C 155.56 549.64, 177.78 550.28, 200.00 546.68 C 222.22 543.09, 244.44 536.83, 266.67 531.36 C 288.89 525.88, 311.11 515.70, 333.33 513.86 C 355.56 512.01, 377.78 514.20, 400.00 520.27 C 422.22 526.33, 444.44 541.46, 466.67 550.26 C 488.89 559.05, 511.11 569.05, 533.33 573.02 C 555.56 577.00, 588.89 573.94, 600.00 574.13 L 600 800 L 0 800 Z" fill="#93976f"/><path d="M 0.00 601.39 C 11.11 603.17, 44.44 606.09, 66.67 612.05 C 88.89 618.01, 111.11 630.66, 133.33 637.15 C 155.56 643.65, 177.78 650.84, 200.00 651.01 C 222.22 651.17, 244.44 643.57, 266.67 638.16 C 288.89 632.74, 311.11 623.08, 333.33 618.51 C 355.56 613.94, 377.78 613.08, 400.00 610.74 C 422.22 608.39, 444.44 607.63, 466.67 604.43 C 488.89 601.22, 511.11 593.76, 533.33 591.49 C 555.56 589.23, 588.89 590.94, 600.00 590.83 L 600 800 L 0 800 Z" fill="#727856"/><path d="M 0.00 670.09 C 11.11 670.20, 44.44 668.18, 66.67 670.72 C 88.89 673.26, 111.11 679.43, 133.33 685.32 C 155.56 691.21, 177.78 701.92, 200.00 706.06 C 222.22 710.21, 244.44 711.77, 266.67 710.18 C 288.89 708.59, 311.11 700.73, 333.33 696.50 C 355.56 692.27, 377.78 687.48, 400.00 684.81 C 422.22 682.14, 444.44 682.69, 466.67 680.47 C 488.89 678.24, 511.11 674.81, 533.33 671.47 C 555.56 668.13, 588.89 662.25, 600.00 660.41 L 600 800 L 0 800 Z" fill="#535840"/><path d="M 0.00 744.34 C 11.11 745.19, 44.44 747.16, 66.67 749.45 C 88.89 751.74, 111.11 755.13, 133.33 758.09 C 155.56 761.05, 177.78 764.80, 200.00 767.22 C 222.22 769.64, 244.44 771.86, 266.67 772.61 C 288.89 773.35, 311.11 772.90, 333.33 771.67 C 355.56 770.45, 377.78 767.71, 400.00 765.24 C 422.22 762.78, 444.44 759.37, 466.67 756.89 C 488.89 754.41, 511.11 752.00, 533.33 750.38 C 555.56 748.76, 588.89 747.70, 600.00 747.17 L 600 800 L 0 800 Z" fill="#363a2c"/>
+    </g>
+  </svg>
+          </div>
+          <div class="room-card__body">
+            <h2 class="room-card__name">Garden Room</h2>
+            <p class="room-card__meta">
+              <span>One queen</span><span>410 sq ft</span>
+              <span>Cypress courtyard</span><span>Sleeps 2</span>
+            </p>
+            <p class="text-soft">Courtyard-facing, quiet side</p>
+            <p class="room-card__rate">$347
+              <span>per night, from</span></p>
+          </div>
+        </a>
+      </li>
+    </ul>
+  </div>
+</section>
+
+<section class="section section--paper" aria-labelledby="rates-heading">
+  <div class="shell">
+    <div class="section-head">
+      <div>
+        <p class="eyebrow">How rates work</p>
+        <h2 class="display-2" id="rates-heading">No surprises at checkout.</h2>
+      </div>
+    </div>
+
+    <div class="split">
+      <div class="split__body">
+        <p class="text-soft">Rates move with the season and with the day of the week, and
+          both movements are published rather than discovered. A $42
+          nightly facilities fee covers the sauna, the trail maintenance and parking; it is
+          shown in every quote from the first screen, not added at the end.</p>
+        <p class="text-soft">Tax is Sonoma County transient occupancy at
+          11.75%. There is no service charge and no
+          tipping — staff are salaried, and that is priced into the room rate.</p>
+        <a class="link-arrow" href="/aurelia/book/">See live rates</a>
+      </div>
+
+      <div>
+        <table class="breakdown" style="margin-top:0">
+          <caption class="visually-hidden">Seasonal rate multipliers</caption>
+          <thead>
+            <tr>
+              <th scope="col">Season</th>
+              <th scope="col">Months</th>
+              <th scope="col">Rate</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Winter</td>
+              <td>Nov–Feb</td>
+              <td>−22%</td>
+            </tr>
+<tr>
+              <td>Shoulder</td>
+              <td>Mar, Apr, May, Oct</td>
+              <td>−8%</td>
+            </tr>
+<tr>
+              <td>High season</td>
+              <td>Jun–Sep</td>
+              <td>+22%</td>
+            </tr>
+            <tr>
+              <td>Friday and Saturday</td>
+              <td>All year</td>
+              <td>+15%</td>
+            </tr>
+            <tr>
+              <td>Additional guest</td>
+              <td>Per night</td>
+              <td>$75</td>
+            </tr>
+          </tbody>
+        </table>
+        <p class="text-soft" style="font-size:var(--step--1);margin-top:var(--space-s)">
+          Two-night minimum on Friday and Saturday between June and September.
+          Free cancellation up to 7 days before arrival.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="cta">
+    <svg class="art " viewBox="0 0 1000 400"
+    xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice"
+    aria-hidden="true" focusable="false">
+    
+    <defs>
+      <linearGradient id="hz-9whkt8-sky" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0" stop-color="#f0d9c4"/>
+        <stop offset="1" stop-color="#d9a689"/>
+      </linearGradient>
+      <radialGradient id="hz-9whkt8-glow" cx="50%" cy="50%" r="50%">
+        <stop offset="0" stop-color="#c96f4e" stop-opacity="0.85"/>
+        <stop offset="1" stop-color="#c96f4e" stop-opacity="0"/>
+      </radialGradient>
+    </defs>
+    <rect width="1000" height="400" fill="url(#hz-9whkt8-sky)"/>
+    <circle cx="340" cy="170" r="209"
+             fill="url(#hz-9whkt8-glow)"/>
+           <circle cx="340" cy="170" r="62"
+             fill="#c96f4e"/>
+    <path d="M 0.00 225.45 C 18.52 225.00, 74.07 223.79, 111.11 222.76 C 148.15 221.72, 185.19 221.07, 222.22 219.24 C 259.26 217.40, 296.30 213.73, 333.33 211.75 C 370.37 209.77, 407.41 206.74, 444.44 207.35 C 481.48 207.97, 518.52 210.72, 555.56 215.43 C 592.59 220.15, 629.63 228.87, 666.67 235.64 C 703.70 242.41, 740.74 251.27, 777.78 256.06 C 814.81 260.84, 851.85 263.78, 888.89 264.34 C 925.93 264.90, 981.48 260.24, 1000.00 259.42 L 1000 400 L 0 400 Z" fill="#a9765f"/><path d="M 0.00 257.43 C 18.52 256.89, 74.07 255.72, 111.11 254.18 C 148.15 252.64, 185.19 246.68, 222.22 248.17 C 259.26 249.67, 296.30 256.06, 333.33 263.16 C 370.37 270.26, 407.41 285.48, 444.44 290.79 C 481.48 296.09, 518.52 296.54, 555.56 295.00 C 592.59 293.46, 629.63 284.85, 666.67 281.55 C 703.70 278.24, 740.74 278.02, 777.78 275.15 C 814.81 272.29, 851.85 269.51, 888.89 264.38 C 925.93 259.24, 981.48 247.66, 1000.00 244.32 L 1000 400 L 0 400 Z" fill="#87594b"/><path d="M 0.00 294.08 C 18.52 293.52, 74.07 291.67, 111.11 290.71 C 148.15 289.75, 185.19 285.56, 222.22 288.34 C 259.26 291.11, 296.30 300.84, 333.33 307.35 C 370.37 313.86, 407.41 324.95, 444.44 327.40 C 481.48 329.85, 518.52 324.75, 555.56 322.05 C 592.59 319.34, 629.63 313.84, 666.67 311.18 C 703.70 308.53, 740.74 309.51, 777.78 306.12 C 814.81 302.72, 851.85 294.98, 888.89 290.80 C 925.93 286.62, 981.48 282.67, 1000.00 281.04 L 1000 400 L 0 400 Z" fill="#65403a"/><path d="M 0.00 329.77 C 18.52 329.78, 74.07 328.11, 111.11 329.83 C 148.15 331.55, 185.19 335.75, 222.22 340.09 C 259.26 344.44, 296.30 352.55, 333.33 355.89 C 370.37 359.24, 407.41 361.05, 444.44 360.15 C 481.48 359.25, 518.52 353.63, 555.56 350.49 C 592.59 347.36, 629.63 343.44, 666.67 341.35 C 703.70 339.27, 740.74 339.60, 777.78 337.98 C 814.81 336.36, 851.85 334.15, 888.89 331.63 C 925.93 329.11, 981.48 324.32, 1000.00 322.86 L 1000 400 L 0 400 Z" fill="#452c2a"/><path d="M 0.00 390.13 C 18.52 389.07, 74.07 385.81, 111.11 383.81 C 148.15 381.80, 185.19 379.45, 222.22 378.11 C 259.26 376.77, 296.30 376.79, 333.33 375.77 C 370.37 374.74, 407.41 373.80, 444.44 371.98 C 481.48 370.16, 518.52 366.68, 555.56 364.84 C 592.59 363.01, 629.63 360.66, 666.67 360.96 C 703.70 361.26, 740.74 363.82, 777.78 366.64 C 814.81 369.47, 851.85 374.83, 888.89 377.91 C 925.93 380.98, 981.48 383.88, 1000.00 385.08 L 1000 400 L 0 400 Z" fill="#281b1c"/>
+  </svg>
+    <div class="shell cta__inner">
+      <h2 class="display-2">See what is open.</h2>
+      <p class="lede" style="color:#ece5d9">The calendar shows live availability by room type, with the full price before you enter a single detail.</p>
+      <a class="button" href="/aurelia/book/">Check availability</a>
+    </div>
+  </section>
+
+    </main>
+    <footer class="footer">
+      <div class="footer__inner">
+        <div class="footer__brand">
+          <span class="footer__mark" aria-hidden="true"><svg viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg"
+  aria-hidden="true" focusable="false">
+  <path d="M6 34V19a14 14 0 0 1 28 0v15" fill="none" stroke="currentColor" stroke-width="2.4"/>
+  <path d="M20 34V6" stroke="currentColor" stroke-width="2.4" opacity="0.45"/>
+</svg></span>
+          <p class="footer__tagline">A twenty-two room retreat on the northern Sonoma coast.</p>
+          <address class="footer__address">
+            4180 Shoreline Highway<br>
+            Sea Ranch, CA
+            95497<br>
+            <a href="tel:+17075550142">+1 (707) 555-0142</a><br>
+            <a href="mailto:stay@example.com">stay@example.com</a>
+          </address>
+        </div>
+
+        <nav class="footer__group" aria-label="Footer">
+          <h2 class="footer__heading">The property</h2>
+          <ul>
+            <li><a href="/aurelia/rooms/">Rooms</a></li>
+<li><a href="/aurelia/dining/">Dining</a></li>
+<li><a href="/aurelia/experiences/">Experiences</a></li>
+<li><a href="/aurelia/journal/">Journal</a></li>
+<li><a href="/aurelia/story/">Story</a></li>
+<li><a href="/aurelia/contact/">Contact</a></li>
+          </ul>
+        </nav>
+
+        <div class="footer__group">
+          <h2 class="footer__heading">Stay</h2>
+          <ul>
+            <li><a href="/aurelia/book/">Check availability</a></li>
+            <li><a href="/aurelia/rooms/">Rooms and rates</a></li>
+            <li><a href="/aurelia/contact/">Plan a visit</a></li>
+          </ul>
+          <p class="footer__note">
+            Check-in 16:00 · Check-out 11:00
+          </p>
+        </div>
+
+        <p class="footer__legal">
+          Aurelia is a fictional property, designed and built by
+          <a href="/work/aurelia/">Studio Meridian</a>
+          to demonstrate hospitality web design. No bookings are taken and no
+          payment details are collected.
+        </p>
+      </div>
+    </footer>
+    <script type="module" src="/aurelia/assets/ui.js"></script>
+  </body>
+</html>

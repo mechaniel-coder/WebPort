@@ -1,0 +1,20 @@
+# Node — only ever needed for the optional build/verify tooling, never for hosting.
+node_modules/
+npm-debug.log*
+package-lock.json
+
+# Verification artefacts
+.playwright/
+screenshots/
+test-results/
+
+# Editors / OS
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+*.swp
+
+# NOTE: dist/ is intentionally NOT ignored.
+# The built output is committed so the sites can be hosted straight from a clone
+# with no toolchain. See HOSTING.md.

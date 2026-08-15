@@ -1,0 +1,16 @@
+{
+  "name": "webport",
+  "version": "1.0.0",
+  "private": true,
+  "description": "A portfolio of four production-grade websites, generated as static HTML with zero runtime dependencies.",
+  "type": "module",
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "build": "node build.js",
+    "serve": "node serve.js",
+    "verify": "node verify.js",
+    "check": "node build.js && node verify.js"
+  }
+}

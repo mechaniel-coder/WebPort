@@ -29,7 +29,7 @@ Upload the **contents of `dist/`** to the web root.
 | Netlify | Drag `dist/` onto the deploy page, or connect the repo with publish directory `dist` |
 | Cloudflare Pages | Connect the repo, build command *(leave empty)*, output directory `dist` |
 | Vercel | Framework preset "Other", build command *(leave empty)*, output directory `dist` |
-| S3 / CloudFront | `aws s3 sync dist/ s3://your-bucket/ --delete` |
+| **AWS (S3, CloudFront, Amplify)** | **See [deploy/aws/](deploy/aws/README.md) — read it first, there is one trap that breaks every interior page** |
 | nginx / Apache / cPanel | Copy the contents of `dist/` into the document root |
 
 Because the sites use clean URLs (`/aurelia/rooms/` rather than `/aurelia/rooms.html`),

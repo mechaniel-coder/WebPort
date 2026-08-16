@@ -62,15 +62,21 @@ Nothing is required — `DirectoryIndex index.html` is the default. Just point
 
 ## Option 2 — GitHub Pages
 
-A workflow at `.github/workflows/pages.yml` builds and publishes automatically.
+A workflow at `.github/workflows/pages.yml` builds and publishes automatically — but it
+**cannot run until Pages is switched on**, and that is a manual step nobody can do for you:
 
 1. Repository **Settings → Pages**
 2. Set **Source** to **GitHub Actions**
-3. Push to the default branch
+3. Push to the default branch, or run the workflow manually from the **Actions** tab
+   (it has a `workflow_dispatch` trigger for exactly this)
 
 The workflow rebuilds with the correct sub-path for a project site
 (`https://<user>.github.io/WebPort/`), which is why it does not simply publish the
-committed `dist/` — see *Base paths* below.
+committed `dist/` — see *Base paths* below. It also runs `verify.js` as a gate, so a build
+with a broken link fails instead of publishing.
+
+Only the **default branch** publishes. Pushes to any other branch start a run that skips
+immediately, so a feature branch never deploys over production.
 
 ---
 

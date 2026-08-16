@@ -9,9 +9,14 @@ name: Deploy to GitHub Pages
 #
 # There is nothing to install: the generator has no dependencies.
 
+# Fires on a push to whichever branch GitHub considers the default, rather than
+# to a hardcoded `main`. This repository's default is currently the branch the
+# work was delivered on, and naming `main` here meant the workflow could never
+# run. The guard on the build job below is what enforces it, so this keeps
+# working if the default is later renamed or the work is merged elsewhere.
 on:
   push:
-    branches: [main, master]
+    branches: ['**']
   workflow_dispatch:
 
 permissions:
@@ -26,6 +31,9 @@ concurrency:
 
 jobs:
   build:
+    # Only the default branch publishes; pushes to other branches start a run
+    # that skips immediately rather than deploying a feature branch to production.
+    if: github.ref_name == github.event.repository.default_branch
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4

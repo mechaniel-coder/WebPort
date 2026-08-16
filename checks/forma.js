@@ -63,6 +63,23 @@ export async function shopScenario(page, origin, check) {
   await page.goto(`${origin}/forma/shop/?category=tableware`, { waitUntil: 'networkidle' });
   check('shop: a filtered URL loads filtered', (await visible()) === 2, `${await visible()} shown`);
 
+  // A combination matching nothing must say so. Nothing is tableware AND oak.
+  // This asserts *visibility*, because the panel was previously toggled by a
+  // selector that matched a facet label instead and so never appeared at all.
+  await page.goto(`${origin}/forma/shop/?category=tableware&material=oak`, {
+    waitUntil: 'networkidle',
+  });
+  check('shop: an impossible combination matches nothing', (await visible()) === 0);
+  check(
+    'shop: the no-results panel is shown',
+    await page.locator('[data-empty-state]').isVisible(),
+  );
+  check(
+    'shop: every facet label survives filtering',
+    (await page.locator('.facet__option:not([hidden])').count()) ===
+      (await page.locator('.facet__option').count()),
+  );
+
   /* ── Variant pricing ─────────────────────────────────────────────────────── */
 
   await page.goto(`${origin}/forma/shop/halo-pendant/`, { waitUntil: 'networkidle' });
@@ -91,6 +108,26 @@ export async function cartScenario(page, origin, check) {
   await page.goto(`${origin}/forma/shop/prism-vase/`, { waitUntil: 'networkidle' });
   await page.evaluate(() => localStorage.clear());
   await page.reload({ waitUntil: 'networkidle' });
+
+  /* ── The empty state ─────────────────────────────────────────────────────── */
+
+  // Storage is clear, so the cart page must show only the empty state. Asserting
+  // *visibility* rather than the `hidden` attribute is the whole point: the
+  // attribute was present and correct while a class-level `display: grid`
+  // outranked it, so the summary and a live Checkout button rendered beside
+  // "Nothing in here yet" with a $0.00 total.
+  await page.goto(`${origin}/forma/cart/`, { waitUntil: 'networkidle' });
+  check('cart: empty state is shown', await page.locator('[data-cart-empty]').isVisible());
+  check(
+    'cart: the filled cart is genuinely hidden when empty',
+    !(await page.locator('[data-cart-filled]').isVisible()),
+  );
+  check(
+    'cart: no checkout route is offered from an empty cart',
+    !(await page.locator('.cart a[href*="/checkout/"]').isVisible()),
+  );
+
+  await page.goBack({ waitUntil: 'networkidle' });
 
   // Prism Vase, clear finish, small: $95.
   await page.locator('[data-add]').click();

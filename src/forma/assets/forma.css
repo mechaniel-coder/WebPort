@@ -487,14 +487,25 @@ a {
   display: block;
 }
 
+/* The hairlines between cards are the 2px gaps showing a darker layer beneath.
+   Painting that layer as the container's background is the usual way to do it,
+   but then any cell the cards do not fill shows as a solid block of rule colour
+   — eight products in three columns always leave one, and filtering the shop
+   down to two leaves five. So the container is paper and each card carries its
+   own 2px ring instead: neighbouring rings meet exactly in the gap, and space
+   with no card in it stays paper. */
 .grid-products {
   display: grid;
   gap: 2px;
-  background: var(--rule);
+  background: var(--paper);
   border: 2px solid var(--rule);
   list-style: none;
   padding: 0;
   margin: 0;
+}
+
+.grid-products > * {
+  box-shadow: 0 0 0 2px var(--rule);
 }
 
 @media (min-width: 34em) {

@@ -94,7 +94,7 @@ ${facetLabelIsland()}
         ${each(ordered, (product) => productCard(product, url))}
       </ul>
 
-      <div class="shop__empty" data-empty hidden>
+      <div class="shop__empty" data-empty-state hidden>
         <p class="h3">Nothing matches those filters.</p>
         <p class="muted" style="margin-top:var(--space-2xs)">
           There are only eight products — try removing one.</p>

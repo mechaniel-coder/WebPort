@@ -26,7 +26,11 @@ function init(root) {
   const labels = JSON.parse(document.getElementById('facet-labels').textContent);
 
   const grid = root.querySelector('[data-grid]');
-  const empty = root.querySelector('[data-empty]');
+  // `[data-empty-state]`, not `[data-empty]`: every facet label carries
+  // `data-empty` for its dimming rule and they appear first in the document, so
+  // the looser selector matched a facet label and toggled `hidden` on that
+  // instead — leaving the real no-results panel permanently inert.
+  const empty = root.querySelector('[data-empty-state]');
   const countOut = root.querySelector('[data-count]');
   const sortSelect = root.querySelector('[data-sort]');
   const chips = root.querySelector('[data-chips]');

@@ -389,8 +389,11 @@
   gap: var(--space-s);
 }
 
+/* `.cart` is the filled block — there is no `.cart__filled`. Hiding is handled
+   globally by `[hidden]` in reset.css; this stays only as local documentation
+   that both halves of the page are toggled. */
 .cart__empty[hidden],
-.cart__filled[hidden] {
+.cart[hidden] {
   display: none;
 }
 

@@ -19,7 +19,7 @@ No framework, no bundler, no `node_modules` needed to host it. See **[HOSTING.md
 | `/aurelia/` | Aurelia | Boutique hospitality | 15 | Accessible date-range booking engine |
 | `/northwind/` | Northwind | B2B observability SaaS | 13 | Live SVG dashboard + pricing calculator |
 | `/forma/` | Forma | Design-object e-commerce | 19 | Faceted catalog, variants, persistent cart |
-| `/lab/` | Meridian Lab | In-house R&D | 7 | WebGL renderer, Verlet physics, scrollytelling, frontier CSS |
+| `/lab/` | Meridian Lab | In-house R&D | 6 | WebGL renderer, Verlet physics, scrollytelling, frontier CSS |
 
 The lab is the studio’s own research rather than client work: four experiments in techniques that normally arrive with a library attached — a WebGL renderer written from the matrix maths up, a hand-written Verlet physics solver, scroll-driven storytelling that never takes the scrollbar, and frontier CSS with no JavaScript at all. No three.js, no physics engine, no scroll library.
 

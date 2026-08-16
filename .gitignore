@@ -6,6 +6,7 @@ package-lock.json
 # Verification artefacts
 .playwright/
 screenshots/
+shots/
 test-results/
 
 # Editors / OS

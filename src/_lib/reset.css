@@ -43,6 +43,17 @@ p, li {
   text-wrap: pretty;
 }
 
+/* The `hidden` attribute must actually hide.
+   Its UA rule is `display: none` at zero specificity, so any class that sets a
+   display — `.cart { display: grid }` — silently outranks it and the element
+   stays on screen while scripts believe it is gone. Guarding each component
+   individually (`.cart__filled[hidden]`) works only until a class is renamed
+   and the guard quietly stops matching, which is exactly how this was found.
+   One `!important` here is worth more than a guard per component. */
+[hidden] {
+  display: none !important;
+}
+
 img,
 picture,
 svg,

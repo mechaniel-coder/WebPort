@@ -41,7 +41,7 @@ static host without rewrite rules.
 ```nginx
 server {
     listen 80;
-    server_name yourdomain.com;
+    server_name exostech.pro;
     root /var/www/webport/dist;
     index index.html;
 
@@ -155,7 +155,7 @@ Internal links are built from a single configured prefix, `basePath` in `site.co
 
 | Where it is hosted | Required `basePath` |
 | --- | --- |
-| A domain root — `https://yourdomain.com/` | `/` **(what the committed `dist/` uses)** |
+| A domain root — `https://exostech.pro/` | `/` **(what the committed `dist/` uses)** |
 | A subdirectory — `https://you.github.io/WebPort/` | `/WebPort/` |
 
 The committed `dist/` is built for a **domain root**. If you are hosting from a
@@ -169,7 +169,7 @@ Also set the canonical origin so the `<link rel="canonical">` tags, Open Graph U
 `sitemap.xml` point at the real domain:
 
 ```bash
-SITE_ORIGIN=https://yourdomain.com BASE_PATH=/ npm run build
+SITE_ORIGIN=https://exostech.pro BASE_PATH=/ npm run build
 ```
 
 ---

@@ -8,7 +8,7 @@ catches almost everyone.
 ## ⚠️ The one thing that will break it
 
 This site uses **clean URLs**: `/aurelia/rooms/` is a real directory containing
-`index.html`. There are 54 such directories.
+`index.html`. There are 53 of them.
 
 - An S3 **website endpoint** resolves those automatically. ✅
 - An S3 **REST endpoint** — what you get with a private bucket and Origin Access Control,
@@ -89,17 +89,52 @@ Distribution → **Error pages** → Create custom error response:
 Add the same for 404: Not Found. (A private S3 origin returns **403** for a missing key,
 not 404 — so mapping only 404 leaves genuine typos showing an AWS error page.)
 
-### 6. Deploy
+### 6. Certificate and domain — `exostech.pro`
+
+Two things here trip people up:
+
+- **The ACM certificate must be issued in `us-east-1`.** CloudFront reads certificates only
+  from N. Virginia, whatever region your bucket is in. A cert in the "right" region for
+  everything else simply will not appear in the CloudFront dropdown, with no explanation.
+- **Request it for both names**: `exostech.pro` and `www.exostech.pro`. Adding the second
+  later means reissuing.
 
 ```bash
-BUCKET=your-bucket \
-DISTRIBUTION_ID=E1234567890ABC \
-SITE_ORIGIN=https://yourdomain.com \
-  ./deploy/aws/deploy.sh
+aws acm request-certificate \
+  --region us-east-1 \
+  --domain-name exostech.pro \
+  --subject-alternative-names www.exostech.pro \
+  --validation-method DNS
 ```
 
-`SITE_ORIGIN` rebuilds first so canonical tags and `sitemap.xml` carry the real domain —
-the committed build uses a placeholder. Add `DRY_RUN=1` to see what would change.
+Add the CNAME records ACM gives you, wait for `ISSUED`, then on the distribution set
+**Alternate domain names (CNAMEs)** to `exostech.pro` and `www.exostech.pro` and select the
+certificate.
+
+Finally point DNS at CloudFront. On Route 53 use **A records with Alias** targeting the
+distribution for both the apex and `www` — an apex cannot be a CNAME, which is why a plain
+CNAME record fails on the bare domain. On another DNS provider, use their ALIAS/ANAME record
+type for the apex and a normal CNAME for `www`.
+
+> Canonical URLs are built for `https://exostech.pro` (no `www`), so send `www` to the apex
+> rather than serving both. [`cloudfront-www-redirect.js`](cloudfront-www-redirect.js) does
+> it — a 301 that preserves the path and query string, the latter mattering because Forma's
+> shop encodes its filter state there. Serving identical content on both hostnames is the
+> one thing to avoid; it splits ranking signals between two addresses.
+>
+> Only **one function can be attached per event type**, so if a single distribution serves
+> both names, merge the redirect and the rewrite into one function rather than trying to
+> chain them.
+
+### 7. Deploy
+
+```bash
+BUCKET=your-bucket DISTRIBUTION_ID=E1234567890ABC ./deploy/aws/deploy.sh
+```
+
+The build already targets `https://exostech.pro`, set in `site.config.js`, so no
+`SITE_ORIGIN` override is needed. Pass one only to build for somewhere else (a staging
+host, say). Add `DRY_RUN=1` to see what would change without uploading.
 
 ---
 
@@ -146,9 +181,9 @@ After going live, check an **interior** page rather than the home page — that 
 rewrite function affects:
 
 ```bash
-curl -sI https://yourdomain.com/aurelia/rooms/     | head -1   # expect 200
-curl -sI https://yourdomain.com/forma/shop/prism-vase/ | head -1   # expect 200
-curl -sI https://yourdomain.com/definitely-not-a-page/ | head -1   # expect 404
+curl -sI https://exostech.pro/aurelia/rooms/     | head -1   # expect 200
+curl -sI https://exostech.pro/forma/shop/prism-vase/ | head -1   # expect 200
+curl -sI https://exostech.pro/definitely-not-a-page/ | head -1   # expect 404
 ```
 
 If the first two return 403, the CloudFront Function is not attached to the viewer request.

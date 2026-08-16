@@ -25,9 +25,15 @@ export const studio = {
 
 /**
  * Absolute origin used for canonical URLs, Open Graph tags and sitemap entries.
- * Override at build time:  SITE_ORIGIN=https://yourdomain.com npm run build
+ *
+ * This is the domain the portfolio is hosted on. Change it here if that moves,
+ * or override per build:  SITE_ORIGIN=https://staging.example.net npm run build
+ *
+ * Note this is separate from the placeholder addresses on the three client
+ * sites — those deliberately use example.com, which is the reserved
+ * documentation domain, because the brands are fictional.
  */
-export const origin = (process.env.SITE_ORIGIN || 'https://example.com').replace(/\/+$/, '');
+export const origin = (process.env.SITE_ORIGIN || 'https://exostech.pro').replace(/\/+$/, '');
 
 /**
  * Path prefix the built output will be served from.

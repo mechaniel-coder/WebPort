@@ -1,0 +1,860 @@
+/**
+ * Meridian Lab design system.
+ *
+ * True black, monospace throughout, visible measurement rules, and an accent
+ * that changes per experiment via --accent. The reference is an instrument
+ * panel: readouts, tick marks and annotation, rather than a marketing surface.
+ *
+ * Northwind is also dark, so the separation is deliberate and structural — that
+ * site is a humanist sans on soft navy with rounded panels; this is mono on
+ * absolute black with hairline rules and square corners.
+ */
+
+:root {
+  color-scheme: dark;
+
+  /* ── Ground ─────────────────────────────────────────────────────────────── */
+  --void: #000000;
+  --panel: #090909;
+  --panel-2: #101010;
+  --line: #1d1d1d;
+  --line-bright: #303030;
+
+  /* ── Ink ────────────────────────────────────────────────────────────────── */
+  --ink: #f2f2f0;
+  --dim: #9a9a96;
+  --faint: #6a6a66;
+
+  /* Default accent; each experiment overrides it on a wrapper. */
+  --accent: #c3f53c;
+  --accent-ink: #0a0f00;
+
+  --focus-ring: var(--accent);
+  --focus-radius: 0px;
+
+  /* ── Type — mono-forward ────────────────────────────────────────────────── */
+  --mono: ui-monospace, SFMono-Regular, 'SF Mono', Menlo, 'DejaVu Sans Mono', Consolas,
+    monospace;
+  --sans: system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+
+  --step--2: clamp(0.68rem, 0.66rem + 0.09vw, 0.74rem);
+  --step--1: clamp(0.8rem, 0.77rem + 0.13vw, 0.87rem);
+  --step-0: clamp(0.94rem, 0.91rem + 0.15vw, 1.02rem);
+  --step-1: clamp(1.13rem, 1.06rem + 0.33vw, 1.35rem);
+  --step-2: clamp(1.35rem, 1.22rem + 0.63vw, 1.79rem);
+  --step-3: clamp(1.62rem, 1.4rem + 1.08vw, 2.37rem);
+  --step-4: clamp(1.94rem, 1.6rem + 1.74vw, 3.15rem);
+  --step-5: clamp(2.33rem, 1.8rem + 2.66vw, 4.18rem);
+
+  /* ── Space ──────────────────────────────────────────────────────────────── */
+  --s-3xs: 0.25rem;
+  --s-2xs: 0.5rem;
+  --s-xs: 0.75rem;
+  --s-s: 1rem;
+  --s-m: 1.5rem;
+  --s-l: 2.25rem;
+  --s-xl: 3.5rem;
+  --s-2xl: 5.5rem;
+  --s-3xl: 8rem;
+
+  --shell: 80rem;
+  --ease: cubic-bezier(0.2, 0.7, 0.3, 1);
+}
+
+/* ── Base ──────────────────────────────────────────────────────────────────── */
+
+body {
+  background: var(--void);
+  color: var(--ink);
+  font-family: var(--mono);
+  font-size: var(--step-0);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+a {
+  color: var(--accent);
+  text-underline-offset: 0.2em;
+}
+
+.shell {
+  width: min(100% - 1.75rem, var(--shell));
+  margin-inline: auto;
+}
+
+@media (min-width: 48em) {
+  .shell {
+    width: min(100% - 4rem, var(--shell));
+  }
+}
+
+.shell--text {
+  width: min(100% - 1.75rem, 46rem);
+  margin-inline: auto;
+}
+
+@media (min-width: 48em) {
+  .shell--text {
+    width: min(100% - 4rem, 46rem);
+  }
+}
+
+.section {
+  padding-block: var(--s-2xl);
+}
+
+.section--tight {
+  padding-block: var(--s-xl);
+}
+
+.ruled {
+  border-top: 1px solid var(--line);
+}
+
+/* ── Type ──────────────────────────────────────────────────────────────────── */
+
+.display {
+  font-size: var(--step-5);
+  font-weight: 500;
+  letter-spacing: -0.04em;
+  line-height: 0.95;
+}
+
+.h1 {
+  font-size: var(--step-4);
+  font-weight: 500;
+  letter-spacing: -0.035em;
+  line-height: 1;
+}
+
+.h2 {
+  font-size: var(--step-2);
+  font-weight: 500;
+  letter-spacing: -0.025em;
+  line-height: 1.15;
+}
+
+.h3 {
+  font-size: var(--step-1);
+  font-weight: 500;
+  letter-spacing: -0.015em;
+}
+
+/* Annotation label — the recurring device. Small, spaced, accent-coloured. */
+.label {
+  font-size: var(--step--2);
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+
+.label--dim {
+  color: var(--faint);
+}
+
+.lede {
+  font-size: var(--step-1);
+  line-height: 1.5;
+  color: var(--dim);
+  max-width: 56ch;
+}
+
+.dim {
+  color: var(--dim);
+}
+
+/* Long-form prose switches to a sans — mono is for instrumentation, not reading. */
+.prose {
+  font-family: var(--sans);
+  max-width: 64ch;
+  color: var(--dim);
+  font-size: var(--step-0);
+  line-height: 1.7;
+}
+
+.prose > * + * {
+  margin-top: var(--s-s);
+}
+
+.prose strong {
+  color: var(--ink);
+  font-weight: 600;
+}
+
+.prose code {
+  font-family: var(--mono);
+  font-size: 0.92em;
+  color: var(--accent);
+}
+
+/* ── Rig (header) ──────────────────────────────────────────────────────────── */
+
+.rig {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  background: color-mix(in srgb, var(--void) 88%, transparent);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--line);
+}
+
+.rig__inner {
+  width: min(100% - 1.75rem, var(--shell));
+  margin-inline: auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--s-m);
+  min-height: 3.5rem;
+  flex-wrap: wrap;
+}
+
+@media (min-width: 48em) {
+  .rig__inner {
+    width: min(100% - 4rem, var(--shell));
+  }
+}
+
+.sigil {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  color: var(--ink);
+  text-decoration: none;
+  font-size: var(--step--1);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.sigil__mark {
+  display: block;
+  width: 1.15rem;
+  color: var(--accent);
+}
+
+.rig__toggle {
+  color: var(--ink);
+  font-size: var(--step-1);
+  padding: 0.25rem 0.5rem;
+  line-height: 1;
+}
+
+.rig__nav {
+  display: none;
+  width: 100%;
+  padding-bottom: var(--s-s);
+}
+
+.rig__nav[data-open='true'] {
+  display: block;
+}
+
+.rig__nav ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 0.1rem;
+}
+
+.rig__nav ul a {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 0.5rem;
+  padding: 0.3rem 0;
+  color: var(--dim);
+  text-decoration: none;
+  font-size: var(--step--1);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  transition: color 0.15s var(--ease);
+}
+
+.rig__nav ul a:hover,
+.rig__nav ul a[aria-current='page'] {
+  color: var(--ink);
+}
+
+.rig__nav ul a[aria-current='page'] .rig__idx {
+  color: var(--accent);
+}
+
+.rig__idx {
+  color: var(--faint);
+  font-size: var(--step--2);
+}
+
+.rig__out {
+  display: inline-block;
+  margin-top: var(--s-s);
+  font-size: var(--step--2);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--faint);
+  text-decoration: none;
+}
+
+.rig__out:hover {
+  color: var(--ink);
+}
+
+@media (min-width: 56em) {
+  .rig__toggle {
+    display: none;
+  }
+  .rig__nav {
+    display: flex !important;
+    width: auto;
+    align-items: center;
+    gap: var(--s-l);
+    padding-bottom: 0;
+  }
+  .rig__nav ul {
+    display: flex;
+    gap: var(--s-m);
+  }
+  .rig__out {
+    margin-top: 0;
+  }
+}
+
+/* ── Buttons and controls ──────────────────────────────────────────────────── */
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.45rem;
+  padding: 0.65rem 1.2rem;
+  background: var(--accent);
+  color: var(--accent-ink);
+  border: 1px solid var(--accent);
+  font-family: var(--mono);
+  font-size: var(--step--1);
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  text-decoration: none;
+  transition: opacity 0.15s var(--ease);
+}
+
+.btn:hover:not(:disabled) {
+  opacity: 0.82;
+  color: var(--accent-ink);
+}
+
+.btn:disabled {
+  opacity: 0.35;
+  cursor: not-allowed;
+}
+
+.btn--ghost {
+  background: transparent;
+  color: var(--ink);
+  border-color: var(--line-bright);
+}
+
+.btn--ghost:hover:not(:disabled) {
+  border-color: var(--accent);
+  color: var(--accent);
+  opacity: 1;
+}
+
+.btn--sm {
+  padding: 0.4rem 0.75rem;
+  font-size: var(--step--2);
+}
+
+.arrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: var(--step--1);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  text-decoration: none;
+  color: var(--accent);
+}
+
+.arrow::after {
+  content: '→';
+  transition: transform 0.15s var(--ease);
+}
+
+.arrow:hover::after {
+  transform: translateX(3px);
+}
+
+/* ── Experiment index ──────────────────────────────────────────────────────── */
+
+.specimens {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  border-top: 1px solid var(--line);
+}
+
+.specimen {
+  border-bottom: 1px solid var(--line);
+  transition: background 0.2s var(--ease);
+}
+
+.specimen:hover {
+  background: var(--panel);
+}
+
+.specimen__link {
+  display: grid;
+  gap: var(--s-xs);
+  padding-block: var(--s-l);
+  text-decoration: none;
+  color: inherit;
+}
+
+@media (min-width: 55em) {
+  .specimen__link {
+    grid-template-columns: 4rem 1fr 1.2fr auto;
+    gap: var(--s-m);
+    align-items: baseline;
+  }
+}
+
+.specimen__index {
+  color: var(--accent);
+  font-size: var(--step--1);
+}
+
+.specimen__name {
+  font-size: var(--step-3);
+  letter-spacing: -0.03em;
+}
+
+.specimen__summary {
+  color: var(--dim);
+  max-width: 44ch;
+  font-size: var(--step--1);
+}
+
+.specimen__kicker {
+  font-size: var(--step--2);
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--faint);
+  white-space: nowrap;
+}
+
+/* ── Stage — the frame every experiment renders into ───────────────────────── */
+
+.stage {
+  position: relative;
+  border: 1px solid var(--line-bright);
+  background: var(--panel);
+  overflow: hidden;
+}
+
+.stage__canvas {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 16 / 10;
+  touch-action: none;
+}
+
+@media (max-width: 40em) {
+  .stage__canvas {
+    aspect-ratio: 4 / 5;
+  }
+}
+
+/* Corner ticks — the instrument-panel device, purely decorative. */
+.stage::before,
+.stage::after {
+  content: '';
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  border-color: var(--accent);
+  border-style: solid;
+  pointer-events: none;
+  z-index: 2;
+}
+
+.stage::before {
+  top: 8px;
+  left: 8px;
+  border-width: 1px 0 0 1px;
+}
+
+.stage::after {
+  bottom: 8px;
+  right: 8px;
+  border-width: 0 1px 1px 0;
+}
+
+.stage__readout {
+  position: absolute;
+  top: 0;
+  right: 0;
+  padding: 0.5rem 0.75rem;
+  font-size: var(--step--2);
+  color: var(--dim);
+  text-align: right;
+  pointer-events: none;
+  z-index: 2;
+  line-height: 1.5;
+}
+
+.stage__readout b {
+  color: var(--accent);
+  font-weight: 500;
+}
+
+/* Shown when WebGL is unavailable or the context is lost. */
+.stage__fallback {
+  padding: var(--s-l);
+  color: var(--dim);
+  font-size: var(--step--1);
+  text-align: center;
+}
+
+.stage__fallback[hidden] {
+  display: none;
+}
+
+/* ── Control panel ─────────────────────────────────────────────────────────── */
+
+.panel {
+  border: 1px solid var(--line-bright);
+  background: var(--panel);
+  padding: var(--s-s);
+}
+
+.panel__title {
+  font-size: var(--step--2);
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--faint);
+  padding-bottom: var(--s-2xs);
+  border-bottom: 1px solid var(--line);
+  margin-bottom: var(--s-s);
+}
+
+.ctrl + .ctrl {
+  margin-top: var(--s-s);
+}
+
+.ctrl__head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--s-s);
+  margin-bottom: 0.3rem;
+}
+
+.ctrl__label {
+  font-size: var(--step--1);
+  color: var(--dim);
+}
+
+.ctrl__value {
+  font-size: var(--step--1);
+  color: var(--accent);
+  font-variant-numeric: tabular-nums;
+}
+
+.ctrl input[type='range'] {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 100%;
+  height: 1.25rem;
+  background: transparent;
+  cursor: pointer;
+}
+
+.ctrl input[type='range']::-webkit-slider-runnable-track {
+  height: 2px;
+  background: var(--line-bright);
+}
+
+.ctrl input[type='range']::-moz-range-track {
+  height: 2px;
+  background: var(--line-bright);
+}
+
+.ctrl input[type='range']::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 0.85rem;
+  height: 0.85rem;
+  margin-top: -0.4rem;
+  background: var(--accent);
+  border: 0;
+}
+
+.ctrl input[type='range']::-moz-range-thumb {
+  width: 0.85rem;
+  height: 0.85rem;
+  background: var(--accent);
+  border: 0;
+  border-radius: 0;
+}
+
+.ctrl input[type='range']:focus-visible {
+  outline: 2px solid var(--focus-ring);
+  outline-offset: 4px;
+}
+
+.chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+}
+
+.chip {
+  position: relative;
+}
+
+.chip input {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  cursor: pointer;
+  margin: 0;
+}
+
+.chip span {
+  display: block;
+  padding: 0.3rem 0.6rem;
+  border: 1px solid var(--line-bright);
+  font-size: var(--step--2);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--dim);
+}
+
+.chip input:checked + span {
+  border-color: var(--accent);
+  color: var(--accent-ink);
+  background: var(--accent);
+}
+
+.chip input:focus-visible + span {
+  outline: 2px solid var(--focus-ring);
+  outline-offset: 2px;
+}
+
+/* ── Layout for an experiment page ─────────────────────────────────────────── */
+
+.rig-grid {
+  display: grid;
+  gap: var(--s-m);
+  align-items: start;
+}
+
+@media (min-width: 62em) {
+  .rig-grid {
+    grid-template-columns: minmax(0, 1fr) 17rem;
+  }
+}
+
+.notes {
+  display: grid;
+  gap: var(--s-l);
+  margin-top: var(--s-2xl);
+}
+
+@media (min-width: 55em) {
+  .notes {
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--s-xl);
+  }
+}
+
+.note__title {
+  font-size: var(--step--2);
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--faint);
+  padding-bottom: var(--s-2xs);
+  border-bottom: 1px solid var(--line);
+  margin-bottom: var(--s-s);
+}
+
+.ticks {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  gap: var(--s-2xs);
+  font-size: var(--step--1);
+  color: var(--dim);
+}
+
+.ticks li {
+  padding-left: 1.35rem;
+  position: relative;
+}
+
+.ticks li::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0.65em;
+  width: 0.7rem;
+  height: 1px;
+  background: var(--accent);
+}
+
+/* ── Data table (text alternative for a canvas) ────────────────────────────── */
+
+.readout-table {
+  width: 100%;
+  font-size: var(--step--2);
+  font-variant-numeric: tabular-nums;
+  border: 1px solid var(--line);
+}
+
+.readout-table caption {
+  text-align: left;
+  padding-bottom: var(--s-2xs);
+  color: var(--faint);
+  font-size: var(--step--2);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.readout-table th,
+.readout-table td {
+  padding: 0.35rem 0.6rem;
+  border-bottom: 1px solid var(--line);
+  text-align: right;
+}
+
+.readout-table th {
+  text-align: left;
+  color: var(--dim);
+  font-weight: 400;
+}
+
+.readout-table thead th {
+  background: var(--panel-2);
+  color: var(--faint);
+}
+
+.alt-view[hidden] {
+  display: none;
+}
+
+.alt-toggle {
+  font-size: var(--step--2);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--dim);
+  text-decoration: underline;
+  text-underline-offset: 0.2em;
+}
+
+.alt-toggle:hover {
+  color: var(--accent);
+}
+
+/* ── Endplate (footer) ─────────────────────────────────────────────────────── */
+
+.endplate {
+  border-top: 1px solid var(--line);
+  padding-block: var(--s-xl) var(--s-m);
+  margin-top: var(--s-3xl);
+}
+
+.endplate__inner {
+  width: min(100% - 1.75rem, var(--shell));
+  margin-inline: auto;
+  display: grid;
+  gap: var(--s-l);
+}
+
+@media (min-width: 48em) {
+  .endplate__inner {
+    width: min(100% - 4rem, var(--shell));
+    grid-template-columns: 2fr 1fr 1fr;
+  }
+}
+
+.endplate__mark {
+  display: block;
+  width: 1.5rem;
+  color: var(--accent);
+  margin-bottom: var(--s-s);
+}
+
+.endplate__line {
+  color: var(--ink);
+  max-width: 26ch;
+}
+
+.endplate__heading {
+  font-size: var(--step--2);
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--faint);
+  margin-bottom: var(--s-2xs);
+}
+
+.endplate__group ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  gap: 0.25rem;
+  font-size: var(--step--1);
+}
+
+.endplate__group a {
+  color: var(--dim);
+  text-decoration: none;
+}
+
+.endplate__group a:hover {
+  color: var(--ink);
+}
+
+.endplate__legal {
+  grid-column: 1 / -1;
+  border-top: 1px solid var(--line);
+  padding-top: var(--s-m);
+  font-size: var(--step--2);
+  color: var(--faint);
+  max-width: 80ch;
+}
+
+/* ── Reduced motion ────────────────────────────────────────────────────────── */
+
+/* Each experiment also checks this in JavaScript and renders a static frame
+   rather than simply freezing mid-animation. */
+@media (prefers-reduced-motion: reduce) {
+  .stage__canvas {
+    transition: none !important;
+  }
+}
+
+/* ── Cross-document view transitions ───────────────────────────────────────── */
+
+/*
+ * One declaration gives every navigation inside the lab a real transition —
+ * between separate HTML documents, with no client-side router. Unsupported
+ * engines ignore the at-rule entirely and navigate instantly, as before.
+ *
+ * Demonstrated on /lab/motion/, declared here because it is a document-level
+ * feature and has to be present on both the outgoing and incoming page.
+ */
+@view-transition {
+  navigation: auto;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  ::view-transition-group(*),
+  ::view-transition-old(*),
+  ::view-transition-new(*) {
+    animation: none !important;
+  }
+}

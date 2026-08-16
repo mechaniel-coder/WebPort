@@ -1,0 +1,349 @@
+<!doctype html>
+<html lang="en" data-color-scheme="dark">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Renderer — Lab — Meridian Lab</title>
+    <meta name="description" content="A WebGL renderer with no engine underneath it.">
+    <link rel="canonical" href="https://exostech.pro/lab/renderer/">
+    <meta name="theme-color" content="#000000">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Meridian Lab">
+    <meta property="og:title" content="Renderer — Lab — Meridian Lab">
+    <meta property="og:description" content="A WebGL renderer with no engine underneath it.">
+    <meta property="og:url" content="https://exostech.pro/lab/renderer/">
+    <meta property="og:image" content="https://exostech.pro/lab/assets/social-card.svg">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Renderer — Lab — Meridian Lab">
+    <meta name="twitter:description" content="A WebGL renderer with no engine underneath it.">
+    <meta name="twitter:image" content="https://exostech.pro/lab/assets/social-card.svg">
+    <link rel="icon" href="data:image/svg+xml,%3Csvg%20viewBox%3D%220%200%2032%2032%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20aria-hidden%3D%22true%22%3E%20%3Crect%20width%3D%2232%22%20height%3D%2232%22%20fill%3D%22%23000%22%2F%3E%20%3Ccircle%20cx%3D%2216%22%20cy%3D%2216%22%20r%3D%2210%22%20fill%3D%22none%22%20stroke%3D%22%23c3f53c%22%20stroke-width%3D%222.5%22%2F%3E%20%3Ccircle%20cx%3D%2216%22%20cy%3D%2216%22%20r%3D%223%22%20fill%3D%22%23c3f53c%22%2F%3E%20%3C%2Fsvg%3E">
+    <link rel="stylesheet" href="/shared/reset.css">
+    <link rel="stylesheet" href="/lab/assets/lab.css">
+    <script type="application/ld+json">{"@context":"https://schema.org","@type":"CollectionPage","name":"Meridian Lab","description":"Four experiments in methods that usually mean importing a library. Each one is\n    raw platform code — and each one still works with a keyboard, still respects reduced\n    motion, and still says something useful when the effect is switched off.","url":"https://exostech.pro/lab/","isPartOf":{"@type":"WebSite","name":"Studio Meridian","url":"https://exostech.pro/"}}</script>
+    <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Work","item":"https://exostech.pro/"},{"@type":"ListItem","position":2,"name":"Lab","item":"https://exostech.pro/lab/"},{"@type":"ListItem","position":3,"name":"Renderer","item":"https://exostech.pro/lab/renderer/"}]}</script>
+  </head>
+  <body class="site-lab">
+    <a class="skip-link" href="#main">Skip to main content</a>
+    <header class="rig">
+      <div class="rig__inner">
+        <a class="sigil" href="/lab/">
+          <span class="sigil__mark" aria-hidden="true"><svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg"
+  aria-hidden="true" focusable="false">
+  <circle cx="16" cy="16" r="13" fill="none" stroke="currentColor" stroke-width="2"/>
+  <circle cx="16" cy="16" r="4" fill="currentColor"/>
+  <path d="M16 1v6M16 25v6M1 16h6M25 16h6" stroke="currentColor" stroke-width="2"/>
+</svg></span>
+          <span class="sigil__text">Meridian Lab</span>
+        </a>
+
+        <button class="rig__toggle" type="button" aria-expanded="false"
+                aria-controls="lab-nav" data-nav-toggle>
+          <span aria-hidden="true">≡</span>
+          <span class="visually-hidden">Menu</span>
+        </button>
+
+        <nav class="rig__nav" id="lab-nav" aria-label="Experiments" data-nav
+             data-nav-breakpoint="56em">
+          <ul>
+            <li>
+              <a href="/lab/renderer/" aria-current="page">
+                <span class="rig__idx" aria-hidden="true">01</span>
+                Renderer
+              </a>
+            </li>
+<li>
+              <a href="/lab/verlet/">
+                <span class="rig__idx" aria-hidden="true">02</span>
+                Verlet
+              </a>
+            </li>
+<li>
+              <a href="/lab/descent/">
+                <span class="rig__idx" aria-hidden="true">03</span>
+                Descent
+              </a>
+            </li>
+<li>
+              <a href="/lab/motion/">
+                <span class="rig__idx" aria-hidden="true">04</span>
+                Motion
+              </a>
+            </li>
+          </ul>
+          <a class="rig__out" href="/">↖ Studio Meridian</a>
+        </nav>
+      </div>
+    </header>
+    <main id="main" tabindex="-1">
+
+<div style="--accent:#c3f53c;--accent-ink:#0a0f00">
+
+<section class="section--tight" style="padding-top:var(--s-l)">
+    <div class="shell">
+      <nav class="label label--dim" aria-label="Breadcrumb" style="margin-bottom:var(--s-s)">
+    <ol style="display:flex;flex-wrap:wrap;gap:0.4rem;list-style:none;margin:0;padding:0">
+      <li><a href="/lab/" style="color:inherit;text-decoration:none">Lab</a> /</li>
+<li><span aria-current="page">Renderer</span></li>
+    </ol>
+  </nav>
+      <p class="label">01 · 3D interface</p>
+      <h1 class="h1" style="margin-top:var(--s-2xs)">Renderer</h1>
+      <p class="lede" style="margin-top:var(--s-s)">Perspective projection, orbit camera, procedural geometry and Blinn–Phong shading,
+      written from the matrix maths up. The GUI drives real uniforms, not a wrapper.</p>
+    </div>
+  </section>
+
+<section class="section--tight">
+  <div class="shell rig-grid" data-renderer>
+
+    <div>
+      <div class="stage">
+        <div class="stage__readout" data-readout aria-hidden="true"></div>
+
+        <!-- tabindex makes the camera reachable without a pointer; the label and
+             description are what assistive technology gets instead of pixels. -->
+        <canvas class="stage__canvas" data-canvas
+                tabindex="0"
+                role="img"
+                aria-label="Interactive 3D view of a procedurally generated torus knot, lit and shaded in real time."
+                aria-describedby="canvas-help"></canvas>
+
+        <p class="stage__fallback" data-fallback hidden></p>
+      </div>
+
+      <p id="canvas-help" class="dim" style="font-size:var(--step--2);margin-top:var(--s-2xs)">
+        Drag to orbit, scroll to zoom. With the canvas focused: arrow keys orbit,
+        <kbd>+</kbd> and <kbd>−</kbd> zoom, <kbd>Home</kbd> resets. Hold <kbd>Shift</kbd>
+        to move faster.
+      </p>
+
+      <div style="display:flex;flex-wrap:wrap;gap:var(--s-2xs);align-items:center;
+                      margin-top:var(--s-s)">
+    <button class="btn btn--ghost btn--sm" type="button" data-play aria-pressed="true">
+      <span data-play-label>Pause</span>
+    </button>
+    <button class="btn btn--ghost btn--sm" type="button" data-reset>Reset</button>
+    
+  </div>
+    </div>
+
+    <div class="panel">
+      <h2 class="panel__title">Controls</h2>
+
+      <fieldset style="border:0;padding:0;margin:0 0 var(--s-m)">
+        <legend class="ctrl__label" style="padding:0;margin-bottom:0.4rem">Geometry</legend>
+        <div class="chips">
+          <label class="chip">
+            <input type="radio" name="shape" value="knot" checked>
+            <span>knot</span>
+          </label><label class="chip">
+            <input type="radio" name="shape" value="sphere" >
+            <span>sphere</span>
+          </label><label class="chip">
+            <input type="radio" name="shape" value="box" >
+            <span>box</span>
+          </label>
+        </div>
+      </fieldset>
+
+      <div class="ctrl" data-knot-only>
+        <div class="ctrl__head">
+          <label class="ctrl__label" for="c-p">Winds around axis (p)</label>
+          <output class="ctrl__value" data-out="p" for="c-p">2</output>
+        </div>
+        <input id="c-p" type="range" min="1" max="7" step="1" value="2" data-uniform="p">
+      </div>
+
+      <div class="ctrl" data-knot-only>
+        <div class="ctrl__head">
+          <label class="ctrl__label" for="c-q">Winds through hole (q)</label>
+          <output class="ctrl__value" data-out="q" for="c-q">3</output>
+        </div>
+        <input id="c-q" type="range" min="1" max="9" step="1" value="3" data-uniform="q">
+      </div>
+
+      <div class="ctrl">
+        <div class="ctrl__head">
+          <label class="ctrl__label" for="c-rough">Roughness</label>
+          <output class="ctrl__value" data-out="roughness" for="c-rough">0.35</output>
+        </div>
+        <input id="c-rough" type="range" min="0" max="1" step="0.05" value="0.35"
+               data-uniform="roughness">
+      </div>
+
+      <div class="ctrl">
+        <div class="ctrl__head">
+          <label class="ctrl__label" for="c-rim">Rim light</label>
+          <output class="ctrl__value" data-out="rim" for="c-rim">0.55</output>
+        </div>
+        <input id="c-rim" type="range" min="0" max="1.5" step="0.05" value="0.55"
+               data-uniform="rim">
+      </div>
+
+      <div class="ctrl">
+        <div class="ctrl__head">
+          <label class="ctrl__label" for="c-facets">Normal wash</label>
+          <output class="ctrl__value" data-out="facets" for="c-facets">0</output>
+        </div>
+        <input id="c-facets" type="range" min="0" max="1" step="0.05" value="0"
+               data-uniform="facets">
+      </div>
+
+      <div class="ctrl">
+        <div class="ctrl__head">
+          <label class="ctrl__label" for="c-fov">Field of view</label>
+          <output class="ctrl__value" data-out="fov" for="c-fov">45°</output>
+        </div>
+        <input id="c-fov" type="range" min="20" max="90" step="1" value="45"
+               data-uniform="fov" data-suffix="°">
+      </div>
+
+      <p class="dim" style="font-size:var(--step--2);margin-top:var(--s-m);
+                            padding-top:var(--s-s);border-top:1px solid var(--line)">
+        Context: <span data-gl-status>initialising</span>
+      </p>
+    </div>
+  </div>
+</section>
+
+<section class="section ruled">
+  <div class="shell">
+    <div class="notes" style="margin-top:0">
+      <div>
+        <h2 class="note__title">The pipeline, in order</h2>
+        <ol class="ticks" style="counter-reset:none">
+          <li>Generate vertices and analytic normals on the CPU</li>
+          <li>Upload both to GPU buffers once, not per frame</li>
+          <li>Compile and link the vertex and fragment shaders</li>
+          <li>Build projection, view and model matrices per frame</li>
+          <li>Derive the normal matrix — inverse transpose of the model</li>
+          <li>Bind uniforms, bind attributes, <code>drawElements</code></li>
+        </ol>
+      </div>
+
+      <div>
+        <h2 class="note__title">Why it looks the way it does</h2>
+        <div class="prose" style="margin:0">
+          <p>Two directional lights, a Blinn–Phong specular term using the half-vector,
+            and a Fresnel-style rim so the silhouette separates from a black background.</p>
+          <p>The last line of the fragment shader raises the colour to
+            <code>1/2.2</code>. That is an approximate sRGB conversion, and skipping it is
+            the single most common reason a hand-written renderer looks flat and washed
+            out next to an engine's output.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section ruled">
+    <div class="shell">
+      <div class="notes" style="margin-top:0">
+        <div>
+          <h2 class="note__title">Written by hand</h2>
+          <ul class="ticks">
+            <li>mat4 and vec3 maths — perspective, lookAt, multiply, invert, transpose</li>
+<li>Shader compilation, linking and uniform binding</li>
+<li>Procedural torus-knot geometry with generated normals</li>
+<li>Blinn–Phong shading with rim light, in GLSL</li>
+<li>An orbit camera driven by pointer, wheel and arrow keys</li>
+          </ul>
+          <p class="dim" style="margin-top:var(--s-m);font-size:var(--step--1)">
+            <span class="label label--dim">Not used</span><br>
+            three.js, gl-matrix, or any helper of any kind
+          </p>
+        </div>
+
+        <div>
+          <h2 class="note__title">The part that was hard</h2>
+          <p class="prose" style="margin:0">Getting the normal matrix right. Normals do not transform with the model matrix —
+      they need its inverse transpose, or lighting shears the moment you scale non-uniformly.
+      It is the bug everyone hits and it looks like a lighting problem rather than a maths one.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+<nav class="section--tight ruled" aria-label="Experiments">
+    <div class="shell" style="display:grid;gap:var(--s-m);
+                              grid-template-columns:repeat(auto-fit,minmax(16rem,1fr))">
+      <a href="/lab/motion/"
+    style="--accent:#ffb648;display:grid;gap:0.3rem;padding:var(--s-m) 0;
+           text-decoration:none;color:inherit;">
+    <span class="label">Previous</span>
+    <span class="h3">04 Motion</span>
+    <span class="dim" style="font-size:var(--step--1)">Four browser features new enough to still need a fallback.</span>
+  </a>
+      <a href="/lab/verlet/"
+    style="--accent:#ff5cf0;display:grid;gap:0.3rem;padding:var(--s-m) 0;
+           text-decoration:none;color:inherit;text-align:right">
+    <span class="label">Next</span>
+    <span class="h3">02 Verlet</span>
+    <span class="dim" style="font-size:var(--step--1)">Cloth, rope and constraint solving with a hand-written integrator.</span>
+  </a>
+    </div>
+  </nav>
+
+</div>
+
+    </main>
+    <footer class="endplate">
+      <div class="endplate__inner">
+        <div>
+          <span class="endplate__mark" aria-hidden="true"><svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg"
+  aria-hidden="true" focusable="false">
+  <circle cx="16" cy="16" r="13" fill="none" stroke="currentColor" stroke-width="2"/>
+  <circle cx="16" cy="16" r="4" fill="currentColor"/>
+  <path d="M16 1v6M16 25v6M1 16h6M25 16h6" stroke="currentColor" stroke-width="2"/>
+</svg></span>
+          <p class="endplate__line">Frontier techniques, written from nothing.</p>
+        </div>
+
+        <nav class="endplate__group" aria-label="Experiments">
+          <h2 class="endplate__heading">Experiments</h2>
+          <ul>
+            <li>
+              <a href="/lab/renderer/">
+                <span aria-hidden="true">01</span> Renderer
+              </a>
+            </li>
+<li>
+              <a href="/lab/verlet/">
+                <span aria-hidden="true">02</span> Verlet
+              </a>
+            </li>
+<li>
+              <a href="/lab/descent/">
+                <span aria-hidden="true">03</span> Descent
+              </a>
+            </li>
+<li>
+              <a href="/lab/motion/">
+                <span aria-hidden="true">04</span> Motion
+              </a>
+            </li>
+          </ul>
+        </nav>
+
+        <nav class="endplate__group" aria-label="Studio">
+          <h2 class="endplate__heading">Studio</h2>
+          <ul>
+            <li><a href="/">Work</a></li>
+            <li><a href="/lab/colophon/">Colophon</a></li>
+            <li><a href="/contact/">Contact</a></li>
+          </ul>
+        </nav>
+
+        <p class="endplate__legal">
+          The lab is in-house research by <a href="/">Studio Meridian</a>,
+          not client work. Every experiment is raw platform code — no rendering engine, no
+          physics engine, no scroll library, no dependencies of any kind.
+        </p>
+      </div>
+    </footer>
+    <script type="module" src="/lab/assets/ui.js"></script>
+    <script type="module" src="/lab/assets/renderer.js"></script>
+  </body>
+</html>

@@ -313,6 +313,13 @@ await withServer(async () => {
     await shopScenario(page, ORIGIN, check);
     await cartScenario(page, ORIGIN, check);
   }
+  if (has('/lab/renderer/')) {
+    const lab = await import('./checks/lab.js');
+    await lab.rendererScenario(page, ORIGIN, check);
+    await lab.verletScenario(page, ORIGIN, check);
+    await lab.descentScenario(page, ORIGIN, check);
+    await lab.motionScenario(page, ORIGIN, check);
+  }
 
   await context.close();
 

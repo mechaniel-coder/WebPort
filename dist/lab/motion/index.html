@@ -1,0 +1,387 @@
+<!doctype html>
+<html lang="en" data-color-scheme="dark">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Motion — Lab — Meridian Lab</title>
+    <meta name="description" content="Four browser features new enough to still need a fallback.">
+    <link rel="canonical" href="https://exostech.pro/lab/motion/">
+    <meta name="theme-color" content="#000000">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Meridian Lab">
+    <meta property="og:title" content="Motion — Lab — Meridian Lab">
+    <meta property="og:description" content="Four browser features new enough to still need a fallback.">
+    <meta property="og:url" content="https://exostech.pro/lab/motion/">
+    <meta property="og:image" content="https://exostech.pro/lab/assets/social-card.svg">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Motion — Lab — Meridian Lab">
+    <meta name="twitter:description" content="Four browser features new enough to still need a fallback.">
+    <meta name="twitter:image" content="https://exostech.pro/lab/assets/social-card.svg">
+    <link rel="icon" href="data:image/svg+xml,%3Csvg%20viewBox%3D%220%200%2032%2032%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20aria-hidden%3D%22true%22%3E%20%3Crect%20width%3D%2232%22%20height%3D%2232%22%20fill%3D%22%23000%22%2F%3E%20%3Ccircle%20cx%3D%2216%22%20cy%3D%2216%22%20r%3D%2210%22%20fill%3D%22none%22%20stroke%3D%22%23c3f53c%22%20stroke-width%3D%222.5%22%2F%3E%20%3Ccircle%20cx%3D%2216%22%20cy%3D%2216%22%20r%3D%223%22%20fill%3D%22%23c3f53c%22%2F%3E%20%3C%2Fsvg%3E">
+    <link rel="stylesheet" href="/shared/reset.css">
+    <link rel="stylesheet" href="/lab/assets/lab.css">
+    <link rel="stylesheet" href="/lab/assets/motion.css">
+    <script type="application/ld+json">{"@context":"https://schema.org","@type":"CollectionPage","name":"Meridian Lab","description":"Four experiments in methods that usually mean importing a library. Each one is\n    raw platform code — and each one still works with a keyboard, still respects reduced\n    motion, and still says something useful when the effect is switched off.","url":"https://exostech.pro/lab/","isPartOf":{"@type":"WebSite","name":"Studio Meridian","url":"https://exostech.pro/"}}</script>
+    <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Work","item":"https://exostech.pro/"},{"@type":"ListItem","position":2,"name":"Lab","item":"https://exostech.pro/lab/"},{"@type":"ListItem","position":3,"name":"Motion","item":"https://exostech.pro/lab/motion/"}]}</script>
+  </head>
+  <body class="site-lab">
+    <a class="skip-link" href="#main">Skip to main content</a>
+    <header class="rig">
+      <div class="rig__inner">
+        <a class="sigil" href="/lab/">
+          <span class="sigil__mark" aria-hidden="true"><svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg"
+  aria-hidden="true" focusable="false">
+  <circle cx="16" cy="16" r="13" fill="none" stroke="currentColor" stroke-width="2"/>
+  <circle cx="16" cy="16" r="4" fill="currentColor"/>
+  <path d="M16 1v6M16 25v6M1 16h6M25 16h6" stroke="currentColor" stroke-width="2"/>
+</svg></span>
+          <span class="sigil__text">Meridian Lab</span>
+        </a>
+
+        <button class="rig__toggle" type="button" aria-expanded="false"
+                aria-controls="lab-nav" data-nav-toggle>
+          <span aria-hidden="true">≡</span>
+          <span class="visually-hidden">Menu</span>
+        </button>
+
+        <nav class="rig__nav" id="lab-nav" aria-label="Experiments" data-nav
+             data-nav-breakpoint="56em">
+          <ul>
+            <li>
+              <a href="/lab/renderer/">
+                <span class="rig__idx" aria-hidden="true">01</span>
+                Renderer
+              </a>
+            </li>
+<li>
+              <a href="/lab/verlet/">
+                <span class="rig__idx" aria-hidden="true">02</span>
+                Verlet
+              </a>
+            </li>
+<li>
+              <a href="/lab/descent/">
+                <span class="rig__idx" aria-hidden="true">03</span>
+                Descent
+              </a>
+            </li>
+<li>
+              <a href="/lab/motion/" aria-current="page">
+                <span class="rig__idx" aria-hidden="true">04</span>
+                Motion
+              </a>
+            </li>
+          </ul>
+          <a class="rig__out" href="/">↖ Studio Meridian</a>
+        </nav>
+      </div>
+    </header>
+    <main id="main" tabindex="-1">
+
+<div style="--accent:#ffb648;--accent-ink:#1a1000">
+
+<section class="section--tight" style="padding-top:var(--s-l)">
+    <div class="shell">
+      <nav class="label label--dim" aria-label="Breadcrumb" style="margin-bottom:var(--s-s)">
+    <ol style="display:flex;flex-wrap:wrap;gap:0.4rem;list-style:none;margin:0;padding:0">
+      <li><a href="/lab/" style="color:inherit;text-decoration:none">Lab</a> /</li>
+<li><span aria-current="page">Motion</span></li>
+    </ol>
+  </nav>
+      <p class="label">04 · Frontier CSS</p>
+      <h1 class="h1" style="margin-top:var(--s-2xs)">Motion</h1>
+      <p class="lede" style="margin-top:var(--s-s)">The counterweight to the other three: no JavaScript at all. Scroll-driven
+      animation, view transitions, animatable custom properties and container queries —
+      each shipped with the plan for engines that do not have them yet.</p>
+    </div>
+  </section>
+
+<section class="section--tight">
+  <div class="shell">
+    <p class="prose" style="max-width:68ch">
+      Everything below runs on CSS alone. There is no script on this page driving any of
+      it — no scroll listener, no class toggling, no resize observer. Each feature is
+      wrapped in <code>@supports</code>, and each badge reports what
+      <strong>your</strong> browser actually does using the same test as the demo beside it.
+    </p>
+  </div>
+</section>
+
+<div class="shell">
+
+  <!-- 1 ─────────────────────────────────────────────────────────────────── -->
+  <section class="feature" aria-labelledby="f-property">
+    <div>
+      <p class="label">01</p>
+      <h2 class="h2" id="f-property" style="margin-top:var(--s-2xs)">
+        <code>@property</code></h2>
+      <div class="prose" style="margin-top:var(--s-s)">
+        <p>An unregistered custom property is only a string, so a browser cannot interpolate
+          it — animating one snaps at the midpoint instead of sweeping.</p>
+        <p>Registering it with a <code>syntax</code> makes it a typed value the engine can
+          actually animate. Here two registered properties drive a conic gradient's start
+          angle and extent.</p>
+      </div>
+      <p class="dim" style="font-size:var(--step--2);border:1px solid var(--line-bright);
+                            padding:0.4rem 0.6rem">
+        This is the one feature here with no support badge — and deliberately so.
+        <code>@property</code> cannot be reliably feature-detected from CSS:
+        <code>@supports at-rule(@property)</code> exists, but is itself too new to test
+        with. Where a condition is unrecognised, <em>both</em> the positive and negated
+        branches evaluate false, so a badge built that way would render blank. It is treated
+        strictly as an enhancement instead.
+      </p>
+    </div>
+
+    <div class="feature__demo">
+      <!-- tabindex so the demo is reachable without a pointer; the CSS reacts to
+           :focus-visible as well as :hover. -->
+      <div class="demo-property" tabindex="0" role="img"
+           aria-label="A conic gradient dial that sweeps from 12 percent to 78 percent when hovered or focused."></div>
+      <p class="dim" style="font-size:var(--step--2)">Hover or focus the dial.</p>
+    </div>
+  </section>
+
+  <!-- 2 ─────────────────────────────────────────────────────────────────── -->
+  <section class="feature" aria-labelledby="f-scroll">
+    <div>
+      <p class="label">02</p>
+      <h2 class="h2" id="f-scroll" style="margin-top:var(--s-2xs)">
+        Scroll-driven animation</h2>
+      <div class="prose" style="margin-top:var(--s-s)">
+        <p><code>animation-timeline: view()</code> ties an animation's progress to where the
+          element sits in the scrollport. No scroll event, no
+          <code>IntersectionObserver</code>, no JavaScript at all.</p>
+        <p>The browser runs it off the main thread, which is why it stays smooth under load
+          where a scroll handler judders. <code>animation-range</code> decides which part of
+          the element's journey the animation covers.</p>
+      </div>
+      <p class="support" data-feature="scroll-timeline">animation-timeline: <span></span></p>
+    </div>
+
+    <div class="feature__demo">
+      <div class="scroll-rise" style="border:1px solid var(--line-bright);padding:var(--s-m)">
+        <p class="h3">This block rises as it enters.</p>
+        <p class="dim" style="font-size:var(--step--1);margin-top:var(--s-2xs)">
+          Driven entirely by scroll position — scroll up and down to scrub it.
+        </p>
+      </div>
+
+      <div>
+        <p class="dim" style="font-size:var(--step--2);margin-bottom:0.3rem">
+          And this meter fills on the same timeline.</p>
+        <div class="meter-track">
+          <div class="meter-fill scroll-meter"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 3 ─────────────────────────────────────────────────────────────────── -->
+  <section class="feature" aria-labelledby="f-container">
+    <div>
+      <p class="label">03</p>
+      <h2 class="h2" id="f-container" style="margin-top:var(--s-2xs)">Container queries</h2>
+      <div class="prose" style="margin-top:var(--s-s)">
+        <p>A media query asks about the viewport, which is the wrong question for a component
+          that might sit in a sidebar on one page and full width on another.</p>
+        <p><code>@container</code> asks about the element's own box instead. The card below
+          switches layout at 26rem of <em>its own</em> width — drag its bottom-right corner
+          and watch it change without the window moving.</p>
+      </div>
+      <p class="support" data-feature="container">@container: <span></span></p>
+    </div>
+
+    <div class="feature__demo">
+      <div class="resizer">
+        <div class="cq-card">
+          <div class="cq-card__figure"></div>
+          <div>
+            <p class="h3">Adaptive card</p>
+            <p class="dim cq-card__state" style="font-size:var(--step--2)">Layout: </p>
+          </div>
+        </div>
+      </div>
+      <p class="dim" style="font-size:var(--step--2)">
+        Drag the corner of the dashed box to resize it.
+      </p>
+    </div>
+  </section>
+
+  <!-- 4 ─────────────────────────────────────────────────────────────────── -->
+  <section class="feature" aria-labelledby="f-has">
+    <div>
+      <p class="label">04</p>
+      <h2 class="h2" id="f-has" style="margin-top:var(--s-2xs)"><code>:has()</code></h2>
+      <div class="prose" style="margin-top:var(--s-s)">
+        <p>The parent selector CSS went without for twenty years. A row can now style itself
+          because of the state of something inside it.</p>
+        <p>Before this, the pattern below needed a change listener toggling a class on the
+          parent for every checkbox on the page. It is the single clearest example of a CSS
+          feature deleting JavaScript.</p>
+      </div>
+      <p class="support" data-feature="has">:has(): <span></span></p>
+    </div>
+
+    <div class="feature__demo">
+      <fieldset class="has-demo" style="border:0;padding:0;margin:0">
+        <legend class="dim" style="font-size:var(--step--2);padding:0">
+          Select a few — the rows and the summary react with no script
+        </legend>
+        <label class="has-row">
+          <input type="checkbox" checked>
+          <span>Renderer</span>
+        </label><label class="has-row">
+          <input type="checkbox" >
+          <span>Verlet</span>
+        </label><label class="has-row">
+          <input type="checkbox" >
+          <span>Descent</span>
+        </label><label class="has-row">
+          <input type="checkbox" >
+          <span>Motion</span>
+        </label>
+      </fieldset>
+      <p class="dim has-summary" style="font-size:var(--step--2)">Summary: </p>
+    </div>
+  </section>
+
+  <!-- 5 ─────────────────────────────────────────────────────────────────── -->
+  <section class="feature" aria-labelledby="f-vt">
+    <div>
+      <p class="label">05</p>
+      <h2 class="h2" id="f-vt" style="margin-top:var(--s-2xs)">View transitions</h2>
+      <div class="prose" style="margin-top:var(--s-s)">
+        <p>A single <code>@view-transition { navigation: auto; }</code> in the stylesheet
+          gives cross-document navigation a real transition — between separate HTML files,
+          on a site with no client-side router.</p>
+        <p>It is declared once for the whole lab. Move between any two experiment pages in a
+          supporting browser and the change is animated; everywhere else the navigation is
+          instant, which is exactly what it was before.</p>
+      </div>
+      <p class="support" data-feature="view-transitions">view-transition-name: <span></span></p>
+    </div>
+
+    <div class="feature__demo">
+      <p class="dim" style="font-size:var(--step--1)">Try it — these are ordinary links to
+        separate documents:</p>
+      <div style="display:flex;flex-wrap:wrap;gap:var(--s-2xs)">
+        <a class="btn btn--ghost btn--sm"
+              href="/lab/renderer/">01 Renderer</a><a class="btn btn--ghost btn--sm"
+              href="/lab/verlet/">02 Verlet</a><a class="btn btn--ghost btn--sm"
+              href="/lab/descent/">03 Descent</a>
+      </div>
+    </div>
+  </section>
+
+</div>
+
+<section class="section ruled">
+    <div class="shell">
+      <div class="notes" style="margin-top:0">
+        <div>
+          <h2 class="note__title">Written by hand</h2>
+          <ul class="ticks">
+            <li>Scroll-driven animation with animation-timeline: view() — no scroll listener</li>
+<li>Cross-document view transitions via @view-transition</li>
+<li>@property to make a custom property genuinely animatable</li>
+<li>Container queries so a component responds to its own box, not the viewport</li>
+<li>:has() as a parent selector, replacing three lines of JavaScript</li>
+          </ul>
+          <p class="dim" style="margin-top:var(--s-m);font-size:var(--step--1)">
+            <span class="label label--dim">Not used</span><br>
+            A single line of JavaScript on the page
+          </p>
+        </div>
+
+        <div>
+          <h2 class="note__title">The part that was hard</h2>
+          <p class="prose" style="margin:0">Every one of these is a progressive enhancement or it is a bug. Each is wrapped in
+      @supports and degrades to a static, legible state — because &quot;works in my browser&quot; is
+      not a rendering strategy.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+<nav class="section--tight ruled" aria-label="Experiments">
+    <div class="shell" style="display:grid;gap:var(--s-m);
+                              grid-template-columns:repeat(auto-fit,minmax(16rem,1fr))">
+      <a href="/lab/descent/"
+    style="--accent:#4fd8ff;display:grid;gap:0.3rem;padding:var(--s-m) 0;
+           text-decoration:none;color:inherit;">
+    <span class="label">Previous</span>
+    <span class="h3">03 Descent</span>
+    <span class="dim" style="font-size:var(--step--1)">A freedive to a hundred metres, told by scrolling down it.</span>
+  </a>
+      <a href="/lab/renderer/"
+    style="--accent:#c3f53c;display:grid;gap:0.3rem;padding:var(--s-m) 0;
+           text-decoration:none;color:inherit;text-align:right">
+    <span class="label">Next</span>
+    <span class="h3">01 Renderer</span>
+    <span class="dim" style="font-size:var(--step--1)">A WebGL renderer with no engine underneath it.</span>
+  </a>
+    </div>
+  </nav>
+
+</div>
+
+    </main>
+    <footer class="endplate">
+      <div class="endplate__inner">
+        <div>
+          <span class="endplate__mark" aria-hidden="true"><svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg"
+  aria-hidden="true" focusable="false">
+  <circle cx="16" cy="16" r="13" fill="none" stroke="currentColor" stroke-width="2"/>
+  <circle cx="16" cy="16" r="4" fill="currentColor"/>
+  <path d="M16 1v6M16 25v6M1 16h6M25 16h6" stroke="currentColor" stroke-width="2"/>
+</svg></span>
+          <p class="endplate__line">Frontier techniques, written from nothing.</p>
+        </div>
+
+        <nav class="endplate__group" aria-label="Experiments">
+          <h2 class="endplate__heading">Experiments</h2>
+          <ul>
+            <li>
+              <a href="/lab/renderer/">
+                <span aria-hidden="true">01</span> Renderer
+              </a>
+            </li>
+<li>
+              <a href="/lab/verlet/">
+                <span aria-hidden="true">02</span> Verlet
+              </a>
+            </li>
+<li>
+              <a href="/lab/descent/">
+                <span aria-hidden="true">03</span> Descent
+              </a>
+            </li>
+<li>
+              <a href="/lab/motion/">
+                <span aria-hidden="true">04</span> Motion
+              </a>
+            </li>
+          </ul>
+        </nav>
+
+        <nav class="endplate__group" aria-label="Studio">
+          <h2 class="endplate__heading">Studio</h2>
+          <ul>
+            <li><a href="/">Work</a></li>
+            <li><a href="/lab/colophon/">Colophon</a></li>
+            <li><a href="/contact/">Contact</a></li>
+          </ul>
+        </nav>
+
+        <p class="endplate__legal">
+          The lab is in-house research by <a href="/">Studio Meridian</a>,
+          not client work. Every experiment is raw platform code — no rendering engine, no
+          physics engine, no scroll library, no dependencies of any kind.
+        </p>
+      </div>
+    </footer>
+    <script type="module" src="/lab/assets/ui.js"></script>
+  </body>
+</html>

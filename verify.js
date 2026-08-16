@@ -147,6 +147,21 @@ function checkDocument(file, html, name) {
     if (attrOf(tag, 'alt') === null) fail(name, `<img> without alt: ${tag.slice(0, 80)}`);
   }
 
+  // A <canvas> is a bitmap with no semantics at all — assistive technology gets
+  // nothing from it unless the element itself is labelled or explicitly hidden.
+  for (const tag of matchAll(html, /(<canvas\b[^>]*>)/gi)) {
+    const hidden = /aria-hidden\s*=\s*"true"/i.test(tag);
+    const named = attrOf(tag, 'aria-label') || attrOf(tag, 'aria-labelledby');
+    if (!hidden && !named) {
+      fail(name, `<canvas> has no accessible name and is not aria-hidden: ${tag.slice(0, 80)}`);
+    }
+    // A labelled canvas is being presented as content, so it needs a role too —
+    // otherwise it is announced as an unlabelled generic element.
+    if (named && !/role\s*=\s*"/i.test(tag)) {
+      fail(name, `<canvas> has an accessible name but no role: ${tag.slice(0, 80)}`);
+    }
+  }
+
   // Inline SVG must either be hidden from AT or carry an accessible name.
   for (const match of html.matchAll(/<svg\b([^>]*)>([\s\S]*?)<\/svg>/gi)) {
     const [, attributes, inner] = match;

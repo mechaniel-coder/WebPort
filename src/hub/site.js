@@ -13,6 +13,7 @@ import { studies as work } from './data.js';
 
 const nav = [
   { label: 'Work', href: '/' },
+  { label: 'Lab', href: '/lab/' },
   { label: 'About', href: '/about/' },
   { label: 'Contact', href: '/contact/' },
 ];

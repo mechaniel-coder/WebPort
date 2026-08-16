@@ -48,5 +48,30 @@ export function render({ url }) {
     )}
   </ul>
 </section>
+
+<section class="section" aria-labelledby="lab-heading">
+  <div class="shell">
+    <div class="case-grid">
+      <p class="section__label" id="lab-heading">In-house research</p>
+      <div>
+        <h2 class="hero__title" style="font-size:var(--step-3);max-width:18ch">
+          The lab is where the techniques get worked out.</h2>
+        <p class="hero__lede" style="margin-top:var(--space-s)">
+          Four experiments in methods that normally arrive with a library attached — a WebGL
+          renderer, a Verlet physics solver, scroll-driven storytelling and frontier CSS —
+          each written without one. Not client work; the reason the client work goes quickly.
+        </p>
+        <ul class="constraints" style="margin-top:var(--space-m)">
+          <li>A 3D renderer written from the matrix maths up, no three.js</li>
+          <li>Cloth and constraint physics with a hand-written integrator</li>
+          <li>Scrollytelling that never takes the scrollbar</li>
+        </ul>
+        <p style="margin-top:var(--space-l)">
+          <a class="button button--ghost" href="${esc(url('/lab/'))}">Open the lab</a>
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
 `;
 }

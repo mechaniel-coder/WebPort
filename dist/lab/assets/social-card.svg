@@ -1,0 +1,57 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" width="1200" height="630"
+     role="img" aria-labelledby="card-title">
+  <title id="card-title">Meridian Lab — frontier techniques, written from nothing</title>
+
+  <rect width="1200" height="630" fill="#000000"/>
+
+  <!-- Measurement grid, the lab's recurring device -->
+  <g stroke="#1d1d1d" stroke-width="1">
+    <line x1="0" y1="140" x2="1200" y2="140"/>
+    <line x1="0" y1="490" x2="1200" y2="490"/>
+    <line x1="80" y1="0" x2="80" y2="630"/>
+    <line x1="1120" y1="0" x2="1120" y2="630"/>
+  </g>
+
+  <!-- Corner ticks -->
+  <g stroke="#c3f53c" stroke-width="2" fill="none">
+    <path d="M80 118 v-22 h22"/>
+    <path d="M1120 512 v22 h-22"/>
+  </g>
+
+  <!-- Sigil -->
+  <g transform="translate(80 176)">
+    <circle cx="18" cy="18" r="15" fill="none" stroke="#c3f53c" stroke-width="2.5"/>
+    <circle cx="18" cy="18" r="4.5" fill="#c3f53c"/>
+    <path d="M18 0v7M18 29v7M0 18h7M29 18h7" stroke="#c3f53c" stroke-width="2.5"/>
+  </g>
+  <text x="132" y="202" fill="#f2f2f0"
+        font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace"
+        font-size="26" letter-spacing="6">MERIDIAN LAB</text>
+
+  <text x="80" y="310" fill="#f2f2f0"
+        font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace"
+        font-size="62" letter-spacing="-2">Frontier techniques,</text>
+  <text x="80" y="384" fill="#f2f2f0"
+        font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace"
+        font-size="62" letter-spacing="-2">written from nothing.</text>
+
+  <!-- Four experiments, each in its own accent -->
+  <g font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="19"
+     letter-spacing="3">
+    <rect x="80" y="540" width="76" height="4" fill="#c3f53c"/>
+    <text x="80" y="578" fill="#9a9a96">01 RENDERER</text>
+
+    <rect x="340" y="540" width="76" height="4" fill="#ff5cf0"/>
+    <text x="340" y="578" fill="#9a9a96">02 VERLET</text>
+
+    <rect x="600" y="540" width="76" height="4" fill="#4fd8ff"/>
+    <text x="600" y="578" fill="#9a9a96">03 DESCENT</text>
+
+    <rect x="860" y="540" width="76" height="4" fill="#ffb648"/>
+    <text x="860" y="578" fill="#9a9a96">04 MOTION</text>
+  </g>
+
+  <text x="1120" y="202" fill="#6a6a66" text-anchor="end"
+        font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace"
+        font-size="19" letter-spacing="3">0 DEPENDENCIES</text>
+</svg>

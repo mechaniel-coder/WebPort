@@ -1,0 +1,388 @@
+<!doctype html>
+<html lang="en" data-color-scheme="dark">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Descent — Lab — Meridian Lab</title>
+    <meta name="description" content="A freedive to a hundred metres, told by scrolling down it.">
+    <link rel="canonical" href="https://exostech.pro/lab/descent/">
+    <meta name="theme-color" content="#000000">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Meridian Lab">
+    <meta property="og:title" content="Descent — Lab — Meridian Lab">
+    <meta property="og:description" content="A freedive to a hundred metres, told by scrolling down it.">
+    <meta property="og:url" content="https://exostech.pro/lab/descent/">
+    <meta property="og:image" content="https://exostech.pro/lab/assets/social-card.svg">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Descent — Lab — Meridian Lab">
+    <meta name="twitter:description" content="A freedive to a hundred metres, told by scrolling down it.">
+    <meta name="twitter:image" content="https://exostech.pro/lab/assets/social-card.svg">
+    <link rel="icon" href="data:image/svg+xml,%3Csvg%20viewBox%3D%220%200%2032%2032%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20aria-hidden%3D%22true%22%3E%20%3Crect%20width%3D%2232%22%20height%3D%2232%22%20fill%3D%22%23000%22%2F%3E%20%3Ccircle%20cx%3D%2216%22%20cy%3D%2216%22%20r%3D%2210%22%20fill%3D%22none%22%20stroke%3D%22%23c3f53c%22%20stroke-width%3D%222.5%22%2F%3E%20%3Ccircle%20cx%3D%2216%22%20cy%3D%2216%22%20r%3D%223%22%20fill%3D%22%23c3f53c%22%2F%3E%20%3C%2Fsvg%3E">
+    <link rel="stylesheet" href="/shared/reset.css">
+    <link rel="stylesheet" href="/lab/assets/lab.css">
+    <link rel="stylesheet" href="/lab/assets/descent.css">
+    <script type="application/ld+json">{"@context":"https://schema.org","@type":"CollectionPage","name":"Meridian Lab","description":"Four experiments in methods that usually mean importing a library. Each one is\n    raw platform code — and each one still works with a keyboard, still respects reduced\n    motion, and still says something useful when the effect is switched off.","url":"https://exostech.pro/lab/","isPartOf":{"@type":"WebSite","name":"Studio Meridian","url":"https://exostech.pro/"}}</script>
+    <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Work","item":"https://exostech.pro/"},{"@type":"ListItem","position":2,"name":"Lab","item":"https://exostech.pro/lab/"},{"@type":"ListItem","position":3,"name":"Descent","item":"https://exostech.pro/lab/descent/"}]}</script>
+  </head>
+  <body class="site-lab">
+    <a class="skip-link" href="#main">Skip to main content</a>
+    <header class="rig">
+      <div class="rig__inner">
+        <a class="sigil" href="/lab/">
+          <span class="sigil__mark" aria-hidden="true"><svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg"
+  aria-hidden="true" focusable="false">
+  <circle cx="16" cy="16" r="13" fill="none" stroke="currentColor" stroke-width="2"/>
+  <circle cx="16" cy="16" r="4" fill="currentColor"/>
+  <path d="M16 1v6M16 25v6M1 16h6M25 16h6" stroke="currentColor" stroke-width="2"/>
+</svg></span>
+          <span class="sigil__text">Meridian Lab</span>
+        </a>
+
+        <button class="rig__toggle" type="button" aria-expanded="false"
+                aria-controls="lab-nav" data-nav-toggle>
+          <span aria-hidden="true">≡</span>
+          <span class="visually-hidden">Menu</span>
+        </button>
+
+        <nav class="rig__nav" id="lab-nav" aria-label="Experiments" data-nav
+             data-nav-breakpoint="56em">
+          <ul>
+            <li>
+              <a href="/lab/renderer/">
+                <span class="rig__idx" aria-hidden="true">01</span>
+                Renderer
+              </a>
+            </li>
+<li>
+              <a href="/lab/verlet/">
+                <span class="rig__idx" aria-hidden="true">02</span>
+                Verlet
+              </a>
+            </li>
+<li>
+              <a href="/lab/descent/" aria-current="page">
+                <span class="rig__idx" aria-hidden="true">03</span>
+                Descent
+              </a>
+            </li>
+<li>
+              <a href="/lab/motion/">
+                <span class="rig__idx" aria-hidden="true">04</span>
+                Motion
+              </a>
+            </li>
+          </ul>
+          <a class="rig__out" href="/">↖ Studio Meridian</a>
+        </nav>
+      </div>
+    </header>
+    <main id="main" tabindex="-1">
+
+<div style="--accent:#4fd8ff;--accent-ink:#001018">
+
+<section class="section--tight" style="padding-top:var(--s-l)">
+    <div class="shell">
+      <nav class="label label--dim" aria-label="Breadcrumb" style="margin-bottom:var(--s-s)">
+    <ol style="display:flex;flex-wrap:wrap;gap:0.4rem;list-style:none;margin:0;padding:0">
+      <li><a href="/lab/" style="color:inherit;text-decoration:none">Lab</a> /</li>
+<li><span aria-current="page">Descent</span></li>
+    </ol>
+  </nav>
+      <p class="label">03 · Storytelling</p>
+      <h1 class="h1" style="margin-top:var(--s-2xs)">Descent</h1>
+      <p class="lede" style="margin-top:var(--s-s)">Scroll position is depth. The visualisation is driven by real physics — Boyle&#39;s law
+      compressing lung volume, light attenuating exponentially — rather than keyframes.</p>
+    </div>
+  </section>
+
+<article class="dive" data-descent>
+  <header class="shell--text section--tight">
+    <h2 class="h2">One hundred metres</h2>
+    <p class="lede" style="margin-top:var(--s-s)">A constant-weight freedive is four minutes long and mostly spent falling. This
+    is what happens on the way down.</p>
+  </header>
+
+  <!-- The stage is sticky; the track below is what gives it something to
+       measure. Nothing here touches scroll position. -->
+  <div class="dive__track" data-track>
+    <div class="dive__stage">
+      <div class="dive__viewport">
+        <canvas class="dive__canvas" data-canvas
+                role="img"
+                aria-label="A water column that darkens and shifts blue with depth, alongside a diver, a depth scale and a circle showing lung volume shrinking under pressure."></canvas>
+
+        <dl class="dive__hud" aria-hidden="true">
+          <div><dt>depth</dt><dd data-depth>0 m</dd></div>
+          <div><dt>pressure</dt><dd data-pressure>1.0 atm</dd></div>
+          <div><dt>lungs</dt><dd data-volume>6.00 L</dd></div>
+          <div><dt>light</dt><dd data-light>100%</dd></div>
+        </dl>
+      </div>
+    </div>
+
+    <div class="dive__scenes shell--text" data-scenes>
+      <section class="dive__scene" data-scene data-active="false">
+        <p class="label">Surface</p>
+        <h3 class="h2" style="margin-top:var(--s-2xs)">The last breath</h3>
+        <p class="prose" style="margin-top:var(--s-s)">A full inhalation is about six litres. The diver holds it at the surface, face
+        down, and does nothing for thirty seconds — heart rate is already falling, because
+        cold water on the face alone is enough to trigger the mammalian dive reflex.</p>
+        <p class="dive__fact">Lung volume 6.0 L · 1 atmosphere</p>
+      </section>
+<section class="dive__scene" data-scene data-active="false">
+        <p class="label">10 m</p>
+        <h3 class="h2" style="margin-top:var(--s-2xs)">Pressure doubles</h3>
+        <p class="prose" style="margin-top:var(--s-s)">Ten metres of seawater is one more atmosphere. Total pressure is now two — and by
+        Boyle&#39;s law the air in the lungs has halved to three litres. Every equalisation from
+        here costs more air than the last.</p>
+        <p class="dive__fact">Lung volume 3.0 L · 2 atmospheres</p>
+      </section>
+<section class="dive__scene" data-scene data-active="false">
+        <p class="label">20 m</p>
+        <h3 class="h2" style="margin-top:var(--s-2xs)">Freefall begins</h3>
+        <p class="prose" style="margin-top:var(--s-s)">Around twenty metres the diver stops swimming. Compressed tissue means the body
+        is no longer buoyant, and from here gravity does the work. Kicking would cost oxygen
+        for no gain.</p>
+        <p class="dive__fact">Lung volume 2.0 L · Negative buoyancy</p>
+      </section>
+<section class="dive__scene" data-scene data-active="false">
+        <p class="label">40 m</p>
+        <h3 class="h2" style="margin-top:var(--s-2xs)">The colour leaves</h3>
+        <p class="prose" style="margin-top:var(--s-s)">Red disappeared at five metres, orange by twenty, yellow around here. What is
+        left is blue, because water absorbs long wavelengths first — the same reason the deep
+        ocean is the colour it is rather than simply dark.</p>
+        <p class="dive__fact">Surface light ~2% · Red fully absorbed</p>
+      </section>
+<section class="dive__scene" data-scene data-active="false">
+        <p class="label">60 m</p>
+        <h3 class="h2" style="margin-top:var(--s-2xs)">Blood shift</h3>
+        <p class="prose" style="margin-top:var(--s-s)">Plasma moves into the chest cavity to fill the space the compressed lungs have
+        left. Without it the ribcage would fail somewhere around here. It is an involuntary
+        adaptation shared with seals and whales, and it is the reason this depth is survivable
+        at all.</p>
+        <p class="dive__fact">Lung volume 0.9 L · Thoracic blood shift</p>
+      </section>
+<section class="dive__scene" data-scene data-active="false">
+        <p class="label">100 m</p>
+        <h3 class="h2" style="margin-top:var(--s-2xs)">The plate</h3>
+        <p class="prose" style="margin-top:var(--s-s)">The diver takes a tag from the plate at the bottom of the line, turns, and begins
+        the swim back. The ascent is longer, harder and more dangerous than the descent —
+        almost every freediving blackout happens in the last ten metres, within sight of the
+        surface.</p>
+        <p class="dive__fact">Lung volume 0.55 L · 11 atmospheres</p>
+      </section>
+    </div>
+  </div>
+
+  <footer class="shell--text section--tight">
+    <p class="prose">Constant weight without fins currently stands a little over a hundred metres. Every
+    number above is real physics applied to a real discipline; the dive itself is a
+    composite, written to give the visualisation something true to be driven by.</p>
+  </footer>
+</article>
+
+<section class="section ruled">
+  <div class="shell">
+    <h2 class="note__title">The same numbers, as a table</h2>
+    <p class="dim" style="font-size:var(--step--1);max-width:60ch;margin-bottom:var(--s-s)">
+      Everything the visualisation encodes, in a form that does not require seeing it. The
+      figures are computed from the same two equations the canvas uses.
+    </p>
+
+    <table class="readout-table" style="max-width:44rem">
+      <caption>Depth, pressure and lung volume</caption>
+      <thead>
+        <tr>
+          <th scope="col">Depth</th>
+          <th scope="col">Pressure</th>
+          <th scope="col">Lung volume</th>
+          <th scope="col">Surface light</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <th scope="row">0 m</th>
+          <td>1.0 atm</td>
+          <td>6.00 L</td>
+          <td>100.0%</td>
+        </tr>
+<tr>
+          <th scope="row">10 m</th>
+          <td>2.0 atm</td>
+          <td>3.00 L</td>
+          <td>49.4%</td>
+        </tr>
+<tr>
+          <th scope="row">20 m</th>
+          <td>3.0 atm</td>
+          <td>2.00 L</td>
+          <td>31.2%</td>
+        </tr>
+<tr>
+          <th scope="row">40 m</th>
+          <td>5.0 atm</td>
+          <td>1.20 L</td>
+          <td>14.6%</td>
+        </tr>
+<tr>
+          <th scope="row">60 m</th>
+          <td>7.0 atm</td>
+          <td>0.86 L</td>
+          <td>7.2%</td>
+        </tr>
+<tr>
+          <th scope="row">100 m</th>
+          <td>11.0 atm</td>
+          <td>0.55 L</td>
+          <td>1.9%</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<section class="section ruled">
+  <div class="shell">
+    <div class="notes" style="margin-top:0">
+      <div>
+        <h2 class="note__title">Driven by equations, not keyframes</h2>
+        <div class="prose" style="margin:0">
+          <p><strong>Pressure.</strong> <code>P = 1 + depth / 10</code> — one atmosphere at
+            the surface, one more for every ten metres of seawater.</p>
+          <p><strong>Volume.</strong> Boyle's law, <code>P₁V₁ = P₂V₂</code>. Six litres at
+            the surface is 0.55 at a hundred metres, which is the number that makes the
+            blood shift necessary rather than merely interesting.</p>
+          <p><strong>Colour.</strong> Beer–Lambert attenuation per channel, with red
+            extinguishing roughly seven times faster than blue. The water column is computed
+            row by row from that, not sampled from a gradient someone drew.</p>
+        </div>
+      </div>
+
+      <div>
+        <h2 class="note__title">What it refuses to do</h2>
+        <div class="prose" style="margin:0">
+          <p>No wheel interception. No <code>scrollTo</code>. No smooth-scroll library
+            replacing native scrolling with an animated approximation of it.</p>
+          <p>The visualisation reads <code>getBoundingClientRect()</code> on its own track
+            and derives a progress value. Scroll is an input, never an output — which is why
+            the scrollbar, keyboard paging, find-in-page and screen-reader navigation all
+            still behave normally.</p>
+          <p>With scripting off the canvas stays empty and every word above is still there.
+            The story is the article; the visualisation is an enhancement.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section ruled">
+    <div class="shell">
+      <div class="notes" style="margin-top:0">
+        <div>
+          <h2 class="note__title">Written by hand</h2>
+          <ul class="ticks">
+            <li>Scroll progress mapped to depth with IntersectionObserver and a sticky stage</li>
+<li>Light attenuation via the Beer–Lambert law, per wavelength</li>
+<li>Lung compression from Boyle’s law at real ambient pressures</li>
+<li>Scene transitions that never hijack the scrollbar</li>
+<li>A complete prose version that reads without the visualisation at all</li>
+          </ul>
+          <p class="dim" style="margin-top:var(--s-m);font-size:var(--step--1)">
+            <span class="label label--dim">Not used</span><br>
+            GSAP ScrollTrigger, Lenis, locomotive-scroll, or any smooth-scroll hijack
+          </p>
+        </div>
+
+        <div>
+          <h2 class="note__title">The part that was hard</h2>
+          <p class="prose" style="margin:0">Scrollytelling usually breaks the one interaction everyone relies on. Nothing here
+      overrides the scrollbar, hijacks the wheel, or animates scrolling — the page scrolls
+      natively and the visualisation reads its position. Turn JavaScript off and the piece is
+      still a complete article.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+<nav class="section--tight ruled" aria-label="Experiments">
+    <div class="shell" style="display:grid;gap:var(--s-m);
+                              grid-template-columns:repeat(auto-fit,minmax(16rem,1fr))">
+      <a href="/lab/verlet/"
+    style="--accent:#ff5cf0;display:grid;gap:0.3rem;padding:var(--s-m) 0;
+           text-decoration:none;color:inherit;">
+    <span class="label">Previous</span>
+    <span class="h3">02 Verlet</span>
+    <span class="dim" style="font-size:var(--step--1)">Cloth, rope and constraint solving with a hand-written integrator.</span>
+  </a>
+      <a href="/lab/motion/"
+    style="--accent:#ffb648;display:grid;gap:0.3rem;padding:var(--s-m) 0;
+           text-decoration:none;color:inherit;text-align:right">
+    <span class="label">Next</span>
+    <span class="h3">04 Motion</span>
+    <span class="dim" style="font-size:var(--step--1)">Four browser features new enough to still need a fallback.</span>
+  </a>
+    </div>
+  </nav>
+
+</div>
+
+    </main>
+    <footer class="endplate">
+      <div class="endplate__inner">
+        <div>
+          <span class="endplate__mark" aria-hidden="true"><svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg"
+  aria-hidden="true" focusable="false">
+  <circle cx="16" cy="16" r="13" fill="none" stroke="currentColor" stroke-width="2"/>
+  <circle cx="16" cy="16" r="4" fill="currentColor"/>
+  <path d="M16 1v6M16 25v6M1 16h6M25 16h6" stroke="currentColor" stroke-width="2"/>
+</svg></span>
+          <p class="endplate__line">Frontier techniques, written from nothing.</p>
+        </div>
+
+        <nav class="endplate__group" aria-label="Experiments">
+          <h2 class="endplate__heading">Experiments</h2>
+          <ul>
+            <li>
+              <a href="/lab/renderer/">
+                <span aria-hidden="true">01</span> Renderer
+              </a>
+            </li>
+<li>
+              <a href="/lab/verlet/">
+                <span aria-hidden="true">02</span> Verlet
+              </a>
+            </li>
+<li>
+              <a href="/lab/descent/">
+                <span aria-hidden="true">03</span> Descent
+              </a>
+            </li>
+<li>
+              <a href="/lab/motion/">
+                <span aria-hidden="true">04</span> Motion
+              </a>
+            </li>
+          </ul>
+        </nav>
+
+        <nav class="endplate__group" aria-label="Studio">
+          <h2 class="endplate__heading">Studio</h2>
+          <ul>
+            <li><a href="/">Work</a></li>
+            <li><a href="/lab/colophon/">Colophon</a></li>
+            <li><a href="/contact/">Contact</a></li>
+          </ul>
+        </nav>
+
+        <p class="endplate__legal">
+          The lab is in-house research by <a href="/">Studio Meridian</a>,
+          not client work. Every experiment is raw platform code — no rendering engine, no
+          physics engine, no scroll library, no dependencies of any kind.
+        </p>
+      </div>
+    </footer>
+    <script type="module" src="/lab/assets/ui.js"></script>
+    <script type="module" src="/lab/assets/descent.js"></script>
+  </body>
+</html>

@@ -1,0 +1,335 @@
+<!doctype html>
+<html lang="en" data-color-scheme="dark">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Verlet — Lab — Meridian Lab</title>
+    <meta name="description" content="Cloth, rope and constraint solving with a hand-written integrator.">
+    <link rel="canonical" href="https://exostech.pro/lab/verlet/">
+    <meta name="theme-color" content="#000000">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Meridian Lab">
+    <meta property="og:title" content="Verlet — Lab — Meridian Lab">
+    <meta property="og:description" content="Cloth, rope and constraint solving with a hand-written integrator.">
+    <meta property="og:url" content="https://exostech.pro/lab/verlet/">
+    <meta property="og:image" content="https://exostech.pro/lab/assets/social-card.svg">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Verlet — Lab — Meridian Lab">
+    <meta name="twitter:description" content="Cloth, rope and constraint solving with a hand-written integrator.">
+    <meta name="twitter:image" content="https://exostech.pro/lab/assets/social-card.svg">
+    <link rel="icon" href="data:image/svg+xml,%3Csvg%20viewBox%3D%220%200%2032%2032%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20aria-hidden%3D%22true%22%3E%20%3Crect%20width%3D%2232%22%20height%3D%2232%22%20fill%3D%22%23000%22%2F%3E%20%3Ccircle%20cx%3D%2216%22%20cy%3D%2216%22%20r%3D%2210%22%20fill%3D%22none%22%20stroke%3D%22%23c3f53c%22%20stroke-width%3D%222.5%22%2F%3E%20%3Ccircle%20cx%3D%2216%22%20cy%3D%2216%22%20r%3D%223%22%20fill%3D%22%23c3f53c%22%2F%3E%20%3C%2Fsvg%3E">
+    <link rel="stylesheet" href="/shared/reset.css">
+    <link rel="stylesheet" href="/lab/assets/lab.css">
+    <script type="application/ld+json">{"@context":"https://schema.org","@type":"CollectionPage","name":"Meridian Lab","description":"Four experiments in methods that usually mean importing a library. Each one is\n    raw platform code — and each one still works with a keyboard, still respects reduced\n    motion, and still says something useful when the effect is switched off.","url":"https://exostech.pro/lab/","isPartOf":{"@type":"WebSite","name":"Studio Meridian","url":"https://exostech.pro/"}}</script>
+    <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Work","item":"https://exostech.pro/"},{"@type":"ListItem","position":2,"name":"Lab","item":"https://exostech.pro/lab/"},{"@type":"ListItem","position":3,"name":"Verlet","item":"https://exostech.pro/lab/verlet/"}]}</script>
+  </head>
+  <body class="site-lab">
+    <a class="skip-link" href="#main">Skip to main content</a>
+    <header class="rig">
+      <div class="rig__inner">
+        <a class="sigil" href="/lab/">
+          <span class="sigil__mark" aria-hidden="true"><svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg"
+  aria-hidden="true" focusable="false">
+  <circle cx="16" cy="16" r="13" fill="none" stroke="currentColor" stroke-width="2"/>
+  <circle cx="16" cy="16" r="4" fill="currentColor"/>
+  <path d="M16 1v6M16 25v6M1 16h6M25 16h6" stroke="currentColor" stroke-width="2"/>
+</svg></span>
+          <span class="sigil__text">Meridian Lab</span>
+        </a>
+
+        <button class="rig__toggle" type="button" aria-expanded="false"
+                aria-controls="lab-nav" data-nav-toggle>
+          <span aria-hidden="true">≡</span>
+          <span class="visually-hidden">Menu</span>
+        </button>
+
+        <nav class="rig__nav" id="lab-nav" aria-label="Experiments" data-nav
+             data-nav-breakpoint="56em">
+          <ul>
+            <li>
+              <a href="/lab/renderer/">
+                <span class="rig__idx" aria-hidden="true">01</span>
+                Renderer
+              </a>
+            </li>
+<li>
+              <a href="/lab/verlet/" aria-current="page">
+                <span class="rig__idx" aria-hidden="true">02</span>
+                Verlet
+              </a>
+            </li>
+<li>
+              <a href="/lab/descent/">
+                <span class="rig__idx" aria-hidden="true">03</span>
+                Descent
+              </a>
+            </li>
+<li>
+              <a href="/lab/motion/">
+                <span class="rig__idx" aria-hidden="true">04</span>
+                Motion
+              </a>
+            </li>
+          </ul>
+          <a class="rig__out" href="/">↖ Studio Meridian</a>
+        </nav>
+      </div>
+    </header>
+    <main id="main" tabindex="-1">
+
+<div style="--accent:#ff5cf0;--accent-ink:#1a0016">
+
+<section class="section--tight" style="padding-top:var(--s-l)">
+    <div class="shell">
+      <nav class="label label--dim" aria-label="Breadcrumb" style="margin-bottom:var(--s-s)">
+    <ol style="display:flex;flex-wrap:wrap;gap:0.4rem;list-style:none;margin:0;padding:0">
+      <li><a href="/lab/" style="color:inherit;text-decoration:none">Lab</a> /</li>
+<li><span aria-current="page">Verlet</span></li>
+    </ol>
+  </nav>
+      <p class="label">02 · Physics</p>
+      <h1 class="h1" style="margin-top:var(--s-2xs)">Verlet</h1>
+      <p class="lede" style="margin-top:var(--s-s)">Position-based dynamics: no velocities stored, no forces integrated. Each particle
+      remembers where it was, and constraints are satisfied by moving points directly.</p>
+    </div>
+  </section>
+
+<section class="section--tight">
+  <div class="shell rig-grid" data-verlet>
+
+    <div>
+      <div class="stage">
+        <div class="stage__readout" data-readout aria-hidden="true"></div>
+
+        <canvas class="stage__canvas" data-canvas
+                tabindex="0"
+                role="img"
+                aria-label="A cloth simulation: a grid of points joined by distance constraints, hanging from pinned anchors and swinging under gravity."
+                aria-describedby="verlet-help"></canvas>
+      </div>
+
+      <p id="verlet-help" class="dim" style="font-size:var(--step--2);margin-top:var(--s-2xs)">
+        Drag to grab a point; switch tools to push or tear the fabric. With the canvas
+        focused: arrow keys shove the structure, <kbd>Space</kbd> pauses, <kbd>C</kbd> cuts
+        at the centre, <kbd>R</kbd> resets. Hold <kbd>Shift</kbd> to push harder.
+      </p>
+
+      <!-- Canvas changes are invisible to assistive technology, so the
+           consequences of each action are announced in text. -->
+      <p class="visually-hidden" role="status" aria-live="polite" data-announce></p>
+
+      <div style="display:flex;flex-wrap:wrap;gap:var(--s-2xs);align-items:center;
+                      margin-top:var(--s-s)">
+    <button class="btn btn--ghost btn--sm" type="button" data-play aria-pressed="true">
+      <span data-play-label>Pause</span>
+    </button>
+    <button class="btn btn--ghost btn--sm" type="button" data-reset>Reset</button>
+    
+  </div>
+    </div>
+
+    <div class="panel">
+      <h2 class="panel__title">Controls</h2>
+
+      <fieldset style="border:0;padding:0;margin:0 0 var(--s-m)">
+        <legend class="ctrl__label" style="padding:0;margin-bottom:0.4rem">Structure</legend>
+        <div class="chips">
+          <label class="chip">
+  <input type="radio" name="structure" value="cloth" checked>
+  <span>cloth</span>
+</label>
+          <label class="chip">
+  <input type="radio" name="structure" value="net" >
+  <span>net</span>
+</label>
+          <label class="chip">
+  <input type="radio" name="structure" value="rope" >
+  <span>rope</span>
+</label>
+        </div>
+      </fieldset>
+
+      <fieldset style="border:0;padding:0;margin:0 0 var(--s-m)">
+        <legend class="ctrl__label" style="padding:0;margin-bottom:0.4rem">Tool</legend>
+        <div class="chips">
+          <label class="chip">
+  <input type="radio" name="tool" value="drag" checked>
+  <span>drag</span>
+</label>
+          <label class="chip">
+  <input type="radio" name="tool" value="wind" >
+  <span>push</span>
+</label>
+          <label class="chip">
+  <input type="radio" name="tool" value="cut" >
+  <span>tear</span>
+</label>
+        </div>
+      </fieldset>
+
+      <div class="ctrl">
+        <div class="ctrl__head">
+          <label class="ctrl__label" for="v-gravity">Gravity</label>
+          <output class="ctrl__value" data-out="gravity" for="v-gravity">900</output>
+        </div>
+        <input id="v-gravity" type="range" min="0" max="2000" step="50" value="900"
+               data-param="gravity">
+      </div>
+
+      <div class="ctrl">
+        <div class="ctrl__head">
+          <label class="ctrl__label" for="v-stiff">Relaxation passes</label>
+          <output class="ctrl__value" data-out="stiffness" for="v-stiff">6</output>
+        </div>
+        <input id="v-stiff" type="range" min="1" max="20" step="1" value="6"
+               data-param="stiffness">
+        <p class="dim" style="font-size:var(--step--2);margin-top:0.3rem">
+          1 is rubber. 20 is steel, and costs frames.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section ruled">
+  <div class="shell">
+    <div class="notes" style="margin-top:0">
+      <div>
+        <h2 class="note__title">Why there are no velocities</h2>
+        <div class="prose" style="margin:0">
+          <p>A particle stores its current position and its previous one. Velocity is the
+            gap between them, never written down:</p>
+          <p><code>x' = x + (x − xPrev) × damping + a × dt²</code></p>
+          <p>That is the whole reason constraints are easy here. To enforce a distance you
+            move the two points, and the velocity updates itself because it was only ever
+            implied. In a force-based engine the same thing needs impulses, masses and a
+            solver that can disagree with the integrator.</p>
+        </div>
+      </div>
+
+      <div>
+        <h2 class="note__title">The fixed timestep is not optional</h2>
+        <div class="prose" style="margin:0">
+          <p>Verlet derives velocity from a position difference produced under some earlier
+            <code>dt</code>. Change <code>dt</code> between frames and that difference is
+            silently rescaled — one long frame and the whole structure detonates.</p>
+          <p>So the loop accumulates real time and consumes it in fixed 1/60 s steps, capped
+            at five per frame so a slow device falls behind gracefully rather than entering a
+            spiral it cannot exit.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section ruled">
+    <div class="shell">
+      <div class="notes" style="margin-top:0">
+        <div>
+          <h2 class="note__title">Written by hand</h2>
+          <ul class="ticks">
+            <li>A Verlet integrator — position derived from the previous position, not velocity</li>
+<li>Distance constraints relaxed over several iterations per frame</li>
+<li>Cloth, rope and net structures built from the same primitive</li>
+<li>Pointer interaction: grab, drag and tear</li>
+<li>A spatial hash so collision stays linear rather than quadratic</li>
+          </ul>
+          <p class="dim" style="margin-top:var(--s-m);font-size:var(--step--1)">
+            <span class="label label--dim">Not used</span><br>
+            matter.js, cannon, rapier, or any physics engine
+          </p>
+        </div>
+
+        <div>
+          <h2 class="note__title">The part that was hard</h2>
+          <p class="prose" style="margin:0">Constraint stiffness is a lie you negotiate with. One relaxation pass gives you
+      rubber; twenty gives you steel and eats the frame budget. The honest answer is to pick
+      an iteration count, tune the rest-lengths around it, and stop pretending the simulation
+      is converging.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+<nav class="section--tight ruled" aria-label="Experiments">
+    <div class="shell" style="display:grid;gap:var(--s-m);
+                              grid-template-columns:repeat(auto-fit,minmax(16rem,1fr))">
+      <a href="/lab/renderer/"
+    style="--accent:#c3f53c;display:grid;gap:0.3rem;padding:var(--s-m) 0;
+           text-decoration:none;color:inherit;">
+    <span class="label">Previous</span>
+    <span class="h3">01 Renderer</span>
+    <span class="dim" style="font-size:var(--step--1)">A WebGL renderer with no engine underneath it.</span>
+  </a>
+      <a href="/lab/descent/"
+    style="--accent:#4fd8ff;display:grid;gap:0.3rem;padding:var(--s-m) 0;
+           text-decoration:none;color:inherit;text-align:right">
+    <span class="label">Next</span>
+    <span class="h3">03 Descent</span>
+    <span class="dim" style="font-size:var(--step--1)">A freedive to a hundred metres, told by scrolling down it.</span>
+  </a>
+    </div>
+  </nav>
+
+</div>
+
+    </main>
+    <footer class="endplate">
+      <div class="endplate__inner">
+        <div>
+          <span class="endplate__mark" aria-hidden="true"><svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg"
+  aria-hidden="true" focusable="false">
+  <circle cx="16" cy="16" r="13" fill="none" stroke="currentColor" stroke-width="2"/>
+  <circle cx="16" cy="16" r="4" fill="currentColor"/>
+  <path d="M16 1v6M16 25v6M1 16h6M25 16h6" stroke="currentColor" stroke-width="2"/>
+</svg></span>
+          <p class="endplate__line">Frontier techniques, written from nothing.</p>
+        </div>
+
+        <nav class="endplate__group" aria-label="Experiments">
+          <h2 class="endplate__heading">Experiments</h2>
+          <ul>
+            <li>
+              <a href="/lab/renderer/">
+                <span aria-hidden="true">01</span> Renderer
+              </a>
+            </li>
+<li>
+              <a href="/lab/verlet/">
+                <span aria-hidden="true">02</span> Verlet
+              </a>
+            </li>
+<li>
+              <a href="/lab/descent/">
+                <span aria-hidden="true">03</span> Descent
+              </a>
+            </li>
+<li>
+              <a href="/lab/motion/">
+                <span aria-hidden="true">04</span> Motion
+              </a>
+            </li>
+          </ul>
+        </nav>
+
+        <nav class="endplate__group" aria-label="Studio">
+          <h2 class="endplate__heading">Studio</h2>
+          <ul>
+            <li><a href="/">Work</a></li>
+            <li><a href="/lab/colophon/">Colophon</a></li>
+            <li><a href="/contact/">Contact</a></li>
+          </ul>
+        </nav>
+
+        <p class="endplate__legal">
+          The lab is in-house research by <a href="/">Studio Meridian</a>,
+          not client work. Every experiment is raw platform code — no rendering engine, no
+          physics engine, no scroll library, no dependencies of any kind.
+        </p>
+      </div>
+    </footer>
+    <script type="module" src="/lab/assets/ui.js"></script>
+    <script type="module" src="/lab/assets/verlet-stage.js"></script>
+  </body>
+</html>

@@ -1,0 +1,248 @@
+<!doctype html>
+<html lang="en" data-color-scheme="dark">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Meridian Lab — frontier techniques, written from nothing</title>
+    <meta name="description" content="Four experiments in WebGL, physics, scroll-driven storytelling and frontier CSS — each written without the library that normally comes with it.">
+    <link rel="canonical" href="https://exostech.pro/lab/">
+    <meta name="theme-color" content="#000000">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Meridian Lab">
+    <meta property="og:title" content="Meridian Lab — frontier techniques, written from nothing">
+    <meta property="og:description" content="Four experiments in WebGL, physics, scroll-driven storytelling and frontier CSS — each written without the library that normally comes with it.">
+    <meta property="og:url" content="https://exostech.pro/lab/">
+    <meta property="og:image" content="https://exostech.pro/lab/assets/social-card.svg">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Meridian Lab — frontier techniques, written from nothing">
+    <meta name="twitter:description" content="Four experiments in WebGL, physics, scroll-driven storytelling and frontier CSS — each written without the library that normally comes with it.">
+    <meta name="twitter:image" content="https://exostech.pro/lab/assets/social-card.svg">
+    <link rel="icon" href="data:image/svg+xml,%3Csvg%20viewBox%3D%220%200%2032%2032%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20aria-hidden%3D%22true%22%3E%20%3Crect%20width%3D%2232%22%20height%3D%2232%22%20fill%3D%22%23000%22%2F%3E%20%3Ccircle%20cx%3D%2216%22%20cy%3D%2216%22%20r%3D%2210%22%20fill%3D%22none%22%20stroke%3D%22%23c3f53c%22%20stroke-width%3D%222.5%22%2F%3E%20%3Ccircle%20cx%3D%2216%22%20cy%3D%2216%22%20r%3D%223%22%20fill%3D%22%23c3f53c%22%2F%3E%20%3C%2Fsvg%3E">
+    <link rel="stylesheet" href="/shared/reset.css">
+    <link rel="stylesheet" href="/lab/assets/lab.css">
+    <script type="application/ld+json">{"@context":"https://schema.org","@type":"CollectionPage","name":"Meridian Lab","description":"Four experiments in methods that usually mean importing a library. Each one is\n    raw platform code — and each one still works with a keyboard, still respects reduced\n    motion, and still says something useful when the effect is switched off.","url":"https://exostech.pro/lab/","isPartOf":{"@type":"WebSite","name":"Studio Meridian","url":"https://exostech.pro/"}}</script>
+    <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Work","item":"https://exostech.pro/"},{"@type":"ListItem","position":2,"name":"Lab","item":"https://exostech.pro/lab/"}]}</script>
+  </head>
+  <body class="site-lab">
+    <a class="skip-link" href="#main">Skip to main content</a>
+    <header class="rig">
+      <div class="rig__inner">
+        <a class="sigil" href="/lab/" aria-current="page">
+          <span class="sigil__mark" aria-hidden="true"><svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg"
+  aria-hidden="true" focusable="false">
+  <circle cx="16" cy="16" r="13" fill="none" stroke="currentColor" stroke-width="2"/>
+  <circle cx="16" cy="16" r="4" fill="currentColor"/>
+  <path d="M16 1v6M16 25v6M1 16h6M25 16h6" stroke="currentColor" stroke-width="2"/>
+</svg></span>
+          <span class="sigil__text">Meridian Lab</span>
+        </a>
+
+        <button class="rig__toggle" type="button" aria-expanded="false"
+                aria-controls="lab-nav" data-nav-toggle>
+          <span aria-hidden="true">≡</span>
+          <span class="visually-hidden">Menu</span>
+        </button>
+
+        <nav class="rig__nav" id="lab-nav" aria-label="Experiments" data-nav
+             data-nav-breakpoint="56em">
+          <ul>
+            <li>
+              <a href="/lab/renderer/">
+                <span class="rig__idx" aria-hidden="true">01</span>
+                Renderer
+              </a>
+            </li>
+<li>
+              <a href="/lab/verlet/">
+                <span class="rig__idx" aria-hidden="true">02</span>
+                Verlet
+              </a>
+            </li>
+<li>
+              <a href="/lab/descent/">
+                <span class="rig__idx" aria-hidden="true">03</span>
+                Descent
+              </a>
+            </li>
+<li>
+              <a href="/lab/motion/">
+                <span class="rig__idx" aria-hidden="true">04</span>
+                Motion
+              </a>
+            </li>
+          </ul>
+          <a class="rig__out" href="/">↖ Studio Meridian</a>
+        </nav>
+      </div>
+    </header>
+    <main id="main" tabindex="-1">
+
+<section class="section" style="padding-top:var(--s-2xl)">
+  <div class="shell">
+    <p class="label">In-house research · Studio Meridian</p>
+    <h1 class="display" style="margin-top:var(--s-s);max-width:14ch">
+      Frontier techniques, written from nothing.</h1>
+    <p class="lede" style="margin-top:var(--s-m)">Four experiments in methods that usually mean importing a library. Each one is
+    raw platform code — and each one still works with a keyboard, still respects reduced
+    motion, and still says something useful when the effect is switched off.</p>
+
+    <div style="display:flex;flex-wrap:wrap;gap:var(--s-s);margin-top:var(--s-l);
+                font-size:var(--step--2);color:var(--faint);letter-spacing:0.1em;
+                text-transform:uppercase">
+      <span>0 dependencies</span>
+      <span>·</span>
+      <span>0 rendering engines</span>
+      <span>·</span>
+      <span>0 scroll hijacks</span>
+    </div>
+  </div>
+</section>
+
+<section class="section--tight" aria-labelledby="specimens-heading">
+  <div class="shell">
+    <h2 class="label label--dim" id="specimens-heading">Four experiments</h2>
+  </div>
+  <div class="shell">
+    <ul class="specimens">
+      <li class="specimen" style="--accent:#c3f53c">
+        <a class="specimen__link" href="/lab/renderer/">
+          <span class="specimen__index">01</span>
+          <span class="specimen__name">Renderer</span>
+          <span class="specimen__summary">A WebGL renderer with no engine underneath it.</span>
+          <span class="specimen__kicker">3D interface</span>
+        </a>
+      </li>
+<li class="specimen" style="--accent:#ff5cf0">
+        <a class="specimen__link" href="/lab/verlet/">
+          <span class="specimen__index">02</span>
+          <span class="specimen__name">Verlet</span>
+          <span class="specimen__summary">Cloth, rope and constraint solving with a hand-written integrator.</span>
+          <span class="specimen__kicker">Physics</span>
+        </a>
+      </li>
+<li class="specimen" style="--accent:#4fd8ff">
+        <a class="specimen__link" href="/lab/descent/">
+          <span class="specimen__index">03</span>
+          <span class="specimen__name">Descent</span>
+          <span class="specimen__summary">A freedive to a hundred metres, told by scrolling down it.</span>
+          <span class="specimen__kicker">Storytelling</span>
+        </a>
+      </li>
+<li class="specimen" style="--accent:#ffb648">
+        <a class="specimen__link" href="/lab/motion/">
+          <span class="specimen__index">04</span>
+          <span class="specimen__name">Motion</span>
+          <span class="specimen__summary">Four browser features new enough to still need a fallback.</span>
+          <span class="specimen__kicker">Frontier CSS</span>
+        </a>
+      </li>
+    </ul>
+  </div>
+</section>
+
+<section class="section ruled" aria-labelledby="rules-heading">
+  <div class="shell">
+    <h2 class="label" id="rules-heading">The constraints</h2>
+    <p class="lede" style="margin-top:var(--s-s)">
+      Spectacle usually arrives at the cost of everything else. These are the rules the lab
+      does not break to get it.
+    </p>
+
+    <div class="notes" style="margin-top:var(--s-xl)">
+      <div>
+        <h3 class="note__title">No dependencies, still</h3>
+        <p class="prose" style="margin:0">The whole portfolio ships zero runtime dependencies, and the lab does not get an
+      exemption for being the hard part. A renderer you imported proves you can read
+      documentation; one you wrote proves something else.</p>
+      </div>
+<div>
+        <h3 class="note__title">Motion is optional, always</h3>
+        <p class="prose" style="margin:0">Every experiment checks prefers-reduced-motion and has a considered static state —
+      not a blank box. Continuous animation carries a pause control, because WCAG 2.2.2 is not
+      waived for being pretty.</p>
+      </div>
+<div>
+        <h3 class="note__title">Canvas is invisible to assistive technology</h3>
+        <p class="prose" style="margin:0">A canvas element is a bitmap with no semantics. Everything drawn in one here is
+      also available as text, a table or a control — so the experiments are described rather
+      than merely decorated.</p>
+      </div>
+<div>
+        <h3 class="note__title">The scrollbar is not yours to take</h3>
+        <p class="prose" style="margin:0">No smooth-scroll hijack, no wheel interception, no scroll-jacking. The page scrolls
+      the way the operating system says it scrolls, and the visualisation reads that position.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section--tight ruled">
+  <div class="shell" style="display:flex;flex-wrap:wrap;gap:var(--s-s);align-items:center;
+                            justify-content:space-between">
+    <p class="dim" style="font-size:var(--step--1);max-width:52ch">
+      The lab is research, not commissioned work. The client projects are on the studio site.
+    </p>
+    <a class="btn btn--ghost" href="/">See the client work</a>
+  </div>
+</section>
+
+    </main>
+    <footer class="endplate">
+      <div class="endplate__inner">
+        <div>
+          <span class="endplate__mark" aria-hidden="true"><svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg"
+  aria-hidden="true" focusable="false">
+  <circle cx="16" cy="16" r="13" fill="none" stroke="currentColor" stroke-width="2"/>
+  <circle cx="16" cy="16" r="4" fill="currentColor"/>
+  <path d="M16 1v6M16 25v6M1 16h6M25 16h6" stroke="currentColor" stroke-width="2"/>
+</svg></span>
+          <p class="endplate__line">Frontier techniques, written from nothing.</p>
+        </div>
+
+        <nav class="endplate__group" aria-label="Experiments">
+          <h2 class="endplate__heading">Experiments</h2>
+          <ul>
+            <li>
+              <a href="/lab/renderer/">
+                <span aria-hidden="true">01</span> Renderer
+              </a>
+            </li>
+<li>
+              <a href="/lab/verlet/">
+                <span aria-hidden="true">02</span> Verlet
+              </a>
+            </li>
+<li>
+              <a href="/lab/descent/">
+                <span aria-hidden="true">03</span> Descent
+              </a>
+            </li>
+<li>
+              <a href="/lab/motion/">
+                <span aria-hidden="true">04</span> Motion
+              </a>
+            </li>
+          </ul>
+        </nav>
+
+        <nav class="endplate__group" aria-label="Studio">
+          <h2 class="endplate__heading">Studio</h2>
+          <ul>
+            <li><a href="/">Work</a></li>
+            <li><a href="/lab/colophon/">Colophon</a></li>
+            <li><a href="/contact/">Contact</a></li>
+          </ul>
+        </nav>
+
+        <p class="endplate__legal">
+          The lab is in-house research by <a href="/">Studio Meridian</a>,
+          not client work. Every experiment is raw platform code — no rendering engine, no
+          physics engine, no scroll library, no dependencies of any kind.
+        </p>
+      </div>
+    </footer>
+    <script type="module" src="/lab/assets/ui.js"></script>
+  </body>
+</html>

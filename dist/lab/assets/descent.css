@@ -1,0 +1,144 @@
+/**
+ * Descent — sticky stage, scrolling prose.
+ *
+ * The layout is ordinary CSS sticky positioning. Nothing here or in descent.js
+ * alters scroll behaviour; the stage simply stays put while the track scrolls
+ * past it.
+ */
+
+.dive__track {
+  position: relative;
+  display: grid;
+}
+
+@media (min-width: 62em) {
+  .dive__track {
+    grid-template-columns: 1fr 1fr;
+    align-items: start;
+  }
+}
+
+/* ── Stage ─────────────────────────────────────────────────────────────────── */
+
+.dive__stage {
+  position: sticky;
+  top: 3.5rem;
+  z-index: 1;
+  padding: var(--s-s);
+  height: min(70vh, 34rem);
+}
+
+@media (max-width: 61.999em) {
+  /* On narrow screens the stage sits above the prose rather than beside it,
+     and shrinks so the text is never pushed off-screen. */
+  .dive__stage {
+    height: min(46vh, 22rem);
+    order: -1;
+    background: color-mix(in srgb, var(--void) 85%, transparent);
+    backdrop-filter: blur(6px);
+    border-bottom: 1px solid var(--line);
+  }
+}
+
+.dive__viewport {
+  position: relative;
+  height: 100%;
+  border: 1px solid var(--line-bright);
+  overflow: hidden;
+  background: #04121c;
+}
+
+.dive__canvas {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+/* ── Heads-up readouts ─────────────────────────────────────────────────────── */
+
+.dive__hud {
+  position: absolute;
+  top: 0;
+  left: 0;
+  margin: 0;
+  padding: var(--s-2xs) var(--s-xs);
+  display: grid;
+  gap: 0.1rem;
+  font-size: var(--step--2);
+  pointer-events: none;
+}
+
+.dive__hud > div {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.dive__hud dt {
+  color: rgba(255, 255, 255, 0.5);
+  min-width: 4.5rem;
+}
+
+.dive__hud dd {
+  margin: 0;
+  color: var(--accent);
+  font-variant-numeric: tabular-nums;
+}
+
+/* ── Scenes ────────────────────────────────────────────────────────────────── */
+
+.dive__scenes {
+  padding-block: var(--s-xl);
+}
+
+@media (min-width: 62em) {
+  .dive__scenes {
+    padding-block: 22vh 30vh;
+    margin-inline: 0;
+    width: min(100% - 3rem, 34rem);
+  }
+}
+
+.dive__scene {
+  min-height: 62vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding-block: var(--s-l);
+  /* Inactive scenes recede rather than disappear — nothing is ever hidden from
+     find-in-page or a screen reader. */
+  opacity: 0.42;
+  transition: opacity 0.4s var(--ease);
+}
+
+.dive__scene[data-active='true'] {
+  opacity: 1;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .dive__scene {
+    opacity: 1;
+    transition: none;
+    min-height: 0;
+  }
+
+  .dive__stage {
+    position: static;
+    height: min(50vh, 24rem);
+  }
+}
+
+/* With scripting unavailable the scenes never receive data-active, so they must
+   read at full strength by default. */
+.dive__scenes:not([data-observed]) .dive__scene {
+  opacity: 1;
+}
+
+.dive__fact {
+  margin-top: var(--s-s);
+  font-size: var(--step--2);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--accent);
+  border-left: 2px solid var(--accent);
+  padding-left: var(--s-2xs);
+}

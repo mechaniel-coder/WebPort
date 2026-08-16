@@ -1,8 +1,8 @@
 # WebPort
 
-A portfolio of four production-grade websites — a studio hub and three complete client
-builds, each with its own design system and one substantial interactive system built from
-scratch.
+A portfolio of five production-grade websites — a studio hub, three complete client builds
+and an experimental lab, each with its own design system and at least one substantial
+interactive system built from scratch.
 
 **Everything is static HTML, CSS and JavaScript with zero runtime dependencies.**
 No framework, no bundler, no `node_modules` needed to host it. See **[HOSTING.md](HOSTING.md)**.
@@ -11,14 +11,17 @@ No framework, no bundler, no `node_modules` needed to host it. See **[HOSTING.md
 
 ## The sites
 
-**53 pages. 0 errors and 0 warnings from the integrity checker. 87 browser checks passing.**
+**60 pages. 0 errors and 0 warnings from the integrity checker. 117 browser checks passing.**
 
 | Path | Site | Sector | Pages | Signature system |
 | --- | --- | --- | --- | --- |
-| `/` | Studio hub | Portfolio | 6 | Case studies for the three builds below |
+| `/` | Studio hub | Portfolio | 7 | Case studies for the three client builds |
 | `/aurelia/` | Aurelia | Boutique hospitality | 15 | Accessible date-range booking engine |
 | `/northwind/` | Northwind | B2B observability SaaS | 13 | Live SVG dashboard + pricing calculator |
 | `/forma/` | Forma | Design-object e-commerce | 19 | Faceted catalog, variants, persistent cart |
+| `/lab/` | Meridian Lab | In-house R&D | 7 | WebGL renderer, Verlet physics, scrollytelling, frontier CSS |
+
+The lab is the studio’s own research rather than client work: four experiments in techniques that normally arrive with a library attached — a WebGL renderer written from the matrix maths up, a hand-written Verlet physics solver, scroll-driven storytelling that never takes the scrollbar, and frontier CSS with no JavaScript at all. No three.js, no physics engine, no scroll library.
 
 Aurelia, Northwind and Forma are **fictional brands**, created to demonstrate design and
 engineering capability across three very different problem shapes: art direction, technical
@@ -61,6 +64,7 @@ src/
   aurelia/            "
   northwind/          "
   forma/              "
+  lab/                "
 
 dist/                 committed build output — this is what gets hosted
 ```
@@ -141,10 +145,12 @@ them, and the rest are driven in a real browser by `npm run check:browser`.
 canonical targets), missing or duplicated metadata, heading structure, malformed JSON-LD,
 duplicate ids, unlabelled form controls, and inline SVG with no accessible name.
 
-`browser-check.js` loads all 53 pages in Chromium asserting zero console errors, then drives
+`browser-check.js` loads all 60 pages in Chromium asserting zero console errors, then drives
 each signature system end to end. The assertions check **exact figures**, not that something
 appeared — Team costs `$359` at 100 GB and 25 hosts; a Forma order of `$225.00` produces
-`$20.66` tax and a `$263.66` total; the booking reference matches `AUR-YYYY-XXXXX`.
+`$20.66` tax and a `$263.66` total; the booking reference matches `AUR-YYYY-XXXXX`. The lab
+is held to the same standard — the descent visualisation is asserted against Boyle’s law at
+100 m, and the physics is checked for stability rather than merely for running.
 
 Both suites also pass against a **subdirectory build** (`BASE_PATH=/WebPort/`), which is the
 single most common way a multi-site static repo breaks.
@@ -171,7 +177,7 @@ Stated plainly rather than left to be discovered:
 ### On valuation
 
 This repository cannot certify what it is worth — no codebase can. What it can do is state
-the scope precisely so it can be compared against a real quote: **53 pages, three
+the scope precisely so it can be compared against a real quote: **60 pages, three
 independent design systems, four hand-built interactive subsystems, WCAG 2.2 AA with
 keyboard-operable custom widgets, structured data per page type, a zero-dependency delivery
 target, and an automated integrity gate.** Whether that is worth a given number is a

@@ -1,0 +1,307 @@
+/**
+ * Motion — four browser features, no JavaScript.
+ *
+ * Every one of these is a progressive enhancement or it is a bug, so each is
+ * behind @supports and each degrades to a static, legible state. Nothing on this
+ * page depends on a feature being present.
+ */
+
+/* ── 1. @property — a genuinely animatable custom property ─────────────────── */
+
+/*
+ * An unregistered custom property is just a string, so the browser cannot
+ * interpolate it — a transition between two values snaps at the halfway point.
+ * Registering it with a syntax makes it a real typed value with real animation.
+ */
+@property --sweep {
+  syntax: '<angle>';
+  initial-value: 0deg;
+  inherits: false;
+}
+
+@property --charge {
+  syntax: '<percentage>';
+  initial-value: 0%;
+  inherits: false;
+}
+
+.demo-property {
+  --sweep: 0deg;
+  --charge: 12%;
+  aspect-ratio: 1;
+  border: 1px solid var(--line-bright);
+  background: conic-gradient(
+    from var(--sweep),
+    var(--accent) 0%,
+    var(--accent) var(--charge),
+    #131313 var(--charge),
+    #131313 100%
+  );
+  transition: --sweep 1.2s var(--ease), --charge 1.2s var(--ease);
+}
+
+/* Hover and keyboard focus both drive it — a hover-only demo is a demo half the
+   audience cannot trigger. */
+.demo-property:hover,
+.demo-property:focus-visible {
+  --sweep: 320deg;
+  --charge: 78%;
+}
+
+/* Without @property the conic gradient still renders; it simply jumps rather
+   than sweeping, which is a perfectly acceptable resting state. */
+@supports not (background: conic-gradient(from 0deg, red, blue)) {
+  .demo-property {
+    background: linear-gradient(120deg, var(--accent), #131313 60%);
+  }
+}
+
+/* ── 2. Scroll-driven animation — no scroll listener ───────────────────────── */
+
+/*
+ * animation-timeline: view() ties an animation's progress to the element's
+ * position within the scrollport. The browser drives it off the main thread,
+ * which is why it stays smooth where a scroll handler would judder.
+ */
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(2.5rem);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes measure {
+  from {
+    scale: 0 1;
+  }
+  to {
+    scale: 1 1;
+  }
+}
+
+@supports (animation-timeline: view()) {
+  .scroll-rise {
+    animation: rise linear both;
+    animation-timeline: view();
+    /* Start as it enters the viewport, finish 40% of the way up. */
+    animation-range: entry 5% cover 40%;
+  }
+
+  .scroll-meter {
+    transform-origin: left center;
+    animation: measure linear both;
+    animation-timeline: view();
+    animation-range: entry 20% cover 55%;
+  }
+}
+
+/* Reduced motion removes the movement but keeps the element visible — the
+   fallback is never "invisible forever". */
+@media (prefers-reduced-motion: reduce) {
+  .scroll-rise,
+  .scroll-meter {
+    animation: none;
+    opacity: 1;
+    transform: none;
+    scale: 1 1;
+  }
+}
+
+/* ── 3. Container queries — respond to the box, not the viewport ───────────── */
+
+.resizer {
+  container-type: inline-size;
+  container-name: card;
+  /* Genuinely resizable so the query can be triggered by hand rather than by
+     changing the window size. */
+  resize: horizontal;
+  overflow: auto;
+  min-width: 12rem;
+  max-width: 100%;
+  border: 1px dashed var(--line-bright);
+  padding: var(--s-xs);
+}
+
+.cq-card {
+  display: grid;
+  gap: var(--s-xs);
+  border: 1px solid var(--line-bright);
+  background: var(--panel-2);
+  padding: var(--s-s);
+}
+
+.cq-card__figure {
+  aspect-ratio: 16 / 9;
+  background: linear-gradient(135deg, var(--accent), transparent 70%);
+  opacity: 0.55;
+}
+
+.cq-card__state::after {
+  content: 'narrow';
+  color: var(--accent);
+}
+
+@container card (min-width: 26rem) {
+  .cq-card {
+    grid-template-columns: 8rem 1fr;
+    align-items: center;
+  }
+
+  .cq-card__figure {
+    aspect-ratio: 1;
+  }
+
+  .cq-card__state::after {
+    content: 'wide';
+  }
+}
+
+@supports not (container-type: inline-size) {
+  .resizer {
+    resize: none;
+  }
+
+  .cq-card__state::after {
+    content: 'container queries unsupported';
+  }
+}
+
+/* ── 4. :has() — the parent selector ───────────────────────────────────────── */
+
+.has-demo {
+  display: grid;
+  gap: var(--s-2xs);
+}
+
+.has-row {
+  display: flex;
+  align-items: center;
+  gap: var(--s-2xs);
+  padding: var(--s-2xs) var(--s-xs);
+  border: 1px solid var(--line);
+  transition: border-color 0.2s var(--ease), background 0.2s var(--ease);
+}
+
+/* The row restyles itself because of the state of a descendant. Before :has()
+   this needed a class toggled by JavaScript on every change event. */
+.has-row:has(input:checked) {
+  border-color: var(--accent);
+  background: color-mix(in srgb, var(--accent) 12%, transparent);
+}
+
+.has-row:has(input:focus-visible) {
+  outline: 2px solid var(--focus-ring);
+  outline-offset: 2px;
+}
+
+.has-summary::after {
+  content: 'nothing selected';
+  color: var(--dim);
+}
+
+/* A sibling combinator inside :has() — "if the list contains any checked box". */
+.has-demo:has(input:checked) .has-summary::after {
+  content: 'at least one selected';
+  color: var(--accent);
+}
+
+@supports not selector(:has(*)) {
+  .has-summary::after {
+    content: ':has() unsupported — selection state would need JavaScript here';
+  }
+}
+
+/* ── Layout ────────────────────────────────────────────────────────────────── */
+
+.feature {
+  display: grid;
+  gap: var(--s-m);
+  padding-block: var(--s-xl);
+  border-top: 1px solid var(--line);
+}
+
+@media (min-width: 55em) {
+  .feature {
+    grid-template-columns: 1fr 1fr;
+    gap: var(--s-xl);
+    align-items: start;
+  }
+}
+
+.feature__demo {
+  display: grid;
+  gap: var(--s-s);
+  align-content: start;
+}
+
+.support {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: var(--step--2);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--dim);
+  border: 1px solid var(--line-bright);
+  padding: 0.2rem 0.5rem;
+}
+
+.support::before {
+  content: '';
+  width: 0.4rem;
+  height: 0.4rem;
+  background: var(--dim);
+  border-radius: 50%;
+}
+
+/* The badge reports what this browser actually supports, using the same
+   @supports test as the feature it describes — no user-agent sniffing. */
+@supports (animation-timeline: view()) {
+  .support[data-feature='scroll-timeline'] { color: var(--accent); }
+  .support[data-feature='scroll-timeline']::before { background: var(--accent); }
+  .support[data-feature='scroll-timeline'] span::after { content: 'supported'; }
+}
+@supports not (animation-timeline: view()) {
+  .support[data-feature='scroll-timeline'] span::after { content: 'not supported'; }
+}
+
+@supports (view-transition-name: none) {
+  .support[data-feature='view-transitions'] { color: var(--accent); }
+  .support[data-feature='view-transitions']::before { background: var(--accent); }
+  .support[data-feature='view-transitions'] span::after { content: 'supported'; }
+}
+@supports not (view-transition-name: none) {
+  .support[data-feature='view-transitions'] span::after { content: 'not supported'; }
+}
+
+@supports (container-type: inline-size) {
+  .support[data-feature='container'] { color: var(--accent); }
+  .support[data-feature='container']::before { background: var(--accent); }
+  .support[data-feature='container'] span::after { content: 'supported'; }
+}
+@supports not (container-type: inline-size) {
+  .support[data-feature='container'] span::after { content: 'not supported'; }
+}
+
+@supports selector(:has(*)) {
+  .support[data-feature='has'] { color: var(--accent); }
+  .support[data-feature='has']::before { background: var(--accent); }
+  .support[data-feature='has'] span::after { content: 'supported'; }
+}
+@supports not selector(:has(*)) {
+  .support[data-feature='has'] span::after { content: 'not supported'; }
+}
+
+.meter-track {
+  height: 3px;
+  background: var(--line);
+}
+
+.meter-fill {
+  height: 100%;
+  background: var(--accent);
+}

@@ -1,0 +1,71 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" width="1200" height="630"
+     role="img" aria-labelledby="card-title">
+  <title id="card-title">Forma — objects with one idea each</title>
+
+  <rect width="1200" height="630" fill="#faf7f2"/>
+
+  <!-- Hard rules, the structural device the site is built on -->
+  <rect x="0" y="0" width="1200" height="8" fill="#101010"/>
+  <rect x="0" y="622" width="1200" height="8" fill="#101010"/>
+
+  <!-- Product panel -->
+  <rect x="726" y="8" width="474" height="614" fill="#f2ede4"/>
+  <rect x="722" y="8" width="4" height="614" fill="#101010"/>
+
+  <!-- Prism Vase in Ochre, drawn from the same geometry the site uses -->
+  <g transform="translate(763 115) scale(0.95)">
+    <path d="M152 116 h96 l22 42 v130 l-30 34 h-80 l-30 -34 v-130 Z"
+          fill="#d8973c" stroke="#101010" stroke-width="6" stroke-linejoin="round"/>
+    <path d="M200 116 h48 l22 42 v130 l-30 34 h-40 Z" fill="#b57a26"/>
+    <path d="M152 116 h96 l22 42 v130 l-30 34 h-80 l-30 -34 v-130 Z"
+          fill="none" stroke="#101010" stroke-width="6" stroke-linejoin="round"/>
+    <path d="M130 158 h140 M170 116 v206 M230 116 v206" stroke="#101010" stroke-width="6"
+          opacity="0.35" fill="none"/>
+    <ellipse cx="200" cy="116" rx="48" ry="15" fill="#b57a26" stroke="#101010"
+             stroke-width="6"/>
+  </g>
+
+  <!-- Wordmark -->
+  <g transform="translate(80 84)">
+    <rect x="2" y="2" width="44" height="44" rx="3" fill="none" stroke="#101010"
+          stroke-width="5"/>
+    <path d="M14 36V14h20M14 25h14" fill="none" stroke="#101010" stroke-width="5"/>
+  </g>
+  <text x="146" y="121" fill="#101010"
+        font-family="system-ui, -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif"
+        font-size="42" font-weight="750" letter-spacing="-1.5">
+    FORMA
+  </text>
+
+  <text x="80" y="286" fill="#101010"
+        font-family="system-ui, -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif"
+        font-size="84" font-weight="700" letter-spacing="-4">
+    OBJECTS WITH
+  </text>
+  <text x="80" y="368" fill="#101010"
+        font-family="system-ui, -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif"
+        font-size="84" font-weight="700" letter-spacing="-4">
+    ONE IDEA EACH.
+  </text>
+
+  <text x="80" y="440" fill="#4a4741"
+        font-family="system-ui, -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif"
+        font-size="27">
+    Lighting, furniture and tableware, made in small runs.
+  </text>
+
+  <!-- Finish swatches -->
+  <g transform="translate(80 492)">
+    <rect x="0" y="0" width="46" height="46" fill="#e9e5dd" stroke="#101010" stroke-width="4"/>
+    <rect x="58" y="0" width="46" height="46" fill="#d8973c" stroke="#101010" stroke-width="4"/>
+    <rect x="116" y="0" width="46" height="46" fill="#23252a" stroke="#101010" stroke-width="4"/>
+    <rect x="174" y="0" width="46" height="46" fill="#5d7355" stroke="#101010" stroke-width="4"/>
+    <rect x="232" y="0" width="46" height="46" fill="#b4553c" stroke="#101010" stroke-width="4"/>
+  </g>
+
+  <text x="80" y="586" fill="#77726a"
+        font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace"
+        font-size="21" letter-spacing="3">
+    BROOKLYN, NEW YORK
+  </text>
+</svg>

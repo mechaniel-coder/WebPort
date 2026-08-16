@@ -1,0 +1,44 @@
+# Netlify configuration.
+#
+# There is no build step: dist/ is committed, so Netlify only has to publish it.
+# Connect the repository and Netlify reads this file — no dashboard settings needed.
+#
+# You can also skip the repository entirely and drag the dist/ folder onto
+# https://app.netlify.com/drop, which needs no account, no billing and no git.
+
+[build]
+  publish = "dist"
+  command = ""
+
+# Clean URLs are already real directories with index.html, so no rewrites are
+# needed. This only supplies the 404 page.
+[[redirects]]
+  from = "/*"
+  to = "/404/index.html"
+  status = 404
+
+# The HTML must stay fresh so a redeploy is visible immediately; hashed-free
+# static assets are small enough that a short cache is fine.
+[[headers]]
+  for = "/*.html"
+  [headers.values]
+    Cache-Control = "public, max-age=0, must-revalidate"
+
+[[headers]]
+  for = "/*.css"
+  [headers.values]
+    Cache-Control = "public, max-age=3600"
+
+[[headers]]
+  for = "/*.js"
+  [headers.values]
+    Cache-Control = "public, max-age=3600"
+
+# The sites load no third-party anything — no fonts, no scripts, no images — so
+# the policy can be this tight.
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+    Content-Security-Policy = "default-src 'self'; img-src 'self' data:; style-src 'self'; script-src 'self'; base-uri 'self'; form-action 'self'; frame-ancestors 'none'"

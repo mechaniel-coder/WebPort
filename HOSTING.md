@@ -60,6 +60,29 @@ Nothing is required — `DirectoryIndex index.html` is the default. Just point
 
 ---
 
+## Option 1b — free hosts, no GitHub billing, no CI
+
+Nothing in this repository needs GitHub Actions or a paid plan. Three routes that need
+neither:
+
+**Netlify Drop — no account, no git, about thirty seconds.**
+Open <https://app.netlify.com/drop> and drag the `dist` folder onto it. It is live at a
+random subdomain immediately, and you can claim it later if you want a real name.
+
+**Connect the repo to Netlify or Vercel.** Both read config committed here
+(`netlify.toml`, `vercel.json`) — publish directory `dist`, no build command, no install
+step. Free tier, no card.
+
+**Cloudflare Pages.** Connect the repo and set, in the dashboard:
+
+| Setting | Value |
+| --- | --- |
+| Framework preset | None |
+| Build command | *(leave empty)* |
+| Build output directory | `dist` |
+
+---
+
 ## Option 2 — GitHub Pages
 
 A workflow at `.github/workflows/pages.yml` builds and publishes automatically — but it
@@ -77,6 +100,30 @@ with a broken link fails instead of publishing.
 
 Only the **default branch** publishes. Pushes to any other branch start a run that skips
 immediately, so a feature branch never deploys over production.
+
+> **On cost:** GitHub Pages and Actions are free with no minute limits on **public**
+> repositories. This repository is public, so neither should require a paid plan. If Actions
+> are unavailable to you anyway, use the branch method below — it uses no CI at all.
+
+### Pages without Actions
+
+Pages can serve a branch directly, which needs no workflow, no minutes and no billing.
+Push the built output to a `gh-pages` branch:
+
+```bash
+npm run build
+git add dist && git commit -m "Build"
+npm run publish:branch      # git subtree push --prefix dist origin gh-pages
+```
+
+Then **Settings → Pages → Source: Deploy from a branch**, branch `gh-pages`, folder `/`.
+
+Because the branch root is the site root, this serves from
+`https://<user>.github.io/WebPort/`, so build with the sub-path first:
+
+```bash
+BASE_PATH=/WebPort/ SITE_ORIGIN=https://<user>.github.io npm run build
+```
 
 ---
 

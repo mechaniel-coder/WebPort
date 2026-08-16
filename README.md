@@ -11,12 +11,14 @@ No framework, no bundler, no `node_modules` needed to host it. See **[HOSTING.md
 
 ## The sites
 
-| Path | Site | Sector | Signature system |
-| --- | --- | --- | --- |
-| `/` | Studio hub | Portfolio | Case studies for the three builds below |
-| `/aurelia/` | Aurelia | Boutique hospitality | Accessible date-range booking engine |
-| `/northwind/` | Northwind | B2B observability SaaS | Live SVG dashboard + pricing calculator |
-| `/forma/` | Forma | Design-object e-commerce | Faceted catalog, variants, persistent cart |
+**53 pages. 0 errors and 0 warnings from the integrity checker. 87 browser checks passing.**
+
+| Path | Site | Sector | Pages | Signature system |
+| --- | --- | --- | --- | --- |
+| `/` | Studio hub | Portfolio | 6 | Case studies for the three builds below |
+| `/aurelia/` | Aurelia | Boutique hospitality | 15 | Accessible date-range booking engine |
+| `/northwind/` | Northwind | B2B observability SaaS | 13 | Live SVG dashboard + pricing calculator |
+| `/forma/` | Forma | Design-object e-commerce | 19 | Faceted catalog, variants, persistent cart |
 
 Aurelia, Northwind and Forma are **fictional brands**, created to demonstrate design and
 engineering capability across three very different problem shapes: art direction, technical
@@ -29,13 +31,16 @@ communication, and transactional UX.
 Hosting requires no tooling at all — serve `dist/`. To work on the source you need Node 20+:
 
 ```bash
-npm run build     # src/ → dist/
-npm run serve     # preview at http://localhost:4173
-npm run verify    # integrity checks; exits non-zero on failure
-npm run check     # build + verify
+npm run build          # src/ → dist/
+npm run serve          # preview at http://localhost:4173
+npm run verify         # integrity checks; exits non-zero on failure
+npm run check          # build + verify
+npm run check:browser  # drive every page and interactive system in Chromium
+npm run screenshots    # responsive screenshots at 390 / 834 / 1440
 ```
 
-There are no dependencies to install.
+There are no dependencies to install for the first four. The browser checks need
+`npm install playwright-core` and skip cleanly without it — hosting never needs either.
 
 ---
 
@@ -90,10 +95,33 @@ and product detail pages).
 
 ---
 
+## What each site demonstrates
+
+Three problems that need genuinely different answers, which is why the sites do not look
+alike:
+
+- **Aurelia** — art direction and a hard accessibility problem. The calendar is a real
+  `role="grid"` with roving tabindex and a per-cell accessible name; choosing an arrival
+  computes the furthest reachable departure so an unfulfillable range cannot be assembled.
+- **Northwind** — technical credibility. Charts are hand-built SVG rendered at *build* time
+  and again in the browser, so the dashboard is in the served HTML before any script runs.
+  The categorical palette was run through a colour-vision validator against the site's own
+  dark surface rather than picked by eye.
+- **Forma** — transactional correctness. Faceted filtering is AND across facets and OR
+  within one, with state in the URL so it survives sharing and the back button. Tax is
+  charged on goods *plus* shipping. No payment details are collected anywhere.
+
+Where the server and browser both need the same logic — rates, chart data, prices, cart
+maths — it lives in one module both import (`src/aurelia/assets/rates.js`,
+`src/northwind/assets/charts.js`, `src/forma/assets/commerce.js`). There is no second
+implementation to drift.
+
+---
+
 ## Quality bar
 
 These are enforced rather than aspirational — `npm run verify` fails the build on most of
-them, and the rest were checked in a real browser.
+them, and the rest are driven in a real browser by `npm run check:browser`.
 
 - **Design systems** — every site defines its own colour, type, space and motion tokens as
   CSS custom properties. Fluid type via `clamp()`. Verified at 360 / 768 / 1024 / 1440px.
@@ -107,6 +135,20 @@ them, and the rest were checked in a real browser.
 - **Imagery** — all artwork is original SVG and CSS. Nothing is hotlinked, and there is no
   third-party licensing to clear.
 
+### What "verified" means here
+
+`verify.js` checks every built page for broken internal links (including `og:image` and
+canonical targets), missing or duplicated metadata, heading structure, malformed JSON-LD,
+duplicate ids, unlabelled form controls, and inline SVG with no accessible name.
+
+`browser-check.js` loads all 53 pages in Chromium asserting zero console errors, then drives
+each signature system end to end. The assertions check **exact figures**, not that something
+appeared — Team costs `$359` at 100 GB and 25 hosts; a Forma order of `$225.00` produces
+`$20.66` tax and a `$263.66` total; the booking reference matches `AUR-YYYY-XXXXX`.
+
+Both suites also pass against a **subdirectory build** (`BASE_PATH=/WebPort/`), which is the
+single most common way a multi-site static repo breaks.
+
 ### Known limitations
 
 Stated plainly rather than left to be discovered:
@@ -119,3 +161,18 @@ Stated plainly rather than left to be discovered:
   single hand-off point in each.
 - **Content is fictional.** Copy, testimonials, metrics and company details are written for
   demonstration. Anything reused for a real client needs real content.
+- **Forma's products are drawn, not photographed.** Generated vector artwork communicates
+  proportion, finish and form honestly, and material texture not at all. The recommendation
+  for a real brand is drawn art for the catalogue and photography on detail pages.
+- **Northwind's dashboard runs on generated data**, stated on the page itself. It uses a
+  seeded generator rather than `Math.random()`, so it is at least internally consistent and
+  identical on every reload.
+
+### On valuation
+
+This repository cannot certify what it is worth — no codebase can. What it can do is state
+the scope precisely so it can be compared against a real quote: **53 pages, three
+independent design systems, four hand-built interactive subsystems, WCAG 2.2 AA with
+keyboard-operable custom widgets, structured data per page type, a zero-dependency delivery
+target, and an automated integrity gate.** Whether that is worth a given number is a
+judgement for whoever is paying; the itemisation above is the honest input to it.

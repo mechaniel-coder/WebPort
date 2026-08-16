@@ -18,8 +18,13 @@ import { existsSync } from 'node:fs';
 import { mkdir, readFile, writeFile } from 'node:fs/promises';
 import { join } from 'node:path';
 
+import { basePath } from './site.config.js';
+
 const PORT = 4199;
-const ORIGIN = `http://localhost:${PORT}`;
+const HOST = `http://localhost:${PORT}`;
+// Scenarios address pages as `${ORIGIN}/aurelia/book/`, so folding the base path
+// in here makes every one of them work unchanged against a subdirectory build.
+const ORIGIN = `${HOST}${basePath.replace(/\/$/, '')}`;
 const SHOTS = process.argv.includes('--shots');
 const BREAKPOINTS = [
   { name: 'mobile', width: 390, height: 844 },
@@ -61,7 +66,7 @@ async function withServer(run) {
   try {
     for (let attempt = 0; attempt < 60; attempt += 1) {
       try {
-        const response = await fetch(`${ORIGIN}/`);
+        const response = await fetch(`${HOST}/`);
         if (response.ok) break;
       } catch {
         /* not up yet */
@@ -224,7 +229,8 @@ async function sweep(browser, routes) {
   page.on('pageerror', (error) => problems.push(`${page.url()} → ${error.message}`));
 
   for (const route of routes) {
-    const response = await page.goto(`${ORIGIN}${route}`, { waitUntil: 'networkidle' });
+    // Sitemap routes already carry the base path, so they address the server root.
+    const response = await page.goto(`${HOST}${route}`, { waitUntil: 'networkidle' });
     if (!response || response.status() >= 400) {
       problems.push(`${route} → HTTP ${response ? response.status() : 'no response'}`);
       continue;
@@ -250,7 +256,7 @@ async function screenshots(browser, routes) {
     });
     const page = await context.newPage();
     for (const route of routes) {
-      await page.goto(`${ORIGIN}${route}`, { waitUntil: 'networkidle' });
+      await page.goto(`${HOST}${route}`, { waitUntil: 'networkidle' });
       const name = route.replace(/[^a-z0-9]+/gi, '-').replace(/^-|-$/g, '') || 'home';
       await page.screenshot({
         path: join(dir, `${name}-${breakpoint.name}.png`),
@@ -288,17 +294,21 @@ await withServer(async () => {
   const page = await context.newPage();
   page.on('pageerror', (error) => failures.push(`      runtime: ${error.message}`));
 
-  if (routes.includes('/aurelia/book/')) {
+  // Matched by suffix so the scenarios still run against a subdirectory build,
+  // where every sitemap route is prefixed with the base path.
+  const has = (path) => routes.some((route) => route.endsWith(path));
+
+  if (has('/aurelia/book/')) {
     await bookingScenario(page);
     await calendarKeyboardScenario(page);
     await widgetScenario(page);
   }
-  if (routes.includes('/northwind/pricing/')) {
+  if (has('/northwind/pricing/')) {
     const { dashboardScenario, pricingScenario } = await import('./checks/northwind.js');
     await dashboardScenario(page, ORIGIN, check);
     await pricingScenario(page, ORIGIN, check);
   }
-  if (routes.includes('/forma/shop/')) {
+  if (has('/forma/shop/')) {
     const { shopScenario, cartScenario } = await import('./checks/forma.js');
     await shopScenario(page, ORIGIN, check);
     await cartScenario(page, ORIGIN, check);

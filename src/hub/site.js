@@ -9,6 +9,7 @@
 import { esc, each } from '../_lib/html.js';
 import { organization } from '../_lib/seo.js';
 import { studio } from '../../site.config.js';
+import { studies as work } from './data.js';
 
 const nav = [
   { label: 'Work', href: '/' },
@@ -16,33 +17,12 @@ const nav = [
   { label: 'Contact', href: '/contact/' },
 ];
 
-/** The three case studies, referenced by the nav, the index and the footer. */
-export const work = [
-  {
-    slug: 'aurelia',
-    name: 'Aurelia',
-    sector: 'Hospitality',
-    summary: 'A coastal retreat with a booking engine built from scratch.',
-    live: '/aurelia/',
-    accent: '#9a6b4f',
-  },
-  {
-    slug: 'northwind',
-    name: 'Northwind',
-    sector: 'B2B SaaS',
-    summary: 'An observability platform that demonstrates itself on the marketing site.',
-    live: '/northwind/',
-    accent: '#4f8ff7',
-  },
-  {
-    slug: 'forma',
-    name: 'Forma',
-    sector: 'E-commerce',
-    summary: 'A design-object storefront with a complete client-side commerce layer.',
-    live: '/forma/',
-    accent: '#e0523c',
-  },
-];
+/**
+ * The three case studies, referenced by the nav, the index and the footer.
+ * Defined once in data.js so the footer, the index and the case study pages
+ * cannot disagree about what the work was.
+ */
+export { studies as work } from './data.js';
 
 const mark = `<svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
   <rect width="32" height="32" rx="7" fill="#12110f"/>
@@ -56,6 +36,7 @@ export default {
   mount: '/',
   themeColor: '#12110f',
   styles: ['hub.css'],
+  socialImage: '/assets/social-card.svg',
   favicon: mark,
 
   organization: () =>

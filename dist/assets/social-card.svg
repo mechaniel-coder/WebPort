@@ -1,0 +1,56 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" width="1200" height="630"
+     role="img" aria-labelledby="card-title">
+  <title id="card-title">Studio Meridian — website design and engineering</title>
+
+  <rect width="1200" height="630" fill="#f4f1ea"/>
+
+  <!-- Wordmark -->
+  <g transform="translate(80 76)">
+    <rect width="56" height="56" rx="12" fill="#12110f"/>
+    <path d="M14 40V33l14 12 14-12v7" fill="none" stroke="#f5f1e8" stroke-width="4.5"
+          stroke-linecap="square"/>
+    <path d="M14 40V23l14 12 14-12v17" fill="none" stroke="#f5f1e8" stroke-width="4.5"
+          stroke-linecap="square"/>
+  </g>
+  <text x="156" y="115" fill="#14130f"
+        font-family="system-ui, -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif"
+        font-size="34" font-weight="620" letter-spacing="-0.8">
+    Studio Meridian
+  </text>
+
+  <text x="80" y="250" fill="#14130f"
+        font-family="system-ui, -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif"
+        font-size="72" font-weight="620" letter-spacing="-3">
+    We build the website
+  </text>
+  <text x="80" y="330" fill="#14130f"
+        font-family="system-ui, -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif"
+        font-size="72" font-weight="620" letter-spacing="-3">
+    the business actually
+  </text>
+  <text x="80" y="410" fill="#14130f"
+        font-family="system-ui, -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif"
+        font-size="72" font-weight="620" letter-spacing="-3">
+    needed.
+  </text>
+
+  <!-- Three project rules, each in its own accent — the hub's organising device -->
+  <g transform="translate(80 486)">
+    <rect x="0" y="0" width="112" height="5" fill="#9a6b4f"/>
+    <text x="0" y="42" fill="#605c52"
+          font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace"
+          font-size="19" letter-spacing="2">HOSPITALITY</text>
+
+    <rect x="300" y="0" width="112" height="5" fill="#4f8ff7"/>
+    <text x="300" y="42" fill="#605c52"
+          font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace"
+          font-size="19" letter-spacing="2">B2B SAAS</text>
+
+    <rect x="600" y="0" width="112" height="5" fill="#d8402a"/>
+    <text x="600" y="42" fill="#605c52"
+          font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace"
+          font-size="19" letter-spacing="2">E-COMMERCE</text>
+  </g>
+
+  <rect x="0" y="622" width="1200" height="8" fill="#12110f"/>
+</svg>

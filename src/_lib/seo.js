@@ -27,6 +27,7 @@ const PRELOAD_FONTS = {
   northwind: ['geist-var.woff2', 'geist-mono-var.woff2'],
   forma: ['bricolage-var.woff2', 'instrument-var.woff2'],
   hub: ['schibsted-var.woff2', 'jetbrains-var.woff2'],
+  lab: ['jetbrains-var.woff2', 'schibsted-var.woff2'],
 };
 
 /**

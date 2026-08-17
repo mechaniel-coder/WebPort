@@ -29,6 +29,12 @@ export default {
   themeColor: '#000000',
   colorScheme: 'dark',
   styles: ['lab.css'],
+
+  // Type only. The motion layer is deliberately NOT enabled here: this site's
+  // own copy says "no GSAP, no scroll library, no dependencies at all", and
+  // loading GSAP onto it would make that claim false. Reveals are done the
+  // lab's way instead — native CSS scroll-driven animation, no JavaScript.
+  webfonts: true,
   socialImage: '/lab/assets/social-card.svg',
   favicon: `<svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
     <rect width="32" height="32" fill="#000"/>

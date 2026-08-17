@@ -350,3 +350,94 @@ export async function typeScenario(page, origin, check, site = SITES.aurelia) {
     `${shift.toFixed(1)}px difference`,
   );
 }
+
+/**
+ * The lab is deliberately exempt from the motion library.
+ *
+ * Its own copy claims "no GSAP, no scroll library, no dependencies at all",
+ * and that claim is part of the product rather than a note in a README. A
+ * future change that switches `motion: true` on for consistency would make the
+ * page lie about itself while every other check stayed green, so the exemption
+ * is asserted rather than left as a convention someone has to remember.
+ */
+export async function labPurityScenario(page, origin, check) {
+  await page.goto(`${origin}/lab/`, { waitUntil: 'networkidle' });
+  await page.waitForTimeout(800);
+
+  const scripts = await page.evaluate(() =>
+    [...document.querySelectorAll('script[src]')].map((s) => s.src.split('/').pop()),
+  );
+  for (const banned of ['gsap.min.js', 'ScrollTrigger.min.js', 'lenis.min.js', 'motion.js']) {
+    check(`lab: ships no ${banned}`, !scripts.includes(banned), scripts.join(', ') || 'none');
+  }
+
+  const globals = await page.evaluate(() =>
+    ['gsap', 'ScrollTrigger', 'Lenis', 'SplitText'].filter((key) => key in window),
+  );
+  check('lab: no animation library on window', globals.length === 0, globals.join(', ') || 'none');
+
+  // It does take the type layer, which is what makes it look like the rest.
+  await page.evaluate(() => document.fonts.ready);
+  const loaded = await page.evaluate(() =>
+    [...document.fonts].filter((f) => f.status === 'loaded').map((f) => f.family),
+  );
+  check(
+    'lab: uses the studio typefaces',
+    loaded.includes('JetBrains Mono') || loaded.includes('Schibsted Grotesk'),
+    loaded.join(', '),
+  );
+
+  /**
+   * The reveal must never be able to hide content permanently.
+   *
+   * Scroll-driven animations are wrapped in `@supports`, so a browser without
+   * them applies no start-state at all. That is a stronger guarantee than the
+   * JavaScript system on the other sites, which needs a boot snippet and a
+   * timeout to reach the same place — and it is worth asserting, because the
+   * whole failure mode of a reveal system is content that is present in the
+   * DOM and invisible on screen.
+   */
+  const hidden = await page.evaluate(() =>
+    [...document.querySelectorAll('[data-rise]')].filter((el) => {
+      const r = el.getBoundingClientRect();
+      if (!(r.bottom > 0 && r.top < window.innerHeight * 0.85)) return false;
+      return parseFloat(getComputedStyle(el).opacity) < 0.99;
+    }).length,
+  );
+  check('lab: nothing on screen is left invisible by a reveal', hidden === 0, `${hidden} hidden`);
+
+  /**
+   * And every one of them must actually resolve when scrolled to.
+   *
+   * The check above only looks at the first screen, which is not enough: a
+   * scroll-driven animation with `fill-mode: both` holds its start state until
+   * the element enters the range, so an element whose range never completes
+   * stays at opacity 0 for good. Walking the whole page is what turns that from
+   * a risk into something tested.
+   */
+  const stuck = await page.evaluate(async () => {
+    const wait = () => new Promise((r) => setTimeout(r, 260));
+    const step = Math.round(window.innerHeight * 0.6);
+    const names = [];
+
+    for (let y = 0; y <= document.body.scrollHeight; y += step) {
+      window.scrollTo(0, y);
+      await wait();
+      for (const el of document.querySelectorAll('[data-rise]')) {
+        const r = el.getBoundingClientRect();
+        // Fully inside the viewport, so its entry range is definitely complete.
+        if (r.top < 0 || r.bottom > window.innerHeight) continue;
+        if (parseFloat(getComputedStyle(el).opacity) < 0.99) {
+          names.push(el.className || el.tagName.toLowerCase());
+        }
+      }
+    }
+    window.scrollTo(0, 0);
+    return names;
+  });
+  check(
+    'lab: every reveal resolves once its element is fully in view',
+    stuck.length === 0,
+    stuck.slice(0, 4).join(', ') || 'none',
+  );
+}

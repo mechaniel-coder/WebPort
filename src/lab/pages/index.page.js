@@ -22,7 +22,7 @@ export function render({ url }) {
     <p class="label">In-house research · ${esc(studio.name)}</p>
     <h1 class="display" style="margin-top:var(--s-s);max-width:14ch">
       Frontier techniques, written from nothing.</h1>
-    <p class="lede" style="margin-top:var(--s-m)">${esc(lab.lede)}</p>
+    <p class="lede" data-rise style="margin-top:var(--s-m)">${esc(lab.lede)}</p>
 
     <div style="display:flex;flex-wrap:wrap;gap:var(--s-s);margin-top:var(--s-l);
                 font-size:var(--step--2);color:var(--faint);letter-spacing:0.1em;
@@ -44,7 +44,7 @@ export function render({ url }) {
     <ul class="specimens">
       ${each(
         experiments,
-        (entry) => `<li class="specimen" style="--accent:${esc(entry.accent)}">
+        (entry) => `<li class="specimen" data-rise style="--accent:${esc(entry.accent)}">
         <a class="specimen__link" href="${esc(url(`/lab/${entry.slug}/`))}">
           <span class="specimen__index">${esc(entry.index)}</span>
           <span class="specimen__name">${esc(entry.name)}</span>

@@ -331,6 +331,7 @@ await withServer(async () => {
       await motion.typeScenario(page, ORIGIN, check, site);
     }
     await motion.calendarLayoutScenario(page, ORIGIN, check);
+    if (has('/lab/')) await motion.labPurityScenario(page, ORIGIN, check);
   }
 
   await context.close();

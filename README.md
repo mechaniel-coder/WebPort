@@ -13,7 +13,7 @@ vendored into the repo and committed, so hosting stays clone-and-serve. See
 
 ## The sites
 
-**60 pages. 0 errors and 0 warnings from the integrity checker. 194 browser checks passing.**
+**60 pages. 0 errors and 0 warnings from the integrity checker. 202 browser checks passing.**
 
 | Path | Site | Sector | Pages | Signature system |
 | --- | --- | --- | --- | --- |
@@ -141,6 +141,9 @@ them, and the rest are driven in a real browser by `npm run check:browser`.
   loaded from a CDN. Pages ask for animation with data attributes; the timing, easing and
   reduced-motion behaviour come with it. Content above the fold animates on load, content
   below it on scroll, and nothing is ever hidden that is not definitely going to be shown.
+  **The lab is exempt on purpose** — its own copy claims no GSAP and no scroll library, so
+  it reveals content with native CSS scroll-driven animation instead and a check asserts it
+  ships none of those files.
 - **Accessibility** — semantic landmarks, skip links, visible focus, AA contrast, and full
   keyboard operation with correct ARIA for every custom widget. `prefers-reduced-motion`
   is honoured throughout.

@@ -52,7 +52,7 @@ export function experimentNotes(experiment) {
       <div class="notes" style="margin-top:0">
         <div>
           <h2 class="note__title">Written by hand</h2>
-          <ul class="ticks">
+          <ul class="ticks" data-rise>
             ${each(experiment.wrote, (item) => `<li>${esc(item)}</li>`)}
           </ul>
           <p class="dim" style="margin-top:var(--s-m);font-size:var(--step--1)">

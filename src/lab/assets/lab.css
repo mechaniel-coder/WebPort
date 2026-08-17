@@ -33,9 +33,14 @@
   --focus-radius: 0px;
 
   /* ── Type — mono-forward ────────────────────────────────────────────────── */
-  --mono: ui-monospace, SFMono-Regular, 'SF Mono', Menlo, 'DejaVu Sans Mono', Consolas,
-    monospace;
-  --sans: system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  /* JetBrains Mono and Schibsted Grotesk — the same pair the studio hub uses.
+     That is the rule across this repo: the three client brands each get a
+     typeface nothing else uses, because they are separate businesses; the two
+     studio-owned surfaces (the hub and this lab) share one voice, because they
+     are the same studio speaking. Both faces are already vendored, so the lab
+     adds no font bytes. */
+  --mono: 'JetBrains Mono', 'JetBrains Fallback', ui-monospace, SFMono-Regular, monospace;
+  --sans: 'Schibsted Grotesk', 'Schibsted Fallback', system-ui, sans-serif;
 
   --step--2: clamp(0.68rem, 0.66rem + 0.09vw, 0.74rem);
   --step--1: clamp(0.8rem, 0.77rem + 0.13vw, 0.87rem);
@@ -45,6 +50,9 @@
   --step-3: clamp(1.62rem, 1.4rem + 1.08vw, 2.37rem);
   --step-4: clamp(1.94rem, 1.6rem + 1.74vw, 3.15rem);
   --step-5: clamp(2.33rem, 1.8rem + 2.66vw, 4.18rem);
+
+  /* The hero step, viewport-scaled like the other four sites. */
+  --step-hero: clamp(2.6rem, 7vw, 6.5rem);
 
   /* ── Space ──────────────────────────────────────────────────────────────── */
   --s-3xs: 0.25rem;
@@ -114,10 +122,54 @@ a {
 /* ── Type ──────────────────────────────────────────────────────────────────── */
 
 .display {
-  font-size: var(--step-5);
+  font-size: var(--step-hero);
   font-weight: 500;
-  letter-spacing: -0.04em;
-  line-height: 0.95;
+  letter-spacing: -0.045em;
+  line-height: 0.92;
+  text-wrap: balance;
+}
+
+/* ── Reveals, without a motion library ───────────────────────────────────────
+ *
+ * The other four sites reveal content with GSAP and ScrollTrigger. This one
+ * cannot: its own copy says "no GSAP, no scroll library, no dependencies at
+ * all", and shipping 140KB of animation library onto the page that makes that
+ * claim would make the claim false. Consistency with the rest of the portfolio
+ * is not worth telling a lie in the product.
+ *
+ * So the same effect is built the way the lab builds everything — out of the
+ * platform. `animation-timeline: view()` ties the animation's progress to the
+ * element's position in the scrollport, running off the main thread with no
+ * scroll listener, no IntersectionObserver and no JavaScript whatsoever.
+ *
+ * `animation-range` ends the reveal at 40% of the element's entry, so it is
+ * finished well before the reader reaches it rather than still resolving under
+ * their eyes.
+ *
+ * Everything is inside `@supports`, so a browser without scroll-driven
+ * animations shows the content plainly — the failure mode is "no animation",
+ * never "no content". That is the same guarantee the JavaScript system on the
+ * other sites needs a boot snippet and a timeout to make.
+ */
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    [data-rise] {
+      animation: lab-rise linear both;
+      animation-timeline: view();
+      animation-range: entry 5% entry 40%;
+    }
+  }
+}
+
+@keyframes lab-rise {
+  from {
+    opacity: 0;
+    transform: translateY(1.75rem);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
 }
 
 .h1 {

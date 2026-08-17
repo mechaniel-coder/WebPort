@@ -25,6 +25,8 @@ import { studio } from '../../site.config.js';
 const PRELOAD_FONTS = {
   aurelia: ['fraunces-var.woff2', 'schibsted-var.woff2'],
   northwind: ['geist-var.woff2', 'geist-mono-var.woff2'],
+  forma: ['bricolage-var.woff2', 'instrument-var.woff2'],
+  hub: ['schibsted-var.woff2', 'jetbrains-var.woff2'],
 };
 
 /**

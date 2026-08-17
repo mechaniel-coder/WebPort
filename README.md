@@ -4,14 +4,16 @@ A portfolio of five production-grade websites — a studio hub, three complete c
 and an experimental lab, each with its own design system and at least one substantial
 interactive system built from scratch.
 
-**Everything is static HTML, CSS and JavaScript with zero runtime dependencies.**
-No framework, no bundler, no `node_modules` needed to host it. See **[HOSTING.md](HOSTING.md)**.
+**Everything is static HTML, CSS and JavaScript. No framework, no bundler, and no
+`node_modules` needed to host it** — the four third-party libraries and seven font files are
+vendored into the repo and committed, so hosting stays clone-and-serve. See
+**[HOSTING.md](HOSTING.md)** and [`src/_lib/vendor/`](src/_lib/vendor/README.md).
 
 ---
 
 ## The sites
 
-**60 pages. 0 errors and 0 warnings from the integrity checker. 117 browser checks passing.**
+**60 pages. 0 errors and 0 warnings from the integrity checker. 194 browser checks passing.**
 
 | Path | Site | Sector | Pages | Signature system |
 | --- | --- | --- | --- | --- |
@@ -42,8 +44,9 @@ npm run check:browser  # drive every page and interactive system in Chromium
 npm run screenshots    # responsive screenshots at 390 / 834 / 1440
 ```
 
-There are no dependencies to install for the first four. The browser checks need
-`npm install playwright-core` and skip cleanly without it — hosting never needs either.
+There are no dependencies to install for the first four. `npm install` is needed only for
+the browser checks and for `node tools/vendor.js`, which refreshes the committed copies of
+GSAP, Lenis and the fonts. Hosting needs neither.
 
 ---
 
@@ -129,15 +132,27 @@ them, and the rest are driven in a real browser by `npm run check:browser`.
 
 - **Design systems** — every site defines its own colour, type, space and motion tokens as
   CSS custom properties. Fluid type via `clamp()`. Verified at 360 / 768 / 1024 / 1440px.
+- **Typography** — four sites, four typefaces, self-hosted as variable fonts: Fraunces and
+  Schibsted Grotesk (Aurelia), Geist and Geist Mono (Northwind), Bricolage Grotesque and
+  Instrument Sans (Forma). The hub reuses Schibsted deliberately — it exists to present the
+  client work, so it is the quietest thing here. Every family has a metric-matched local
+  fallback, so the webfont swap moves no line and costs nothing in layout shift.
+- **Motion** — GSAP, ScrollTrigger, SplitText and Lenis, vendored into the repo rather than
+  loaded from a CDN. Pages ask for animation with data attributes; the timing, easing and
+  reduced-motion behaviour come with it. Content above the fold animates on load, content
+  below it on scroll, and nothing is ever hidden that is not definitely going to be shown.
 - **Accessibility** — semantic landmarks, skip links, visible focus, AA contrast, and full
   keyboard operation with correct ARIA for every custom widget. `prefers-reduced-motion`
   is honoured throughout.
 - **SEO** — unique title and description per page, canonical URLs, Open Graph and Twitter
   cards, JSON-LD per page type, generated `sitemap.xml` and `robots.txt`.
-- **Performance** — no runtime framework, no external font or script requests, no layout
-  shift. The largest page ships a few KB of JavaScript.
-- **Imagery** — all artwork is original SVG and CSS. Nothing is hotlinked, and there is no
-  third-party licensing to clear.
+- **Performance** — no runtime framework and no external request of any kind: fonts,
+  scripts and artwork are all same-origin, and the Content-Security-Policy allows nothing
+  else. Zero layout shift, including from the webfont swap.
+- **Imagery** — all artwork is original: generated SVG, CSS, and two WebGL shaders written
+  for the sites that use them. Nothing is hotlinked. The only third-party licences are the
+  fonts (SIL OFL), Lenis (MIT) and GSAP (its standard no-charge licence), with full texts
+  committed alongside the files in `src/_lib/vendor/licences/`.
 
 ### What "verified" means here
 

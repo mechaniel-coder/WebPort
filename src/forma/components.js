@@ -105,7 +105,11 @@ export function productCard(product, url) {
 }
 
 export function productGrid(list, url, { columns = 3 } = {}) {
-  return `<ul class="grid-products${columns === 4 ? ' grid-products--4' : ''}">
+  // The reveal lives on the shared grid rather than on each page that uses one,
+  // so every product listing on the site staggers in without nineteen pages
+  // each having to remember to ask for it.
+  return `<ul class="grid-products${columns === 4 ? ' grid-products--4' : ''}"
+    data-reveal data-stagger="0.07">
     ${each(list, (product) => productCard(product, url))}
   </ul>`;
 }

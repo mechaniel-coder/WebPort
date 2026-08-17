@@ -305,7 +305,11 @@
       value: end,
       duration: 1.6,
       ease: 'power2.out',
-      scrollTrigger: trigger(el),
+      // The `trigger()` helper this used to call was removed when reveals were
+      // reworked into `reveal()`, and nothing caught the dangling reference:
+      // it only throws on a page that actually contains a `[data-count]`, and
+      // for a while none did.
+      scrollTrigger: { trigger: el, start: 'top 85%', once: true },
       onUpdate: function () {
         el.textContent = prefix + state.value.toFixed(decimals) + suffix;
       },

@@ -21,15 +21,20 @@
     <meta name="twitter:description" content="Your cart. Everything is held in your own browser — nothing is transmitted, and no payment details are collected at any point.">
     <meta name="twitter:image" content="https://exostech.pro/forma/assets/social-card.svg">
     <link rel="icon" href="data:image/svg+xml,%3Csvg%20viewBox%3D%220%200%2032%2032%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20aria-hidden%3D%22true%22%3E%20%3Crect%20width%3D%2232%22%20height%3D%2232%22%20rx%3D%224%22%20fill%3D%22%23101010%22%2F%3E%20%3Cpath%20d%3D%22M10%2024V9h13M10%2016h9%22%20fill%3D%22none%22%20stroke%3D%22%23faf7f2%22%20stroke-width%3D%223%22%2F%3E%20%3C%2Fsvg%3E">
+    <link rel="preload" as="font" type="font/woff2" crossorigin href="/shared/fonts/bricolage-var.woff2">
+    <link rel="preload" as="font" type="font/woff2" crossorigin href="/shared/fonts/instrument-var.woff2">
     <link rel="stylesheet" href="/shared/reset.css">
+    <link rel="stylesheet" href="/shared/type.css">
+    <link rel="stylesheet" href="/shared/motion.css">
     <link rel="stylesheet" href="/forma/assets/forma.css">
     <link rel="stylesheet" href="/forma/assets/shop.css">
+    <script>var d=document.documentElement;if(!matchMedia('(prefers-reduced-motion: reduce)').matches){d.classList.add('has-motion');window.__motionFallback=setTimeout(function(){d.classList.remove('has-motion');d.classList.add('motion-off')},2500)}</script>
     <script type="application/ld+json">{"@context":"https://schema.org","@type":"Store","name":"Forma","description":"Lighting, furniture and tableware made in small runs by people we have met, from\n    materials that look better after a few years than they did on day one.","url":"https://exostech.pro/forma/","email":"hello@example.com","telephone":"+1 (212) 555-0188","address":{"@type":"PostalAddress","streetAddress":"44 Provost Street","addressLocality":"Brooklyn","addressRegion":"NY","postalCode":"11222","addressCountry":"US"},"openingHours":"Th,Fr,Sa 11:00-18:00"}</script>
     <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Forma","item":"https://exostech.pro/forma/"},{"@type":"ListItem","position":2,"name":"Cart","item":"https://exostech.pro/forma/cart/"}]}</script>
   </head>
   <body class="site-forma">
     <a class="skip-link" href="#main">Skip to main content</a>
-    <header class="bar">
+    <header class="bar" data-header>
       <div class="bar__inner">
         <a class="brandmark" href="/forma/">
           <span class="brandmark__icon" aria-hidden="true"><svg viewBox="0 0 36 36" xmlns="http://www.w3.org/2000/svg"
@@ -172,7 +177,11 @@
         </p>
       </div>
     </footer>
-    
+    <script defer src="/shared/js/gsap.min.js"></script>
+    <script defer src="/shared/js/ScrollTrigger.min.js"></script>
+    <script defer src="/shared/js/SplitText.min.js"></script>
+    <script defer src="/shared/js/lenis.min.js"></script>
+    <script defer src="/shared/motion.js"></script>
     <script type="module" src="/forma/assets/ui.js"></script>
     <script type="module" src="/forma/assets/cart.js"></script>
     <script type="module" src="/forma/assets/checkout.js"></script>

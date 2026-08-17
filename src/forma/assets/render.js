@@ -27,6 +27,29 @@ export const FINISHES = {
 const LINE = '#101010';
 const STROKE = 3;
 
+/**
+ * Where each product meets the floor.
+ *
+ * Two things a single shared ellipse got wrong. The pendant hangs from a
+ * ceiling and the mirror is on a wall, so a floor shadow under either is a
+ * lighting mistake rather than a nice touch — those are simply absent here.
+ * And the pieces that do stand on something have bases at different heights
+ * and different widths, so one fixed ellipse floated well below most of them,
+ * which reads worse than no shadow at all.
+ *
+ * `y` is the base line in the 400×400 box; `rx` is a little wider than the
+ * footprint, because a shadow from a broad light source spreads past the object
+ * that casts it.
+ */
+const GROUND = {
+  arclamp: { y: 352, rx: 96 },
+  sidetable: { y: 340, rx: 78 },
+  stool: { y: 330, rx: 90 },
+  vase: { y: 330, rx: 84 },
+  bowl: { y: 286, rx: 76 },
+  carafe: { y: 344, rx: 74 },
+};
+
 /* ── Shapes ────────────────────────────────────────────────────────────────── */
 
 /**
@@ -142,16 +165,81 @@ const SHAPES = {
  * @param {string} options.finish  key of FINISHES
  * @param {string} [options.title] accessible name; omit for decorative use
  */
+/**
+ * Unique-enough ids for the per-instance gradients.
+ *
+ * SVG gradient references are document-global, so two products on the same page
+ * sharing an id would silently take each other's colours — and `verify.js`
+ * fails the build on duplicate ids anyway. A counter is enough: the build
+ * renders pages in a stable sorted order in one process, so output stays
+ * reproducible between runs, and a browser re-render replaces the whole node
+ * along with its defs.
+ */
+let sequence = 0;
+
+/** Nudge a hex colour toward white (positive) or black (negative). */
+function shift(hex, amount) {
+  const n = parseInt(hex.slice(1), 16);
+  const channel = (offset) => {
+    const value = (n >> offset) & 255;
+    const moved = amount >= 0 ? value + (255 - value) * amount : value * (1 + amount);
+    return Math.max(0, Math.min(255, Math.round(moved)));
+  };
+  return `#${((1 << 24) | (channel(16) << 16) | (channel(8) << 8) | channel(0))
+    .toString(16)
+    .slice(1)}`;
+}
+
 export function productArt({ shape, finish = 'chalk', title = null, className = '' }) {
   const palette = FINISHES[finish] || FINISHES.chalk;
   const draw = SHAPES[shape] || SHAPES.vase;
+  const id = `pa${(sequence += 1).toString(36)}`;
+
+  /**
+   * Material shading, without touching a single shape function.
+   *
+   * Every shape interpolates `body` and `shade` straight into a `fill` or
+   * `stroke` attribute, and an SVG paint value can be a gradient reference just
+   * as easily as a hex colour. So passing `url(#…)` in their place gives the
+   * whole catalogue lit material for free — no geometry changes, and the
+   * browser-side re-render on choosing a finish goes through the same path.
+   *
+   * Two stops would read as a plastic ramp. Three — a highlight where the light
+   * lands, the true colour through the middle, and a turn into shadow at the
+   * far edge — is the least that reads as a surface with a form under it.
+   */
+  const gradients = `
+    <linearGradient id="${id}-body" x1="0.15" y1="0" x2="0.85" y2="1">
+      <stop offset="0" stop-color="${shift(palette.body, 0.22)}"/>
+      <stop offset="0.45" stop-color="${palette.body}"/>
+      <stop offset="1" stop-color="${shift(palette.body, -0.12)}"/>
+    </linearGradient>
+    <linearGradient id="${id}-shade" x1="0.1" y1="0" x2="0.9" y2="1">
+      <stop offset="0" stop-color="${shift(palette.shade, 0.14)}"/>
+      <stop offset="0.6" stop-color="${palette.shade}"/>
+      <stop offset="1" stop-color="${shift(palette.shade, -0.16)}"/>
+    </linearGradient>
+    <radialGradient id="${id}-floor" cx="0.5" cy="0.5" r="0.5">
+      <stop offset="0" stop-color="#101010" stop-opacity="0.28"/>
+      <stop offset="1" stop-color="#101010" stop-opacity="0"/>
+    </radialGradient>`;
 
   return `<svg class="product-art ${className}" viewBox="0 0 400 400"
     xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet"
     data-shape="${shape}" data-finish="${finish}"
     ${title ? 'role="img"' : 'aria-hidden="true" focusable="false"'}>
     ${title ? `<title>${escapeSvg(title)}</title>` : ''}
-    ${draw(palette)}
+    <defs>${gradients}</defs>
+    ${
+      GROUND[shape]
+        ? // Contact shadow. An object with nothing under it floats, and
+          // floating is the difference between a product photograph and an
+          // icon. Drawn before the geometry so it sits behind.
+          `<ellipse cx="200" cy="${GROUND[shape].y}" rx="${GROUND[shape].rx}" ry="14"
+            fill="url(#${id}-floor)"/>`
+        : ''
+    }
+    ${draw({ body: `url(#${id}-body)`, shade: `url(#${id}-shade)` })}
   </svg>`;
 }
 

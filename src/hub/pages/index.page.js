@@ -14,13 +14,14 @@ export function render({ url }) {
   return `
 <section class="hero">
   <div class="shell">
-    <h1 class="hero__title">We build the website the business actually needed.</h1>
-    <p class="hero__lede">
+    <h1 class="hero__title" data-reveal="lines" data-stagger="0.08">We build the website the
+      business actually needed.</h1>
+    <p class="hero__lede" data-reveal data-delay="0.32">
       ${esc(studio.name)} designs and engineers marketing sites and storefronts for companies
       where the website <em>is</em> the first impression. Every project below was designed,
       built and shipped end to end — design system, front end, interaction, accessibility.
     </p>
-    <div class="hero__meta">
+    <div class="hero__meta" data-reveal data-delay="0.45">
       <span>Three case studies</span>
       <span>Design systems built from scratch</span>
       <span>No templates, no page builders</span>
@@ -32,7 +33,7 @@ export function render({ url }) {
   <div class="shell">
     <p class="section__label" id="work-heading">Selected work</p>
   </div>
-  <ul class="work">
+  <ul class="work" data-reveal data-stagger="0.1">
     ${each(
       work,
       (item, index) => `<li class="work__item" style="--accent: ${esc(item.accent)}">

@@ -29,6 +29,10 @@ export default {
   name: brand.name,
   themeColor: '#faf7f2',
   styles: ['forma.css'],
+
+  // Shared type and motion layers.
+  webfonts: true,
+  motion: true,
   socialImage: '/forma/assets/social-card.svg',
   favicon: `<svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
     <rect width="32" height="32" rx="4" fill="#101010"/>
@@ -56,7 +60,7 @@ export default {
 
   header({ url, path }) {
     const current = (href) => (path === href ? ' aria-current="page"' : '');
-    return `<header class="bar">
+    return `<header class="bar" data-header>
       <div class="bar__inner">
         <a class="brandmark" href="${esc(url('/forma/'))}"${current('/forma/')}>
           <span class="brandmark__icon" aria-hidden="true">${mark}</span>

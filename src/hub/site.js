@@ -37,6 +37,10 @@ export default {
   mount: '/',
   themeColor: '#12110f',
   styles: ['hub.css'],
+
+  // Shared type and motion layers.
+  webfonts: true,
+  motion: true,
   socialImage: '/assets/social-card.svg',
   favicon: mark,
 
@@ -48,7 +52,7 @@ export default {
     }),
 
   header({ url, path }) {
-    return `<header class="masthead">
+    return `<header class="masthead" data-header>
       <div class="shell masthead__inner">
         <a class="wordmark" href="${esc(url('/'))}"${path === '/' ? ' aria-current="page"' : ''}>
           <span class="wordmark__mark" aria-hidden="true">${mark}</span>

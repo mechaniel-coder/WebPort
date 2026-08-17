@@ -20,15 +20,20 @@
     <meta name="twitter:description" content="Three groupings — the lamps, the oak pieces, and the things that get used every day and are therefore allowed to be plain.">
     <meta name="twitter:image" content="https://exostech.pro/forma/assets/social-card.svg">
     <link rel="icon" href="data:image/svg+xml,%3Csvg%20viewBox%3D%220%200%2032%2032%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20aria-hidden%3D%22true%22%3E%20%3Crect%20width%3D%2232%22%20height%3D%2232%22%20rx%3D%224%22%20fill%3D%22%23101010%22%2F%3E%20%3Cpath%20d%3D%22M10%2024V9h13M10%2016h9%22%20fill%3D%22none%22%20stroke%3D%22%23faf7f2%22%20stroke-width%3D%223%22%2F%3E%20%3C%2Fsvg%3E">
+    <link rel="preload" as="font" type="font/woff2" crossorigin href="/shared/fonts/bricolage-var.woff2">
+    <link rel="preload" as="font" type="font/woff2" crossorigin href="/shared/fonts/instrument-var.woff2">
     <link rel="stylesheet" href="/shared/reset.css">
+    <link rel="stylesheet" href="/shared/type.css">
+    <link rel="stylesheet" href="/shared/motion.css">
     <link rel="stylesheet" href="/forma/assets/forma.css">
     <link rel="stylesheet" href="/forma/assets/shop.css">
+    <script>var d=document.documentElement;if(!matchMedia('(prefers-reduced-motion: reduce)').matches){d.classList.add('has-motion');window.__motionFallback=setTimeout(function(){d.classList.remove('has-motion');d.classList.add('motion-off')},2500)}</script>
     <script type="application/ld+json">{"@context":"https://schema.org","@type":"Store","name":"Forma","description":"Lighting, furniture and tableware made in small runs by people we have met, from\n    materials that look better after a few years than they did on day one.","url":"https://exostech.pro/forma/","email":"hello@example.com","telephone":"+1 (212) 555-0188","address":{"@type":"PostalAddress","streetAddress":"44 Provost Street","addressLocality":"Brooklyn","addressRegion":"NY","postalCode":"11222","addressCountry":"US"},"openingHours":"Th,Fr,Sa 11:00-18:00"}</script>
     <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Forma","item":"https://exostech.pro/forma/"},{"@type":"ListItem","position":2,"name":"Collections","item":"https://exostech.pro/forma/collections/"}]}</script>
   </head>
   <body class="site-forma">
     <a class="skip-link" href="#main">Skip to main content</a>
-    <header class="bar">
+    <header class="bar" data-header>
       <div class="bar__inner">
         <a class="brandmark" href="/forma/">
           <span class="brandmark__icon" aria-hidden="true"><svg viewBox="0 0 36 36" xmlns="http://www.w3.org/2000/svg"
@@ -112,15 +117,31 @@
     data-shape="pendant" data-finish="chalk"
     role="img">
     <title>Halo Pendant — illustration</title>
+    <defs>
+    <linearGradient id="pa8-body" x1="0.15" y1="0" x2="0.85" y2="1">
+      <stop offset="0" stop-color="#eeebe4"/>
+      <stop offset="0.45" stop-color="#e9e5dd"/>
+      <stop offset="1" stop-color="#cdcac2"/>
+    </linearGradient>
+    <linearGradient id="pa8-shade" x1="0.1" y1="0" x2="0.9" y2="1">
+      <stop offset="0" stop-color="#d4cfc5"/>
+      <stop offset="0.6" stop-color="#cdc7bb"/>
+      <stop offset="1" stop-color="#aca79d"/>
+    </linearGradient>
+    <radialGradient id="pa8-floor" cx="0.5" cy="0.5" r="0.5">
+      <stop offset="0" stop-color="#101010" stop-opacity="0.28"/>
+      <stop offset="1" stop-color="#101010" stop-opacity="0"/>
+    </radialGradient></defs>
+    
     
     <line x1="200" y1="30" x2="200" y2="132" stroke="#101010" stroke-width="3"/>
     <rect x="188" y="24" width="24" height="12" rx="3" fill="#101010"/>
-    <path d="M92 262 A108 130 0 0 1 308 262 Z" fill="#e9e5dd"/>
-    <path d="M200 132 A108 130 0 0 1 308 262 L200 262 Z" fill="#cdc7bb"/>
+    <path d="M92 262 A108 130 0 0 1 308 262 Z" fill="url(#pa8-body)"/>
+    <path d="M200 132 A108 130 0 0 1 308 262 L200 262 Z" fill="url(#pa8-shade)"/>
     <path d="M92 262 A108 130 0 0 1 308 262 Z" fill="none" stroke="#101010"
       stroke-width="3" stroke-linejoin="round"/>
     <line x1="92" y1="262" x2="308" y2="262" stroke="#101010" stroke-width="3"/>
-    <ellipse cx="200" cy="278" rx="34" ry="12" fill="#cdc7bb" stroke="#101010"
+    <ellipse cx="200" cy="278" rx="34" ry="12" fill="url(#pa8-shade)" stroke="#101010"
       stroke-width="3"/>
   </svg>
             <span class="product-card__name" style="font-size:var(--step-0)">
@@ -135,19 +156,36 @@
     data-shape="arclamp" data-finish="ink"
     role="img">
     <title>Arc Floor Lamp — illustration</title>
+    <defs>
+    <linearGradient id="pa9-body" x1="0.15" y1="0" x2="0.85" y2="1">
+      <stop offset="0" stop-color="#535559"/>
+      <stop offset="0.45" stop-color="#23252a"/>
+      <stop offset="1" stop-color="#1f2125"/>
+    </linearGradient>
+    <linearGradient id="pa9-shade" x1="0.1" y1="0" x2="0.9" y2="1">
+      <stop offset="0" stop-color="#36373a"/>
+      <stop offset="0.6" stop-color="#15171a"/>
+      <stop offset="1" stop-color="#121316"/>
+    </linearGradient>
+    <radialGradient id="pa9-floor" cx="0.5" cy="0.5" r="0.5">
+      <stop offset="0" stop-color="#101010" stop-opacity="0.28"/>
+      <stop offset="1" stop-color="#101010" stop-opacity="0"/>
+    </radialGradient></defs>
+    <ellipse cx="200" cy="352" rx="96" ry="14"
+            fill="url(#pa9-floor)"/>
     
-    <path d="M96 342 C 96 150 210 92 318 118" fill="none" stroke="#23252a" stroke-width="14"
+    <path d="M96 342 C 96 150 210 92 318 118" fill="none" stroke="url(#pa9-body)" stroke-width="14"
       stroke-linecap="round"/>
     <path d="M96 342 C 96 150 210 92 318 118" fill="none" stroke="#101010" stroke-width="3"
       stroke-linecap="round" fill-opacity="0"/>
-    <path d="M282 108 h72 l-14 62 h-44 Z" fill="#23252a" stroke="#101010"
+    <path d="M282 108 h72 l-14 62 h-44 Z" fill="url(#pa9-body)" stroke="#101010"
       stroke-width="3" stroke-linejoin="round"/>
-    <path d="M318 108 h36 l-14 62 h-22 Z" fill="#15171a"/>
+    <path d="M318 108 h36 l-14 62 h-22 Z" fill="url(#pa9-shade)"/>
     <path d="M282 108 h72 l-14 62 h-44 Z" fill="none" stroke="#101010"
       stroke-width="3" stroke-linejoin="round"/>
-    <ellipse cx="96" cy="346" rx="74" ry="20" fill="#15171a" stroke="#101010"
+    <ellipse cx="96" cy="346" rx="74" ry="20" fill="url(#pa9-shade)" stroke="#101010"
       stroke-width="3"/>
-    <ellipse cx="96" cy="338" rx="74" ry="20" fill="#23252a" stroke="#101010"
+    <ellipse cx="96" cy="338" rx="74" ry="20" fill="url(#pa9-body)" stroke="#101010"
       stroke-width="3"/>
   </svg>
             <span class="product-card__name" style="font-size:var(--step-0)">
@@ -183,16 +221,33 @@
     data-shape="sidetable" data-finish="oak"
     role="img">
     <title>Cairn Side Table — illustration</title>
+    <defs>
+    <linearGradient id="paa-body" x1="0.15" y1="0" x2="0.85" y2="1">
+      <stop offset="0" stop-color="#e1c8a4"/>
+      <stop offset="0.45" stop-color="#d9b98a"/>
+      <stop offset="1" stop-color="#bfa379"/>
+    </linearGradient>
+    <linearGradient id="paa-shade" x1="0.1" y1="0" x2="0.9" y2="1">
+      <stop offset="0" stop-color="#c6a880"/>
+      <stop offset="0.6" stop-color="#bd9a6b"/>
+      <stop offset="1" stop-color="#9f815a"/>
+    </linearGradient>
+    <radialGradient id="paa-floor" cx="0.5" cy="0.5" r="0.5">
+      <stop offset="0" stop-color="#101010" stop-opacity="0.28"/>
+      <stop offset="1" stop-color="#101010" stop-opacity="0"/>
+    </radialGradient></defs>
+    <ellipse cx="200" cy="340" rx="78" ry="14"
+            fill="url(#paa-floor)"/>
     
-    <ellipse cx="200" cy="118" rx="104" ry="26" fill="#d9b98a" stroke="#101010"
+    <ellipse cx="200" cy="118" rx="104" ry="26" fill="url(#paa-body)" stroke="#101010"
       stroke-width="3"/>
-    <path d="M96 118 v26 a104 26 0 0 0 208 0 v-26" fill="#bd9a6b" stroke="#101010"
+    <path d="M96 118 v26 a104 26 0 0 0 208 0 v-26" fill="url(#paa-shade)" stroke="#101010"
       stroke-width="3" stroke-linejoin="round"/>
-    <path d="M138 152 v98 a62 20 0 0 0 124 0 v-98" fill="#d9b98a" stroke="#101010"
+    <path d="M138 152 v98 a62 20 0 0 0 124 0 v-98" fill="url(#paa-body)" stroke="#101010"
       stroke-width="3" stroke-linejoin="round"/>
-    <ellipse cx="200" cy="152" rx="62" ry="20" fill="#bd9a6b" stroke="#101010"
+    <ellipse cx="200" cy="152" rx="62" ry="20" fill="url(#paa-shade)" stroke="#101010"
       stroke-width="3"/>
-    <path d="M158 256 v76 a42 16 0 0 0 84 0 v-76" fill="#bd9a6b" stroke="#101010"
+    <path d="M158 256 v76 a42 16 0 0 0 84 0 v-76" fill="url(#paa-shade)" stroke="#101010"
       stroke-width="3" stroke-linejoin="round"/>
   </svg>
             <span class="product-card__name" style="font-size:var(--step-0)">
@@ -207,13 +262,30 @@
     data-shape="stool" data-finish="oak"
     role="img">
     <title>Column Stool — illustration</title>
+    <defs>
+    <linearGradient id="pab-body" x1="0.15" y1="0" x2="0.85" y2="1">
+      <stop offset="0" stop-color="#e1c8a4"/>
+      <stop offset="0.45" stop-color="#d9b98a"/>
+      <stop offset="1" stop-color="#bfa379"/>
+    </linearGradient>
+    <linearGradient id="pab-shade" x1="0.1" y1="0" x2="0.9" y2="1">
+      <stop offset="0" stop-color="#c6a880"/>
+      <stop offset="0.6" stop-color="#bd9a6b"/>
+      <stop offset="1" stop-color="#9f815a"/>
+    </linearGradient>
+    <radialGradient id="pab-floor" cx="0.5" cy="0.5" r="0.5">
+      <stop offset="0" stop-color="#101010" stop-opacity="0.28"/>
+      <stop offset="1" stop-color="#101010" stop-opacity="0"/>
+    </radialGradient></defs>
+    <ellipse cx="200" cy="330" rx="90" ry="14"
+            fill="url(#pab-floor)"/>
     
-    <path d="M124 132 v168 a76 22 0 0 0 152 0 v-168" fill="#d9b98a" stroke="#101010"
+    <path d="M124 132 v168 a76 22 0 0 0 152 0 v-168" fill="url(#pab-body)" stroke="#101010"
       stroke-width="3" stroke-linejoin="round"/>
-    <path d="M200 110 v212 a76 22 0 0 0 76 -22 v-168" fill="#bd9a6b"/>
+    <path d="M200 110 v212 a76 22 0 0 0 76 -22 v-168" fill="url(#pab-shade)"/>
     <path d="M124 132 v168 a76 22 0 0 0 152 0 v-168" fill="none" stroke="#101010"
       stroke-width="3" stroke-linejoin="round"/>
-    <ellipse cx="200" cy="132" rx="76" ry="22" fill="#bd9a6b" stroke="#101010"
+    <ellipse cx="200" cy="132" rx="76" ry="22" fill="url(#pab-shade)" stroke="#101010"
       stroke-width="3"/>
     <path d="M140 130 q60 26 120 0" fill="none" stroke="#101010" stroke-width="3"
       opacity="0.55"/>
@@ -251,16 +323,33 @@
     data-shape="bowl" data-finish="chalk"
     role="img">
     <title>Quarry Bowl — illustration</title>
+    <defs>
+    <linearGradient id="pac-body" x1="0.15" y1="0" x2="0.85" y2="1">
+      <stop offset="0" stop-color="#eeebe4"/>
+      <stop offset="0.45" stop-color="#e9e5dd"/>
+      <stop offset="1" stop-color="#cdcac2"/>
+    </linearGradient>
+    <linearGradient id="pac-shade" x1="0.1" y1="0" x2="0.9" y2="1">
+      <stop offset="0" stop-color="#d4cfc5"/>
+      <stop offset="0.6" stop-color="#cdc7bb"/>
+      <stop offset="1" stop-color="#aca79d"/>
+    </linearGradient>
+    <radialGradient id="pac-floor" cx="0.5" cy="0.5" r="0.5">
+      <stop offset="0" stop-color="#101010" stop-opacity="0.28"/>
+      <stop offset="1" stop-color="#101010" stop-opacity="0"/>
+    </radialGradient></defs>
+    <ellipse cx="200" cy="286" rx="76" ry="14"
+            fill="url(#pac-floor)"/>
     
-    <path d="M76 168 h248 a124 96 0 0 1 -248 0 Z" fill="#e9e5dd" stroke="#101010"
+    <path d="M76 168 h248 a124 96 0 0 1 -248 0 Z" fill="url(#pac-body)" stroke="#101010"
       stroke-width="3" stroke-linejoin="round"/>
-    <path d="M200 264 a124 96 0 0 0 124 -96 h-124 Z" fill="#cdc7bb"/>
+    <path d="M200 264 a124 96 0 0 0 124 -96 h-124 Z" fill="url(#pac-shade)"/>
     <path d="M76 168 h248 a124 96 0 0 1 -248 0 Z" fill="none" stroke="#101010"
       stroke-width="3" stroke-linejoin="round"/>
-    <ellipse cx="200" cy="168" rx="124" ry="34" fill="#cdc7bb" stroke="#101010"
+    <ellipse cx="200" cy="168" rx="124" ry="34" fill="url(#pac-shade)" stroke="#101010"
       stroke-width="3"/>
-    <ellipse cx="200" cy="168" rx="104" ry="27" fill="#e9e5dd" opacity="0.8"/>
-    <path d="M164 262 h72 v14 h-72 Z" fill="#cdc7bb" stroke="#101010" stroke-width="3"
+    <ellipse cx="200" cy="168" rx="104" ry="27" fill="url(#pac-body)" opacity="0.8"/>
+    <path d="M164 262 h72 v14 h-72 Z" fill="url(#pac-shade)" stroke="#101010" stroke-width="3"
       stroke-linejoin="round"/>
   </svg>
             <span class="product-card__name" style="font-size:var(--step-0)">
@@ -275,11 +364,28 @@
     data-shape="carafe" data-finish="clear"
     role="img">
     <title>Facet Carafe — illustration</title>
+    <defs>
+    <linearGradient id="pad-body" x1="0.15" y1="0" x2="0.85" y2="1">
+      <stop offset="0" stop-color="#e6edec"/>
+      <stop offset="0.45" stop-color="#dfe8e6"/>
+      <stop offset="1" stop-color="#c4ccca"/>
+    </linearGradient>
+    <linearGradient id="pad-shade" x1="0.1" y1="0" x2="0.9" y2="1">
+      <stop offset="0" stop-color="#cbd8d6"/>
+      <stop offset="0.6" stop-color="#c2d2cf"/>
+      <stop offset="1" stop-color="#a3b0ae"/>
+    </linearGradient>
+    <radialGradient id="pad-floor" cx="0.5" cy="0.5" r="0.5">
+      <stop offset="0" stop-color="#101010" stop-opacity="0.28"/>
+      <stop offset="1" stop-color="#101010" stop-opacity="0"/>
+    </radialGradient></defs>
+    <ellipse cx="200" cy="344" rx="74" ry="14"
+            fill="url(#pad-floor)"/>
     
     <path d="M170 92 h60 v46 l30 44 v128 a24 24 0 0 1 -24 24 h-72 a24 24 0 0 1 -24 -24
-      v-128 l30 -44 Z" fill="#dfe8e6" stroke="#101010" stroke-width="3"
+      v-128 l30 -44 Z" fill="url(#pad-body)" stroke="#101010" stroke-width="3"
       stroke-linejoin="round"/>
-    <path d="M200 92 h30 v46 l30 44 v128 a24 24 0 0 1 -24 24 h-36 Z" fill="#c2d2cf"/>
+    <path d="M200 92 h30 v46 l30 44 v128 a24 24 0 0 1 -24 24 h-36 Z" fill="url(#pad-shade)"/>
     <path d="M170 92 h60 v46 l30 44 v128 a24 24 0 0 1 -24 24 h-72 a24 24 0 0 1 -24 -24
       v-128 l30 -44 Z" fill="none" stroke="#101010" stroke-width="3"
       stroke-linejoin="round"/>
@@ -300,15 +406,32 @@
     data-shape="vase" data-finish="clear"
     role="img">
     <title>Prism Vase — illustration</title>
+    <defs>
+    <linearGradient id="pae-body" x1="0.15" y1="0" x2="0.85" y2="1">
+      <stop offset="0" stop-color="#e6edec"/>
+      <stop offset="0.45" stop-color="#dfe8e6"/>
+      <stop offset="1" stop-color="#c4ccca"/>
+    </linearGradient>
+    <linearGradient id="pae-shade" x1="0.1" y1="0" x2="0.9" y2="1">
+      <stop offset="0" stop-color="#cbd8d6"/>
+      <stop offset="0.6" stop-color="#c2d2cf"/>
+      <stop offset="1" stop-color="#a3b0ae"/>
+    </linearGradient>
+    <radialGradient id="pae-floor" cx="0.5" cy="0.5" r="0.5">
+      <stop offset="0" stop-color="#101010" stop-opacity="0.28"/>
+      <stop offset="1" stop-color="#101010" stop-opacity="0"/>
+    </radialGradient></defs>
+    <ellipse cx="200" cy="330" rx="84" ry="14"
+            fill="url(#pae-floor)"/>
     
     <path d="M152 116 h96 l22 42 v130 l-30 34 h-80 l-30 -34 v-130 Z"
-      fill="#dfe8e6" stroke="#101010" stroke-width="3" stroke-linejoin="round"/>
-    <path d="M200 116 h48 l22 42 v130 l-30 34 h-40 Z" fill="#c2d2cf"/>
+      fill="url(#pae-body)" stroke="#101010" stroke-width="3" stroke-linejoin="round"/>
+    <path d="M200 116 h48 l22 42 v130 l-30 34 h-40 Z" fill="url(#pae-shade)"/>
     <path d="M152 116 h96 l22 42 v130 l-30 34 h-80 l-30 -34 v-130 Z"
       fill="none" stroke="#101010" stroke-width="3" stroke-linejoin="round"/>
     <path d="M130 158 h140 M170 116 v206 M230 116 v206" stroke="#101010"
       stroke-width="3" opacity="0.35" fill="none"/>
-    <ellipse cx="200" cy="116" rx="48" ry="15" fill="#c2d2cf" stroke="#101010"
+    <ellipse cx="200" cy="116" rx="48" ry="15" fill="url(#pae-shade)" stroke="#101010"
       stroke-width="3"/>
   </svg>
             <span class="product-card__name" style="font-size:var(--step-0)">
@@ -378,7 +501,11 @@
         </p>
       </div>
     </footer>
-    
+    <script defer src="/shared/js/gsap.min.js"></script>
+    <script defer src="/shared/js/ScrollTrigger.min.js"></script>
+    <script defer src="/shared/js/SplitText.min.js"></script>
+    <script defer src="/shared/js/lenis.min.js"></script>
+    <script defer src="/shared/motion.js"></script>
     <script type="module" src="/forma/assets/ui.js"></script>
     <script type="module" src="/forma/assets/cart.js"></script>
   </body>

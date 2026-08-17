@@ -25,9 +25,15 @@
   --focus-radius: 0px;
 
   /* ── Type ───────────────────────────────────────────────────────────────── */
-  --font-sans: system-ui, -apple-system, 'Segoe UI Variable', 'Segoe UI', Roboto,
-    Helvetica, Arial, sans-serif;
-  --font-mono: ui-monospace, SFMono-Regular, 'SF Mono', Menlo, Consolas, monospace;
+  /* Bricolage Grotesque for display, Instrument Sans for text. Bricolage
+     carries a width axis, so the same face can be a wide poster headline and a
+     narrower product name without a second file — and its slightly irregular
+     letterforms give a design-object brand the character that a neutral
+     grotesk deliberately withholds. Nothing here is shared with Aurelia or
+     Northwind: three sites on one type stack demonstrates one capability. */
+  --font-display: 'Bricolage Grotesque', 'Bricolage Fallback', system-ui, sans-serif;
+  --font-sans: 'Instrument Sans', 'Instrument Fallback', system-ui, sans-serif;
+  --font-mono: 'Instrument Sans', 'Instrument Fallback', ui-monospace, monospace;
 
   --step--2: clamp(0.72rem, 0.7rem + 0.09vw, 0.78rem);
   --step--1: clamp(0.84rem, 0.81rem + 0.13vw, 0.92rem);
@@ -38,6 +44,11 @@
   --step-4: clamp(2.07rem, 1.68rem + 1.98vw, 3.32rem);
   --step-5: clamp(2.49rem, 1.87rem + 3.09vw, 4.38rem);
   --step-6: clamp(2.99rem, 2.04rem + 4.73vw, 5.78rem);
+
+  /* The hero step — viewport-scaled, like the other two sites. Between
+     Aurelia's 11rem poster and Northwind's 6rem claim: a shop headline has to
+     be confident without pushing the product below the fold. */
+  --step-hero: clamp(2.9rem, 8vw, 8rem);
 
   /* ── Space ──────────────────────────────────────────────────────────────── */
   --space-3xs: 0.25rem;
@@ -112,12 +123,33 @@ a {
 
 /* ── Typography ────────────────────────────────────────────────────────────── */
 
+.display,
+.h1,
+.h2,
+.h3 {
+  font-family: var(--font-display);
+  font-kerning: normal;
+  font-feature-settings: 'kern' 1, 'liga' 1;
+  text-wrap: balance;
+}
+
 .display {
   font-size: var(--step-6);
   font-weight: 700;
   letter-spacing: -0.045em;
   line-height: 0.92;
   text-transform: uppercase;
+}
+
+/* Only the hero is viewport-scaled. `font-stretch` reaches for Bricolage's
+   width axis: condensing a headline this large lets it hold more words per
+   line without dropping the size, which is the whole reason to carry a
+   variable-width face rather than a second file. */
+.hero__title {
+  font-size: var(--step-hero);
+  font-stretch: 88%;
+  letter-spacing: -0.05em;
+  line-height: 0.88;
 }
 
 .h1 {
@@ -142,11 +174,24 @@ a {
 }
 
 .tag {
-  font-family: var(--font-mono);
+  font-family: var(--font-sans);
   font-size: var(--step--2);
-  letter-spacing: 0.16em;
+  font-weight: 600;
+  letter-spacing: 0.18em;
   text-transform: uppercase;
   color: var(--ink-3);
+  display: flex;
+  align-items: center;
+  gap: 0.7em;
+}
+
+.tag::after {
+  content: '';
+  flex: 1;
+  height: 2px;
+  background: currentColor;
+  opacity: 0.3;
+  max-width: 4rem;
 }
 
 .lede {

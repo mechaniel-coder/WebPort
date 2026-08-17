@@ -8,7 +8,7 @@
  */
 
 /**
- * The two sites carrying the motion layer, and what to look at on each.
+ * Every site carrying the motion layer, and what to look at on each.
  *
  * Parameterised rather than copied: these scenarios exist to catch bugs in the
  * *shared* system, so a second hand-written copy would drift from the first and
@@ -20,6 +20,7 @@ export const SITES = {
     path: '/aurelia/',
     lede: '.hero__lede',
     headline: 'very little else',
+    cta: '.hero__actions',
     cards: '.rooms > li',
     faces: ['Fraunces', 'Schibsted Grotesk'],
     display: 'Fraunces',
@@ -30,10 +31,33 @@ export const SITES = {
     path: '/northwind/',
     lede: '.lede',
     headline: 'roll up your data',
+    cta: '.hero__actions',
     cards: '.feature-grid > *, .logos > li',
     faces: ['Geist', 'Geist Mono'],
     display: 'Geist',
     minHero: 70,
+  },
+  hub: {
+    key: 'hub',
+    path: '/',
+    lede: '.hero__lede',
+    headline: 'business actually needed',
+    cta: '.hero__meta',
+    cards: '.work > li',
+    faces: ['Schibsted Grotesk', 'JetBrains Mono'],
+    display: 'Schibsted Grotesk',
+    minHero: 80,
+  },
+  forma: {
+    key: 'forma',
+    path: '/forma/',
+    lede: '.lede',
+    headline: 'one idea each',
+    cta: '.hero__actions',
+    cards: '.grid-products > li',
+    faces: ['Bricolage Grotesque', 'Instrument Sans'],
+    display: 'Bricolage Grotesque',
+    minHero: 80,
   },
 };
 
@@ -60,7 +84,7 @@ export async function revealScenario(page, origin, check, site = SITES.aurelia) 
   for (const [label, selector] of [
     ['headline', '.hero__title'],
     ['lede', site.lede],
-    ['call to action', '.hero__actions'],
+    ['call to action', site.cta],
   ]) {
     const box = await page.locator(selector).first().boundingBox();
     check(
@@ -92,9 +116,13 @@ export async function revealScenario(page, origin, check, site = SITES.aurelia) 
    */
   const transparent = await page.evaluate(() => {
     const found = [];
+    // Matches the trigger's own `top 85%` threshold rather than a plain
+    // intersection test. An element straddling the fold is "visible" by the
+    // looser test while its ScrollTrigger has legitimately not fired yet, and
+    // asserting against that would forbid the boundary case entirely.
     const inView = (el) => {
       const r = el.getBoundingClientRect();
-      return r.bottom > 0 && r.top < window.innerHeight;
+      return r.bottom > 0 && r.top < window.innerHeight * 0.85;
     };
 
     for (const root of document.querySelectorAll('[data-reveal]')) {
@@ -285,10 +313,13 @@ export async function typeScenario(page, origin, check, site = SITES.aurelia) {
     check(`type: ${site.key} loaded ${family}`, loaded.includes(family), loaded.join(', '));
   }
 
+  // Family names containing a space come back quoted, so compare the first
+  // entry with its quotes stripped rather than testing the raw string.
   const used = await page.locator('h1').evaluate((el) => getComputedStyle(el).fontFamily);
+  const first = used.split(',')[0].trim().replace(/^["']|["']$/g, '');
   check(
     `type: ${site.key} headline is set in the display face`,
-    used.startsWith(site.display),
+    first === site.display,
     used,
   );
 

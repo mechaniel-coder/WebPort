@@ -48,6 +48,20 @@ const ASSETS = [
     to('fonts', 'geist-mono-var.woff2'),
   ],
 
+  // Forma's pair. Bricolage carries a width axis as well as weight, which is
+  // what lets one display face be both a wide poster headline and a narrow
+  // product name without a second file. The `wdth` cut rather than `full`:
+  // optical sizing costs another 38KB and Forma's display sizes vary less than
+  // Aurelia's do.
+  [
+    from('@fontsource-variable', 'bricolage-grotesque', 'files', 'bricolage-grotesque-latin-wdth-normal.woff2'),
+    to('fonts', 'bricolage-var.woff2'),
+  ],
+  [
+    from('@fontsource-variable', 'instrument-sans', 'files', 'instrument-sans-latin-wght-normal.woff2'),
+    to('fonts', 'instrument-var.woff2'),
+  ],
+
   // Licence texts travel with the files they cover.
   [from('@fontsource-variable', 'fraunces', 'LICENSE'), to('licences', 'OFL-Fraunces.txt')],
   [
@@ -60,6 +74,8 @@ const ASSETS = [
   ],
   [from('@fontsource-variable', 'geist', 'LICENSE'), to('licences', 'OFL-Geist.txt')],
   [from('@fontsource-variable', 'geist-mono', 'LICENSE'), to('licences', 'OFL-GeistMono.txt')],
+  [from('@fontsource-variable', 'bricolage-grotesque', 'LICENSE'), to('licences', 'OFL-BricolageGrotesque.txt')],
+  [from('@fontsource-variable', 'instrument-sans', 'LICENSE'), to('licences', 'OFL-InstrumentSans.txt')],
   [from('lenis', 'LICENSE'), to('licences', 'MIT-Lenis.txt')],
 ];
 

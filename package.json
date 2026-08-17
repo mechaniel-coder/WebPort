@@ -17,9 +17,11 @@
     "publish:branch": "git subtree push --prefix dist origin gh-pages"
   },
   "devDependencies": {
+    "@fontsource-variable/bricolage-grotesque": "^5.3.0",
     "@fontsource-variable/fraunces": "^5.3.0",
     "@fontsource-variable/geist": "^5.3.0",
     "@fontsource-variable/geist-mono": "^5.3.0",
+    "@fontsource-variable/instrument-sans": "^5.3.0",
     "@fontsource-variable/jetbrains-mono": "^5.3.0",
     "@fontsource-variable/schibsted-grotesk": "^5.3.0",
     "gsap": "^3.15.0",

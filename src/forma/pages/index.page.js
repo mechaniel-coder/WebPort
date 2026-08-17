@@ -24,14 +24,15 @@ ${catalogueIsland(url)}
   <div class="shell hero__grid">
     <div>
       <p class="tag">Since ${brand.founded} · Brooklyn</p>
-      <h1 class="display hero__title" style="margin-top:var(--space-s)">Objects with one idea each.</h1>
-      <p class="lede" style="margin-top:var(--space-m)">${esc(brand.lede)}</p>
-      <div class="hero__actions">
+      <h1 class="display hero__title" data-reveal="lines" data-stagger="0.08"
+          style="margin-top:var(--space-s)">Objects with one idea each.</h1>
+      <p class="lede" data-reveal data-delay="0.3" style="margin-top:var(--space-m)">${esc(brand.lede)}</p>
+      <div class="hero__actions" data-reveal data-delay="0.42">
         <a class="btn" href="${esc(url('/forma/shop/'))}">Shop everything</a>
         <a class="btn btn--ghost" href="${esc(url('/forma/materials/'))}">How it is made</a>
       </div>
     </div>
-    <div class="hero__art">
+    <div class="hero__art" data-reveal="clip" data-delay="0.15">
       ${productArt({
         shape: hero.shape,
         finish: 'ochre',

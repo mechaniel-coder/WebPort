@@ -11,14 +11,21 @@ import { bootTag } from './boot.js';
 import { studio } from '../../site.config.js';
 
 /**
- * Fonts worth blocking the render for.
+ * Fonts worth blocking the render for, per site.
  *
- * Only the two the reader sees first. Preloading all three would make the mono
- * compete for bandwidth with the display face during the exact window that
- * decides how quickly the page looks finished, and the mono is used for small
- * metadata that can afford to swap a moment later.
+ * Only the faces a reader sees first — the display face and the one the body
+ * copy is set in. Preloading the whole family list would make a monospace used
+ * for small metadata compete for bandwidth during the exact window that decides
+ * how quickly the page looks finished.
+ *
+ * Keyed by site because the sites do not share a typeface: preloading Aurelia's
+ * serif on Northwind would be a wasted request on every page, which is worse
+ * than not preloading at all.
  */
-const PRELOAD_FONTS = ['fraunces-var.woff2', 'schibsted-var.woff2'];
+const PRELOAD_FONTS = {
+  aurelia: ['fraunces-var.woff2', 'schibsted-var.woff2'],
+  northwind: ['geist-var.woff2', 'geist-mono-var.woff2'],
+};
 
 /**
  * Compose the <head> for a page.
@@ -73,7 +80,7 @@ export function head({ site, page, path }) {
     // mode, and a preload whose mode does not match is discarded and fetched
     // a second time — the exact opposite of the intent.
     ...(site.webfonts
-      ? PRELOAD_FONTS.map(
+      ? (PRELOAD_FONTS[site.key] || []).map(
           (file) =>
             `<link rel="preload" as="font" type="font/woff2" crossorigin href="${esc(
               url(`/shared/fonts/${file}`),

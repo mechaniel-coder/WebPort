@@ -20,15 +20,20 @@
     <meta name="twitter:description" content="Ten-second resolution, kept at full fidelity for as long as you pay to keep it.">
     <meta name="twitter:image" content="https://exostech.pro/northwind/assets/social-card.svg">
     <link rel="icon" href="data:image/svg+xml,%3Csvg%20viewBox%3D%220%200%2032%2032%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20aria-hidden%3D%22true%22%3E%20%3Crect%20width%3D%2232%22%20height%3D%2232%22%20rx%3D%227%22%20fill%3D%22%230b0e14%22%2F%3E%20%3Cpath%20d%3D%22M6%2023V10l10%2010%2010-10v13%22%20fill%3D%22none%22%20stroke%3D%22%234f8ff7%22%20stroke-width%3D%222.6%22%2F%3E%20%3C%2Fsvg%3E">
+    <link rel="preload" as="font" type="font/woff2" crossorigin href="/shared/fonts/geist-var.woff2">
+    <link rel="preload" as="font" type="font/woff2" crossorigin href="/shared/fonts/geist-mono-var.woff2">
     <link rel="stylesheet" href="/shared/reset.css">
+    <link rel="stylesheet" href="/shared/type.css">
+    <link rel="stylesheet" href="/shared/motion.css">
     <link rel="stylesheet" href="/northwind/assets/northwind.css">
+    <script>var d=document.documentElement;if(!matchMedia('(prefers-reduced-motion: reduce)').matches){d.classList.add('has-motion');window.__motionFallback=setTimeout(function(){d.classList.remove('has-motion');d.classList.add('motion-off')},2500)}</script>
     <script type="application/ld+json">{"@context":"https://schema.org","@type":"SoftwareApplication","name":"Northwind","description":"Metrics, traces and logs in one query language, priced on what you actually\n    ingest rather than per seat.","url":"https://exostech.pro/northwind/","applicationCategory":"DeveloperApplication","operatingSystem":"Web","offers":{"@type":"AggregateOffer","priceCurrency":"USD","lowPrice":"0","highPrice":"499","offerCount":3}}</script>
     <script type="application/ld+json">{"@context":"https://schema.org","@type":"TechArticle","headline":"Metrics — Northwind","description":"Ten-second resolution, kept at full fidelity for as long as you pay to keep it.","mainEntityOfPage":"https://exostech.pro/northwind/features/metrics/"}</script>
     <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Northwind","item":"https://exostech.pro/northwind/"},{"@type":"ListItem","position":2,"name":"Platform","item":"https://exostech.pro/northwind/platform/"},{"@type":"ListItem","position":3,"name":"Metrics","item":"https://exostech.pro/northwind/features/metrics/"}]}</script>
   </head>
   <body class="site-northwind">
     <a class="skip-link" href="#main">Skip to main content</a>
-    <header class="topbar">
+    <header class="topbar" data-header>
       <div class="topbar__inner">
         <a class="logo" href="/northwind/">
           <span class="logo__mark" aria-hidden="true"><svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg"
@@ -294,7 +299,11 @@
         </div>
       </div>
     </footer>
-    
+    <script defer src="/shared/js/gsap.min.js"></script>
+    <script defer src="/shared/js/ScrollTrigger.min.js"></script>
+    <script defer src="/shared/js/SplitText.min.js"></script>
+    <script defer src="/shared/js/lenis.min.js"></script>
+    <script defer src="/shared/motion.js"></script>
     <script type="module" src="/northwind/assets/ui.js"></script>
   </body>
 </html>

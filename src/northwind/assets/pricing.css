@@ -52,7 +52,10 @@
 .plan__price {
   display: flex;
   align-items: baseline;
-  gap: 0.35rem;
+  flex-wrap: wrap;
+  /* Geist's numerals are wider than the system face this was spaced for, so
+     `$499` and its period now sit closer than `$0` and its did. */
+  gap: 0.5rem;
 }
 
 .plan__amount {

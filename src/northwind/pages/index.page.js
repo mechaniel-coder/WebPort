@@ -9,26 +9,35 @@ export const meta = {
     per seat. Ten-second resolution kept at full fidelity for the whole retention window.`,
   priority: 1.0,
   styles: ['dashboard.css'],
-  scripts: ['ui.js', 'dashboard.js'],
+  scripts: ['ui.js', 'dashboard.js', 'hero.js'],
 };
 
 export function render({ url }) {
   return `
 <section class="hero">
+  <!-- Decoration over a CSS gradient that stands alone: if WebGL is missing the
+       canvas hides itself and the gradient is what remains. aria-hidden because
+       describing an abstract field of moving light to a screen-reader user
+       conveys nothing they can use, and the kicker below already names what the
+       product does. -->
+  <canvas class="hero__surface" data-signal aria-hidden="true"></canvas>
+
   <div class="shell">
     <p class="kicker">Metrics · Traces · Logs</p>
-    <h1 class="h1 hero__title" style="margin-top:var(--space-xs)">
+    <h1 class="h1 hero__title" data-reveal="lines" data-stagger="0.07"
+        style="margin-top:var(--space-xs)">
       Observability that does not roll up your data the week you need it.</h1>
-    <p class="lede" style="margin-top:var(--space-m)">
+    <p class="lede" data-reveal data-delay="0.3" style="margin-top:var(--space-m)">
       ${esc(product.lede)} Ten-second resolution stays ten-second resolution for the whole
       retention window — including the 87th day, which is when the incident review happens.
     </p>
-    <div class="hero__actions">
+    <div class="hero__actions" data-reveal data-delay="0.42">
       <a class="btn btn--lg" href="${esc(url('/northwind/demo/'))}">Book a demo</a>
       <a class="btn btn--ghost btn--lg" href="${esc(url('/northwind/docs/'))}">
         Read the docs</a>
     </div>
-    <p class="hero__note">Free up to 5 GB a month. No card, no seat count, no sales call.</p>
+    <p class="hero__note" data-reveal data-delay="0.5">Free up to 5 GB a month. No card, no
+      seat count, no sales call.</p>
   </div>
 </section>
 

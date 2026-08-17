@@ -35,6 +35,22 @@
   font-display: swap;
 }
 
+@font-face {
+  font-family: 'Geist';
+  src: url('fonts/geist-var.woff2') format('woff2-variations');
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Geist Mono';
+  src: url('fonts/geist-mono-var.woff2') format('woff2-variations');
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+
 /**
  * Metric-matched fallbacks.
  *
@@ -74,4 +90,22 @@
   descent-override: 30%;
   line-gap-override: 0%;
   size-adjust: 98%;
+}
+
+@font-face {
+  font-family: 'Geist Fallback';
+  src: local('Helvetica Neue'), local('Arial'), local('Liberation Sans');
+  ascent-override: 95%;
+  descent-override: 24%;
+  line-gap-override: 0%;
+  size-adjust: 101%;
+}
+
+@font-face {
+  font-family: 'Geist Mono Fallback';
+  src: local('SFMono-Regular'), local('Consolas'), local('Liberation Mono');
+  ascent-override: 100%;
+  descent-override: 28%;
+  line-gap-override: 0%;
+  size-adjust: 97%;
 }

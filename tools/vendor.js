@@ -37,6 +37,17 @@ const ASSETS = [
     to('fonts', 'jetbrains-var.woff2'),
   ],
 
+  // Northwind's pair. A serif would be wrong for a developer tool, so this site
+  // runs on a neutral grotesk with its own matched monospace.
+  [
+    from('@fontsource-variable', 'geist', 'files', 'geist-latin-wght-normal.woff2'),
+    to('fonts', 'geist-var.woff2'),
+  ],
+  [
+    from('@fontsource-variable', 'geist-mono', 'files', 'geist-mono-latin-wght-normal.woff2'),
+    to('fonts', 'geist-mono-var.woff2'),
+  ],
+
   // Licence texts travel with the files they cover.
   [from('@fontsource-variable', 'fraunces', 'LICENSE'), to('licences', 'OFL-Fraunces.txt')],
   [
@@ -47,6 +58,8 @@ const ASSETS = [
     from('@fontsource-variable', 'jetbrains-mono', 'LICENSE'),
     to('licences', 'OFL-JetBrainsMono.txt'),
   ],
+  [from('@fontsource-variable', 'geist', 'LICENSE'), to('licences', 'OFL-Geist.txt')],
+  [from('@fontsource-variable', 'geist-mono', 'LICENSE'), to('licences', 'OFL-GeistMono.txt')],
   [from('lenis', 'LICENSE'), to('licences', 'MIT-Lenis.txt')],
 ];
 

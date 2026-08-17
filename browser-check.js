@@ -324,8 +324,12 @@ await withServer(async () => {
   let motion = null;
   if (has('/aurelia/')) {
     motion = await import('./checks/motion.js');
-    await motion.revealScenario(page, ORIGIN, check);
-    await motion.typeScenario(page, ORIGIN, check);
+    // The same scenarios against every site carrying the shared motion layer.
+    for (const site of Object.values(motion.SITES)) {
+      if (!has(site.path)) continue;
+      await motion.revealScenario(page, ORIGIN, check, site);
+      await motion.typeScenario(page, ORIGIN, check, site);
+    }
     await motion.calendarLayoutScenario(page, ORIGIN, check);
   }
 

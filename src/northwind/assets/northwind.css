@@ -47,8 +47,14 @@
   --focus-radius: 4px;
 
   /* ── Type ───────────────────────────────────────────────────────────────── */
-  --font-sans: system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-  --font-mono: ui-monospace, SFMono-Regular, 'SF Mono', Menlo, Consolas, monospace;
+  /* Geist and its matched monospace. A developer tool is read by people who
+     look at monospaced text all day, and a mono drawn against the same skeleton
+     as the sans is the difference between a code sample that belongs on the
+     page and one that was pasted onto it. No serif anywhere: Aurelia's Fraunces
+     would be actively wrong here, which is why the sites do not share a stack. */
+  --font-sans: 'Geist', 'Geist Fallback', system-ui, sans-serif;
+  --font-mono: 'Geist Mono', 'Geist Mono Fallback', ui-monospace, monospace;
+  --font-display: var(--font-sans);
 
   --step--2: clamp(0.72rem, 0.7rem + 0.08vw, 0.76rem);
   --step--1: clamp(0.83rem, 0.81rem + 0.11vw, 0.89rem);
@@ -57,7 +63,13 @@
   --step-2: clamp(1.37rem, 1.26rem + 0.53vw, 1.69rem);
   --step-3: clamp(1.63rem, 1.44rem + 0.9vw, 2.15rem);
   --step-4: clamp(1.94rem, 1.64rem + 1.45vw, 2.73rem);
-  --step-5: clamp(2.31rem, 1.85rem + 2.24vw, 3.47rem);
+  --step-5: clamp(2.31rem, 1.7rem + 3vw, 4.4rem);
+
+  /* The hero step, sized against the viewport rather than taken from the
+     modular scale — see the same note in aurelia.css. Smaller than Aurelia's
+     11rem on purpose: a hotel hero is a poster, a developer tool's is a claim
+     that has to be read and believed, and 176px of it reads as shouting. */
+  --step-hero: clamp(2.6rem, 6.4vw, 6rem);
 
   /* ── Space ──────────────────────────────────────────────────────────────── */
   --space-3xs: 0.25rem;
@@ -128,10 +140,24 @@ a:hover {
   font-weight: 620;
   letter-spacing: -0.028em;
   line-height: 1.08;
+  text-wrap: balance;
+  /* Optical kerning matters more once headings are set this large — at 96px a
+     badly-spaced pair is an 8px gap rather than a 1px one. */
+  font-kerning: normal;
+  font-feature-settings: 'kern' 1, 'liga' 1, 'ss01' 1;
 }
 
 .h1 {
   font-size: var(--step-5);
+}
+
+/* Only the hero gets viewport-scaled type. Section headings stay on the modular
+   scale — two competing display sizes on one page reads as two headlines
+   arguing, which is the mistake Aurelia's first pass made. */
+.hero__title {
+  font-size: var(--step-hero);
+  letter-spacing: -0.038em;
+  line-height: 1;
 }
 .h2 {
   font-size: var(--step-3);
@@ -149,6 +175,20 @@ a:hover {
   letter-spacing: 0.14em;
   text-transform: uppercase;
   color: var(--accent);
+  display: flex;
+  align-items: center;
+  gap: 0.7em;
+}
+
+/* A rule growing out of the label. One pseudo-element, and it does more to make
+   a section feel composed than any amount of extra margin. */
+.kicker::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: currentColor;
+  opacity: 0.3;
+  max-width: 4.5rem;
 }
 
 .lede {
@@ -365,12 +405,13 @@ a:hover {
 
 .hero {
   position: relative;
-  padding-block: var(--space-2xl) var(--space-xl);
+  padding-block: calc(var(--space-2xl) * 1.5) var(--space-2xl);
   overflow: hidden;
   isolation: isolate;
 }
 
-/* A faint field of the accent, so the top of the page is not flat black. */
+/* The fallback, and the floor the canvas composites over. Without WebGL, or
+   before the first frame, this alone is a finished hero. */
 .hero::before {
   content: '';
   position: absolute;
@@ -380,6 +421,32 @@ a:hover {
   background:
     radial-gradient(60rem 30rem at 22% 12%, rgba(79, 143, 247, 0.16), transparent 70%),
     radial-gradient(44rem 24rem at 82% 0%, rgba(25, 158, 112, 0.1), transparent 70%);
+}
+
+.hero__surface {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -2;
+  display: block;
+}
+
+/* The shader fades its own lower-left quadrant, but a scrim is still needed for
+   the guarantee: the headline has to clear AA against the *brightest* frame the
+   animation can produce, not the average one. */
+.hero::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: linear-gradient(
+    100deg,
+    rgba(11, 14, 20, 0.94) 0%,
+    rgba(11, 14, 20, 0.82) 38%,
+    rgba(11, 14, 20, 0.36) 72%,
+    rgba(11, 14, 20, 0.12) 100%
+  );
 }
 
 .hero__grid {

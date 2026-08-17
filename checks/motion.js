@@ -7,13 +7,45 @@
  * to a human. So these assert *rendered* state: opacity, transforms and pixels.
  */
 
+/**
+ * The two sites carrying the motion layer, and what to look at on each.
+ *
+ * Parameterised rather than copied: these scenarios exist to catch bugs in the
+ * *shared* system, so a second hand-written copy would drift from the first and
+ * quietly stop covering the same ground.
+ */
+export const SITES = {
+  aurelia: {
+    key: 'aurelia',
+    path: '/aurelia/',
+    lede: '.hero__lede',
+    headline: 'very little else',
+    cards: '.rooms > li',
+    faces: ['Fraunces', 'Schibsted Grotesk'],
+    display: 'Fraunces',
+    minHero: 120,
+  },
+  northwind: {
+    key: 'northwind',
+    path: '/northwind/',
+    lede: '.lede',
+    headline: 'roll up your data',
+    cards: '.feature-grid > *, .logos > li',
+    faces: ['Geist', 'Geist Mono'],
+    display: 'Geist',
+    minHero: 70,
+  },
+};
+
 /** The reveal system: content must end up visible, on load and on scroll. */
-export async function revealScenario(page, origin, check) {
-  await page.goto(`${origin}/aurelia/`, { waitUntil: 'networkidle' });
+export async function revealScenario(page, origin, check, site = SITES.aurelia) {
+  await page.goto(`${origin}${site.path}`, { waitUntil: 'networkidle' });
   await page.waitForTimeout(2600);
 
+  const at = (name) => `${site.key} ${name}`;
+
   check(
-    'motion: boot snippet ran and motion.js took over',
+    at('motion: boot snippet ran and motion.js took over'),
     (await page.evaluate(() => document.documentElement.className)).includes('motion-ready'),
     await page.evaluate(() => document.documentElement.className),
   );
@@ -27,18 +59,21 @@ export async function revealScenario(page, origin, check) {
    */
   for (const [label, selector] of [
     ['headline', '.hero__title'],
-    ['lede', '.hero__lede'],
+    ['lede', site.lede],
     ['call to action', '.hero__actions'],
   ]) {
-    const box = await page.locator(selector).boundingBox();
+    const box = await page.locator(selector).first().boundingBox();
     check(
-      `motion: hero ${label} is on screen without scrolling`,
+      at(`motion: hero ${label} is on screen without scrolling`),
       box !== null && box.height > 0,
       JSON.stringify(box),
     );
     check(
-      `motion: hero ${label} finished at full opacity`,
-      (await page.locator(selector).evaluate((el) => getComputedStyle(el).opacity)) === '1',
+      at(`motion: hero ${label} finished at full opacity`),
+      (await page
+        .locator(selector)
+        .first()
+        .evaluate((el) => getComputedStyle(el).opacity)) === '1',
     );
   }
 
@@ -83,7 +118,7 @@ export async function revealScenario(page, origin, check) {
     return found;
   });
   check(
-    'motion: no revealed element leaves a transparent descendant',
+    at('motion: no revealed element leaves a transparent descendant'),
     transparent.length === 0,
     transparent.slice(0, 4).join(', ') || 'none',
   );
@@ -95,8 +130,8 @@ export async function revealScenario(page, origin, check) {
     text: el.textContent.replace(/\s+/g, ' ').trim(),
   }));
   check(
-    'motion: split headline keeps one readable accessible name',
-    (heading.label || heading.text).includes('very little else'),
+    at('motion: split headline keeps one readable accessible name'),
+    (heading.label || heading.text).includes(site.headline),
     heading.label || heading.text,
   );
 
@@ -104,10 +139,10 @@ export async function revealScenario(page, origin, check) {
   await page.evaluate(() => window.scrollTo(0, 1500));
   await page.waitForTimeout(1600);
   const cards = await page
-    .locator('.rooms > li')
+    .locator(site.cards)
     .evaluateAll((nodes) => nodes.map((n) => getComputedStyle(n).opacity));
   check(
-    'motion: scrolled-to content reveals to full opacity',
+    at('motion: scrolled-to content reveals to full opacity'),
     cards.length > 0 && cards.every((value) => value === '1'),
     cards.join(', '),
   );
@@ -239,42 +274,47 @@ export async function calendarLayoutScenario(page, origin, check) {
 }
 
 /** Webfonts must actually load, and must not shift the layout when they do. */
-export async function typeScenario(page, origin, check) {
-  await page.goto(`${origin}/aurelia/`, { waitUntil: 'networkidle' });
+export async function typeScenario(page, origin, check, site = SITES.aurelia) {
+  await page.goto(`${origin}${site.path}`, { waitUntil: 'networkidle' });
   await page.evaluate(() => document.fonts.ready);
 
   const loaded = await page.evaluate(() =>
     [...document.fonts].filter((f) => f.status === 'loaded').map((f) => f.family),
   );
-  for (const family of ['Fraunces', 'Schibsted Grotesk']) {
-    check(`type: ${family} loaded`, loaded.includes(family), loaded.join(', '));
+  for (const family of site.faces) {
+    check(`type: ${site.key} loaded ${family}`, loaded.includes(family), loaded.join(', '));
   }
 
   const used = await page.locator('h1').evaluate((el) => getComputedStyle(el).fontFamily);
-  check('type: the headline is set in the display face', used.startsWith('Fraunces'), used);
+  check(
+    `type: ${site.key} headline is set in the display face`,
+    used.startsWith(site.display),
+    used,
+  );
 
   // The hero must be display-scale, not a large paragraph. The old scale
   // topped out at ~84px, which is most of why this site read as basic.
   const size = await page
     .locator('h1')
     .evaluate((el) => parseFloat(getComputedStyle(el).fontSize));
-  check('type: hero is set at display scale', size > 120, `${Math.round(size)}px`);
+  check(
+    `type: ${site.key} hero is set at display scale`,
+    size > site.minHero,
+    `${Math.round(size)}px`,
+  );
 
   // Metric-matched fallbacks exist so the swap moves nothing. Compare the
   // headline's box before and after the webfonts are applied.
-  const shift = await page.evaluate(async () => {
-    const el = document.querySelector('.hero__lede');
+  const shift = await page.evaluate(async (selector) => {
+    const el = document.querySelector(selector);
     const before = el.getBoundingClientRect().height;
-    document.documentElement.style.setProperty(
-      '--font-sans',
-      "'Schibsted Fallback', sans-serif",
-    );
+    document.documentElement.style.setProperty('--font-sans', 'sans-serif');
     const after = el.getBoundingClientRect().height;
     document.documentElement.style.removeProperty('--font-sans');
     return Math.abs(after - before);
-  });
+  }, site.lede);
   check(
-    'type: the fallback face matches the webfont metrics',
+    `type: ${site.key} fallback face matches the webfont metrics`,
     shift < 4,
     `${shift.toFixed(1)}px difference`,
   );

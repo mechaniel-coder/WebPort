@@ -60,6 +60,11 @@ export default {
   colorScheme: 'dark',
   styles: ['northwind.css'],
   socialImage: '/northwind/assets/social-card.svg',
+
+  // The shared type and motion layers, same as Aurelia. Per-site flags, so
+  // Forma and the hub keep their current weight until they get the same pass.
+  webfonts: true,
+  motion: true,
   favicon: `<svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
     <rect width="32" height="32" rx="7" fill="#0b0e14"/>
     <path d="M6 23V10l10 10 10-10v13" fill="none" stroke="#4f8ff7" stroke-width="2.6"/>
@@ -84,7 +89,7 @@ export default {
 
   header({ url, path }) {
     const current = (href) => (path === href ? ' aria-current="page"' : '');
-    return `<header class="topbar">
+    return `<header class="topbar" data-header>
       <div class="topbar__inner">
         <a class="logo" href="${esc(url('/northwind/'))}"${current('/northwind/')}>
           <span class="logo__mark" aria-hidden="true">${mark}</span>

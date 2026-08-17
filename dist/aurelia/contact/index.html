@@ -6,7 +6,7 @@
     <title>Contact — Aurelia</title>
     <meta name="description" content="How to reach Aurelia, how to get here from San Francisco or Santa Rosa, and answers to the questions we are asked most often before a first visit.">
     <link rel="canonical" href="https://exostech.pro/aurelia/contact/">
-    <meta name="theme-color" content="#23201c">
+    <meta name="theme-color" content="#1a1714">
     <meta property="og:type" content="website">
     <meta property="og:site_name" content="Aurelia">
     <meta property="og:title" content="Contact — Aurelia">
@@ -20,15 +20,20 @@
     <meta name="twitter:description" content="How to reach Aurelia, how to get here from San Francisco or Santa Rosa, and answers to the questions we are asked most often before a first visit.">
     <meta name="twitter:image" content="https://exostech.pro/aurelia/assets/social-card.svg">
     <link rel="icon" href="data:image/svg+xml,%3Csvg%20viewBox%3D%220%200%2032%2032%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20aria-hidden%3D%22true%22%3E%20%3Crect%20width%3D%2232%22%20height%3D%2232%22%20rx%3D%226%22%20fill%3D%22%2323201c%22%2F%3E%20%3Cpath%20d%3D%22M7%2026V16a9%209%200%200%201%2018%200v10%22%20fill%3D%22none%22%20stroke%3D%22%23efe9df%22%20stroke-width%3D%222.2%22%2F%3E%20%3C%2Fsvg%3E">
+    <link rel="preload" as="font" type="font/woff2" crossorigin href="/shared/fonts/fraunces-var.woff2">
+    <link rel="preload" as="font" type="font/woff2" crossorigin href="/shared/fonts/schibsted-var.woff2">
     <link rel="stylesheet" href="/shared/reset.css">
+    <link rel="stylesheet" href="/shared/type.css">
+    <link rel="stylesheet" href="/shared/motion.css">
     <link rel="stylesheet" href="/aurelia/assets/aurelia.css">
+    <script>var d=document.documentElement;if(!matchMedia('(prefers-reduced-motion: reduce)').matches){d.classList.add('has-motion');window.__motionFallback=setTimeout(function(){d.classList.remove('has-motion');d.classList.add('motion-off')},2500)}</script>
     <script type="application/ld+json">{"@context":"https://schema.org","@type":"Hotel","name":"Aurelia Coast Retreat","description":"A twenty-two room retreat on the northern Sonoma coast.","url":"https://exostech.pro/aurelia/","telephone":"+1 (707) 555-0142","email":"stay@example.com","numberOfRooms":22,"priceRange":"$$$$","checkinTime":"16:00","checkoutTime":"11:00","address":{"@type":"PostalAddress","streetAddress":"4180 Shoreline Highway","addressLocality":"Sea Ranch","addressRegion":"CA","postalCode":"95497","addressCountry":"US"},"geo":{"@type":"GeoCoordinates","latitude":38.7096,"longitude":-123.4569},"amenityFeature":[{"@type":"LocationFeatureSpecification","name":"Restaurant","value":true},{"@type":"LocationFeatureSpecification","name":"Sauna","value":true},{"@type":"LocationFeatureSpecification","name":"Ocean view","value":true},{"@type":"LocationFeatureSpecification","name":"Free breakfast","value":true},{"@type":"LocationFeatureSpecification","name":"Free parking","value":true}]}</script>
     <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"What time is check-in and check-out?","acceptedAnswer":{"@type":"Answer","text":"Check-in is from 16:00, check-out is 11:00. Arrive earlier and we will take your bags and point you at the courtyard or the bluff trail."}},{"@type":"Question","name":"Is there a minimum stay?","acceptedAnswer":{"@type":"Answer","text":"Two nights on Friday and Saturday between June and September. Single nights are available every other night of the year."}},{"@type":"Question","name":"What is the cancellation policy?","acceptedAnswer":{"@type":"Answer","text":"Cancel more than 7 days before arrival for a full refund. Inside that window the first night is charged."}},{"@type":"Question","name":"Are children welcome?","acceptedAnswer":{"@type":"Answer","text":"Yes, in the Cliff Houses, which have the space and the second bathroom. The restaurant seats children at the 19:00 service."}},{"@type":"Question","name":"Can we bring a dog?","acceptedAnswer":{"@type":"Answer","text":"One dog per Cliff House, no charge. The bluff trail is a working conservation easement, so dogs stay leashed on it."}},{"@type":"Question","name":"How do we get there?","acceptedAnswer":{"@type":"Answer","text":"Two and a half hours from San Francisco on Highway 1, or ninety minutes from Santa Rosa. The last forty minutes have no cell service — download the directions."}}]}</script>
     <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Aurelia","item":"https://exostech.pro/aurelia/"},{"@type":"ListItem","position":2,"name":"Contact","item":"https://exostech.pro/aurelia/contact/"}]}</script>
   </head>
   <body class="site-aurelia">
     <a class="skip-link" href="#main">Skip to main content</a>
-    <header class="masthead" data-masthead>
+    <header class="masthead" data-masthead data-header>
       <div class="masthead__inner">
         <a class="brand" href="/aurelia/">
           <span class="brand__mark" aria-hidden="true"><svg viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg"
@@ -142,19 +147,62 @@
     <defs>
       <linearGradient id="hz-v5smd0-sky" x1="0" y1="0" x2="0" y2="1">
         <stop offset="0" stop-color="#dfeaea"/>
-        <stop offset="1" stop-color="#bcd3d3"/>
+        <stop offset="0.62" stop-color="#bcd3d3"/>
+        <stop offset="1" stop-color="#f2f0e6" stop-opacity="0.55"/>
       </linearGradient>
       <radialGradient id="hz-v5smd0-glow" cx="50%" cy="50%" r="50%">
-        <stop offset="0" stop-color="#f2f0e6" stop-opacity="0.85"/>
+        <stop offset="0" stop-color="#f2f0e6" stop-opacity="0.9"/>
+        <stop offset="0.45" stop-color="#f2f0e6" stop-opacity="0.28"/>
         <stop offset="1" stop-color="#f2f0e6" stop-opacity="0"/>
       </radialGradient>
+
+      <!-- Grain. The same trick as the page-wide overlay, but baked into the
+           artwork so it survives being scaled down into a card: a large flat
+           gradient at card size bands into visible steps without it. -->
+      <filter id="hz-v5smd0-grain" x="0" y="0" width="100%" height="100%">
+        <feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="3"
+          stitchTiles="stitch" result="n"/>
+        <feColorMatrix type="saturate" values="0" in="n" result="g"/>
+        <feComponentTransfer in="g">
+          <feFuncA type="linear" slope="0.5"/>
+        </feComponentTransfer>
+      </filter>
     </defs>
+
     <rect width="1000" height="625" fill="url(#hz-v5smd0-sky)"/>
-    <circle cx="524" cy="207" r="235"
-             fill="url(#hz-v5smd0-glow)"/>
-           <circle cx="524" cy="207" r="69"
-             fill="#f2f0e6"/>
-    <path d="M 0.00 394.38 C 18.52 391.28, 74.07 380.71, 111.11 375.76 C 148.15 370.82, 185.19 367.39, 222.22 364.71 C 259.26 362.03, 296.30 361.56, 333.33 359.66 C 370.37 357.76, 407.41 356.45, 444.44 353.31 C 481.48 350.17, 518.52 345.42, 555.56 340.83 C 592.59 336.24, 629.63 329.53, 666.67 325.76 C 703.70 321.99, 740.74 318.06, 777.78 318.21 C 814.81 318.37, 851.85 321.31, 888.89 326.69 C 925.93 332.08, 981.48 346.54, 1000.00 350.51 L 1000 625 L 0 625 Z" fill="#9fb9b5"/><path d="M 0.00 455.92 C 18.52 451.48, 74.07 435.52, 111.11 429.28 C 148.15 423.05, 185.19 422.67, 222.22 418.49 C 259.26 414.32, 296.30 410.42, 333.33 404.23 C 370.37 398.04, 407.41 383.81, 444.44 381.36 C 481.48 378.91, 518.52 381.35, 555.56 389.52 C 592.59 397.70, 629.63 419.71, 666.67 430.40 C 703.70 441.10, 740.74 450.68, 777.78 453.67 C 814.81 456.66, 851.85 449.60, 888.89 448.36 C 925.93 447.11, 981.48 446.57, 1000.00 446.21 L 1000 625 L 0 625 Z" fill="#7d9d99"/><path d="M 0.00 485.52 C 18.52 489.48, 74.07 506.03, 111.11 509.27 C 148.15 512.51, 185.19 507.78, 222.22 504.97 C 259.26 502.16, 296.30 495.32, 333.33 492.42 C 370.37 489.51, 407.41 490.45, 444.44 487.52 C 481.48 484.60, 518.52 481.30, 555.56 474.89 C 592.59 468.48, 629.63 455.12, 666.67 449.07 C 703.70 443.02, 740.74 436.84, 777.78 438.60 C 814.81 440.37, 851.85 451.73, 888.89 459.65 C 925.93 467.58, 981.48 481.75, 1000.00 486.17 L 1000 625 L 0 625 Z" fill="#5c7d7a"/><path d="M 0.00 517.95 C 18.52 517.25, 74.07 515.03, 111.11 513.75 C 148.15 512.48, 185.19 506.99, 222.22 510.30 C 259.26 513.61, 296.30 525.37, 333.33 533.62 C 370.37 541.86, 407.41 556.34, 444.44 559.75 C 481.48 563.16, 518.52 557.38, 555.56 554.09 C 592.59 550.80, 629.63 543.40, 666.67 540.02 C 703.70 536.64, 740.74 537.95, 777.78 533.79 C 814.81 529.64, 851.85 520.56, 888.89 515.11 C 925.93 509.65, 981.48 503.39, 1000.00 501.05 L 1000 625 L 0 625 Z" fill="#415c5b"/><path d="M 0.00 601.69 C 18.52 599.74, 74.07 592.77, 111.11 589.99 C 148.15 587.21, 185.19 586.54, 222.22 584.99 C 259.26 583.43, 296.30 582.97, 333.33 580.66 C 370.37 578.34, 407.41 573.72, 444.44 571.10 C 481.48 568.47, 518.52 564.49, 555.56 564.90 C 592.59 565.31, 629.63 569.04, 666.67 573.56 C 703.70 578.08, 740.74 587.00, 777.78 592.04 C 814.81 597.09, 851.85 601.98, 888.89 603.82 C 925.93 605.67, 981.48 603.25, 1000.00 603.14 L 1000 625 L 0 625 Z" fill="#2b3d3e"/>
+    <circle cx="524" cy="207"
+             r="360" fill="url(#hz-v5smd0-glow)"/>
+           <circle cx="524" cy="207"
+             r="50" fill="#f2f0e6" opacity="0.55"/>
+    <path d="M 0.00 375.55 C 18.52 372.02, 74.07 360.01, 111.11 354.39 C 148.15 348.77, 185.19 344.88, 222.22 341.83 C 259.26 338.78, 296.30 338.25, 333.33 336.09 C 370.37 333.93, 407.41 332.44, 444.44 328.87 C 481.48 325.31, 518.52 319.91, 555.56 314.69 C 592.59 309.47, 629.63 301.85, 666.67 297.57 C 703.70 293.29, 740.74 288.81, 777.78 288.99 C 814.81 289.17, 851.85 292.51, 888.89 298.63 C 925.93 304.75, 981.48 321.19, 1000.00 325.70 L 1000 625 L 0 625 Z"
+        fill="#9fb9b5" opacity="0.696"
+        filter="url(#hz-v5smd0-soft-0)"/>
+        <filter id="hz-v5smd0-soft-0" x="-10%" y="-30%" width="120%" height="180%">
+          <feGaussianBlur stdDeviation="0 4.40"/>
+        </filter><path d="M 0.00 440.61 C 18.52 435.55, 74.07 417.35, 111.11 410.23 C 148.15 403.12, 185.19 402.69, 222.22 397.93 C 259.26 393.17, 296.30 388.73, 333.33 381.67 C 370.37 374.61, 407.41 358.38, 444.44 355.59 C 481.48 352.79, 518.52 355.57, 555.56 364.89 C 592.59 374.22, 629.63 399.32, 666.67 411.51 C 703.70 423.71, 740.74 434.63, 777.78 438.04 C 814.81 441.46, 851.85 433.40, 888.89 431.99 C 925.93 430.57, 981.48 429.95, 1000.00 429.54 L 1000 625 L 0 625 Z"
+        fill="#7d9d99" opacity="0.772"
+        filter="url(#hz-v5smd0-soft-1)"/>
+        <filter id="hz-v5smd0-soft-1" x="-10%" y="-30%" width="120%" height="180%">
+          <feGaussianBlur stdDeviation="0 3.30"/>
+        </filter><path d="M 0.00 469.19 C 18.52 473.72, 74.07 492.69, 111.11 496.40 C 148.15 500.12, 185.19 494.70, 222.22 491.48 C 259.26 488.26, 296.30 480.42, 333.33 477.09 C 370.37 473.76, 407.41 474.83, 444.44 471.49 C 481.48 468.14, 518.52 464.35, 555.56 457.01 C 592.59 449.66, 629.63 434.36, 666.67 427.43 C 703.70 420.50, 740.74 413.41, 777.78 415.43 C 814.81 417.45, 851.85 430.47, 888.89 439.55 C 925.93 448.63, 981.48 464.87, 1000.00 469.93 L 1000 625 L 0 625 Z"
+        fill="#5c7d7a" opacity="0.848"
+        filter="url(#hz-v5smd0-soft-2)"/>
+        <filter id="hz-v5smd0-soft-2" x="-10%" y="-30%" width="120%" height="180%">
+          <feGaussianBlur stdDeviation="0 2.20"/>
+        </filter><path d="M 0.00 500.71 C 18.52 499.90, 74.07 497.34, 111.11 495.87 C 148.15 494.40, 185.19 488.06, 222.22 491.88 C 259.26 495.70, 296.30 509.28, 333.33 518.79 C 370.37 528.30, 407.41 545.00, 444.44 548.94 C 481.48 552.88, 518.52 546.20, 555.56 542.41 C 592.59 538.61, 629.63 530.08, 666.67 526.18 C 703.70 522.27, 740.74 523.78, 777.78 518.99 C 814.81 514.20, 851.85 503.73, 888.89 497.43 C 925.93 491.13, 981.48 483.91, 1000.00 481.21 L 1000 625 L 0 625 Z"
+        fill="#415c5b" opacity="0.924"
+        filter="url(#hz-v5smd0-soft-3)"/>
+        <filter id="hz-v5smd0-soft-3" x="-10%" y="-30%" width="120%" height="180%">
+          <feGaussianBlur stdDeviation="0 1.10"/>
+        </filter><path d="M 0.00 591.56 C 18.52 589.28, 74.07 581.15, 111.11 577.91 C 148.15 574.66, 185.19 573.89, 222.22 572.07 C 259.26 570.26, 296.30 569.72, 333.33 567.02 C 370.37 564.32, 407.41 558.92, 444.44 555.86 C 481.48 552.80, 518.52 548.16, 555.56 548.64 C 592.59 549.12, 629.63 553.46, 666.67 558.73 C 703.70 564.01, 740.74 574.41, 777.78 580.30 C 814.81 586.18, 851.85 591.89, 888.89 594.04 C 925.93 596.20, 981.48 593.38, 1000.00 593.24 L 1000 625 L 0 625 Z"
+        fill="#2b3d3e" opacity="1.000"
+        filter="url(#hz-v5smd0-soft-4)"/>
+        <filter id="hz-v5smd0-soft-4" x="-10%" y="-30%" width="120%" height="180%">
+          <feGaussianBlur stdDeviation="0 0.00"/>
+        </filter>
+
+    <rect width="1000" height="625" filter="url(#hz-v5smd0-grain)"
+      opacity="0.14" style="mix-blend-mode:overlay"/>
   </svg>
         </div>
 
@@ -348,6 +396,11 @@
         </p>
       </div>
     </footer>
+    <script defer src="/shared/js/gsap.min.js"></script>
+    <script defer src="/shared/js/ScrollTrigger.min.js"></script>
+    <script defer src="/shared/js/SplitText.min.js"></script>
+    <script defer src="/shared/js/lenis.min.js"></script>
+    <script defer src="/shared/motion.js"></script>
     <script type="module" src="/aurelia/assets/ui.js"></script>
   </body>
 </html>

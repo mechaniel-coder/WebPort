@@ -321,7 +321,23 @@ await withServer(async () => {
     await lab.motionScenario(page, ORIGIN, check);
   }
 
+  let motion = null;
+  if (has('/aurelia/')) {
+    motion = await import('./checks/motion.js');
+    await motion.revealScenario(page, ORIGIN, check);
+    await motion.typeScenario(page, ORIGIN, check);
+    await motion.calendarLayoutScenario(page, ORIGIN, check);
+  }
+
   await context.close();
+
+  // These need their own browser context — a reduced-motion preference and a
+  // scripting-disabled page cannot be set on an existing one, and both are
+  // exactly the conditions under which a reveal system fails silently.
+  if (motion) {
+    await motion.reducedMotionScenario(browser, ORIGIN, check);
+    await motion.noScriptScenario(browser, ORIGIN, check);
+  }
 
   if (SHOTS) await screenshots(browser, routes.slice(0, 8));
   await browser.close();

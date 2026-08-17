@@ -6,7 +6,7 @@
     <title>Salt &amp; Ember — dining at Aurelia</title>
     <meta name="description" content="Twenty-eight seats, one seating a night, and a menu written the morning it is served. Dinner Wednesday to Sunday, breakfast in the courtyard every day.">
     <link rel="canonical" href="https://exostech.pro/aurelia/dining/">
-    <meta name="theme-color" content="#23201c">
+    <meta name="theme-color" content="#1a1714">
     <meta property="og:type" content="website">
     <meta property="og:site_name" content="Aurelia">
     <meta property="og:title" content="Salt &amp; Ember — dining at Aurelia">
@@ -20,15 +20,20 @@
     <meta name="twitter:description" content="Twenty-eight seats, one seating a night, and a menu written the morning it is served. Dinner Wednesday to Sunday, breakfast in the courtyard every day.">
     <meta name="twitter:image" content="https://exostech.pro/aurelia/assets/social-card.svg">
     <link rel="icon" href="data:image/svg+xml,%3Csvg%20viewBox%3D%220%200%2032%2032%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20aria-hidden%3D%22true%22%3E%20%3Crect%20width%3D%2232%22%20height%3D%2232%22%20rx%3D%226%22%20fill%3D%22%2323201c%22%2F%3E%20%3Cpath%20d%3D%22M7%2026V16a9%209%200%200%201%2018%200v10%22%20fill%3D%22none%22%20stroke%3D%22%23efe9df%22%20stroke-width%3D%222.2%22%2F%3E%20%3C%2Fsvg%3E">
+    <link rel="preload" as="font" type="font/woff2" crossorigin href="/shared/fonts/fraunces-var.woff2">
+    <link rel="preload" as="font" type="font/woff2" crossorigin href="/shared/fonts/schibsted-var.woff2">
     <link rel="stylesheet" href="/shared/reset.css">
+    <link rel="stylesheet" href="/shared/type.css">
+    <link rel="stylesheet" href="/shared/motion.css">
     <link rel="stylesheet" href="/aurelia/assets/aurelia.css">
+    <script>var d=document.documentElement;if(!matchMedia('(prefers-reduced-motion: reduce)').matches){d.classList.add('has-motion');window.__motionFallback=setTimeout(function(){d.classList.remove('has-motion');d.classList.add('motion-off')},2500)}</script>
     <script type="application/ld+json">{"@context":"https://schema.org","@type":"Hotel","name":"Aurelia Coast Retreat","description":"A twenty-two room retreat on the northern Sonoma coast.","url":"https://exostech.pro/aurelia/","telephone":"+1 (707) 555-0142","email":"stay@example.com","numberOfRooms":22,"priceRange":"$$$$","checkinTime":"16:00","checkoutTime":"11:00","address":{"@type":"PostalAddress","streetAddress":"4180 Shoreline Highway","addressLocality":"Sea Ranch","addressRegion":"CA","postalCode":"95497","addressCountry":"US"},"geo":{"@type":"GeoCoordinates","latitude":38.7096,"longitude":-123.4569},"amenityFeature":[{"@type":"LocationFeatureSpecification","name":"Restaurant","value":true},{"@type":"LocationFeatureSpecification","name":"Sauna","value":true},{"@type":"LocationFeatureSpecification","name":"Ocean view","value":true},{"@type":"LocationFeatureSpecification","name":"Free breakfast","value":true},{"@type":"LocationFeatureSpecification","name":"Free parking","value":true}]}</script>
     <script type="application/ld+json">{"@context":"https://schema.org","@type":"Restaurant","name":"Salt & Ember","description":"Twenty-eight seats, one seating a night, and a menu that is written the morning it\n    is served.","url":"https://exostech.pro/aurelia/dining/","servesCuisine":"Californian coastal","priceRange":"$$$","acceptsReservations":true,"telephone":"+1 (707) 555-0142","address":{"@type":"PostalAddress","streetAddress":"4180 Shoreline Highway","addressLocality":"Sea Ranch","addressRegion":"CA","postalCode":"95497","addressCountry":"US"}}</script>
     <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Aurelia","item":"https://exostech.pro/aurelia/"},{"@type":"ListItem","position":2,"name":"Dining","item":"https://exostech.pro/aurelia/dining/"}]}</script>
   </head>
   <body class="site-aurelia">
     <a class="skip-link" href="#main">Skip to main content</a>
-    <header class="masthead" data-masthead>
+    <header class="masthead" data-masthead data-header>
       <div class="masthead__inner">
         <a class="brand" href="/aurelia/">
           <span class="brand__mark" aria-hidden="true"><svg viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg"
@@ -102,19 +107,62 @@
     <defs>
       <linearGradient id="hz-2c7xeg-sky" x1="0" y1="0" x2="0" y2="1">
         <stop offset="0" stop-color="#f0d9c4"/>
-        <stop offset="1" stop-color="#d9a689"/>
+        <stop offset="0.62" stop-color="#d9a689"/>
+        <stop offset="1" stop-color="#c96f4e" stop-opacity="0.55"/>
       </linearGradient>
       <radialGradient id="hz-2c7xeg-glow" cx="50%" cy="50%" r="50%">
-        <stop offset="0" stop-color="#c96f4e" stop-opacity="0.85"/>
+        <stop offset="0" stop-color="#c96f4e" stop-opacity="0.9"/>
+        <stop offset="0.45" stop-color="#c96f4e" stop-opacity="0.28"/>
         <stop offset="1" stop-color="#c96f4e" stop-opacity="0"/>
       </radialGradient>
+
+      <!-- Grain. The same trick as the page-wide overlay, but baked into the
+           artwork so it survives being scaled down into a card: a large flat
+           gradient at card size bands into visible steps without it. -->
+      <filter id="hz-2c7xeg-grain" x="0" y="0" width="100%" height="100%">
+        <feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="3"
+          stitchTiles="stitch" result="n"/>
+        <feColorMatrix type="saturate" values="0" in="n" result="g"/>
+        <feComponentTransfer in="g">
+          <feFuncA type="linear" slope="0.5"/>
+        </feComponentTransfer>
+      </filter>
     </defs>
+
     <rect width="1000" height="750" fill="url(#hz-2c7xeg-sky)"/>
-    <circle cx="184" cy="245" r="215"
-             fill="url(#hz-2c7xeg-glow)"/>
-           <circle cx="184" cy="245" r="63"
-             fill="#c96f4e"/>
-    <path d="M 0.00 495.59 C 18.52 490.46, 74.07 473.38, 111.11 464.78 C 148.15 456.18, 185.19 449.05, 222.22 443.99 C 259.26 438.93, 296.30 439.79, 333.33 434.44 C 370.37 429.09, 407.41 420.38, 444.44 411.89 C 481.48 403.41, 518.52 387.62, 555.56 383.55 C 592.59 379.48, 629.63 379.54, 666.67 387.47 C 703.70 395.41, 740.74 416.85, 777.78 431.15 C 814.81 445.45, 851.85 464.78, 888.89 473.28 C 925.93 481.78, 981.48 480.66, 1000.00 482.14 L 1000 750 L 0 750 Z" fill="#a9765f"/><path d="M 0.00 489.49 C 18.52 488.74, 74.07 487.57, 111.11 484.96 C 148.15 482.35, 185.19 477.59, 222.22 473.82 C 259.26 470.06, 296.30 461.43, 333.33 462.36 C 370.37 463.29, 407.41 469.32, 444.44 479.39 C 481.48 489.47, 518.52 510.58, 555.56 522.83 C 592.59 535.07, 629.63 548.72, 666.67 552.86 C 703.70 556.99, 740.74 551.49, 777.78 547.64 C 814.81 543.78, 851.85 534.03, 888.89 529.72 C 925.93 525.42, 981.48 523.11, 1000.00 521.79 L 1000 750 L 0 750 Z" fill="#87594b"/><path d="M 0.00 554.93 C 18.52 554.42, 74.07 554.11, 111.11 551.85 C 148.15 549.59, 185.19 543.68, 222.22 541.38 C 259.26 539.09, 296.30 534.45, 333.33 538.08 C 370.37 541.71, 407.41 552.77, 444.44 563.16 C 481.48 573.54, 518.52 591.93, 555.56 600.39 C 592.59 608.85, 629.63 613.91, 666.67 613.91 C 703.70 613.91, 740.74 604.92, 777.78 600.39 C 814.81 595.87, 851.85 590.02, 888.89 586.76 C 925.93 583.51, 981.48 581.83, 1000.00 580.85 L 1000 750 L 0 750 Z" fill="#65403a"/><path d="M 0.00 620.61 C 18.52 620.37, 74.07 620.10, 111.11 619.18 C 148.15 618.26, 185.19 616.30, 222.22 615.12 C 259.26 613.94, 296.30 612.00, 333.33 612.09 C 370.37 612.18, 407.41 612.93, 444.44 615.67 C 481.48 618.41, 518.52 623.21, 555.56 628.51 C 592.59 633.81, 629.63 641.39, 666.67 647.46 C 703.70 653.54, 740.74 660.57, 777.78 664.96 C 814.81 669.34, 851.85 672.65, 888.89 673.76 C 925.93 674.87, 981.48 671.97, 1000.00 671.61 L 1000 750 L 0 750 Z" fill="#452c2a"/><path d="M 0.00 707.71 C 18.52 706.22, 74.07 701.05, 111.11 698.73 C 148.15 696.41, 185.19 696.49, 222.22 693.79 C 259.26 691.08, 296.30 684.44, 333.33 682.50 C 370.37 680.55, 407.41 678.47, 444.44 682.11 C 481.48 685.75, 518.52 697.10, 555.56 704.33 C 592.59 711.56, 629.63 722.00, 666.67 725.50 C 703.70 729.01, 740.74 726.59, 777.78 725.35 C 814.81 724.10, 851.85 719.63, 888.89 718.04 C 925.93 716.45, 981.48 716.16, 1000.00 715.78 L 1000 750 L 0 750 Z" fill="#281b1c"/>
+    <circle cx="184" cy="245"
+             r="328" fill="url(#hz-2c7xeg-glow)"/>
+           <circle cx="184" cy="245"
+             r="45" fill="#c96f4e" opacity="0.55"/>
+    <path d="M 0.00 476.04 C 18.52 470.20, 74.07 450.80, 111.11 441.03 C 148.15 431.25, 185.19 423.14, 222.22 417.40 C 259.26 411.65, 296.30 412.62, 333.33 406.54 C 370.37 400.46, 407.41 390.56, 444.44 380.92 C 481.48 371.29, 518.52 353.34, 555.56 348.71 C 592.59 344.09, 629.63 344.16, 666.67 353.17 C 703.70 362.19, 740.74 386.56, 777.78 402.81 C 814.81 419.06, 851.85 441.02, 888.89 450.68 C 925.93 460.34, 981.48 459.07, 1000.00 460.75 L 1000 750 L 0 750 Z"
+        fill="#a9765f" opacity="0.696"
+        filter="url(#hz-2c7xeg-soft-0)"/>
+        <filter id="hz-2c7xeg-soft-0" x="-10%" y="-30%" width="120%" height="180%">
+          <feGaussianBlur stdDeviation="0 4.40"/>
+        </filter><path d="M 0.00 463.03 C 18.52 462.17, 74.07 460.84, 111.11 457.87 C 148.15 454.89, 185.19 449.46, 222.22 445.17 C 259.26 440.87, 296.30 431.04, 333.33 432.10 C 370.37 433.16, 407.41 440.03, 444.44 451.52 C 481.48 463.01, 518.52 487.08, 555.56 501.05 C 592.59 515.01, 629.63 530.58, 666.67 535.30 C 703.70 540.01, 740.74 533.74, 777.78 529.34 C 814.81 524.94, 851.85 513.83, 888.89 508.91 C 925.93 504.00, 981.48 501.37, 1000.00 499.86 L 1000 750 L 0 750 Z"
+        fill="#87594b" opacity="0.772"
+        filter="url(#hz-2c7xeg-soft-1)"/>
+        <filter id="hz-2c7xeg-soft-1" x="-10%" y="-30%" width="120%" height="180%">
+          <feGaussianBlur stdDeviation="0 3.30"/>
+        </filter><path d="M 0.00 531.30 C 18.52 530.71, 74.07 530.35, 111.11 527.77 C 148.15 525.18, 185.19 518.40, 222.22 515.77 C 259.26 513.14, 296.30 507.83, 333.33 511.99 C 370.37 516.15, 407.41 528.82, 444.44 540.72 C 481.48 552.62, 518.52 573.69, 555.56 583.39 C 592.59 593.08, 629.63 598.88, 666.67 598.88 C 703.70 598.88, 740.74 588.57, 777.78 583.39 C 814.81 578.20, 851.85 571.50, 888.89 567.77 C 925.93 564.04, 981.48 562.12, 1000.00 560.99 L 1000 750 L 0 750 Z"
+        fill="#65403a" opacity="0.848"
+        filter="url(#hz-2c7xeg-soft-2)"/>
+        <filter id="hz-2c7xeg-soft-2" x="-10%" y="-30%" width="120%" height="180%">
+          <feGaussianBlur stdDeviation="0 2.20"/>
+        </filter><path d="M 0.00 599.78 C 18.52 599.51, 74.07 599.19, 111.11 598.13 C 148.15 597.07, 185.19 594.81, 222.22 593.44 C 259.26 592.08, 296.30 589.85, 333.33 589.95 C 370.37 590.06, 407.41 590.92, 444.44 594.08 C 481.48 597.24, 518.52 602.78, 555.56 608.90 C 592.59 615.01, 629.63 623.76, 666.67 630.77 C 703.70 637.77, 740.74 645.89, 777.78 650.95 C 814.81 656.01, 851.85 659.83, 888.89 661.11 C 925.93 662.39, 981.48 659.04, 1000.00 658.63 L 1000 750 L 0 750 Z"
+        fill="#452c2a" opacity="0.924"
+        filter="url(#hz-2c7xeg-soft-3)"/>
+        <filter id="hz-2c7xeg-soft-3" x="-10%" y="-30%" width="120%" height="180%">
+          <feGaussianBlur stdDeviation="0 1.10"/>
+        </filter><path d="M 0.00 693.17 C 18.52 691.42, 74.07 685.39, 111.11 682.69 C 148.15 679.98, 185.19 680.07, 222.22 676.92 C 259.26 673.76, 296.30 666.02, 333.33 663.75 C 370.37 661.48, 407.41 659.05, 444.44 663.29 C 481.48 667.54, 518.52 680.78, 555.56 689.22 C 592.59 697.66, 629.63 709.83, 666.67 713.92 C 703.70 718.01, 740.74 715.19, 777.78 713.74 C 814.81 712.29, 851.85 707.07, 888.89 705.21 C 925.93 703.35, 981.48 703.02, 1000.00 702.58 L 1000 750 L 0 750 Z"
+        fill="#281b1c" opacity="1.000"
+        filter="url(#hz-2c7xeg-soft-4)"/>
+        <filter id="hz-2c7xeg-soft-4" x="-10%" y="-30%" width="120%" height="180%">
+          <feGaussianBlur stdDeviation="0 0.00"/>
+        </filter>
+
+    <rect width="1000" height="750" filter="url(#hz-2c7xeg-grain)"
+      opacity="0.14" style="mix-blend-mode:overlay"/>
   </svg>
       </div>
     </div>
@@ -278,19 +326,62 @@
     <defs>
       <linearGradient id="hz-98n383-sky" x1="0" y1="0" x2="0" y2="1">
         <stop offset="0" stop-color="#f0d9c4"/>
-        <stop offset="1" stop-color="#d9a689"/>
+        <stop offset="0.62" stop-color="#d9a689"/>
+        <stop offset="1" stop-color="#c96f4e" stop-opacity="0.55"/>
       </linearGradient>
       <radialGradient id="hz-98n383-glow" cx="50%" cy="50%" r="50%">
-        <stop offset="0" stop-color="#c96f4e" stop-opacity="0.85"/>
+        <stop offset="0" stop-color="#c96f4e" stop-opacity="0.9"/>
+        <stop offset="0.45" stop-color="#c96f4e" stop-opacity="0.28"/>
         <stop offset="1" stop-color="#c96f4e" stop-opacity="0"/>
       </radialGradient>
+
+      <!-- Grain. The same trick as the page-wide overlay, but baked into the
+           artwork so it survives being scaled down into a card: a large flat
+           gradient at card size bands into visible steps without it. -->
+      <filter id="hz-98n383-grain" x="0" y="0" width="100%" height="100%">
+        <feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="3"
+          stitchTiles="stitch" result="n"/>
+        <feColorMatrix type="saturate" values="0" in="n" result="g"/>
+        <feComponentTransfer in="g">
+          <feFuncA type="linear" slope="0.5"/>
+        </feComponentTransfer>
+      </filter>
     </defs>
+
     <rect width="1000" height="400" fill="url(#hz-98n383-sky)"/>
-    <circle cx="748" cy="144" r="242"
-             fill="url(#hz-98n383-glow)"/>
-           <circle cx="748" cy="144" r="71"
-             fill="#c96f4e"/>
-    <path d="M 0.00 224.48 C 18.52 226.82, 74.07 232.89, 111.11 238.55 C 148.15 244.21, 185.19 253.25, 222.22 258.45 C 259.26 263.65, 296.30 268.93, 333.33 269.76 C 370.37 270.59, 407.41 267.41, 444.44 263.43 C 481.48 259.44, 518.52 251.22, 555.56 245.85 C 592.59 240.47, 629.63 234.57, 666.67 231.19 C 703.70 227.80, 740.74 226.98, 777.78 225.53 C 814.81 224.07, 851.85 224.24, 888.89 222.46 C 925.93 220.68, 981.48 216.13, 1000.00 214.86 L 1000 400 L 0 400 Z" fill="#a9765f"/><path d="M 0.00 297.24 C 18.52 295.27, 74.07 289.22, 111.11 285.46 C 148.15 281.69, 185.19 277.19, 222.22 274.64 C 259.26 272.09, 296.30 272.00, 333.33 270.15 C 370.37 268.29, 407.41 266.81, 444.44 263.51 C 481.48 260.22, 518.52 253.98, 555.56 250.37 C 592.59 246.75, 629.63 241.81, 666.67 241.82 C 703.70 241.83, 740.74 245.54, 777.78 250.43 C 814.81 255.32, 851.85 265.17, 888.89 271.19 C 925.93 277.21, 981.48 283.97, 1000.00 286.53 L 1000 400 L 0 400 Z" fill="#87594b"/><path d="M 0.00 295.80 C 18.52 295.47, 74.07 295.20, 111.11 293.82 C 148.15 292.45, 185.19 288.25, 222.22 287.53 C 259.26 286.82, 296.30 285.97, 333.33 289.53 C 370.37 293.09, 407.41 302.77, 444.44 308.87 C 481.48 314.98, 518.52 323.64, 555.56 326.17 C 592.59 328.70, 629.63 326.00, 666.67 324.05 C 703.70 322.11, 740.74 316.75, 777.78 314.49 C 814.81 312.23, 851.85 312.52, 888.89 310.49 C 925.93 308.47, 981.48 303.70, 1000.00 302.35 L 1000 400 L 0 400 Z" fill="#65403a"/><path d="M 0.00 333.59 C 18.52 333.29, 74.07 333.02, 111.11 331.81 C 148.15 330.60, 185.19 327.16, 222.22 326.34 C 259.26 325.52, 296.30 324.18, 333.33 326.90 C 370.37 329.63, 407.41 337.64, 444.44 342.70 C 481.48 347.77, 518.52 355.17, 555.56 357.29 C 592.59 359.40, 629.63 356.95, 666.67 355.40 C 703.70 353.84, 740.74 349.68, 777.78 347.94 C 814.81 346.20, 851.85 346.80, 888.89 344.95 C 925.93 343.11, 981.48 338.22, 1000.00 336.88 L 1000 400 L 0 400 Z" fill="#452c2a"/><path d="M 0.00 385.05 C 18.52 385.67, 74.07 389.38, 111.11 388.79 C 148.15 388.20, 185.19 383.25, 222.22 381.51 C 259.26 379.78, 296.30 380.42, 333.33 378.37 C 370.37 376.32, 407.41 372.23, 444.44 369.22 C 481.48 366.21, 518.52 360.13, 555.56 360.32 C 592.59 360.51, 629.63 366.66, 666.67 370.34 C 703.70 374.03, 740.74 380.21, 777.78 382.42 C 814.81 384.63, 851.85 382.90, 888.89 383.58 C 925.93 384.26, 981.48 386.02, 1000.00 386.51 L 1000 400 L 0 400 Z" fill="#281b1c"/>
+    <circle cx="748" cy="144"
+             r="370" fill="url(#hz-98n383-glow)"/>
+           <circle cx="748" cy="144"
+             r="51" fill="#c96f4e" opacity="0.55"/>
+    <path d="M 0.00 208.62 C 18.52 211.28, 74.07 218.17, 111.11 224.60 C 148.15 231.04, 185.19 241.31, 222.22 247.22 C 259.26 253.13, 296.30 259.13, 333.33 260.07 C 370.37 261.02, 407.41 257.40, 444.44 252.88 C 481.48 248.35, 518.52 239.00, 555.56 232.90 C 592.59 226.79, 629.63 220.09, 666.67 216.24 C 703.70 212.39, 740.74 211.46, 777.78 209.81 C 814.81 208.16, 851.85 208.34, 888.89 206.32 C 925.93 204.30, 981.48 199.12, 1000.00 197.68 L 1000 400 L 0 400 Z"
+        fill="#a9765f" opacity="0.696"
+        filter="url(#hz-98n383-soft-0)"/>
+        <filter id="hz-98n383-soft-0" x="-10%" y="-30%" width="120%" height="180%">
+          <feGaussianBlur stdDeviation="0 4.40"/>
+        </filter><path d="M 0.00 288.20 C 18.52 285.96, 74.07 279.06, 111.11 274.77 C 148.15 270.48, 185.19 265.35, 222.22 262.44 C 259.26 259.53, 296.30 259.43, 333.33 257.31 C 370.37 255.20, 407.41 253.51, 444.44 249.75 C 481.48 245.99, 518.52 238.88, 555.56 234.76 C 592.59 230.64, 629.63 225.00, 666.67 225.01 C 703.70 225.02, 740.74 229.25, 777.78 234.83 C 814.81 240.41, 851.85 251.64, 888.89 258.50 C 925.93 265.36, 981.48 273.08, 1000.00 275.99 L 1000 400 L 0 400 Z"
+        fill="#87594b" opacity="0.772"
+        filter="url(#hz-98n383-soft-1)"/>
+        <filter id="hz-98n383-soft-1" x="-10%" y="-30%" width="120%" height="180%">
+          <feGaussianBlur stdDeviation="0 3.30"/>
+        </filter><path d="M 0.00 283.17 C 18.52 282.79, 74.07 282.49, 111.11 280.91 C 148.15 279.33, 185.19 274.52, 222.22 273.70 C 259.26 272.88, 296.30 271.91, 333.33 275.98 C 370.37 280.06, 407.41 291.15, 444.44 298.15 C 481.48 305.15, 518.52 315.08, 555.56 317.97 C 592.59 320.87, 629.63 317.78, 666.67 315.54 C 703.70 313.31, 740.74 307.18, 777.78 304.59 C 814.81 302.00, 851.85 302.32, 888.89 300.01 C 925.93 297.69, 981.48 292.23, 1000.00 290.67 L 1000 400 L 0 400 Z"
+        fill="#65403a" opacity="0.848"
+        filter="url(#hz-98n383-soft-2)"/>
+        <filter id="hz-98n383-soft-2" x="-10%" y="-30%" width="120%" height="180%">
+          <feGaussianBlur stdDeviation="0 2.20"/>
+        </filter><path d="M 0.00 322.88 C 18.52 322.54, 74.07 322.22, 111.11 320.83 C 148.15 319.43, 185.19 315.46, 222.22 314.51 C 259.26 313.57, 296.30 312.02, 333.33 315.17 C 370.37 318.31, 407.41 327.55, 444.44 333.39 C 481.48 339.24, 518.52 347.78, 555.56 350.22 C 592.59 352.66, 629.63 349.84, 666.67 348.04 C 703.70 346.24, 740.74 341.45, 777.78 339.44 C 814.81 337.43, 851.85 338.12, 888.89 335.99 C 925.93 333.87, 981.48 328.23, 1000.00 326.67 L 1000 400 L 0 400 Z"
+        fill="#452c2a" opacity="0.924"
+        filter="url(#hz-98n383-soft-3)"/>
+        <filter id="hz-98n383-soft-3" x="-10%" y="-30%" width="120%" height="180%">
+          <feGaussianBlur stdDeviation="0 1.10"/>
+        </filter><path d="M 0.00 378.56 C 18.52 379.29, 74.07 383.61, 111.11 382.92 C 148.15 382.24, 185.19 376.46, 222.22 374.43 C 259.26 372.41, 296.30 373.15, 333.33 370.76 C 370.37 368.37, 407.41 363.60, 444.44 360.09 C 481.48 356.58, 518.52 349.49, 555.56 349.71 C 592.59 349.93, 629.63 357.10, 666.67 361.40 C 703.70 365.70, 740.74 372.92, 777.78 375.49 C 814.81 378.06, 851.85 376.05, 888.89 376.84 C 925.93 377.64, 981.48 379.69, 1000.00 380.26 L 1000 400 L 0 400 Z"
+        fill="#281b1c" opacity="1.000"
+        filter="url(#hz-98n383-soft-4)"/>
+        <filter id="hz-98n383-soft-4" x="-10%" y="-30%" width="120%" height="180%">
+          <feGaussianBlur stdDeviation="0 0.00"/>
+        </filter>
+
+    <rect width="1000" height="400" filter="url(#hz-98n383-grain)"
+      opacity="0.14" style="mix-blend-mode:overlay"/>
   </svg>
     <div class="shell cta__inner">
       <h2 class="display-2">Dinner is included in the booking.</h2>
@@ -350,6 +441,11 @@
         </p>
       </div>
     </footer>
+    <script defer src="/shared/js/gsap.min.js"></script>
+    <script defer src="/shared/js/ScrollTrigger.min.js"></script>
+    <script defer src="/shared/js/SplitText.min.js"></script>
+    <script defer src="/shared/js/lenis.min.js"></script>
+    <script defer src="/shared/motion.js"></script>
     <script type="module" src="/aurelia/assets/ui.js"></script>
   </body>
 </html>

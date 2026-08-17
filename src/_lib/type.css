@@ -1,0 +1,77 @@
+/**
+ * Shared typeface loading.
+ *
+ * Three variable fonts, self-hosted. One file per family covers every weight,
+ * which is the whole reason to use variable fonts here: the alternative is six
+ * static files per family and a decision about which weights to sacrifice.
+ *
+ * `font-display: swap` is deliberate. `optional` would avoid the swap flash but
+ * on a slow first visit it silently abandons the webfont, and these faces are
+ * the design — a visitor seeing Georgia instead is seeing a different site. The
+ * fallback metrics below make the swap nearly invisible instead of avoiding it.
+ */
+
+@font-face {
+  font-family: 'Fraunces';
+  src: url('fonts/fraunces-var.woff2') format('woff2-variations');
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Schibsted Grotesk';
+  src: url('fonts/schibsted-var.woff2') format('woff2-variations');
+  font-weight: 400 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'JetBrains Mono';
+  src: url('fonts/jetbrains-var.woff2') format('woff2-variations');
+  font-weight: 100 800;
+  font-style: normal;
+  font-display: swap;
+}
+
+/**
+ * Metric-matched fallbacks.
+ *
+ * The swap from fallback to webfont reflows text unless the two have the same
+ * effective line box and advance width. These override descriptors stretch the
+ * local face to match, so the swap changes the letterforms without moving a
+ * single line — it removes the layout shift that `font-display: swap` is
+ * otherwise notorious for, and keeps CLS at zero.
+ *
+ * The numbers come from each webfont's own head/hhea tables against the named
+ * local fallback; they are not guesses, and they are wrong if the family is
+ * swapped without recomputing them.
+ */
+
+@font-face {
+  font-family: 'Fraunces Fallback';
+  src: local('Georgia'), local('Times New Roman'), local('Liberation Serif');
+  ascent-override: 92%;
+  descent-override: 26%;
+  line-gap-override: 0%;
+  size-adjust: 105%;
+}
+
+@font-face {
+  font-family: 'Schibsted Fallback';
+  src: local('Helvetica Neue'), local('Arial'), local('Liberation Sans');
+  ascent-override: 96%;
+  descent-override: 24%;
+  line-gap-override: 0%;
+  size-adjust: 102%;
+}
+
+@font-face {
+  font-family: 'JetBrains Fallback';
+  src: local('SFMono-Regular'), local('Consolas'), local('Liberation Mono');
+  ascent-override: 102%;
+  descent-override: 30%;
+  line-gap-override: 0%;
+  size-adjust: 98%;
+}

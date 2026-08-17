@@ -10,23 +10,34 @@ export const meta = {
   description: `A twenty-two room retreat on the northern Sonoma coast. Ocean-facing rooms,
     one seating a night at Salt & Ember, and four miles of bluff trail.`,
   priority: 1.0,
-  scripts: ['ui.js'],
+  scripts: ['ui.js', 'hero.js'],
 };
 
 export function render({ url }) {
   return `
 <section class="hero">
-  ${horizon({ seed: 'aurelia-hero', palette: 'dawn', ratio: 0.55 })}
+  <!-- The canvas is decoration layered over a CSS gradient that is itself a
+       complete design. If WebGL is unavailable the canvas hides itself and the
+       gradient is what remains, so nothing here is load-bearing. That is why it
+       is aria-hidden rather than given a label: describing generated water to a
+       screen-reader user tells them nothing they can act on, and the prose
+       below already says where the hotel is. -->
+  <canvas class="hero__surface" data-caustics aria-hidden="true"></canvas>
+
   <div class="hero__inner">
     <p class="eyebrow">${esc(hotel.address.locality)}, California</p>
-    <h1 class="display-1 hero__title">The coast, and very little else.</h1>
-    <p class="hero__lede">${esc(hotel.tagline)} Built into the bluff in 1974, taken back to
-      its frame in 2019, and run by forty-one people for twenty-two rooms.</p>
-    <div class="hero__actions">
+    <h1 class="display-1 hero__title" data-reveal="lines" data-stagger="0.09">
+      The coast,<br>and very little else.</h1>
+    <p class="hero__lede" data-reveal data-delay="0.35">${esc(hotel.tagline)} Built into the
+      bluff in 1974, taken back to its frame in 2019, and run by forty-one people for
+      twenty-two rooms.</p>
+    <div class="hero__actions" data-reveal data-delay="0.5">
       <a class="button" href="${esc(url('/aurelia/book/'))}">Check availability</a>
       <a class="button button--ghost" href="${esc(url('/aurelia/rooms/'))}">See the rooms</a>
     </div>
   </div>
+
+  <p class="hero__scroll" aria-hidden="true"><span>Scroll</span></p>
 </section>
 
 <section class="section section--tight">
@@ -34,7 +45,7 @@ export function render({ url }) {
     <div class="split">
       <div class="split__body">
         <p class="eyebrow">The property</p>
-        <h2 class="display-2">Ninety minutes past the last coffee shop.</h2>
+        <h2 class="display-2" data-reveal="lines" data-stagger="0.07">Ninety minutes past the last coffee shop.</h2>
         <p class="text-soft">Aurelia sits on a mile of bluff between Highway 1 and the open
           Pacific, at the point where the road stops pretending to be convenient. There is no
           town attached to it. That is more or less the entire proposition.</p>
@@ -43,7 +54,7 @@ export function render({ url }) {
           miles of trail that ends at a headland full of elephant seals.</p>
         <a class="link-arrow" href="${esc(url('/aurelia/story/'))}">How it got here</a>
       </div>
-      <div class="split__art split__art--arch">
+      <div class="split__art split__art--arch" data-reveal="clip">
         ${arch({ seed: 'aurelia-intro', palette: 'noon' })}
       </div>
     </div>
@@ -60,7 +71,7 @@ export function render({ url }) {
       url,
     })}
 
-    <ul class="rooms">
+    <ul class="rooms" data-reveal data-stagger="0.09">
       ${each(
         rooms,
         (room) => `<li class="room-card">
@@ -87,16 +98,16 @@ export function render({ url }) {
 <section class="section" aria-labelledby="dining-heading">
   <div class="shell">
     <div class="split split--reverse">
-      <div class="split__art">
+      <div class="split__art" data-reveal="clip">
         ${horizon({ seed: 'dining-home', palette: 'dusk', ratio: 0.75 })}
       </div>
       <div class="split__body">
         <p class="eyebrow">Dining</p>
-        <h2 class="display-2" id="dining-heading">${esc(restaurant.name)}</h2>
+        <h2 class="display-2" id="dining-heading" data-reveal="lines" data-stagger="0.07">${esc(restaurant.name)}</h2>
         <p class="text-soft">${esc(restaurant.lede)} Ines Okafor cooks what came out of the
           water and off the ridge that day, which means the menu is written after the
           deliveries and printed before service.</p>
-        <ul class="feature-list">
+        <ul class="feature-list" data-reveal data-stagger="0.06">
           ${each(
             restaurant.service,
             (item) => `<li><strong>${esc(item.label)}</strong> — ${esc(item.detail)}</li>`,
@@ -120,7 +131,7 @@ ${cypressRow({ className: 'cypress-rule' })}
       url,
     })}
 
-    <ul class="experiences">
+    <ul class="experiences" data-reveal data-stagger="0.09">
       ${each(
         experiences.slice(0, 3),
         (item) => `<li class="experience">
@@ -149,7 +160,7 @@ ${cypressRow({ className: 'cypress-rule' })}
       url,
     })}
 
-    <ul class="posts">
+    <ul class="posts" data-reveal data-stagger="0.09">
       ${each(
         journal,
         (post) => `<li class="post-card">

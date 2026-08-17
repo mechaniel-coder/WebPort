@@ -197,6 +197,18 @@ async function main() {
   await mkdir(join(outDir, 'shared'), { recursive: true });
   await cp(join(srcDir, '_lib', 'reset.css'), join(outDir, 'shared', 'reset.css'));
   await cp(join(srcDir, '_lib', 'widgets.js'), join(outDir, 'shared', 'widgets.js'));
+  await cp(join(srcDir, '_lib', 'motion.js'), join(outDir, 'shared', 'motion.js'));
+  await cp(join(srcDir, '_lib', 'motion.css'), join(outDir, 'shared', 'motion.css'));
+  await cp(join(srcDir, '_lib', 'type.css'), join(outDir, 'shared', 'type.css'));
+
+  // Third-party code and fonts. Vendored into src/ and committed, so this is a
+  // plain copy — the build never reaches into node_modules. See
+  // src/_lib/vendor/README.md.
+  for (const dir of ['js', 'fonts', 'licences']) {
+    await cp(join(srcDir, '_lib', 'vendor', dir), join(outDir, 'shared', dir), {
+      recursive: true,
+    });
+  }
 
   await writeSitemap(routes);
 

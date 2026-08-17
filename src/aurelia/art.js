@@ -145,12 +145,34 @@ export function horizon({
   const sunX = width * (0.18 + random() * 0.64);
   const sunR = width * (0.055 + random() * 0.035);
 
+  /**
+   * Atmospheric perspective.
+   *
+   * The earlier version drew each ridge as a flat fill, which is why a stack of
+   * them read as clip art: in the real world the air between you and a distant
+   * ridge scatters light, so far ridges are paler, lower in contrast and
+   * softer-edged than near ones. Drawing them all at full strength is the
+   * single thing that most makes generated landscape art look generated.
+   *
+   * So each band gets three treatments that vary with depth: it is mixed toward
+   * the sky colour, it is blurred, and it is faded. The near bands stay sharp
+   * and saturated, which is what gives the composition a front and a back.
+   */
+  const bandCount = colors.bands.length;
   const bands = colors.bands
     .map((color, index) => {
-      const depth = (index + 1) / colors.bands.length;
-      const baseline = height * (0.5 + depth * 0.44);
-      const amplitude = height * (0.075 - depth * 0.045);
-      return `<path d="${band({ width, height, baseline, amplitude, random })}" fill="${color}"/>`;
+      const depth = (index + 1) / bandCount;
+      const baseline = height * (0.46 + depth * 0.46);
+      const amplitude = height * (0.085 - depth * 0.05);
+      // Furthest band ~5px of blur, nearest none.
+      const blur = ((1 - depth) * 5.5).toFixed(2);
+      const opacity = (0.62 + depth * 0.38).toFixed(3);
+      return `<path d="${band({ width, height, baseline, amplitude, random })}"
+        fill="${color}" opacity="${opacity}"
+        filter="url(#${id}-soft-${index})"/>
+        <filter id="${id}-soft-${index}" x="-10%" y="-30%" width="120%" height="180%">
+          <feGaussianBlur stdDeviation="0 ${blur}"/>
+        </filter>`;
     })
     .join('');
 
@@ -161,23 +183,44 @@ export function horizon({
     <defs>
       <linearGradient id="${id}-sky" x1="0" y1="0" x2="0" y2="1">
         <stop offset="0" stop-color="${colors.sky[0]}"/>
-        <stop offset="1" stop-color="${colors.sky[1]}"/>
+        <stop offset="0.62" stop-color="${colors.sky[1]}"/>
+        <stop offset="1" stop-color="${colors.sun}" stop-opacity="0.55"/>
       </linearGradient>
       <radialGradient id="${id}-glow" cx="50%" cy="50%" r="50%">
-        <stop offset="0" stop-color="${colors.sun}" stop-opacity="0.85"/>
+        <stop offset="0" stop-color="${colors.sun}" stop-opacity="0.9"/>
+        <stop offset="0.45" stop-color="${colors.sun}" stop-opacity="0.28"/>
         <stop offset="1" stop-color="${colors.sun}" stop-opacity="0"/>
       </radialGradient>
+
+      <!-- Grain. The same trick as the page-wide overlay, but baked into the
+           artwork so it survives being scaled down into a card: a large flat
+           gradient at card size bands into visible steps without it. -->
+      <filter id="${id}-grain" x="0" y="0" width="100%" height="100%">
+        <feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="3"
+          stitchTiles="stitch" result="n"/>
+        <feColorMatrix type="saturate" values="0" in="n" result="g"/>
+        <feComponentTransfer in="g">
+          <feFuncA type="linear" slope="0.5"/>
+        </feComponentTransfer>
+      </filter>
     </defs>
+
     <rect width="${width}" height="${height}" fill="url(#${id}-sky)"/>
     ${
       sun
-        ? `<circle cx="${sunX.toFixed(0)}" cy="${sunY.toFixed(0)}" r="${(sunR * 3.4).toFixed(0)}"
-             fill="url(#${id}-glow)"/>
-           <circle cx="${sunX.toFixed(0)}" cy="${sunY.toFixed(0)}" r="${sunR.toFixed(0)}"
-             fill="${colors.sun}"/>`
+        ? // No hard disc. A low coastal sun is almost always behind haze, and a
+          // crisp circle is the other half of why the old version read as an
+          // illustration. The bloom alone carries the light.
+          `<circle cx="${sunX.toFixed(0)}" cy="${sunY.toFixed(0)}"
+             r="${(sunR * 5.2).toFixed(0)}" fill="url(#${id}-glow)"/>
+           <circle cx="${sunX.toFixed(0)}" cy="${sunY.toFixed(0)}"
+             r="${(sunR * 0.72).toFixed(0)}" fill="${colors.sun}" opacity="0.55"/>`
         : ''
     }
     ${bands}
+
+    <rect width="${width}" height="${height}" filter="url(#${id}-grain)"
+      opacity="0.14" style="mix-blend-mode:overlay"/>
   </svg>`;
 }
 
@@ -192,18 +235,30 @@ export function arch({ seed = 'arch', palette = 'noon', title = null, className 
   const colors = PALETTES[palette] || PALETTES.noon;
   const random = rng(seedFrom(seed));
 
+  // Same atmospheric treatment as `horizon` — see the note there. Far ridges
+  // are hazier and paler; near ones stay sharp. Without it a stack of flat
+  // fills reads as clip art no matter how good the palette is.
+  const bandCount = colors.bands.length;
   const bands = colors.bands
     .map((color, index) => {
-      const depth = (index + 1) / colors.bands.length;
-      return `<path d="${band({
-        width,
-        height,
-        baseline: height * (0.52 + depth * 0.42),
-        amplitude: height * (0.05 - depth * 0.03),
-        random,
-      })}" fill="${color}"/>`;
+      const depth = (index + 1) / bandCount;
+      const blur = ((1 - depth) * 7).toFixed(2);
+      const opacity = (0.58 + depth * 0.42).toFixed(3);
+      return `<filter id="${id}-s${index}" x="-10%" y="-30%" width="120%" height="180%">
+          <feGaussianBlur stdDeviation="0 ${blur}"/>
+        </filter>
+        <path d="${band({
+          width,
+          height,
+          baseline: height * (0.5 + depth * 0.44),
+          amplitude: height * (0.06 - depth * 0.035),
+          random,
+        })}" fill="${color}" opacity="${opacity}" filter="url(#${id}-s${index})"/>`;
     })
     .join('');
+
+  const sunX = width * 0.66;
+  const sunY = height * 0.34;
 
   return `<svg class="art art--arch ${esc(className)}" viewBox="0 0 ${width} ${height}"
     xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice"
@@ -216,14 +271,32 @@ export function arch({ seed = 'arch', palette = 'noon', title = null, className 
       </clipPath>
       <linearGradient id="${id}-sky" x1="0" y1="0" x2="0" y2="1">
         <stop offset="0" stop-color="${colors.sky[0]}"/>
-        <stop offset="1" stop-color="${colors.sky[1]}"/>
+        <stop offset="0.6" stop-color="${colors.sky[1]}"/>
+        <stop offset="1" stop-color="${colors.sun}" stop-opacity="0.5"/>
       </linearGradient>
+      <radialGradient id="${id}-glow" cx="50%" cy="50%" r="50%">
+        <stop offset="0" stop-color="${colors.sun}" stop-opacity="0.95"/>
+        <stop offset="0.4" stop-color="${colors.sun}" stop-opacity="0.3"/>
+        <stop offset="1" stop-color="${colors.sun}" stop-opacity="0"/>
+      </radialGradient>
+      <filter id="${id}-grain" x="0" y="0" width="100%" height="100%">
+        <feTurbulence type="fractalNoise" baseFrequency="0.85" numOctaves="3"
+          stitchTiles="stitch" result="n"/>
+        <feColorMatrix type="saturate" values="0" in="n"/>
+      </filter>
     </defs>
     <g clip-path="url(#${id}-clip)">
       <rect width="${width}" height="${height}" fill="url(#${id}-sky)"/>
-      <circle cx="${(width * 0.66).toFixed(0)}" cy="${(height * 0.34).toFixed(0)}"
-              r="${(width * 0.11).toFixed(0)}" fill="${colors.sun}"/>
+      <!-- A bloom rather than a disc. A hard circle is the single detail that
+           most says "vector illustration"; a low coastal sun is behind haze
+           almost every hour it is worth looking at. -->
+      <circle cx="${sunX.toFixed(0)}" cy="${sunY.toFixed(0)}"
+              r="${(width * 0.44).toFixed(0)}" fill="url(#${id}-glow)"/>
+      <circle cx="${sunX.toFixed(0)}" cy="${sunY.toFixed(0)}"
+              r="${(width * 0.075).toFixed(0)}" fill="${colors.sun}" opacity="0.5"/>
       ${bands}
+      <rect width="${width}" height="${height}" filter="url(#${id}-grain)"
+        opacity="0.13" style="mix-blend-mode:overlay"/>
     </g>
   </svg>`;
 }

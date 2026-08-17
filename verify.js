@@ -17,6 +17,7 @@ import { dirname, join, relative, resolve, sep } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 import { basePath, origin } from './site.config.js';
+import { CSP_HASH, SNIPPET } from './src/_lib/boot.js';
 
 const root = dirname(fileURLToPath(import.meta.url));
 const outDir = join(root, 'dist');
@@ -240,6 +241,68 @@ function checkDocument(file, html, name) {
   }
 }
 
+/* ── Cross-file consistency ────────────────────────────────────────────────── */
+
+/**
+ * The inline boot snippet is allowed by a SHA-256 hash rather than by opening
+ * the policy with 'unsafe-inline'. That means three host configurations quote a
+ * hash of a fourth file's contents, and nothing in the browser tells you when
+ * they disagree — the script is just silently blocked, and the only symptom is
+ * that reveal animations stop working on production but not locally.
+ *
+ * So the hash is recomputed from source here and every config that carries one
+ * is checked against it.
+ */
+async function checkCspHash() {
+  const consumers = [
+    'netlify.toml',
+    'vercel.json',
+    join('deploy', 'aws', 'README.md'),
+  ];
+
+  for (const name of consumers) {
+    const path = join(root, name);
+    if (!existsSync(path)) {
+      warn(name, 'expected to carry the CSP hash, but the file is missing');
+      continue;
+    }
+
+    const text = await readFile(path, 'utf8');
+    const quoted = [...text.matchAll(/sha256-[A-Za-z0-9+/]+=*/g)].map((m) => m[0]);
+
+    if (!quoted.length) {
+      fail(name, `no CSP hash found — the inline boot script needs '${CSP_HASH}'`);
+      continue;
+    }
+    for (const found of quoted) {
+      if (found !== CSP_HASH) {
+        fail(
+          name,
+          `stale CSP hash '${found}' — src/_lib/boot.js now hashes to '${CSP_HASH}'`,
+        );
+      }
+    }
+  }
+
+  // The snippet must also actually appear in the built pages that claim motion,
+  // byte-for-byte. A build that emits a re-formatted copy would hash differently
+  // and be blocked in production while passing every check above.
+  const motionPages = [];
+  for (const file of await walk(outDir)) {
+    if (!file.endsWith('.html')) continue;
+    const html = await readFile(file, 'utf8');
+    if (!html.includes('/shared/motion.js')) continue;
+    motionPages.push(file);
+    if (!html.includes(SNIPPET)) {
+      fail(
+        relative(outDir, file).split(sep).join('/'),
+        'loads motion.js but does not contain the exact boot snippet',
+      );
+    }
+  }
+  if (!motionPages.length) warn('dist/', 'no page loads the motion system');
+}
+
 /* ── Entry point ───────────────────────────────────────────────────────────── */
 
 async function main() {
@@ -260,6 +323,8 @@ async function main() {
   for (const required of ['sitemap.xml', 'robots.txt', '.nojekyll']) {
     if (!existsSync(join(outDir, required))) fail('dist/', `missing ${required}`);
   }
+
+  await checkCspHash();
 
   const report = (list, label) => {
     if (!list.length) return;

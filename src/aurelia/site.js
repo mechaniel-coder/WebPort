@@ -28,9 +28,14 @@ const mark = `<svg viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg"
 export default {
   key: 'aurelia',
   name: hotel.name,
-  themeColor: '#23201c',
+  themeColor: '#1a1714',
   styles: ['aurelia.css'],
   socialImage: '/aurelia/assets/social-card.svg',
+
+  // Opt in to the shared type and motion layers. Both are per-site so the other
+  // three keep their current weight until they get the same treatment.
+  webfonts: true,
+  motion: true,
   favicon: `<svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
     <rect width="32" height="32" rx="6" fill="#23201c"/>
     <path d="M7 26V16a9 9 0 0 1 18 0v10" fill="none" stroke="#efe9df" stroke-width="2.2"/>
@@ -68,7 +73,7 @@ export default {
 
   header({ url, path }) {
     const current = (href) => (path === href ? ' aria-current="page"' : '');
-    return `<header class="masthead" data-masthead>
+    return `<header class="masthead" data-masthead data-header>
       <div class="masthead__inner">
         <a class="brand" href="${esc(url('/aurelia/'))}"${current('/aurelia/')}>
           <span class="brand__mark" aria-hidden="true">${mark}</span>

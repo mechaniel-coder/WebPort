@@ -1,0 +1,79 @@
+/**
+ * Copy third-party assets out of node_modules and into src/_lib/vendor/.
+ *
+ * The vendored copies are committed, so neither the build nor hosting needs
+ * node_modules present. This script exists only to make updating them a single
+ * reproducible command rather than a sequence of remembered `cp` calls.
+ *
+ *   node tools/vendor.js
+ */
+import { copyFile, mkdir, access } from 'node:fs/promises';
+import { dirname, join } from 'node:path';
+import { fileURLToPath } from 'node:url';
+
+const root = join(dirname(fileURLToPath(import.meta.url)), '..');
+const from = (...parts) => join(root, 'node_modules', ...parts);
+const to = (...parts) => join(root, 'src', '_lib', 'vendor', ...parts);
+
+const ASSETS = [
+  // Motion.
+  [from('gsap', 'dist', 'gsap.min.js'), to('js', 'gsap.min.js')],
+  [from('gsap', 'dist', 'ScrollTrigger.min.js'), to('js', 'ScrollTrigger.min.js')],
+  [from('gsap', 'dist', 'SplitText.min.js'), to('js', 'SplitText.min.js')],
+  [from('lenis', 'dist', 'lenis.min.js'), to('js', 'lenis.min.js')],
+
+  // Type. The Latin subsets, and for Fraunces the `standard` axis cut
+  // (opsz + wght) rather than `full` — see vendor/README.md.
+  [
+    from('@fontsource-variable', 'fraunces', 'files', 'fraunces-latin-standard-normal.woff2'),
+    to('fonts', 'fraunces-var.woff2'),
+  ],
+  [
+    from('@fontsource-variable', 'schibsted-grotesk', 'files', 'schibsted-grotesk-latin-wght-normal.woff2'),
+    to('fonts', 'schibsted-var.woff2'),
+  ],
+  [
+    from('@fontsource-variable', 'jetbrains-mono', 'files', 'jetbrains-mono-latin-wght-normal.woff2'),
+    to('fonts', 'jetbrains-var.woff2'),
+  ],
+
+  // Licence texts travel with the files they cover.
+  [from('@fontsource-variable', 'fraunces', 'LICENSE'), to('licences', 'OFL-Fraunces.txt')],
+  [
+    from('@fontsource-variable', 'schibsted-grotesk', 'LICENSE'),
+    to('licences', 'OFL-SchibstedGrotesk.txt'),
+  ],
+  [
+    from('@fontsource-variable', 'jetbrains-mono', 'LICENSE'),
+    to('licences', 'OFL-JetBrainsMono.txt'),
+  ],
+  [from('lenis', 'LICENSE'), to('licences', 'MIT-Lenis.txt')],
+];
+
+const exists = async (path) => {
+  try {
+    await access(path);
+    return true;
+  } catch {
+    return false;
+  }
+};
+
+if (!(await exists(join(root, 'node_modules')))) {
+  console.error('node_modules is missing — run `npm install` first.');
+  console.error('(Hosting never needs this; the vendored copies are committed.)');
+  process.exit(1);
+}
+
+let copied = 0;
+for (const [source, target] of ASSETS) {
+  if (!(await exists(source))) {
+    console.error(`missing: ${source.replace(root, '.')}`);
+    process.exit(1);
+  }
+  await mkdir(dirname(target), { recursive: true });
+  await copyFile(source, target);
+  copied += 1;
+}
+
+console.log(`Vendored ${copied} files into src/_lib/vendor/`);

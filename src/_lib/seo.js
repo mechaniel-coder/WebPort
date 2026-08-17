@@ -7,7 +7,18 @@
  * centralised rather than left to individual pages to remember.
  */
 import { absolute, esc, escJson, oneLine, url } from './html.js';
+import { bootTag } from './boot.js';
 import { studio } from '../../site.config.js';
+
+/**
+ * Fonts worth blocking the render for.
+ *
+ * Only the two the reader sees first. Preloading all three would make the mono
+ * compete for bandwidth with the display face during the exact window that
+ * decides how quickly the page looks finished, and the mono is used for small
+ * metadata that can afford to swap a moment later.
+ */
+const PRELOAD_FONTS = ['fraunces-var.woff2', 'schibsted-var.woff2'];
 
 /**
  * Compose the <head> for a page.
@@ -57,12 +68,30 @@ export function head({ site, page, path }) {
     // Icons — an inline SVG mark, so there is no extra request and no binary asset.
     site.favicon ? `<link rel="icon" href="${esc(svgDataUri(site.favicon))}">` : '',
 
-    // Styles. Shared reset first, then the site's own design system.
+    // Fonts, before the stylesheets that use them. `crossorigin` is required
+    // on a font preload even same-origin: fonts are always fetched in CORS
+    // mode, and a preload whose mode does not match is discarded and fetched
+    // a second time — the exact opposite of the intent.
+    ...(site.webfonts
+      ? PRELOAD_FONTS.map(
+          (file) =>
+            `<link rel="preload" as="font" type="font/woff2" crossorigin href="${esc(
+              url(`/shared/fonts/${file}`),
+            )}">`,
+        )
+      : []),
+
+    // Styles. Shared reset first, then type, then the site's own design system.
     `<link rel="stylesheet" href="${esc(url('/shared/reset.css'))}">`,
+    site.webfonts ? `<link rel="stylesheet" href="${esc(url('/shared/type.css'))}">` : '',
+    site.motion ? `<link rel="stylesheet" href="${esc(url('/shared/motion.css'))}">` : '',
     // Site-wide styles, then any stylesheet a single page opts into.
     ...[...(site.styles || []), ...(page.styles || [])].map(
       (file) => `<link rel="stylesheet" href="${esc(site.asset(file))}">`,
     ),
+
+    // Must run before first paint — see src/_lib/boot.js.
+    site.motion ? bootTag() : '',
 
     ...records.map(
       (record) => `<script type="application/ld+json">${escJson(record)}</script>`,

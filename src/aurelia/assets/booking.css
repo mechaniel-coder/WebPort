@@ -156,6 +156,14 @@
 
 .month table {
   table-layout: fixed;
+  /* `table-layout: fixed` needs a definite width to divide between the columns.
+     Without one the browser falls back to auto layout, and auto layout cannot
+     resolve `.day { width: 100% }` against a column whose width depends on that
+     same content — so every cell in a row collapsed to the first column and the
+     row grew to seven cells tall. The calendar still worked: dates were
+     selectable, the roving tabindex was correct, and every booking check
+     passed, because none of them looked at where a cell actually was. */
+  width: 100%;
 }
 
 .month th {
@@ -172,11 +180,25 @@
   padding: 1px;
 }
 
+/**
+ * `.day` is the <td> itself, not a control inside one.
+ *
+ * That means it must stay a table cell. `display: grid` here — which is the
+ * obvious way to centre something — took every date out of the table's layout,
+ * so all seven cells in a week stacked at the first column and each row grew to
+ * seven cells tall. `aspect-ratio` does not apply to table cells either, so the
+ * square shape has to come from an explicit height.
+ *
+ * The failure was invisible to the whole test suite: dates were still
+ * selectable, the roving tabindex still moved correctly, and the rate
+ * arithmetic was still right, because nothing asserted where a cell *was*.
+ *
+ * 2.9rem keeps the tap target above the 44px minimum at the default text size.
+ */
 .day {
-  width: 100%;
-  aspect-ratio: 1;
-  display: grid;
-  place-items: center;
+  height: 2.9rem;
+  text-align: center;
+  vertical-align: middle;
   position: relative;
   border-radius: var(--radius);
   font-size: var(--step--1);

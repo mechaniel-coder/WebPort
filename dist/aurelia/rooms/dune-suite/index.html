@@ -6,7 +6,7 @@
     <title>Dune Suite — Aurelia</title>
     <meta name="description" content="Ocean-facing, private terrace. 620 sq ft, one king, sleeps 2. From $534 per night including breakfast.">
     <link rel="canonical" href="https://exostech.pro/aurelia/rooms/dune-suite/">
-    <meta name="theme-color" content="#23201c">
+    <meta name="theme-color" content="#1a1714">
     <meta property="og:type" content="product">
     <meta property="og:site_name" content="Aurelia">
     <meta property="og:title" content="Dune Suite — Aurelia">
@@ -20,15 +20,20 @@
     <meta name="twitter:description" content="Ocean-facing, private terrace. 620 sq ft, one king, sleeps 2. From $534 per night including breakfast.">
     <meta name="twitter:image" content="https://exostech.pro/aurelia/assets/social-card.svg">
     <link rel="icon" href="data:image/svg+xml,%3Csvg%20viewBox%3D%220%200%2032%2032%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20aria-hidden%3D%22true%22%3E%20%3Crect%20width%3D%2232%22%20height%3D%2232%22%20rx%3D%226%22%20fill%3D%22%2323201c%22%2F%3E%20%3Cpath%20d%3D%22M7%2026V16a9%209%200%200%201%2018%200v10%22%20fill%3D%22none%22%20stroke%3D%22%23efe9df%22%20stroke-width%3D%222.2%22%2F%3E%20%3C%2Fsvg%3E">
+    <link rel="preload" as="font" type="font/woff2" crossorigin href="/shared/fonts/fraunces-var.woff2">
+    <link rel="preload" as="font" type="font/woff2" crossorigin href="/shared/fonts/schibsted-var.woff2">
     <link rel="stylesheet" href="/shared/reset.css">
+    <link rel="stylesheet" href="/shared/type.css">
+    <link rel="stylesheet" href="/shared/motion.css">
     <link rel="stylesheet" href="/aurelia/assets/aurelia.css">
+    <script>var d=document.documentElement;if(!matchMedia('(prefers-reduced-motion: reduce)').matches){d.classList.add('has-motion');window.__motionFallback=setTimeout(function(){d.classList.remove('has-motion');d.classList.add('motion-off')},2500)}</script>
     <script type="application/ld+json">{"@context":"https://schema.org","@type":"Hotel","name":"Aurelia Coast Retreat","description":"A twenty-two room retreat on the northern Sonoma coast.","url":"https://exostech.pro/aurelia/","telephone":"+1 (707) 555-0142","email":"stay@example.com","numberOfRooms":22,"priceRange":"$$$$","checkinTime":"16:00","checkoutTime":"11:00","address":{"@type":"PostalAddress","streetAddress":"4180 Shoreline Highway","addressLocality":"Sea Ranch","addressRegion":"CA","postalCode":"95497","addressCountry":"US"},"geo":{"@type":"GeoCoordinates","latitude":38.7096,"longitude":-123.4569},"amenityFeature":[{"@type":"LocationFeatureSpecification","name":"Restaurant","value":true},{"@type":"LocationFeatureSpecification","name":"Sauna","value":true},{"@type":"LocationFeatureSpecification","name":"Ocean view","value":true},{"@type":"LocationFeatureSpecification","name":"Free breakfast","value":true},{"@type":"LocationFeatureSpecification","name":"Free parking","value":true}]}</script>
     <script type="application/ld+json">{"@context":"https://schema.org","@type":"HotelRoom","name":"Dune Suite","description":"Ocean-facing, private terrace","url":"https://exostech.pro/aurelia/rooms/dune-suite/","occupancy":{"@type":"QuantitativeValue","maxValue":3,"unitCode":"C62"},"floorSize":{"@type":"QuantitativeValue","value":620,"unitCode":"FTK"},"bed":{"@type":"BedDetails","typeOfBed":"One king"},"amenityFeature":[{"@type":"LocationFeatureSpecification","name":"Ocean view","value":true},{"@type":"LocationFeatureSpecification","name":"Terrace","value":true},{"@type":"LocationFeatureSpecification","name":"Soaking tub","value":true},{"@type":"LocationFeatureSpecification","name":"Fireplace","value":true},{"@type":"LocationFeatureSpecification","name":"Rain shower","value":true}],"offers":{"@type":"Offer","price":"534.00","priceCurrency":"USD","availability":"https://schema.org/InStock","url":"https://exostech.pro/aurelia/book/"}}</script>
     <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Aurelia","item":"https://exostech.pro/aurelia/"},{"@type":"ListItem","position":2,"name":"Rooms","item":"https://exostech.pro/aurelia/rooms/"},{"@type":"ListItem","position":3,"name":"Dune Suite","item":"https://exostech.pro/aurelia/rooms/dune-suite/"}]}</script>
   </head>
   <body class="site-aurelia">
     <a class="skip-link" href="#main">Skip to main content</a>
-    <header class="masthead" data-masthead>
+    <header class="masthead" data-masthead data-header>
       <div class="masthead__inner">
         <a class="brand" href="/aurelia/">
           <span class="brand__mark" aria-hidden="true"><svg viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg"
@@ -92,14 +97,47 @@
       </clipPath>
       <linearGradient id="arch-1fzzq1y-sky" x1="0" y1="0" x2="0" y2="1">
         <stop offset="0" stop-color="#f6e3d2"/>
-        <stop offset="1" stop-color="#efc9ad"/>
+        <stop offset="0.6" stop-color="#efc9ad"/>
+        <stop offset="1" stop-color="#e8996b" stop-opacity="0.5"/>
       </linearGradient>
+      <radialGradient id="arch-1fzzq1y-glow" cx="50%" cy="50%" r="50%">
+        <stop offset="0" stop-color="#e8996b" stop-opacity="0.95"/>
+        <stop offset="0.4" stop-color="#e8996b" stop-opacity="0.3"/>
+        <stop offset="1" stop-color="#e8996b" stop-opacity="0"/>
+      </radialGradient>
+      <filter id="arch-1fzzq1y-grain" x="0" y="0" width="100%" height="100%">
+        <feTurbulence type="fractalNoise" baseFrequency="0.85" numOctaves="3"
+          stitchTiles="stitch" result="n"/>
+        <feColorMatrix type="saturate" values="0" in="n"/>
+      </filter>
     </defs>
     <g clip-path="url(#arch-1fzzq1y-clip)">
       <rect width="600" height="800" fill="url(#arch-1fzzq1y-sky)"/>
+      <!-- A bloom rather than a disc. A hard circle is the single detail that
+           most says "vector illustration"; a low coastal sun is behind haze
+           almost every hour it is worth looking at. -->
       <circle cx="396" cy="272"
-              r="66" fill="#e8996b"/>
-      <path d="M 0.00 472.16 C 11.11 471.17, 44.44 469.27, 66.67 466.23 C 88.89 463.19, 111.11 457.20, 133.33 453.92 C 155.56 450.64, 177.78 442.90, 200.00 446.56 C 222.22 450.23, 244.44 464.50, 266.67 475.88 C 288.89 487.27, 311.11 507.80, 333.33 514.87 C 355.56 521.94, 377.78 520.40, 400.00 518.32 C 422.22 516.24, 444.44 506.11, 466.67 502.38 C 488.89 498.65, 511.11 499.77, 533.33 495.92 C 555.56 492.07, 588.89 482.06, 600.00 479.28 L 600 800 L 0 800 Z" fill="#c9a184"/><path d="M 0.00 539.00 C 11.11 538.53, 44.44 537.15, 66.67 536.18 C 88.89 535.21, 111.11 534.85, 133.33 533.18 C 155.56 531.51, 177.78 528.49, 200.00 526.16 C 222.22 523.82, 244.44 520.06, 266.67 519.17 C 288.89 518.28, 311.11 518.08, 333.33 520.81 C 355.56 523.55, 377.78 529.32, 400.00 535.57 C 422.22 541.82, 444.44 551.32, 466.67 558.29 C 488.89 565.27, 511.11 573.12, 533.33 577.40 C 555.56 581.69, 588.89 582.91, 600.00 584.02 L 600 800 L 0 800 Z" fill="#a87f66"/><path d="M 0.00 600.29 C 11.11 600.89, 44.44 600.94, 66.67 603.85 C 88.89 606.77, 111.11 612.18, 133.33 617.79 C 155.56 623.40, 177.78 632.13, 200.00 637.51 C 222.22 642.89, 244.44 648.49, 266.67 650.06 C 288.89 651.64, 311.11 649.86, 333.33 646.96 C 355.56 644.06, 377.78 637.31, 400.00 632.68 C 422.22 628.04, 444.44 622.45, 466.67 619.14 C 488.89 615.83, 511.11 614.43, 533.33 612.79 C 555.56 611.16, 588.89 609.90, 600.00 609.32 L 600 800 L 0 800 Z" fill="#7e5f4e"/><path d="M 0.00 672.59 C 11.11 672.47, 44.44 672.47, 66.67 671.90 C 88.89 671.33, 111.11 670.21, 133.33 669.17 C 155.56 668.13, 177.78 666.29, 200.00 665.65 C 222.22 665.00, 244.44 664.33, 266.67 665.30 C 288.89 666.27, 311.11 668.39, 333.33 671.46 C 355.56 674.53, 377.78 679.37, 400.00 683.73 C 422.22 688.09, 444.44 693.70, 466.67 697.60 C 488.89 701.51, 511.11 705.27, 533.33 707.17 C 555.56 709.07, 588.89 708.71, 600.00 709.01 L 600 800 L 0 800 Z" fill="#57443a"/><path d="M 0.00 755.13 C 11.11 754.09, 44.44 750.28, 66.67 748.86 C 88.89 747.44, 111.11 747.69, 133.33 746.59 C 155.56 745.50, 177.78 744.13, 200.00 742.31 C 222.22 740.48, 244.44 736.98, 266.67 735.65 C 288.89 734.32, 311.11 732.97, 333.33 734.31 C 355.56 735.66, 377.78 739.72, 400.00 743.74 C 422.22 747.76, 444.44 754.49, 466.67 758.43 C 488.89 762.37, 511.11 766.01, 533.33 767.38 C 555.56 768.75, 588.89 766.78, 600.00 766.66 L 600 800 L 0 800 Z" fill="#332924"/>
+              r="264" fill="url(#arch-1fzzq1y-glow)"/>
+      <circle cx="396" cy="272"
+              r="45" fill="#e8996b" opacity="0.5"/>
+      <filter id="arch-1fzzq1y-s0" x="-10%" y="-30%" width="120%" height="180%">
+          <feGaussianBlur stdDeviation="0 5.60"/>
+        </filter>
+        <path d="M 0.00 457.10 C 11.11 455.91, 44.44 453.62, 66.67 449.96 C 88.89 446.30, 111.11 439.08, 133.33 435.13 C 155.56 431.18, 177.78 421.86, 200.00 426.27 C 222.22 430.68, 244.44 447.87, 266.67 461.58 C 288.89 475.30, 311.11 500.03, 333.33 508.55 C 355.56 517.07, 377.78 515.21, 400.00 512.70 C 422.22 510.19, 444.44 498.00, 466.67 493.50 C 488.89 489.01, 511.11 490.36, 533.33 485.72 C 555.56 481.09, 588.89 469.02, 600.00 465.68 L 600 800 L 0 800 Z" fill="#c9a184" opacity="0.664" filter="url(#arch-1fzzq1y-s0)"/><filter id="arch-1fzzq1y-s1" x="-10%" y="-30%" width="120%" height="180%">
+          <feGaussianBlur stdDeviation="0 4.20"/>
+        </filter>
+        <path d="M 0.00 527.00 C 11.11 526.43, 44.44 524.76, 66.67 523.59 C 88.89 522.41, 111.11 521.98, 133.33 519.96 C 155.56 517.94, 177.78 514.28, 200.00 511.45 C 222.22 508.62, 244.44 504.07, 266.67 502.99 C 288.89 501.91, 311.11 501.68, 333.33 504.98 C 355.56 508.29, 377.78 515.29, 400.00 522.85 C 422.22 530.41, 444.44 541.92, 466.67 550.36 C 488.89 558.80, 511.11 568.30, 533.33 573.49 C 555.56 578.68, 588.89 580.16, 600.00 581.49 L 600 800 L 0 800 Z" fill="#a87f66" opacity="0.748" filter="url(#arch-1fzzq1y-s1)"/><filter id="arch-1fzzq1y-s2" x="-10%" y="-30%" width="120%" height="180%">
+          <feGaussianBlur stdDeviation="0 2.80"/>
+        </filter>
+        <path d="M 0.00 590.11 C 11.11 590.83, 44.44 590.89, 66.67 594.45 C 88.89 598.00, 111.11 604.59, 133.33 611.43 C 155.56 618.26, 177.78 628.90, 200.00 635.46 C 222.22 642.02, 244.44 648.84, 266.67 650.76 C 288.89 652.68, 311.11 650.51, 333.33 646.98 C 355.56 643.45, 377.78 635.23, 400.00 629.57 C 422.22 623.92, 444.44 617.11, 466.67 613.08 C 488.89 609.04, 511.11 607.34, 533.33 605.34 C 555.56 603.35, 588.89 601.81, 600.00 601.11 L 600 800 L 0 800 Z" fill="#7e5f4e" opacity="0.832" filter="url(#arch-1fzzq1y-s2)"/><filter id="arch-1fzzq1y-s3" x="-10%" y="-30%" width="120%" height="180%">
+          <feGaussianBlur stdDeviation="0 1.40"/>
+        </filter>
+        <path d="M 0.00 666.57 C 11.11 666.43, 44.44 666.42, 66.67 665.72 C 88.89 665.02, 111.11 663.64, 133.33 662.36 C 155.56 661.08, 177.78 658.82, 200.00 658.03 C 222.22 657.24, 244.44 656.41, 266.67 657.60 C 288.89 658.79, 311.11 661.40, 333.33 665.18 C 355.56 668.96, 377.78 674.92, 400.00 680.29 C 422.22 685.65, 444.44 692.55, 466.67 697.36 C 488.89 702.16, 511.11 706.79, 533.33 709.13 C 555.56 711.47, 588.89 711.02, 600.00 711.40 L 600 800 L 0 800 Z" fill="#57443a" opacity="0.916" filter="url(#arch-1fzzq1y-s3)"/><filter id="arch-1fzzq1y-s4" x="-10%" y="-30%" width="120%" height="180%">
+          <feGaussianBlur stdDeviation="0 0.00"/>
+        </filter>
+        <path d="M 0.00 755.91 C 11.11 754.61, 44.44 749.86, 66.67 748.08 C 88.89 746.30, 111.11 746.61, 133.33 745.24 C 155.56 743.88, 177.78 742.16, 200.00 739.88 C 222.22 737.60, 244.44 733.23, 266.67 731.56 C 288.89 729.90, 311.11 728.21, 333.33 729.89 C 355.56 731.58, 377.78 736.65, 400.00 741.67 C 422.22 746.69, 444.44 755.11, 466.67 760.04 C 488.89 764.96, 511.11 769.51, 533.33 771.23 C 555.56 772.94, 588.89 770.48, 600.00 770.33 L 600 800 L 0 800 Z" fill="#332924" opacity="1.000" filter="url(#arch-1fzzq1y-s4)"/>
+      <rect width="600" height="800" filter="url(#arch-1fzzq1y-grain)"
+        opacity="0.13" style="mix-blend-mode:overlay"/>
     </g>
   </svg>
       </div>
@@ -144,19 +182,62 @@
     <defs>
       <linearGradient id="hz-it7xto-sky" x1="0" y1="0" x2="0" y2="1">
         <stop offset="0" stop-color="#f6e3d2"/>
-        <stop offset="1" stop-color="#efc9ad"/>
+        <stop offset="0.62" stop-color="#efc9ad"/>
+        <stop offset="1" stop-color="#e8996b" stop-opacity="0.55"/>
       </linearGradient>
       <radialGradient id="hz-it7xto-glow" cx="50%" cy="50%" r="50%">
-        <stop offset="0" stop-color="#e8996b" stop-opacity="0.85"/>
+        <stop offset="0" stop-color="#e8996b" stop-opacity="0.9"/>
+        <stop offset="0.45" stop-color="#e8996b" stop-opacity="0.28"/>
         <stop offset="1" stop-color="#e8996b" stop-opacity="0"/>
       </radialGradient>
+
+      <!-- Grain. The same trick as the page-wide overlay, but baked into the
+           artwork so it survives being scaled down into a card: a large flat
+           gradient at card size bands into visible steps without it. -->
+      <filter id="hz-it7xto-grain" x="0" y="0" width="100%" height="100%">
+        <feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="3"
+          stitchTiles="stitch" result="n"/>
+        <feColorMatrix type="saturate" values="0" in="n" result="g"/>
+        <feComponentTransfer in="g">
+          <feFuncA type="linear" slope="0.5"/>
+        </feComponentTransfer>
+      </filter>
     </defs>
+
     <rect width="1000" height="750" fill="url(#hz-it7xto-sky)"/>
-    <circle cx="269" cy="237" r="299"
-             fill="url(#hz-it7xto-glow)"/>
-           <circle cx="269" cy="237" r="88"
-             fill="#e8996b"/>
-    <path d="M 0.00 466.39 C 18.52 462.73, 74.07 449.91, 111.11 444.41 C 148.15 438.91, 185.19 436.19, 222.22 433.40 C 259.26 430.61, 296.30 430.42, 333.33 427.66 C 370.37 424.91, 407.41 421.68, 444.44 416.89 C 481.48 412.09, 518.52 404.36, 555.56 398.90 C 592.59 393.44, 629.63 386.11, 666.67 384.12 C 703.70 382.12, 740.74 382.28, 777.78 386.94 C 814.81 391.60, 851.85 401.79, 888.89 412.07 C 925.93 422.35, 981.48 442.53, 1000.00 448.63 L 1000 750 L 0 750 Z" fill="#c9a184"/><path d="M 0.00 478.03 C 18.52 477.45, 74.07 475.73, 111.11 474.57 C 148.15 473.41, 185.19 471.00, 222.22 471.06 C 259.26 471.11, 296.30 471.59, 333.33 474.90 C 370.37 478.20, 407.41 483.96, 444.44 490.91 C 481.48 497.85, 518.52 507.97, 555.56 516.59 C 592.59 525.20, 629.63 535.66, 666.67 542.60 C 703.70 549.54, 740.74 555.65, 777.78 558.24 C 814.81 560.82, 851.85 560.28, 888.89 558.13 C 925.93 555.97, 981.48 547.43, 1000.00 545.29 L 1000 750 L 0 750 Z" fill="#a87f66"/><path d="M 0.00 553.15 C 18.52 552.34, 74.07 550.93, 111.11 548.33 C 148.15 545.72, 185.19 536.04, 222.22 537.52 C 259.26 539.00, 296.30 546.55, 333.33 557.20 C 370.37 567.85, 407.41 592.10, 444.44 601.42 C 481.48 610.75, 518.52 614.54, 555.56 613.14 C 592.59 611.74, 629.63 598.22, 666.67 593.02 C 703.70 587.82, 740.74 586.17, 777.78 581.93 C 814.81 577.68, 851.85 575.32, 888.89 567.56 C 925.93 559.80, 981.48 540.74, 1000.00 535.37 L 1000 750 L 0 750 Z" fill="#7e5f4e"/><path d="M 0.00 638.28 C 18.52 636.65, 74.07 631.83, 111.11 628.52 C 148.15 625.21, 185.19 622.14, 222.22 618.43 C 259.26 614.72, 296.30 604.75, 333.33 606.26 C 370.37 607.77, 407.41 618.06, 444.44 627.52 C 481.48 636.98, 518.52 656.52, 555.56 663.03 C 592.59 669.54, 629.63 667.90, 666.67 666.59 C 703.70 665.27, 740.74 657.76, 777.78 655.14 C 814.81 652.52, 851.85 655.15, 888.89 650.88 C 925.93 646.61, 981.48 633.08, 1000.00 629.52 L 1000 750 L 0 750 Z" fill="#57443a"/><path d="M 0.00 732.38 C 18.52 731.67, 74.07 730.36, 111.11 728.11 C 148.15 725.86, 185.19 721.69, 222.22 718.89 C 259.26 716.10, 296.30 713.23, 333.33 711.35 C 370.37 709.48, 407.41 708.81, 444.44 707.66 C 481.48 706.51, 518.52 706.17, 555.56 704.44 C 592.59 702.72, 629.63 700.31, 666.67 697.30 C 703.70 694.30, 740.74 689.70, 777.78 686.42 C 814.81 683.14, 851.85 679.07, 888.89 677.63 C 925.93 676.20, 981.48 677.77, 1000.00 677.79 L 1000 750 L 0 750 Z" fill="#332924"/>
+    <circle cx="269" cy="237"
+             r="457" fill="url(#hz-it7xto-glow)"/>
+           <circle cx="269" cy="237"
+             r="63" fill="#e8996b" opacity="0.55"/>
+    <path d="M 0.00 442.85 C 18.52 438.69, 74.07 424.12, 111.11 417.87 C 148.15 411.62, 185.19 408.53, 222.22 405.36 C 259.26 402.19, 296.30 401.97, 333.33 398.85 C 370.37 395.72, 407.41 392.05, 444.44 386.60 C 481.48 381.15, 518.52 372.37, 555.56 366.16 C 592.59 359.95, 629.63 351.63, 666.67 349.36 C 703.70 347.10, 740.74 347.28, 777.78 352.57 C 814.81 357.86, 851.85 369.44, 888.89 381.12 C 925.93 392.80, 981.48 415.74, 1000.00 422.67 L 1000 750 L 0 750 Z"
+        fill="#c9a184" opacity="0.696"
+        filter="url(#hz-it7xto-soft-0)"/>
+        <filter id="hz-it7xto-soft-0" x="-10%" y="-30%" width="120%" height="180%">
+          <feGaussianBlur stdDeviation="0 4.40"/>
+        </filter><path d="M 0.00 449.96 C 18.52 449.30, 74.07 447.34, 111.11 446.02 C 148.15 444.70, 185.19 441.95, 222.22 442.01 C 259.26 442.08, 296.30 442.62, 333.33 446.39 C 370.37 450.16, 407.41 456.72, 444.44 464.65 C 481.48 472.57, 518.52 484.11, 555.56 493.93 C 592.59 503.76, 629.63 515.68, 666.67 523.59 C 703.70 531.51, 740.74 538.48, 777.78 541.43 C 814.81 544.38, 851.85 543.76, 888.89 541.30 C 925.93 538.84, 981.48 529.10, 1000.00 526.66 L 1000 750 L 0 750 Z"
+        fill="#a87f66" opacity="0.772"
+        filter="url(#hz-it7xto-soft-1)"/>
+        <filter id="hz-it7xto-soft-1" x="-10%" y="-30%" width="120%" height="180%">
+          <feGaussianBlur stdDeviation="0 3.30"/>
+        </filter><path d="M 0.00 529.25 C 18.52 528.33, 74.07 526.71, 111.11 523.73 C 148.15 520.74, 185.19 509.65, 222.22 511.35 C 259.26 513.04, 296.30 521.69, 333.33 533.89 C 370.37 546.09, 407.41 573.88, 444.44 584.57 C 481.48 595.25, 518.52 599.59, 555.56 597.99 C 592.59 596.38, 629.63 580.90, 666.67 574.94 C 703.70 568.98, 740.74 567.09, 777.78 562.23 C 814.81 557.37, 851.85 554.66, 888.89 545.77 C 925.93 536.88, 981.48 515.03, 1000.00 508.89 L 1000 750 L 0 750 Z"
+        fill="#7e5f4e" opacity="0.848"
+        filter="url(#hz-it7xto-soft-2)"/>
+        <filter id="hz-it7xto-soft-2" x="-10%" y="-30%" width="120%" height="180%">
+          <feGaussianBlur stdDeviation="0 2.20"/>
+        </filter><path d="M 0.00 620.17 C 18.52 618.29, 74.07 612.72, 111.11 608.91 C 148.15 605.09, 185.19 601.55, 222.22 597.27 C 259.26 592.99, 296.30 581.48, 333.33 583.22 C 370.37 584.97, 407.41 596.84, 444.44 607.75 C 481.48 618.67, 518.52 641.22, 555.56 648.73 C 592.59 656.24, 629.63 654.35, 666.67 652.83 C 703.70 651.31, 740.74 642.64, 777.78 639.62 C 814.81 636.60, 851.85 639.63, 888.89 634.71 C 925.93 629.78, 981.48 614.17, 1000.00 610.06 L 1000 750 L 0 750 Z"
+        fill="#57443a" opacity="0.924"
+        filter="url(#hz-it7xto-soft-3)"/>
+        <filter id="hz-it7xto-soft-3" x="-10%" y="-30%" width="120%" height="180%">
+          <feGaussianBlur stdDeviation="0 1.10"/>
+        </filter><path d="M 0.00 721.94 C 18.52 721.11, 74.07 719.58, 111.11 716.96 C 148.15 714.34, 185.19 709.47, 222.22 706.21 C 259.26 702.95, 296.30 699.60, 333.33 697.41 C 370.37 695.23, 407.41 694.45, 444.44 693.10 C 481.48 691.76, 518.52 691.36, 555.56 689.35 C 592.59 687.34, 629.63 684.53, 666.67 681.02 C 703.70 677.52, 740.74 672.14, 777.78 668.32 C 814.81 664.49, 851.85 659.75, 888.89 658.07 C 925.93 656.39, 981.48 658.23, 1000.00 658.26 L 1000 750 L 0 750 Z"
+        fill="#332924" opacity="1.000"
+        filter="url(#hz-it7xto-soft-4)"/>
+        <filter id="hz-it7xto-soft-4" x="-10%" y="-30%" width="120%" height="180%">
+          <feGaussianBlur stdDeviation="0 0.00"/>
+        </filter>
+
+    <rect width="1000" height="750" filter="url(#hz-it7xto-grain)"
+      opacity="0.14" style="mix-blend-mode:overlay"/>
   </svg>
       </div>
       <div class="split__body">
@@ -244,14 +325,47 @@
       </clipPath>
       <linearGradient id="arch-k4zwx4-sky" x1="0" y1="0" x2="0" y2="1">
         <stop offset="0" stop-color="#f0d9c4"/>
-        <stop offset="1" stop-color="#d9a689"/>
+        <stop offset="0.6" stop-color="#d9a689"/>
+        <stop offset="1" stop-color="#c96f4e" stop-opacity="0.5"/>
       </linearGradient>
+      <radialGradient id="arch-k4zwx4-glow" cx="50%" cy="50%" r="50%">
+        <stop offset="0" stop-color="#c96f4e" stop-opacity="0.95"/>
+        <stop offset="0.4" stop-color="#c96f4e" stop-opacity="0.3"/>
+        <stop offset="1" stop-color="#c96f4e" stop-opacity="0"/>
+      </radialGradient>
+      <filter id="arch-k4zwx4-grain" x="0" y="0" width="100%" height="100%">
+        <feTurbulence type="fractalNoise" baseFrequency="0.85" numOctaves="3"
+          stitchTiles="stitch" result="n"/>
+        <feColorMatrix type="saturate" values="0" in="n"/>
+      </filter>
     </defs>
     <g clip-path="url(#arch-k4zwx4-clip)">
       <rect width="600" height="800" fill="url(#arch-k4zwx4-sky)"/>
+      <!-- A bloom rather than a disc. A hard circle is the single detail that
+           most says "vector illustration"; a low coastal sun is behind haze
+           almost every hour it is worth looking at. -->
       <circle cx="396" cy="272"
-              r="66" fill="#c96f4e"/>
-      <path d="M 0.00 511.05 C 11.11 506.82, 44.44 491.38, 66.67 485.62 C 88.89 479.86, 111.11 480.75, 133.33 476.51 C 155.56 472.27, 177.78 466.09, 200.00 460.17 C 222.22 454.26, 244.44 441.31, 266.67 441.01 C 288.89 440.71, 311.11 448.58, 333.33 458.38 C 355.56 468.18, 377.78 490.33, 400.00 499.80 C 422.22 509.27, 444.44 513.95, 466.67 515.19 C 488.89 516.43, 511.11 508.80, 533.33 507.24 C 555.56 505.69, 588.89 506.07, 600.00 505.84 L 600 800 L 0 800 Z" fill="#a9765f"/><path d="M 0.00 556.50 C 11.11 554.49, 44.44 547.17, 66.67 544.43 C 88.89 541.69, 111.11 542.20, 133.33 540.06 C 155.56 537.92, 177.78 535.13, 200.00 531.59 C 222.22 528.06, 244.44 521.23, 266.67 518.85 C 288.89 516.46, 311.11 514.30, 333.33 517.27 C 355.56 520.23, 377.78 528.72, 400.00 536.63 C 422.22 544.54, 444.44 557.48, 466.67 564.75 C 488.89 572.01, 511.11 578.11, 533.33 580.21 C 555.56 582.31, 588.89 577.83, 600.00 577.36 L 600 800 L 0 800 Z" fill="#87594b"/><path d="M 0.00 599.52 C 11.11 599.52, 44.44 597.80, 66.67 599.55 C 88.89 601.30, 111.11 604.82, 133.33 610.02 C 155.56 615.21, 177.78 624.43, 200.00 630.73 C 222.22 637.03, 244.44 644.88, 266.67 647.82 C 288.89 650.76, 311.11 650.54, 333.33 648.38 C 355.56 646.22, 377.78 639.45, 400.00 634.89 C 422.22 630.33, 444.44 624.39, 466.67 621.02 C 488.89 617.64, 511.11 616.42, 533.33 614.63 C 555.56 612.84, 588.89 611.01, 600.00 610.28 L 600 800 L 0 800 Z" fill="#65403a"/><path d="M 0.00 674.39 C 11.11 674.17, 44.44 674.02, 66.67 673.08 C 88.89 672.14, 111.11 670.26, 133.33 668.73 C 155.56 667.20, 177.78 664.00, 200.00 663.90 C 222.22 663.80, 244.44 664.75, 266.67 668.13 C 288.89 671.51, 311.11 678.56, 333.33 684.18 C 355.56 689.81, 377.78 697.80, 400.00 701.86 C 422.22 705.91, 444.44 708.33, 466.67 708.53 C 488.89 708.73, 511.11 705.29, 533.33 703.04 C 555.56 700.79, 588.89 696.35, 600.00 695.01 L 600 800 L 0 800 Z" fill="#452c2a"/><path d="M 0.00 742.02 C 11.11 741.82, 44.44 741.51, 66.67 740.81 C 88.89 740.12, 111.11 738.32, 133.33 737.86 C 155.56 737.40, 177.78 736.72, 200.00 738.05 C 222.22 739.39, 244.44 742.38, 266.67 745.87 C 288.89 749.35, 311.11 755.06, 333.33 758.95 C 355.56 762.84, 377.78 767.28, 400.00 769.22 C 422.22 771.16, 444.44 771.36, 466.67 770.60 C 488.89 769.85, 511.11 766.78, 533.33 764.71 C 555.56 762.64, 588.89 759.25, 600.00 758.16 L 600 800 L 0 800 Z" fill="#281b1c"/>
+              r="264" fill="url(#arch-k4zwx4-glow)"/>
+      <circle cx="396" cy="272"
+              r="45" fill="#c96f4e" opacity="0.5"/>
+      <filter id="arch-k4zwx4-s0" x="-10%" y="-30%" width="120%" height="180%">
+          <feGaussianBlur stdDeviation="0 5.60"/>
+        </filter>
+        <path d="M 0.00 503.95 C 11.11 498.85, 44.44 480.25, 66.67 473.32 C 88.89 466.38, 111.11 467.45, 133.33 462.34 C 155.56 457.23, 177.78 449.79, 200.00 442.66 C 222.22 435.54, 244.44 419.94, 266.67 419.58 C 288.89 419.22, 311.11 428.70, 333.33 440.50 C 355.56 452.30, 377.78 478.99, 400.00 490.39 C 422.22 501.80, 444.44 507.44, 466.67 508.93 C 488.89 510.42, 511.11 501.24, 533.33 499.36 C 555.56 497.49, 588.89 497.95, 600.00 497.67 L 600 800 L 0 800 Z" fill="#a9765f" opacity="0.664" filter="url(#arch-k4zwx4-s0)"/><filter id="arch-k4zwx4-s1" x="-10%" y="-30%" width="120%" height="180%">
+          <feGaussianBlur stdDeviation="0 4.20"/>
+        </filter>
+        <path d="M 0.00 548.18 C 11.11 545.75, 44.44 536.89, 66.67 533.57 C 88.89 530.26, 111.11 530.88, 133.33 528.29 C 155.56 525.70, 177.78 522.32, 200.00 518.03 C 222.22 513.75, 244.44 505.49, 266.67 502.60 C 288.89 499.71, 311.11 497.10, 333.33 500.69 C 355.56 504.28, 377.78 514.55, 400.00 524.13 C 422.22 533.71, 444.44 549.37, 466.67 558.17 C 488.89 566.96, 511.11 574.34, 533.33 576.89 C 555.56 579.43, 588.89 574.01, 600.00 573.43 L 600 800 L 0 800 Z" fill="#87594b" opacity="0.748" filter="url(#arch-k4zwx4-s1)"/><filter id="arch-k4zwx4-s2" x="-10%" y="-30%" width="120%" height="180%">
+          <feGaussianBlur stdDeviation="0 2.80"/>
+        </filter>
+        <path d="M 0.00 589.16 C 11.11 589.17, 44.44 587.06, 66.67 589.20 C 88.89 591.33, 111.11 595.62, 133.33 601.96 C 155.56 608.29, 177.78 619.52, 200.00 627.20 C 222.22 634.88, 244.44 644.45, 266.67 648.03 C 288.89 651.62, 311.11 651.34, 333.33 648.71 C 355.56 646.09, 377.78 637.83, 400.00 632.27 C 422.22 626.71, 444.44 619.48, 466.67 615.36 C 488.89 611.25, 511.11 609.76, 533.33 607.58 C 555.56 605.40, 588.89 603.17, 600.00 602.28 L 600 800 L 0 800 Z" fill="#65403a" opacity="0.832" filter="url(#arch-k4zwx4-s2)"/><filter id="arch-k4zwx4-s3" x="-10%" y="-30%" width="120%" height="180%">
+          <feGaussianBlur stdDeviation="0 1.40"/>
+        </filter>
+        <path d="M 0.00 668.79 C 11.11 668.52, 44.44 668.34, 66.67 667.18 C 88.89 666.02, 111.11 663.71, 133.33 661.82 C 155.56 659.94, 177.78 656.00, 200.00 655.88 C 222.22 655.75, 244.44 656.92, 266.67 661.09 C 288.89 665.25, 311.11 673.92, 333.33 680.84 C 355.56 687.76, 377.78 697.60, 400.00 702.59 C 422.22 707.59, 444.44 710.56, 466.67 710.81 C 488.89 711.05, 511.11 706.82, 533.33 704.05 C 555.56 701.28, 588.89 695.82, 600.00 694.17 L 600 800 L 0 800 Z" fill="#452c2a" opacity="0.916" filter="url(#arch-k4zwx4-s3)"/><filter id="arch-k4zwx4-s4" x="-10%" y="-30%" width="120%" height="180%">
+          <feGaussianBlur stdDeviation="0 0.00"/>
+        </filter>
+        <path d="M 0.00 739.52 C 11.11 739.27, 44.44 738.88, 66.67 738.02 C 88.89 737.15, 111.11 734.90, 133.33 734.33 C 155.56 733.75, 177.78 732.90, 200.00 734.57 C 222.22 736.24, 244.44 739.98, 266.67 744.33 C 288.89 748.69, 311.11 755.82, 333.33 760.69 C 355.56 765.55, 377.78 771.10, 400.00 773.53 C 422.22 775.95, 444.44 776.19, 466.67 775.25 C 488.89 774.31, 511.11 770.48, 533.33 767.89 C 555.56 765.29, 588.89 761.06, 600.00 759.70 L 600 800 L 0 800 Z" fill="#281b1c" opacity="1.000" filter="url(#arch-k4zwx4-s4)"/>
+      <rect width="600" height="800" filter="url(#arch-k4zwx4-grain)"
+        opacity="0.13" style="mix-blend-mode:overlay"/>
     </g>
   </svg>
           </div>
@@ -278,14 +392,47 @@
       </clipPath>
       <linearGradient id="arch-160l8i4-sky" x1="0" y1="0" x2="0" y2="1">
         <stop offset="0" stop-color="#eeeade"/>
-        <stop offset="1" stop-color="#d7d8c3"/>
+        <stop offset="0.6" stop-color="#d7d8c3"/>
+        <stop offset="1" stop-color="#f4f1e4" stop-opacity="0.5"/>
       </linearGradient>
+      <radialGradient id="arch-160l8i4-glow" cx="50%" cy="50%" r="50%">
+        <stop offset="0" stop-color="#f4f1e4" stop-opacity="0.95"/>
+        <stop offset="0.4" stop-color="#f4f1e4" stop-opacity="0.3"/>
+        <stop offset="1" stop-color="#f4f1e4" stop-opacity="0"/>
+      </radialGradient>
+      <filter id="arch-160l8i4-grain" x="0" y="0" width="100%" height="100%">
+        <feTurbulence type="fractalNoise" baseFrequency="0.85" numOctaves="3"
+          stitchTiles="stitch" result="n"/>
+        <feColorMatrix type="saturate" values="0" in="n"/>
+      </filter>
     </defs>
     <g clip-path="url(#arch-160l8i4-clip)">
       <rect width="600" height="800" fill="url(#arch-160l8i4-sky)"/>
+      <!-- A bloom rather than a disc. A hard circle is the single detail that
+           most says "vector illustration"; a low coastal sun is behind haze
+           almost every hour it is worth looking at. -->
       <circle cx="396" cy="272"
-              r="66" fill="#f4f1e4"/>
-      <path d="M 0.00 462.07 C 11.11 460.94, 44.44 456.76, 66.67 455.27 C 88.89 453.78, 111.11 446.72, 133.33 453.13 C 155.56 459.54, 177.78 481.76, 200.00 493.71 C 222.22 505.67, 244.44 522.60, 266.67 524.84 C 288.89 527.08, 311.11 512.81, 333.33 507.14 C 355.56 501.48, 377.78 495.90, 400.00 490.86 C 422.22 485.83, 444.44 484.74, 466.67 476.93 C 488.89 469.12, 511.11 448.95, 533.33 444.02 C 555.56 439.09, 588.89 446.78, 600.00 447.34 L 600 800 L 0 800 Z" fill="#b2b494"/><path d="M 0.00 585.25 C 11.11 582.11, 44.44 571.78, 66.67 566.39 C 88.89 561.00, 111.11 556.21, 133.33 552.92 C 155.56 549.64, 177.78 550.28, 200.00 546.68 C 222.22 543.09, 244.44 536.83, 266.67 531.36 C 288.89 525.88, 311.11 515.70, 333.33 513.86 C 355.56 512.01, 377.78 514.20, 400.00 520.27 C 422.22 526.33, 444.44 541.46, 466.67 550.26 C 488.89 559.05, 511.11 569.05, 533.33 573.02 C 555.56 577.00, 588.89 573.94, 600.00 574.13 L 600 800 L 0 800 Z" fill="#93976f"/><path d="M 0.00 601.39 C 11.11 603.17, 44.44 606.09, 66.67 612.05 C 88.89 618.01, 111.11 630.66, 133.33 637.15 C 155.56 643.65, 177.78 650.84, 200.00 651.01 C 222.22 651.17, 244.44 643.57, 266.67 638.16 C 288.89 632.74, 311.11 623.08, 333.33 618.51 C 355.56 613.94, 377.78 613.08, 400.00 610.74 C 422.22 608.39, 444.44 607.63, 466.67 604.43 C 488.89 601.22, 511.11 593.76, 533.33 591.49 C 555.56 589.23, 588.89 590.94, 600.00 590.83 L 600 800 L 0 800 Z" fill="#727856"/><path d="M 0.00 670.09 C 11.11 670.20, 44.44 668.18, 66.67 670.72 C 88.89 673.26, 111.11 679.43, 133.33 685.32 C 155.56 691.21, 177.78 701.92, 200.00 706.06 C 222.22 710.21, 244.44 711.77, 266.67 710.18 C 288.89 708.59, 311.11 700.73, 333.33 696.50 C 355.56 692.27, 377.78 687.48, 400.00 684.81 C 422.22 682.14, 444.44 682.69, 466.67 680.47 C 488.89 678.24, 511.11 674.81, 533.33 671.47 C 555.56 668.13, 588.89 662.25, 600.00 660.41 L 600 800 L 0 800 Z" fill="#535840"/><path d="M 0.00 744.34 C 11.11 745.19, 44.44 747.16, 66.67 749.45 C 88.89 751.74, 111.11 755.13, 133.33 758.09 C 155.56 761.05, 177.78 764.80, 200.00 767.22 C 222.22 769.64, 244.44 771.86, 266.67 772.61 C 288.89 773.35, 311.11 772.90, 333.33 771.67 C 355.56 770.45, 377.78 767.71, 400.00 765.24 C 422.22 762.78, 444.44 759.37, 466.67 756.89 C 488.89 754.41, 511.11 752.00, 533.33 750.38 C 555.56 748.76, 588.89 747.70, 600.00 747.17 L 600 800 L 0 800 Z" fill="#363a2c"/>
+              r="264" fill="url(#arch-160l8i4-glow)"/>
+      <circle cx="396" cy="272"
+              r="45" fill="#f4f1e4" opacity="0.5"/>
+      <filter id="arch-160l8i4-s0" x="-10%" y="-30%" width="120%" height="180%">
+          <feGaussianBlur stdDeviation="0 5.60"/>
+        </filter>
+        <path d="M 0.00 444.95 C 11.11 443.58, 44.44 438.55, 66.67 436.75 C 88.89 434.96, 111.11 426.46, 133.33 434.18 C 155.56 441.90, 177.78 468.67, 200.00 483.06 C 222.22 497.46, 244.44 517.86, 266.67 520.56 C 288.89 523.26, 311.11 506.06, 333.33 499.24 C 355.56 492.42, 377.78 485.69, 400.00 479.63 C 422.22 473.56, 444.44 472.25, 466.67 462.85 C 488.89 453.44, 511.11 429.15, 533.33 423.21 C 555.56 417.26, 588.89 426.53, 600.00 427.20 L 600 800 L 0 800 Z" fill="#b2b494" opacity="0.664" filter="url(#arch-160l8i4-s0)"/><filter id="arch-160l8i4-s1" x="-10%" y="-30%" width="120%" height="180%">
+          <feGaussianBlur stdDeviation="0 4.20"/>
+        </filter>
+        <path d="M 0.00 582.99 C 11.11 579.19, 44.44 566.68, 66.67 560.16 C 88.89 553.64, 111.11 547.83, 133.33 543.85 C 155.56 539.88, 177.78 540.65, 200.00 536.30 C 222.22 531.95, 244.44 524.37, 266.67 517.75 C 288.89 511.12, 311.11 498.80, 333.33 496.56 C 355.56 494.32, 377.78 496.98, 400.00 504.32 C 422.22 511.67, 444.44 529.98, 466.67 540.63 C 488.89 551.27, 511.11 563.37, 533.33 568.19 C 555.56 573.00, 588.89 569.30, 600.00 569.52 L 600 800 L 0 800 Z" fill="#93976f" opacity="0.748" filter="url(#arch-160l8i4-s1)"/><filter id="arch-160l8i4-s2" x="-10%" y="-30%" width="120%" height="180%">
+          <feGaussianBlur stdDeviation="0 2.80"/>
+        </filter>
+        <path d="M 0.00 591.45 C 11.11 593.61, 44.44 597.17, 66.67 604.44 C 88.89 611.70, 111.11 627.12, 133.33 635.03 C 155.56 642.94, 177.78 651.71, 200.00 651.91 C 222.22 652.12, 244.44 642.86, 266.67 636.25 C 288.89 629.65, 311.11 617.88, 333.33 612.31 C 355.56 606.74, 377.78 605.70, 400.00 602.84 C 422.22 599.98, 444.44 599.05, 466.67 595.15 C 488.89 591.24, 511.11 582.15, 533.33 579.38 C 555.56 576.62, 588.89 578.70, 600.00 578.57 L 600 800 L 0 800 Z" fill="#727856" opacity="0.832" filter="url(#arch-160l8i4-s2)"/><filter id="arch-160l8i4-s3" x="-10%" y="-30%" width="120%" height="180%">
+          <feGaussianBlur stdDeviation="0 1.40"/>
+        </filter>
+        <path d="M 0.00 663.50 C 11.11 663.63, 44.44 661.15, 66.67 664.27 C 88.89 667.39, 111.11 674.99, 133.33 682.24 C 155.56 689.49, 177.78 702.67, 200.00 707.77 C 222.22 712.87, 244.44 714.80, 266.67 712.84 C 288.89 710.88, 311.11 701.21, 333.33 696.00 C 355.56 690.80, 377.78 684.90, 400.00 681.61 C 422.22 678.32, 444.44 679.00, 466.67 676.27 C 488.89 673.53, 511.11 669.31, 533.33 665.19 C 555.56 661.08, 588.89 653.85, 600.00 651.58 L 600 800 L 0 800 Z" fill="#535840" opacity="0.916" filter="url(#arch-160l8i4-s3)"/><filter id="arch-160l8i4-s4" x="-10%" y="-30%" width="120%" height="180%">
+          <feGaussianBlur stdDeviation="0 0.00"/>
+        </filter>
+        <path d="M 0.00 742.42 C 11.11 743.49, 44.44 745.95, 66.67 748.81 C 88.89 751.68, 111.11 755.91, 133.33 759.61 C 155.56 763.31, 177.78 768.00, 200.00 771.02 C 222.22 774.04, 244.44 776.83, 266.67 777.76 C 288.89 778.69, 311.11 778.13, 333.33 776.59 C 355.56 775.06, 377.78 771.63, 400.00 768.55 C 422.22 765.47, 444.44 761.21, 466.67 758.11 C 488.89 755.02, 511.11 752.00, 533.33 749.97 C 555.56 747.95, 588.89 746.63, 600.00 745.96 L 600 800 L 0 800 Z" fill="#363a2c" opacity="1.000" filter="url(#arch-160l8i4-s4)"/>
+      <rect width="600" height="800" filter="url(#arch-160l8i4-grain)"
+        opacity="0.13" style="mix-blend-mode:overlay"/>
     </g>
   </svg>
           </div>
@@ -310,19 +457,62 @@
     <defs>
       <linearGradient id="hz-zislnz-sky" x1="0" y1="0" x2="0" y2="1">
         <stop offset="0" stop-color="#f0d9c4"/>
-        <stop offset="1" stop-color="#d9a689"/>
+        <stop offset="0.62" stop-color="#d9a689"/>
+        <stop offset="1" stop-color="#c96f4e" stop-opacity="0.55"/>
       </linearGradient>
       <radialGradient id="hz-zislnz-glow" cx="50%" cy="50%" r="50%">
-        <stop offset="0" stop-color="#c96f4e" stop-opacity="0.85"/>
+        <stop offset="0" stop-color="#c96f4e" stop-opacity="0.9"/>
+        <stop offset="0.45" stop-color="#c96f4e" stop-opacity="0.28"/>
         <stop offset="1" stop-color="#c96f4e" stop-opacity="0"/>
       </radialGradient>
+
+      <!-- Grain. The same trick as the page-wide overlay, but baked into the
+           artwork so it survives being scaled down into a card: a large flat
+           gradient at card size bands into visible steps without it. -->
+      <filter id="hz-zislnz-grain" x="0" y="0" width="100%" height="100%">
+        <feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="3"
+          stitchTiles="stitch" result="n"/>
+        <feColorMatrix type="saturate" values="0" in="n" result="g"/>
+        <feComponentTransfer in="g">
+          <feFuncA type="linear" slope="0.5"/>
+        </feComponentTransfer>
+      </filter>
     </defs>
+
     <rect width="1000" height="400" fill="url(#hz-zislnz-sky)"/>
-    <circle cx="791" cy="130" r="189"
-             fill="url(#hz-zislnz-glow)"/>
-           <circle cx="791" cy="130" r="56"
-             fill="#c96f4e"/>
-    <path d="M 0.00 218.37 C 18.52 220.75, 74.07 225.28, 111.11 232.62 C 148.15 239.96, 185.19 256.80, 222.22 262.41 C 259.26 268.01, 296.30 269.56, 333.33 266.26 C 370.37 262.96, 407.41 248.82, 444.44 242.62 C 481.48 236.42, 518.52 232.50, 555.56 229.09 C 592.59 225.67, 629.63 225.83, 666.67 222.15 C 703.70 218.47, 740.74 208.66, 777.78 207.00 C 814.81 205.34, 851.85 205.92, 888.89 212.20 C 925.93 218.49, 981.48 239.29, 1000.00 244.71 L 1000 400 L 0 400 Z" fill="#a9765f"/><path d="M 0.00 277.90 C 18.52 280.70, 74.07 292.37, 111.11 294.69 C 148.15 297.00, 185.19 293.88, 222.22 291.81 C 259.26 289.74, 296.30 284.52, 333.33 282.27 C 370.37 280.02, 407.41 280.14, 444.44 278.29 C 481.48 276.43, 518.52 275.28, 555.56 271.13 C 592.59 266.98, 629.63 258.47, 666.67 253.38 C 703.70 248.29, 740.74 241.19, 777.78 240.57 C 814.81 239.95, 851.85 244.63, 888.89 249.65 C 925.93 254.67, 981.48 267.19, 1000.00 270.70 L 1000 400 L 0 400 Z" fill="#87594b"/><path d="M 0.00 320.64 C 18.52 318.45, 74.07 310.54, 111.11 307.52 C 148.15 304.50, 185.19 304.47, 222.22 302.52 C 259.26 300.57, 296.30 298.83, 333.33 295.82 C 370.37 292.82, 407.41 286.20, 444.44 284.49 C 481.48 282.79, 518.52 282.23, 555.56 285.59 C 592.59 288.95, 629.63 298.71, 666.67 304.64 C 703.70 310.58, 740.74 318.34, 777.78 321.19 C 814.81 324.04, 851.85 322.28, 888.89 321.73 C 925.93 321.19, 981.48 318.57, 1000.00 317.94 L 1000 400 L 0 400 Z" fill="#65403a"/><path d="M 0.00 332.79 C 18.52 334.17, 74.07 337.41, 111.11 341.05 C 148.15 344.68, 185.19 351.21, 222.22 354.58 C 259.26 357.96, 296.30 361.26, 333.33 361.29 C 370.37 361.31, 407.41 357.79, 444.44 354.74 C 481.48 351.69, 518.52 346.04, 555.56 343.01 C 592.59 339.98, 629.63 337.99, 666.67 336.56 C 703.70 335.12, 740.74 335.57, 777.78 334.39 C 814.81 333.22, 851.85 331.29, 888.89 329.51 C 925.93 327.74, 981.48 324.69, 1000.00 323.72 L 1000 400 L 0 400 Z" fill="#452c2a"/><path d="M 0.00 377.95 C 18.52 377.10, 74.07 374.15, 111.11 372.89 C 148.15 371.62, 185.19 371.77, 222.22 370.34 C 259.26 368.91, 296.30 365.49, 333.33 364.32 C 370.37 363.15, 407.41 361.62, 444.44 363.33 C 481.48 365.03, 518.52 370.69, 555.56 374.53 C 592.59 378.38, 629.63 384.28, 666.67 386.38 C 703.70 388.48, 740.74 387.65, 777.78 387.12 C 814.81 386.59, 851.85 384.05, 888.89 383.20 C 925.93 382.35, 981.48 382.21, 1000.00 382.02 L 1000 400 L 0 400 Z" fill="#281b1c"/>
+    <circle cx="791" cy="130"
+             r="289" fill="url(#hz-zislnz-glow)"/>
+           <circle cx="791" cy="130"
+             r="40" fill="#c96f4e" opacity="0.55"/>
+    <path d="M 0.00 201.67 C 18.52 204.37, 74.07 209.53, 111.11 217.87 C 148.15 226.21, 185.19 245.34, 222.22 251.71 C 259.26 258.09, 296.30 259.84, 333.33 256.09 C 370.37 252.35, 407.41 236.27, 444.44 229.23 C 481.48 222.19, 518.52 217.73, 555.56 213.85 C 592.59 209.98, 629.63 210.15, 666.67 205.97 C 703.70 201.78, 740.74 190.64, 777.78 188.76 C 814.81 186.87, 851.85 187.52, 888.89 194.67 C 925.93 201.81, 981.48 225.45, 1000.00 231.61 L 1000 400 L 0 400 Z"
+        fill="#a9765f" opacity="0.696"
+        filter="url(#hz-zislnz-soft-0)"/>
+        <filter id="hz-zislnz-soft-0" x="-10%" y="-30%" width="120%" height="180%">
+          <feGaussianBlur stdDeviation="0 4.40"/>
+        </filter><path d="M 0.00 266.16 C 18.52 269.35, 74.07 282.65, 111.11 285.30 C 148.15 287.94, 185.19 284.37, 222.22 282.01 C 259.26 279.65, 296.30 273.71, 333.33 271.14 C 370.37 268.57, 407.41 268.71, 444.44 266.60 C 481.48 264.48, 518.52 263.17, 555.56 258.44 C 592.59 253.70, 629.63 244.00, 666.67 238.19 C 703.70 232.38, 740.74 224.30, 777.78 223.59 C 814.81 222.88, 851.85 228.21, 888.89 233.94 C 925.93 239.66, 981.48 253.94, 1000.00 257.94 L 1000 400 L 0 400 Z"
+        fill="#87594b" opacity="0.772"
+        filter="url(#hz-zislnz-soft-1)"/>
+        <filter id="hz-zislnz-soft-1" x="-10%" y="-30%" width="120%" height="180%">
+          <feGaussianBlur stdDeviation="0 3.30"/>
+        </filter><path d="M 0.00 311.63 C 18.52 309.13, 74.07 300.06, 111.11 296.60 C 148.15 293.14, 185.19 293.10, 222.22 290.87 C 259.26 288.63, 296.30 286.64, 333.33 283.19 C 370.37 279.75, 407.41 272.17, 444.44 270.21 C 481.48 268.26, 518.52 267.62, 555.56 271.47 C 592.59 275.32, 629.63 286.50, 666.67 293.30 C 703.70 300.10, 740.74 309.00, 777.78 312.26 C 814.81 315.53, 851.85 313.51, 888.89 312.89 C 925.93 312.27, 981.48 309.26, 1000.00 308.54 L 1000 400 L 0 400 Z"
+        fill="#65403a" opacity="0.848"
+        filter="url(#hz-zislnz-soft-2)"/>
+        <filter id="hz-zislnz-soft-2" x="-10%" y="-30%" width="120%" height="180%">
+          <feGaussianBlur stdDeviation="0 2.20"/>
+        </filter><path d="M 0.00 321.96 C 18.52 323.55, 74.07 327.29, 111.11 331.49 C 148.15 335.68, 185.19 343.21, 222.22 347.10 C 259.26 351.00, 296.30 354.81, 333.33 354.84 C 370.37 354.87, 407.41 350.80, 444.44 347.28 C 481.48 343.77, 518.52 337.24, 555.56 333.74 C 592.59 330.25, 629.63 327.96, 666.67 326.31 C 703.70 324.65, 740.74 325.16, 777.78 323.80 C 814.81 322.45, 851.85 320.23, 888.89 318.18 C 925.93 316.13, 981.48 312.61, 1000.00 311.50 L 1000 400 L 0 400 Z"
+        fill="#452c2a" opacity="0.924"
+        filter="url(#hz-zislnz-soft-3)"/>
+        <filter id="hz-zislnz-soft-3" x="-10%" y="-30%" width="120%" height="180%">
+          <feGaussianBlur stdDeviation="0 1.10"/>
+        </filter><path d="M 0.00 370.27 C 18.52 369.29, 74.07 365.85, 111.11 364.37 C 148.15 362.89, 185.19 363.06, 222.22 361.40 C 259.26 359.73, 296.30 355.73, 333.33 354.37 C 370.37 353.01, 407.41 351.23, 444.44 353.22 C 481.48 355.20, 518.52 361.81, 555.56 366.29 C 592.59 370.77, 629.63 377.66, 666.67 380.11 C 703.70 382.56, 740.74 381.59, 777.78 380.97 C 814.81 380.35, 851.85 377.39, 888.89 376.40 C 925.93 375.41, 981.48 375.25, 1000.00 375.02 L 1000 400 L 0 400 Z"
+        fill="#281b1c" opacity="1.000"
+        filter="url(#hz-zislnz-soft-4)"/>
+        <filter id="hz-zislnz-soft-4" x="-10%" y="-30%" width="120%" height="180%">
+          <feGaussianBlur stdDeviation="0 0.00"/>
+        </filter>
+
+    <rect width="1000" height="400" filter="url(#hz-zislnz-grain)"
+      opacity="0.14" style="mix-blend-mode:overlay"/>
   </svg>
     <div class="shell cta__inner">
       <h2 class="display-2">Look for a dune suite.</h2>
@@ -382,6 +572,11 @@
         </p>
       </div>
     </footer>
+    <script defer src="/shared/js/gsap.min.js"></script>
+    <script defer src="/shared/js/ScrollTrigger.min.js"></script>
+    <script defer src="/shared/js/SplitText.min.js"></script>
+    <script defer src="/shared/js/lenis.min.js"></script>
+    <script defer src="/shared/motion.js"></script>
     <script type="module" src="/aurelia/assets/ui.js"></script>
   </body>
 </html>

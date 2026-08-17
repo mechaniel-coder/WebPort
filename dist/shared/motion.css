@@ -1,0 +1,88 @@
+/**
+ * Start-states for the motion system.
+ *
+ * Every rule here is scoped to `.has-motion` on <html>, which only exists when
+ * the boot snippet in <head> ran AND the user has not asked for reduced motion.
+ * That scoping is the safety property: with no JavaScript, with a failed GSAP
+ * load, or with reduce-motion set, none of these selectors match and the page
+ * is a plain document with nothing hidden.
+ *
+ * `motion.js` removes the class in the failure cases and adds `motion-ready`
+ * on success, so `.has-motion` alone is never a permanently-hidden state.
+ */
+
+/* Hide only what will be animated in. GSAP takes over from these values, so
+   they must match the `from` states in motion.js or the first frame jumps. */
+.has-motion [data-reveal='fade'],
+.has-motion [data-reveal='']:not([data-stagger]),
+.has-motion [data-reveal]:not([data-reveal='lines']):not([data-reveal='chars']):not([data-reveal='clip']):not([data-stagger]) {
+  opacity: 0;
+  transform: translateY(28px);
+}
+
+/* Staggered children of a plain fade.
+ *
+ * Excluding the split types is not a tidiness detail. SplitText replaces the
+ * element's children with its own line wrappers, so on a heading carrying both
+ * `data-reveal="lines"` and `data-stagger` this rule would hide the very
+ * wrappers the line animation is about to move — leaving the headline blank
+ * while everything around it revealed correctly. */
+.has-motion
+  [data-reveal][data-stagger]:not([data-reveal='lines']):not([data-reveal='chars']):not([data-reveal='clip'])
+  > * {
+  opacity: 0;
+  transform: translateY(28px);
+}
+
+/* `clip` animates the clip-path itself, so the element stays fully opaque —
+   fading it as well would double the effect and read as a dissolve. */
+.has-motion [data-reveal='clip'] {
+  clip-path: inset(0 0 100% 0);
+}
+
+/* Lines and chars are hidden by their own wrappers once SplitText has run.
+   Hiding the source element too would leave a frame of nothing between paint
+   and the split, so it is deliberately not hidden here. */
+
+/* Once the animation has played, clear the transform so it cannot interfere
+   with anything positioned relative to these elements. */
+.motion-ready [data-reveal] {
+  will-change: auto;
+}
+
+/* ── Header ──────────────────────────────────────────────────────────────── */
+
+[data-header] {
+  transition:
+    transform 0.45s cubic-bezier(0.22, 0.61, 0.36, 1),
+    background-color 0.3s linear,
+    border-color 0.3s linear;
+}
+
+[data-header].is-hidden {
+  transform: translateY(-100%);
+}
+
+/* ── Reduced motion ──────────────────────────────────────────────────────────
+ *
+ * A belt-and-braces stop. The boot snippet already prevents `has-motion` from
+ * being set, so these selectors should never match — but a user can change the
+ * setting after load, and a media query re-evaluates where a one-time class
+ * check does not.
+ */
+@media (prefers-reduced-motion: reduce) {
+  .has-motion [data-reveal],
+  .has-motion [data-reveal][data-stagger] > * {
+    opacity: 1 !important;
+    transform: none !important;
+    clip-path: none !important;
+  }
+
+  [data-header] {
+    transition: none;
+  }
+
+  [data-header].is-hidden {
+    transform: none;
+  }
+}

@@ -41,4 +41,4 @@
   [headers.values]
     X-Content-Type-Options = "nosniff"
     Referrer-Policy = "strict-origin-when-cross-origin"
-    Content-Security-Policy = "default-src 'self'; img-src 'self' data:; style-src 'self'; script-src 'self'; base-uri 'self'; form-action 'self'; frame-ancestors 'none'"
+    Content-Security-Policy = "default-src 'self'; img-src 'self' data:; style-src 'self'; script-src 'self' 'sha256-rQEg0M7tvZq9vbxirCHofYgZd2FDizfH+UmLKbdUGxA='; base-uri 'self'; form-action 'self'; frame-ancestors 'none'"

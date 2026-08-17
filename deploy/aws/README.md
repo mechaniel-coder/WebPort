@@ -126,7 +126,35 @@ type for the apex and a normal CNAME for `www`.
 > both names, merge the redirect and the rewrite into one function rather than trying to
 > chain them.
 
-### 7. Deploy
+### 7. Security headers
+
+Netlify and Vercel read these from `netlify.toml` / `vercel.json`. CloudFront reads
+neither, so on AWS they have to be attached as a **response headers policy** or the site
+ships with none.
+
+CloudFront → Policies → Response headers → Create. Add a custom header:
+
+| Header | Value |
+| --- | --- |
+| `Content-Security-Policy` | see below |
+
+```
+default-src 'self'; img-src 'self' data:; style-src 'self'; script-src 'self' 'sha256-rQEg0M7tvZq9vbxirCHofYgZd2FDizfH+UmLKbdUGxA='; font-src 'self'; base-uri 'self'; form-action 'self'; frame-ancestors 'none'
+```
+
+Under *Security headers* in the same policy, enable `X-Content-Type-Options: nosniff`,
+`Referrer-Policy: strict-origin-when-cross-origin` and `Strict-Transport-Security`
+(31536000, include subdomains). Then attach the policy to the default cache behaviour.
+
+> **That `sha256-…` is not decorative.** One inline script runs before first paint to
+> decide whether elements about to be animated should start hidden — see
+> `src/_lib/boot.js` for why it cannot be an external file. The hash allows exactly that
+> snippet instead of opening the policy up with `'unsafe-inline'`. If you edit the
+> snippet the hash changes and the script is silently blocked: `npm run verify` fails
+> when the value here no longer matches the source, so run it after any such edit and
+> copy the new hash into this policy, `netlify.toml` and `vercel.json` together.
+
+### 8. Deploy
 
 ```bash
 BUCKET=your-bucket DISTRIBUTION_ID=E1234567890ABC ./deploy/aws/deploy.sh

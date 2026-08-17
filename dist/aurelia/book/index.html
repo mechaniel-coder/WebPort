@@ -6,7 +6,7 @@
     <title>Check availability — Aurelia</title>
     <meta name="description" content="Live availability and the full price — fees and tax included — before you enter a single personal detail. Free cancellation up to seven days before arrival.">
     <link rel="canonical" href="https://exostech.pro/aurelia/book/">
-    <meta name="theme-color" content="#23201c">
+    <meta name="theme-color" content="#1a1714">
     <meta property="og:type" content="website">
     <meta property="og:site_name" content="Aurelia">
     <meta property="og:title" content="Check availability — Aurelia">
@@ -20,15 +20,20 @@
     <meta name="twitter:description" content="Live availability and the full price — fees and tax included — before you enter a single personal detail. Free cancellation up to seven days before arrival.">
     <meta name="twitter:image" content="https://exostech.pro/aurelia/assets/social-card.svg">
     <link rel="icon" href="data:image/svg+xml,%3Csvg%20viewBox%3D%220%200%2032%2032%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20aria-hidden%3D%22true%22%3E%20%3Crect%20width%3D%2232%22%20height%3D%2232%22%20rx%3D%226%22%20fill%3D%22%2323201c%22%2F%3E%20%3Cpath%20d%3D%22M7%2026V16a9%209%200%200%201%2018%200v10%22%20fill%3D%22none%22%20stroke%3D%22%23efe9df%22%20stroke-width%3D%222.2%22%2F%3E%20%3C%2Fsvg%3E">
+    <link rel="preload" as="font" type="font/woff2" crossorigin href="/shared/fonts/fraunces-var.woff2">
+    <link rel="preload" as="font" type="font/woff2" crossorigin href="/shared/fonts/schibsted-var.woff2">
     <link rel="stylesheet" href="/shared/reset.css">
+    <link rel="stylesheet" href="/shared/type.css">
+    <link rel="stylesheet" href="/shared/motion.css">
     <link rel="stylesheet" href="/aurelia/assets/aurelia.css">
     <link rel="stylesheet" href="/aurelia/assets/booking.css">
+    <script>var d=document.documentElement;if(!matchMedia('(prefers-reduced-motion: reduce)').matches){d.classList.add('has-motion');window.__motionFallback=setTimeout(function(){d.classList.remove('has-motion');d.classList.add('motion-off')},2500)}</script>
     <script type="application/ld+json">{"@context":"https://schema.org","@type":"Hotel","name":"Aurelia Coast Retreat","description":"A twenty-two room retreat on the northern Sonoma coast.","url":"https://exostech.pro/aurelia/","telephone":"+1 (707) 555-0142","email":"stay@example.com","numberOfRooms":22,"priceRange":"$$$$","checkinTime":"16:00","checkoutTime":"11:00","address":{"@type":"PostalAddress","streetAddress":"4180 Shoreline Highway","addressLocality":"Sea Ranch","addressRegion":"CA","postalCode":"95497","addressCountry":"US"},"geo":{"@type":"GeoCoordinates","latitude":38.7096,"longitude":-123.4569},"amenityFeature":[{"@type":"LocationFeatureSpecification","name":"Restaurant","value":true},{"@type":"LocationFeatureSpecification","name":"Sauna","value":true},{"@type":"LocationFeatureSpecification","name":"Ocean view","value":true},{"@type":"LocationFeatureSpecification","name":"Free breakfast","value":true},{"@type":"LocationFeatureSpecification","name":"Free parking","value":true}]}</script>
     <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Aurelia","item":"https://exostech.pro/aurelia/"},{"@type":"ListItem","position":2,"name":"Check availability","item":"https://exostech.pro/aurelia/book/"}]}</script>
   </head>
   <body class="site-aurelia">
     <a class="skip-link" href="#main">Skip to main content</a>
-    <header class="masthead" data-masthead>
+    <header class="masthead" data-masthead data-header>
       <div class="masthead__inner">
         <a class="brand" href="/aurelia/">
           <span class="brand__mark" aria-hidden="true"><svg viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg"
@@ -182,14 +187,47 @@
       </clipPath>
       <linearGradient id="arch-1fzzq1y-sky" x1="0" y1="0" x2="0" y2="1">
         <stop offset="0" stop-color="#f6e3d2"/>
-        <stop offset="1" stop-color="#efc9ad"/>
+        <stop offset="0.6" stop-color="#efc9ad"/>
+        <stop offset="1" stop-color="#e8996b" stop-opacity="0.5"/>
       </linearGradient>
+      <radialGradient id="arch-1fzzq1y-glow" cx="50%" cy="50%" r="50%">
+        <stop offset="0" stop-color="#e8996b" stop-opacity="0.95"/>
+        <stop offset="0.4" stop-color="#e8996b" stop-opacity="0.3"/>
+        <stop offset="1" stop-color="#e8996b" stop-opacity="0"/>
+      </radialGradient>
+      <filter id="arch-1fzzq1y-grain" x="0" y="0" width="100%" height="100%">
+        <feTurbulence type="fractalNoise" baseFrequency="0.85" numOctaves="3"
+          stitchTiles="stitch" result="n"/>
+        <feColorMatrix type="saturate" values="0" in="n"/>
+      </filter>
     </defs>
     <g clip-path="url(#arch-1fzzq1y-clip)">
       <rect width="600" height="800" fill="url(#arch-1fzzq1y-sky)"/>
+      <!-- A bloom rather than a disc. A hard circle is the single detail that
+           most says "vector illustration"; a low coastal sun is behind haze
+           almost every hour it is worth looking at. -->
       <circle cx="396" cy="272"
-              r="66" fill="#e8996b"/>
-      <path d="M 0.00 472.16 C 11.11 471.17, 44.44 469.27, 66.67 466.23 C 88.89 463.19, 111.11 457.20, 133.33 453.92 C 155.56 450.64, 177.78 442.90, 200.00 446.56 C 222.22 450.23, 244.44 464.50, 266.67 475.88 C 288.89 487.27, 311.11 507.80, 333.33 514.87 C 355.56 521.94, 377.78 520.40, 400.00 518.32 C 422.22 516.24, 444.44 506.11, 466.67 502.38 C 488.89 498.65, 511.11 499.77, 533.33 495.92 C 555.56 492.07, 588.89 482.06, 600.00 479.28 L 600 800 L 0 800 Z" fill="#c9a184"/><path d="M 0.00 539.00 C 11.11 538.53, 44.44 537.15, 66.67 536.18 C 88.89 535.21, 111.11 534.85, 133.33 533.18 C 155.56 531.51, 177.78 528.49, 200.00 526.16 C 222.22 523.82, 244.44 520.06, 266.67 519.17 C 288.89 518.28, 311.11 518.08, 333.33 520.81 C 355.56 523.55, 377.78 529.32, 400.00 535.57 C 422.22 541.82, 444.44 551.32, 466.67 558.29 C 488.89 565.27, 511.11 573.12, 533.33 577.40 C 555.56 581.69, 588.89 582.91, 600.00 584.02 L 600 800 L 0 800 Z" fill="#a87f66"/><path d="M 0.00 600.29 C 11.11 600.89, 44.44 600.94, 66.67 603.85 C 88.89 606.77, 111.11 612.18, 133.33 617.79 C 155.56 623.40, 177.78 632.13, 200.00 637.51 C 222.22 642.89, 244.44 648.49, 266.67 650.06 C 288.89 651.64, 311.11 649.86, 333.33 646.96 C 355.56 644.06, 377.78 637.31, 400.00 632.68 C 422.22 628.04, 444.44 622.45, 466.67 619.14 C 488.89 615.83, 511.11 614.43, 533.33 612.79 C 555.56 611.16, 588.89 609.90, 600.00 609.32 L 600 800 L 0 800 Z" fill="#7e5f4e"/><path d="M 0.00 672.59 C 11.11 672.47, 44.44 672.47, 66.67 671.90 C 88.89 671.33, 111.11 670.21, 133.33 669.17 C 155.56 668.13, 177.78 666.29, 200.00 665.65 C 222.22 665.00, 244.44 664.33, 266.67 665.30 C 288.89 666.27, 311.11 668.39, 333.33 671.46 C 355.56 674.53, 377.78 679.37, 400.00 683.73 C 422.22 688.09, 444.44 693.70, 466.67 697.60 C 488.89 701.51, 511.11 705.27, 533.33 707.17 C 555.56 709.07, 588.89 708.71, 600.00 709.01 L 600 800 L 0 800 Z" fill="#57443a"/><path d="M 0.00 755.13 C 11.11 754.09, 44.44 750.28, 66.67 748.86 C 88.89 747.44, 111.11 747.69, 133.33 746.59 C 155.56 745.50, 177.78 744.13, 200.00 742.31 C 222.22 740.48, 244.44 736.98, 266.67 735.65 C 288.89 734.32, 311.11 732.97, 333.33 734.31 C 355.56 735.66, 377.78 739.72, 400.00 743.74 C 422.22 747.76, 444.44 754.49, 466.67 758.43 C 488.89 762.37, 511.11 766.01, 533.33 767.38 C 555.56 768.75, 588.89 766.78, 600.00 766.66 L 600 800 L 0 800 Z" fill="#332924"/>
+              r="264" fill="url(#arch-1fzzq1y-glow)"/>
+      <circle cx="396" cy="272"
+              r="45" fill="#e8996b" opacity="0.5"/>
+      <filter id="arch-1fzzq1y-s0" x="-10%" y="-30%" width="120%" height="180%">
+          <feGaussianBlur stdDeviation="0 5.60"/>
+        </filter>
+        <path d="M 0.00 457.10 C 11.11 455.91, 44.44 453.62, 66.67 449.96 C 88.89 446.30, 111.11 439.08, 133.33 435.13 C 155.56 431.18, 177.78 421.86, 200.00 426.27 C 222.22 430.68, 244.44 447.87, 266.67 461.58 C 288.89 475.30, 311.11 500.03, 333.33 508.55 C 355.56 517.07, 377.78 515.21, 400.00 512.70 C 422.22 510.19, 444.44 498.00, 466.67 493.50 C 488.89 489.01, 511.11 490.36, 533.33 485.72 C 555.56 481.09, 588.89 469.02, 600.00 465.68 L 600 800 L 0 800 Z" fill="#c9a184" opacity="0.664" filter="url(#arch-1fzzq1y-s0)"/><filter id="arch-1fzzq1y-s1" x="-10%" y="-30%" width="120%" height="180%">
+          <feGaussianBlur stdDeviation="0 4.20"/>
+        </filter>
+        <path d="M 0.00 527.00 C 11.11 526.43, 44.44 524.76, 66.67 523.59 C 88.89 522.41, 111.11 521.98, 133.33 519.96 C 155.56 517.94, 177.78 514.28, 200.00 511.45 C 222.22 508.62, 244.44 504.07, 266.67 502.99 C 288.89 501.91, 311.11 501.68, 333.33 504.98 C 355.56 508.29, 377.78 515.29, 400.00 522.85 C 422.22 530.41, 444.44 541.92, 466.67 550.36 C 488.89 558.80, 511.11 568.30, 533.33 573.49 C 555.56 578.68, 588.89 580.16, 600.00 581.49 L 600 800 L 0 800 Z" fill="#a87f66" opacity="0.748" filter="url(#arch-1fzzq1y-s1)"/><filter id="arch-1fzzq1y-s2" x="-10%" y="-30%" width="120%" height="180%">
+          <feGaussianBlur stdDeviation="0 2.80"/>
+        </filter>
+        <path d="M 0.00 590.11 C 11.11 590.83, 44.44 590.89, 66.67 594.45 C 88.89 598.00, 111.11 604.59, 133.33 611.43 C 155.56 618.26, 177.78 628.90, 200.00 635.46 C 222.22 642.02, 244.44 648.84, 266.67 650.76 C 288.89 652.68, 311.11 650.51, 333.33 646.98 C 355.56 643.45, 377.78 635.23, 400.00 629.57 C 422.22 623.92, 444.44 617.11, 466.67 613.08 C 488.89 609.04, 511.11 607.34, 533.33 605.34 C 555.56 603.35, 588.89 601.81, 600.00 601.11 L 600 800 L 0 800 Z" fill="#7e5f4e" opacity="0.832" filter="url(#arch-1fzzq1y-s2)"/><filter id="arch-1fzzq1y-s3" x="-10%" y="-30%" width="120%" height="180%">
+          <feGaussianBlur stdDeviation="0 1.40"/>
+        </filter>
+        <path d="M 0.00 666.57 C 11.11 666.43, 44.44 666.42, 66.67 665.72 C 88.89 665.02, 111.11 663.64, 133.33 662.36 C 155.56 661.08, 177.78 658.82, 200.00 658.03 C 222.22 657.24, 244.44 656.41, 266.67 657.60 C 288.89 658.79, 311.11 661.40, 333.33 665.18 C 355.56 668.96, 377.78 674.92, 400.00 680.29 C 422.22 685.65, 444.44 692.55, 466.67 697.36 C 488.89 702.16, 511.11 706.79, 533.33 709.13 C 555.56 711.47, 588.89 711.02, 600.00 711.40 L 600 800 L 0 800 Z" fill="#57443a" opacity="0.916" filter="url(#arch-1fzzq1y-s3)"/><filter id="arch-1fzzq1y-s4" x="-10%" y="-30%" width="120%" height="180%">
+          <feGaussianBlur stdDeviation="0 0.00"/>
+        </filter>
+        <path d="M 0.00 755.91 C 11.11 754.61, 44.44 749.86, 66.67 748.08 C 88.89 746.30, 111.11 746.61, 133.33 745.24 C 155.56 743.88, 177.78 742.16, 200.00 739.88 C 222.22 737.60, 244.44 733.23, 266.67 731.56 C 288.89 729.90, 311.11 728.21, 333.33 729.89 C 355.56 731.58, 377.78 736.65, 400.00 741.67 C 422.22 746.69, 444.44 755.11, 466.67 760.04 C 488.89 764.96, 511.11 769.51, 533.33 771.23 C 555.56 772.94, 588.89 770.48, 600.00 770.33 L 600 800 L 0 800 Z" fill="#332924" opacity="1.000" filter="url(#arch-1fzzq1y-s4)"/>
+      <rect width="600" height="800" filter="url(#arch-1fzzq1y-grain)"
+        opacity="0.13" style="mix-blend-mode:overlay"/>
     </g>
   </svg>
           </span>
@@ -221,14 +259,47 @@
       </clipPath>
       <linearGradient id="arch-k4zwx4-sky" x1="0" y1="0" x2="0" y2="1">
         <stop offset="0" stop-color="#f0d9c4"/>
-        <stop offset="1" stop-color="#d9a689"/>
+        <stop offset="0.6" stop-color="#d9a689"/>
+        <stop offset="1" stop-color="#c96f4e" stop-opacity="0.5"/>
       </linearGradient>
+      <radialGradient id="arch-k4zwx4-glow" cx="50%" cy="50%" r="50%">
+        <stop offset="0" stop-color="#c96f4e" stop-opacity="0.95"/>
+        <stop offset="0.4" stop-color="#c96f4e" stop-opacity="0.3"/>
+        <stop offset="1" stop-color="#c96f4e" stop-opacity="0"/>
+      </radialGradient>
+      <filter id="arch-k4zwx4-grain" x="0" y="0" width="100%" height="100%">
+        <feTurbulence type="fractalNoise" baseFrequency="0.85" numOctaves="3"
+          stitchTiles="stitch" result="n"/>
+        <feColorMatrix type="saturate" values="0" in="n"/>
+      </filter>
     </defs>
     <g clip-path="url(#arch-k4zwx4-clip)">
       <rect width="600" height="800" fill="url(#arch-k4zwx4-sky)"/>
+      <!-- A bloom rather than a disc. A hard circle is the single detail that
+           most says "vector illustration"; a low coastal sun is behind haze
+           almost every hour it is worth looking at. -->
       <circle cx="396" cy="272"
-              r="66" fill="#c96f4e"/>
-      <path d="M 0.00 511.05 C 11.11 506.82, 44.44 491.38, 66.67 485.62 C 88.89 479.86, 111.11 480.75, 133.33 476.51 C 155.56 472.27, 177.78 466.09, 200.00 460.17 C 222.22 454.26, 244.44 441.31, 266.67 441.01 C 288.89 440.71, 311.11 448.58, 333.33 458.38 C 355.56 468.18, 377.78 490.33, 400.00 499.80 C 422.22 509.27, 444.44 513.95, 466.67 515.19 C 488.89 516.43, 511.11 508.80, 533.33 507.24 C 555.56 505.69, 588.89 506.07, 600.00 505.84 L 600 800 L 0 800 Z" fill="#a9765f"/><path d="M 0.00 556.50 C 11.11 554.49, 44.44 547.17, 66.67 544.43 C 88.89 541.69, 111.11 542.20, 133.33 540.06 C 155.56 537.92, 177.78 535.13, 200.00 531.59 C 222.22 528.06, 244.44 521.23, 266.67 518.85 C 288.89 516.46, 311.11 514.30, 333.33 517.27 C 355.56 520.23, 377.78 528.72, 400.00 536.63 C 422.22 544.54, 444.44 557.48, 466.67 564.75 C 488.89 572.01, 511.11 578.11, 533.33 580.21 C 555.56 582.31, 588.89 577.83, 600.00 577.36 L 600 800 L 0 800 Z" fill="#87594b"/><path d="M 0.00 599.52 C 11.11 599.52, 44.44 597.80, 66.67 599.55 C 88.89 601.30, 111.11 604.82, 133.33 610.02 C 155.56 615.21, 177.78 624.43, 200.00 630.73 C 222.22 637.03, 244.44 644.88, 266.67 647.82 C 288.89 650.76, 311.11 650.54, 333.33 648.38 C 355.56 646.22, 377.78 639.45, 400.00 634.89 C 422.22 630.33, 444.44 624.39, 466.67 621.02 C 488.89 617.64, 511.11 616.42, 533.33 614.63 C 555.56 612.84, 588.89 611.01, 600.00 610.28 L 600 800 L 0 800 Z" fill="#65403a"/><path d="M 0.00 674.39 C 11.11 674.17, 44.44 674.02, 66.67 673.08 C 88.89 672.14, 111.11 670.26, 133.33 668.73 C 155.56 667.20, 177.78 664.00, 200.00 663.90 C 222.22 663.80, 244.44 664.75, 266.67 668.13 C 288.89 671.51, 311.11 678.56, 333.33 684.18 C 355.56 689.81, 377.78 697.80, 400.00 701.86 C 422.22 705.91, 444.44 708.33, 466.67 708.53 C 488.89 708.73, 511.11 705.29, 533.33 703.04 C 555.56 700.79, 588.89 696.35, 600.00 695.01 L 600 800 L 0 800 Z" fill="#452c2a"/><path d="M 0.00 742.02 C 11.11 741.82, 44.44 741.51, 66.67 740.81 C 88.89 740.12, 111.11 738.32, 133.33 737.86 C 155.56 737.40, 177.78 736.72, 200.00 738.05 C 222.22 739.39, 244.44 742.38, 266.67 745.87 C 288.89 749.35, 311.11 755.06, 333.33 758.95 C 355.56 762.84, 377.78 767.28, 400.00 769.22 C 422.22 771.16, 444.44 771.36, 466.67 770.60 C 488.89 769.85, 511.11 766.78, 533.33 764.71 C 555.56 762.64, 588.89 759.25, 600.00 758.16 L 600 800 L 0 800 Z" fill="#281b1c"/>
+              r="264" fill="url(#arch-k4zwx4-glow)"/>
+      <circle cx="396" cy="272"
+              r="45" fill="#c96f4e" opacity="0.5"/>
+      <filter id="arch-k4zwx4-s0" x="-10%" y="-30%" width="120%" height="180%">
+          <feGaussianBlur stdDeviation="0 5.60"/>
+        </filter>
+        <path d="M 0.00 503.95 C 11.11 498.85, 44.44 480.25, 66.67 473.32 C 88.89 466.38, 111.11 467.45, 133.33 462.34 C 155.56 457.23, 177.78 449.79, 200.00 442.66 C 222.22 435.54, 244.44 419.94, 266.67 419.58 C 288.89 419.22, 311.11 428.70, 333.33 440.50 C 355.56 452.30, 377.78 478.99, 400.00 490.39 C 422.22 501.80, 444.44 507.44, 466.67 508.93 C 488.89 510.42, 511.11 501.24, 533.33 499.36 C 555.56 497.49, 588.89 497.95, 600.00 497.67 L 600 800 L 0 800 Z" fill="#a9765f" opacity="0.664" filter="url(#arch-k4zwx4-s0)"/><filter id="arch-k4zwx4-s1" x="-10%" y="-30%" width="120%" height="180%">
+          <feGaussianBlur stdDeviation="0 4.20"/>
+        </filter>
+        <path d="M 0.00 548.18 C 11.11 545.75, 44.44 536.89, 66.67 533.57 C 88.89 530.26, 111.11 530.88, 133.33 528.29 C 155.56 525.70, 177.78 522.32, 200.00 518.03 C 222.22 513.75, 244.44 505.49, 266.67 502.60 C 288.89 499.71, 311.11 497.10, 333.33 500.69 C 355.56 504.28, 377.78 514.55, 400.00 524.13 C 422.22 533.71, 444.44 549.37, 466.67 558.17 C 488.89 566.96, 511.11 574.34, 533.33 576.89 C 555.56 579.43, 588.89 574.01, 600.00 573.43 L 600 800 L 0 800 Z" fill="#87594b" opacity="0.748" filter="url(#arch-k4zwx4-s1)"/><filter id="arch-k4zwx4-s2" x="-10%" y="-30%" width="120%" height="180%">
+          <feGaussianBlur stdDeviation="0 2.80"/>
+        </filter>
+        <path d="M 0.00 589.16 C 11.11 589.17, 44.44 587.06, 66.67 589.20 C 88.89 591.33, 111.11 595.62, 133.33 601.96 C 155.56 608.29, 177.78 619.52, 200.00 627.20 C 222.22 634.88, 244.44 644.45, 266.67 648.03 C 288.89 651.62, 311.11 651.34, 333.33 648.71 C 355.56 646.09, 377.78 637.83, 400.00 632.27 C 422.22 626.71, 444.44 619.48, 466.67 615.36 C 488.89 611.25, 511.11 609.76, 533.33 607.58 C 555.56 605.40, 588.89 603.17, 600.00 602.28 L 600 800 L 0 800 Z" fill="#65403a" opacity="0.832" filter="url(#arch-k4zwx4-s2)"/><filter id="arch-k4zwx4-s3" x="-10%" y="-30%" width="120%" height="180%">
+          <feGaussianBlur stdDeviation="0 1.40"/>
+        </filter>
+        <path d="M 0.00 668.79 C 11.11 668.52, 44.44 668.34, 66.67 667.18 C 88.89 666.02, 111.11 663.71, 133.33 661.82 C 155.56 659.94, 177.78 656.00, 200.00 655.88 C 222.22 655.75, 244.44 656.92, 266.67 661.09 C 288.89 665.25, 311.11 673.92, 333.33 680.84 C 355.56 687.76, 377.78 697.60, 400.00 702.59 C 422.22 707.59, 444.44 710.56, 466.67 710.81 C 488.89 711.05, 511.11 706.82, 533.33 704.05 C 555.56 701.28, 588.89 695.82, 600.00 694.17 L 600 800 L 0 800 Z" fill="#452c2a" opacity="0.916" filter="url(#arch-k4zwx4-s3)"/><filter id="arch-k4zwx4-s4" x="-10%" y="-30%" width="120%" height="180%">
+          <feGaussianBlur stdDeviation="0 0.00"/>
+        </filter>
+        <path d="M 0.00 739.52 C 11.11 739.27, 44.44 738.88, 66.67 738.02 C 88.89 737.15, 111.11 734.90, 133.33 734.33 C 155.56 733.75, 177.78 732.90, 200.00 734.57 C 222.22 736.24, 244.44 739.98, 266.67 744.33 C 288.89 748.69, 311.11 755.82, 333.33 760.69 C 355.56 765.55, 377.78 771.10, 400.00 773.53 C 422.22 775.95, 444.44 776.19, 466.67 775.25 C 488.89 774.31, 511.11 770.48, 533.33 767.89 C 555.56 765.29, 588.89 761.06, 600.00 759.70 L 600 800 L 0 800 Z" fill="#281b1c" opacity="1.000" filter="url(#arch-k4zwx4-s4)"/>
+      <rect width="600" height="800" filter="url(#arch-k4zwx4-grain)"
+        opacity="0.13" style="mix-blend-mode:overlay"/>
     </g>
   </svg>
           </span>
@@ -260,14 +331,47 @@
       </clipPath>
       <linearGradient id="arch-160l8i4-sky" x1="0" y1="0" x2="0" y2="1">
         <stop offset="0" stop-color="#eeeade"/>
-        <stop offset="1" stop-color="#d7d8c3"/>
+        <stop offset="0.6" stop-color="#d7d8c3"/>
+        <stop offset="1" stop-color="#f4f1e4" stop-opacity="0.5"/>
       </linearGradient>
+      <radialGradient id="arch-160l8i4-glow" cx="50%" cy="50%" r="50%">
+        <stop offset="0" stop-color="#f4f1e4" stop-opacity="0.95"/>
+        <stop offset="0.4" stop-color="#f4f1e4" stop-opacity="0.3"/>
+        <stop offset="1" stop-color="#f4f1e4" stop-opacity="0"/>
+      </radialGradient>
+      <filter id="arch-160l8i4-grain" x="0" y="0" width="100%" height="100%">
+        <feTurbulence type="fractalNoise" baseFrequency="0.85" numOctaves="3"
+          stitchTiles="stitch" result="n"/>
+        <feColorMatrix type="saturate" values="0" in="n"/>
+      </filter>
     </defs>
     <g clip-path="url(#arch-160l8i4-clip)">
       <rect width="600" height="800" fill="url(#arch-160l8i4-sky)"/>
+      <!-- A bloom rather than a disc. A hard circle is the single detail that
+           most says "vector illustration"; a low coastal sun is behind haze
+           almost every hour it is worth looking at. -->
       <circle cx="396" cy="272"
-              r="66" fill="#f4f1e4"/>
-      <path d="M 0.00 462.07 C 11.11 460.94, 44.44 456.76, 66.67 455.27 C 88.89 453.78, 111.11 446.72, 133.33 453.13 C 155.56 459.54, 177.78 481.76, 200.00 493.71 C 222.22 505.67, 244.44 522.60, 266.67 524.84 C 288.89 527.08, 311.11 512.81, 333.33 507.14 C 355.56 501.48, 377.78 495.90, 400.00 490.86 C 422.22 485.83, 444.44 484.74, 466.67 476.93 C 488.89 469.12, 511.11 448.95, 533.33 444.02 C 555.56 439.09, 588.89 446.78, 600.00 447.34 L 600 800 L 0 800 Z" fill="#b2b494"/><path d="M 0.00 585.25 C 11.11 582.11, 44.44 571.78, 66.67 566.39 C 88.89 561.00, 111.11 556.21, 133.33 552.92 C 155.56 549.64, 177.78 550.28, 200.00 546.68 C 222.22 543.09, 244.44 536.83, 266.67 531.36 C 288.89 525.88, 311.11 515.70, 333.33 513.86 C 355.56 512.01, 377.78 514.20, 400.00 520.27 C 422.22 526.33, 444.44 541.46, 466.67 550.26 C 488.89 559.05, 511.11 569.05, 533.33 573.02 C 555.56 577.00, 588.89 573.94, 600.00 574.13 L 600 800 L 0 800 Z" fill="#93976f"/><path d="M 0.00 601.39 C 11.11 603.17, 44.44 606.09, 66.67 612.05 C 88.89 618.01, 111.11 630.66, 133.33 637.15 C 155.56 643.65, 177.78 650.84, 200.00 651.01 C 222.22 651.17, 244.44 643.57, 266.67 638.16 C 288.89 632.74, 311.11 623.08, 333.33 618.51 C 355.56 613.94, 377.78 613.08, 400.00 610.74 C 422.22 608.39, 444.44 607.63, 466.67 604.43 C 488.89 601.22, 511.11 593.76, 533.33 591.49 C 555.56 589.23, 588.89 590.94, 600.00 590.83 L 600 800 L 0 800 Z" fill="#727856"/><path d="M 0.00 670.09 C 11.11 670.20, 44.44 668.18, 66.67 670.72 C 88.89 673.26, 111.11 679.43, 133.33 685.32 C 155.56 691.21, 177.78 701.92, 200.00 706.06 C 222.22 710.21, 244.44 711.77, 266.67 710.18 C 288.89 708.59, 311.11 700.73, 333.33 696.50 C 355.56 692.27, 377.78 687.48, 400.00 684.81 C 422.22 682.14, 444.44 682.69, 466.67 680.47 C 488.89 678.24, 511.11 674.81, 533.33 671.47 C 555.56 668.13, 588.89 662.25, 600.00 660.41 L 600 800 L 0 800 Z" fill="#535840"/><path d="M 0.00 744.34 C 11.11 745.19, 44.44 747.16, 66.67 749.45 C 88.89 751.74, 111.11 755.13, 133.33 758.09 C 155.56 761.05, 177.78 764.80, 200.00 767.22 C 222.22 769.64, 244.44 771.86, 266.67 772.61 C 288.89 773.35, 311.11 772.90, 333.33 771.67 C 355.56 770.45, 377.78 767.71, 400.00 765.24 C 422.22 762.78, 444.44 759.37, 466.67 756.89 C 488.89 754.41, 511.11 752.00, 533.33 750.38 C 555.56 748.76, 588.89 747.70, 600.00 747.17 L 600 800 L 0 800 Z" fill="#363a2c"/>
+              r="264" fill="url(#arch-160l8i4-glow)"/>
+      <circle cx="396" cy="272"
+              r="45" fill="#f4f1e4" opacity="0.5"/>
+      <filter id="arch-160l8i4-s0" x="-10%" y="-30%" width="120%" height="180%">
+          <feGaussianBlur stdDeviation="0 5.60"/>
+        </filter>
+        <path d="M 0.00 444.95 C 11.11 443.58, 44.44 438.55, 66.67 436.75 C 88.89 434.96, 111.11 426.46, 133.33 434.18 C 155.56 441.90, 177.78 468.67, 200.00 483.06 C 222.22 497.46, 244.44 517.86, 266.67 520.56 C 288.89 523.26, 311.11 506.06, 333.33 499.24 C 355.56 492.42, 377.78 485.69, 400.00 479.63 C 422.22 473.56, 444.44 472.25, 466.67 462.85 C 488.89 453.44, 511.11 429.15, 533.33 423.21 C 555.56 417.26, 588.89 426.53, 600.00 427.20 L 600 800 L 0 800 Z" fill="#b2b494" opacity="0.664" filter="url(#arch-160l8i4-s0)"/><filter id="arch-160l8i4-s1" x="-10%" y="-30%" width="120%" height="180%">
+          <feGaussianBlur stdDeviation="0 4.20"/>
+        </filter>
+        <path d="M 0.00 582.99 C 11.11 579.19, 44.44 566.68, 66.67 560.16 C 88.89 553.64, 111.11 547.83, 133.33 543.85 C 155.56 539.88, 177.78 540.65, 200.00 536.30 C 222.22 531.95, 244.44 524.37, 266.67 517.75 C 288.89 511.12, 311.11 498.80, 333.33 496.56 C 355.56 494.32, 377.78 496.98, 400.00 504.32 C 422.22 511.67, 444.44 529.98, 466.67 540.63 C 488.89 551.27, 511.11 563.37, 533.33 568.19 C 555.56 573.00, 588.89 569.30, 600.00 569.52 L 600 800 L 0 800 Z" fill="#93976f" opacity="0.748" filter="url(#arch-160l8i4-s1)"/><filter id="arch-160l8i4-s2" x="-10%" y="-30%" width="120%" height="180%">
+          <feGaussianBlur stdDeviation="0 2.80"/>
+        </filter>
+        <path d="M 0.00 591.45 C 11.11 593.61, 44.44 597.17, 66.67 604.44 C 88.89 611.70, 111.11 627.12, 133.33 635.03 C 155.56 642.94, 177.78 651.71, 200.00 651.91 C 222.22 652.12, 244.44 642.86, 266.67 636.25 C 288.89 629.65, 311.11 617.88, 333.33 612.31 C 355.56 606.74, 377.78 605.70, 400.00 602.84 C 422.22 599.98, 444.44 599.05, 466.67 595.15 C 488.89 591.24, 511.11 582.15, 533.33 579.38 C 555.56 576.62, 588.89 578.70, 600.00 578.57 L 600 800 L 0 800 Z" fill="#727856" opacity="0.832" filter="url(#arch-160l8i4-s2)"/><filter id="arch-160l8i4-s3" x="-10%" y="-30%" width="120%" height="180%">
+          <feGaussianBlur stdDeviation="0 1.40"/>
+        </filter>
+        <path d="M 0.00 663.50 C 11.11 663.63, 44.44 661.15, 66.67 664.27 C 88.89 667.39, 111.11 674.99, 133.33 682.24 C 155.56 689.49, 177.78 702.67, 200.00 707.77 C 222.22 712.87, 244.44 714.80, 266.67 712.84 C 288.89 710.88, 311.11 701.21, 333.33 696.00 C 355.56 690.80, 377.78 684.90, 400.00 681.61 C 422.22 678.32, 444.44 679.00, 466.67 676.27 C 488.89 673.53, 511.11 669.31, 533.33 665.19 C 555.56 661.08, 588.89 653.85, 600.00 651.58 L 600 800 L 0 800 Z" fill="#535840" opacity="0.916" filter="url(#arch-160l8i4-s3)"/><filter id="arch-160l8i4-s4" x="-10%" y="-30%" width="120%" height="180%">
+          <feGaussianBlur stdDeviation="0 0.00"/>
+        </filter>
+        <path d="M 0.00 742.42 C 11.11 743.49, 44.44 745.95, 66.67 748.81 C 88.89 751.68, 111.11 755.91, 133.33 759.61 C 155.56 763.31, 177.78 768.00, 200.00 771.02 C 222.22 774.04, 244.44 776.83, 266.67 777.76 C 288.89 778.69, 311.11 778.13, 333.33 776.59 C 355.56 775.06, 377.78 771.63, 400.00 768.55 C 422.22 765.47, 444.44 761.21, 466.67 758.11 C 488.89 755.02, 511.11 752.00, 533.33 749.97 C 555.56 747.95, 588.89 746.63, 600.00 745.96 L 600 800 L 0 800 Z" fill="#363a2c" opacity="1.000" filter="url(#arch-160l8i4-s4)"/>
+      <rect width="600" height="800" filter="url(#arch-160l8i4-grain)"
+        opacity="0.13" style="mix-blend-mode:overlay"/>
     </g>
   </svg>
           </span>
@@ -420,6 +524,11 @@
         </p>
       </div>
     </footer>
+    <script defer src="/shared/js/gsap.min.js"></script>
+    <script defer src="/shared/js/ScrollTrigger.min.js"></script>
+    <script defer src="/shared/js/SplitText.min.js"></script>
+    <script defer src="/shared/js/lenis.min.js"></script>
+    <script defer src="/shared/motion.js"></script>
     <script type="module" src="/aurelia/assets/ui.js"></script>
     <script type="module" src="/aurelia/assets/booking.js"></script>
   </body>

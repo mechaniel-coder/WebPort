@@ -23,22 +23,40 @@ website is exactly what it is for.
 
 ## Fonts — `fonts/`
 
-All three are SIL Open Font License 1.1, which permits embedding and web use commercially.
+All eleven are SIL Open Font License 1.1, which permits embedding and web use commercially.
 Full texts in `licences/`.
 
-| File | Family | Axes | Size |
-| --- | --- | --- | --- |
-| `fraunces-var.woff2` | Fraunces Variable | `opsz` 9–144, `wght` 100–900 | 66 KB |
-| `schibsted-var.woff2` | Schibsted Grotesk Variable | `wght` 400–900 | 46 KB |
-| `jetbrains-var.woff2` | JetBrains Mono Variable | `wght` 100–800 | 39 KB |
+| File | Family | Axes | Size | Used by |
+| --- | --- | --- | --- | --- |
+| `newsreader-var.woff2` | Newsreader | `opsz` 6–72, `wght` 200–800 | 128 KB | Aurelia |
+| `familjen-var.woff2` | Familjen Grotesk | `wght` 400–700 | 18 KB | Aurelia |
+| `redhat-display-var.woff2` | Red Hat Display | `wght` 300–900 | 29 KB | Northwind |
+| `redhat-text-var.woff2` | Red Hat Text | `wght` 300–700 | 29 KB | Northwind |
+| `redhat-mono-var.woff2` | Red Hat Mono | `wght` 300–700 | 21 KB | Northwind |
+| `chivo-var.woff2` | Chivo | `wght` 100–900 | 32 KB | Forma |
+| `chivo-mono-var.woff2` | Chivo Mono | `wght` 100–900 | 25 KB | Forma |
+| `epilogue-var.woff2` | Epilogue | `wght` 100–900 | 34 KB | Vestra |
+| `spline-mono-var.woff2` | Spline Sans Mono | `wght` 300–700 | 35 KB | Vestra |
+| `schibsted-var.woff2` | Schibsted Grotesk | `wght` 400–900 | 45 KB | hub, lab |
+| `jetbrains-var.woff2` | JetBrains Mono | `wght` 100–800 | 39 KB | hub, lab |
 
 These are the Latin subsets from the Fontsource packages — already cut down from the full
 families, which is why one file covers every weight.
 
-Fraunces ships in several axis combinations; this is the `standard` cut (optical size plus
-weight) rather than `full`. The `SOFT` and `WONK` axes are characterful but cost another
-54 KB, and the design uses optical sizing far more: the same face is set at 200 px in a hero
-and at 15 px in a caption, and `opsz` is what keeps the second one from looking spindly.
+No family is shared between two client brands: Aurelia, Northwind, Forma and Vestra are
+separate businesses and a shared typeface would say otherwise. The hub and the lab do share
+a pair, because they are the same studio speaking.
+
+Newsreader is the outlier on size, and deliberately: it ships in several axis combinations
+and this is the `standard` cut, optical size plus weight, rather than weight alone. Aurelia
+sets the same face at 176 px in a hero and at 13 px in a table, and `opsz` is what keeps the
+second from looking spindly and the first from looking clotted. Only two files per site are
+preloaded, so the rest never block a first paint.
+
+Every family has a metric-matched fallback declared in `src/_lib/type.css`. Those numbers
+were measured in the rendering engine through canvas metrics, not read out of the font
+tables — see the note in that file. **If a family here is swapped, they must be recomputed;
+they are specific to these exact files.**
 
 ## Updating
 

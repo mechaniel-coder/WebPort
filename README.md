@@ -115,8 +115,12 @@ alike:
   computes the furthest reachable departure so an unfulfillable range cannot be assembled.
 - **Northwind** — technical credibility. Charts are hand-built SVG rendered at *build* time
   and again in the browser, so the dashboard is in the served HTML before any script runs.
-  The categorical palette was run through a colour-vision validator against the site's own
-  dark surface rather than picked by eye.
+  The page is light and only the dashboard is dark, so the product reads as an instrument
+  sitting on a page rather than as wallpaper. The categorical palette is validated for
+  colour vision against the chart's own surface, by a checker committed alongside it: worst
+  separation across normal, protanopia, deuteranopia and tritanopia is 44.3 dE. An earlier
+  palette claimed the same and held for only two of the three — under tritanopia its blue
+  and green landed 4.3 dE apart, which on a latency chart is one line, not two.
 - **Forma** — transactional correctness. Faceted filtering is AND across facets and OR
   within one, with state in the URL so it survives sharing and the back button. Tax is
   charged on goods *plus* shipping. No payment details are collected anywhere.
@@ -143,13 +147,19 @@ them, and the rest are driven in a real browser by `npm run check:browser`.
 
 - **Design systems** — every site defines its own colour, type, space and motion tokens as
   CSS custom properties. Fluid type via `clamp()`. Verified at 360 / 768 / 1024 / 1440px.
-- **Typography** — four client brands, four typeface pairings, self-hosted as variable
-  fonts: Fraunces and Schibsted Grotesk (Aurelia), Geist and Geist Mono (Northwind),
-  Bricolage Grotesque and Instrument Sans (Forma), Bodoni Moda and Archivo (Vestra). The
-  hub and the lab share Schibsted and JetBrains deliberately: the client brands are separate
+- **Typography** — four client brands, four typeface systems, self-hosted as variable
+  fonts: Newsreader and Familjen Grotesk (Aurelia), Red Hat Display/Text/Mono (Northwind),
+  Chivo and Chivo Mono (Forma), Epilogue and Spline Sans Mono (Vestra). The hub and the lab
+  share Schibsted Grotesk and JetBrains Mono deliberately: the client brands are separate
   businesses and get faces nothing else uses, while the two studio-owned surfaces are the
-  same studio speaking. Every family has a metric-matched local fallback, so the webfont
-  swap moves no line and costs nothing in layout shift.
+  same studio speaking.
+
+  Every family has a metric-matched local fallback, so the webfont swap moves no line and
+  costs nothing in layout shift. Those override descriptors were **measured, not derived** —
+  each face and each fallback loaded into the rendering engine and probed through canvas
+  metrics, because `fontBoundingBoxAscent`/`Descent` and the measured advance are what the
+  engine actually builds the line box from. Reading the same values out of the font tables
+  gives a different answer, and the table answer is the wrong one.
 - **Motion** — GSAP, ScrollTrigger, SplitText and Lenis, vendored into the repo rather than
   loaded from a CDN. Pages ask for animation with data attributes; the timing, easing and
   reduced-motion behaviour come with it. Content above the fold animates on load, content

@@ -7,7 +7,7 @@
 # Environment overrides:
 #   SITE_DOMAIN=sample-1.exostech.pro   hostname Caddy serves and gets a cert for
 #   SSH_HOST=ubuntu@18.226.86.97       target host
-#   SSH_KEY=~/.ssh/kids-that-shred.pem identity file
+#   SSH_KEY=~/.ssh/whatever.pem        identity file, if ssh needs telling
 #   TLS_EMAIL=you@example.com          ACME contact for expiry notices
 #   SKIP_BUILD=1                       ship the committed dist/ as-is
 #   DRY_RUN=1                          show what would transfer, change nothing
@@ -19,14 +19,33 @@ set -euo pipefail
 
 SITE_DOMAIN="${SITE_DOMAIN:-sample-1.exostech.pro}"
 SSH_HOST="${SSH_HOST:-ubuntu@18.226.86.97}"
-SSH_KEY="${SSH_KEY:-$HOME/.ssh/kids-that-shred.pem}"
+# No default identity file on purpose.
+#
+# This used to default to a specific .pem belonging to an unrelated project,
+# which meant the script asserted a filename it had no way to know and failed
+# for anyone whose key is named anything else. Left empty, ssh resolves the
+# identity the way it normally does — ~/.ssh/config, a loaded agent, the default
+# id_* files — which is already correct for anyone who can reach the host at
+# all. Set SSH_KEY only when ssh needs telling.
+SSH_KEY="${SSH_KEY:-}"
 TLS_EMAIL="${TLS_EMAIL:-}"
 
 ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/../.." && pwd)"
 DIST="$ROOT/dist"
 SITE_ROOT="/var/www/${SITE_DOMAIN}"
 
-SSH=(ssh -i "$SSH_KEY" -o StrictHostKeyChecking=accept-new -o ConnectTimeout=15 "$SSH_HOST")
+# An `if` rather than `[[ ... ]] && ...`: under `set -e` the short form is only
+# safe while another command follows it, which is the kind of thing a later edit
+# breaks silently.
+SSH_OPTS=(-o StrictHostKeyChecking=accept-new)
+if [[ -n "$SSH_KEY" ]]; then
+  SSH_OPTS=(-i "$SSH_KEY" "${SSH_OPTS[@]}")
+fi
+
+SSH=(ssh "${SSH_OPTS[@]}" -o ConnectTimeout=15 "$SSH_HOST")
+
+# rsync takes its transport as one string rather than an array.
+RSYNC_SSH="ssh ${SSH_KEY:+-i $SSH_KEY} -o StrictHostKeyChecking=accept-new"
 
 say() { printf '\n\033[1m→ %s\033[0m\n' "$*"; }
 
@@ -47,7 +66,13 @@ fi
 # ── Preflight ─────────────────────────────────────────────────────────────────
 say "Checking connectivity and DNS"
 
-"${SSH[@]}" true || { echo "Cannot reach ${SSH_HOST} with key ${SSH_KEY}" >&2; exit 1; }
+"${SSH[@]}" true || {
+  echo "Cannot reach ${SSH_HOST}${SSH_KEY:+ with key $SSH_KEY}" >&2
+  if [[ -z "$SSH_KEY" ]]; then
+    echo "  ssh used its own default identities — set SSH_KEY to name one." >&2
+  fi
+  exit 1
+}
 echo "  ssh    ${SSH_HOST} reachable"
 
 # Caddy obtains certificates over the ACME HTTP-01 challenge, which requires
@@ -82,7 +107,7 @@ fi
 
 if [[ -n "${DRY_RUN:-}" ]]; then
   say "Dry run — files that would transfer"
-  rsync -avn --delete -e "ssh -i $SSH_KEY -o StrictHostKeyChecking=accept-new" \
+  rsync -avn --delete -e "$RSYNC_SSH" \
     "$DIST/" "${SSH_HOST}:/tmp/webport-dryrun/"
   echo; echo "Dry run complete — nothing on the host was changed."
   exit 0
@@ -119,7 +144,7 @@ REMOTE
 say "Uploading dist/ to ${SITE_ROOT}"
 "${SSH[@]}" "mkdir -p /tmp/webport-stage"
 rsync -az --delete --info=stats1 \
-  -e "ssh -i $SSH_KEY -o StrictHostKeyChecking=accept-new" \
+  -e "$RSYNC_SSH" \
   "$DIST/" "${SSH_HOST}:/tmp/webport-stage/"
 
 "${SSH[@]}" "bash -se" <<REMOTE

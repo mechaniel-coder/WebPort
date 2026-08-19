@@ -71,7 +71,8 @@ SITE_DOMAIN=other.exostech.pro ./deploy/ec2/deploy.sh   # different hostname
 TLS_EMAIL=you@example.com      ./deploy/ec2/deploy.sh   # ACME expiry notices
 SKIP_BUILD=1                   ./deploy/ec2/deploy.sh   # ship committed dist/
 DRY_RUN=1                      ./deploy/ec2/deploy.sh   # show transfers, change nothing
-SSH_HOST=ubuntu@1.2.3.4 SSH_KEY=~/.ssh/other.pem ./deploy/ec2/deploy.sh
+SSH_HOST=ubuntu@1.2.3.4         ./deploy/ec2/deploy.sh   # a different host
+SSH_KEY=~/.ssh/your-key.pem    ./deploy/ec2/deploy.sh   # only if ssh needs telling
 ```
 
 Setting `TLS_EMAIL` is worth doing for a site you intend to keep: it is how Let's Encrypt
@@ -99,7 +100,7 @@ echo | openssl s_client -connect sample-1.exostech.pro:443 \
 ### If HTTPS is not working
 
 ```bash
-ssh -i ~/.ssh/kids-that-shred.pem ubuntu@18.226.86.97 \
+ssh ubuntu@18.226.86.97 \
   'sudo journalctl -u caddy -n 50 --no-pager | grep -Ei "acme|cert|error"'
 ```
 

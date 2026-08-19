@@ -26,12 +26,17 @@ export function crumbs(trail, url) {
   </nav>`;
 }
 
+/**
+ * `tag` renders after the heading, and only when it is a specification rather
+ * than a label. A count of pieces, a material, a place: those belong in a
+ * drawing's title block. "Checkout" over "Checkout." does not.
+ */
 export function pageHead({ tag, title, lede, trail, url }) {
   return `<section class="page-head">
     <div class="shell">
       ${trail ? crumbs(trail, url) : ''}
-      <p class="tag">${esc(tag)}</p>
       <h1 class="h1 page-head__title">${esc(title)}</h1>
+      ${tag ? `<p class="tag">${esc(tag)}</p>` : ''}
       ${lede ? `<p class="lede">${esc(lede)}</p>` : ''}
     </div>
   </section>`;
@@ -39,9 +44,8 @@ export function pageHead({ tag, title, lede, trail, url }) {
 
 export function sectionHead({ tag, title, body, id, link, url }) {
   return `<div style="margin-bottom:var(--space-l)">
+    <h2 class="h2"${id ? ` id="${esc(id)}"` : ''}>${esc(title)}</h2>
     ${tag ? `<p class="tag">${esc(tag)}</p>` : ''}
-    <h2 class="h2"${id ? ` id="${esc(id)}"` : ''} style="margin-top:var(--space-2xs)">
-      ${esc(title)}</h2>
     ${body ? `<p class="lede" style="margin-top:var(--space-s)">${esc(body)}</p>` : ''}
     ${
       link

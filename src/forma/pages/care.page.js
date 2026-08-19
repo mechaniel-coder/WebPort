@@ -20,7 +20,6 @@ export const meta = {
 export function render({ url }) {
   return `
 ${pageHead({
-  tag: 'Care & FAQ',
   title: 'Looking after it, and getting it to you.',
   lede: `Free shipping over ${money(COMMERCE.freeShippingOver)}, ${COMMERCE.returnDays}-day
     returns with the postage paid, and instructions for every piece.`,
@@ -30,7 +29,6 @@ ${pageHead({
 
 <section class="section section--tight">
   <div class="shell" style="max-width:56rem">
-    <p class="tag">Questions</p>
     <h2 class="h2" style="margin:var(--space-2xs) 0 var(--space-l)">The ones we get asked.</h2>
     ${accordion(faqs, 'ffaq')}
   </div>
@@ -38,7 +36,6 @@ ${pageHead({
 
 <section class="section section--fill section--ruled" aria-labelledby="care-heading">
   <div class="shell">
-    <p class="tag">Care</p>
     <h2 class="h2" id="care-heading" style="margin:var(--space-2xs) 0 var(--space-l)">
       One instruction per object.</h2>
 
@@ -60,7 +57,6 @@ ${pageHead({
 <section class="section" aria-labelledby="terms-heading">
   <div class="shell">
     <div class="prose">
-      <p class="tag">Shipping &amp; returns</p>
       <h2 class="h2" id="terms-heading" style="color:var(--ink);margin-top:var(--space-2xs)">
         The terms, in plain language.</h2>
 

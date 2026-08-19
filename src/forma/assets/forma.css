@@ -1,39 +1,56 @@
 /**
  * Forma design system.
  *
- * Hard-edged and bright: warm paper, a 2px black rule doing most of the
- * structural work, oversized grotesque type, and one saturated red used only
- * where something is meant to be acted on. Almost no radius and no shadows —
- * the objects are the only curved things on the page.
+ * ── The drawing, not the gallery ────────────────────────────────────────────
+ *
+ * Forma's artwork is generated vector geometry: every lamp, stool, vase and
+ * mirror on this site is drawn from parameters rather than photographed. The
+ * previous build put that work on warm cream under a saturated red, which is
+ * the look every design-object shop reaches for — and it was the same warm
+ * cream three other sites in this portfolio were sitting on.
+ *
+ * A drawing belongs on a drawing sheet. So the ground is true white, the
+ * structure is hairlines in a cold blue-grey, dimensions and prices are set in
+ * the mono, and the one colour is a cobalt used the way a drafting stamp is:
+ * for the thing that has been decided. It is the register the artwork was
+ * already in; the page had been arguing with it.
  */
 
 :root {
   /* ── Colour ─────────────────────────────────────────────────────────────── */
-  --paper: #faf7f2;
-  --paper-2: #f2ede4;
-  --paper-3: #e8e1d5;
-  --ink: #101010;
-  --ink-2: #4a4741;
-  --ink-3: #77726a;
-  --rule: #101010;
-  --hairline: #d8d1c4;
-  --signal: #d8402a;
-  --signal-deep: #b32f1c;
-  --good: #2f6b45;
+  --paper: #ffffff;
+  --paper-2: #f1f3f5;
+  --paper-3: #e5e9ed;
+  --ink: #16181c;
+  --ink-2: #4b5058;
+  --ink-3: #6b7078;
+  --rule: #16181c;
+  --hairline: #ccd4dc;
+  /* The drafting line: visible on white, never competing with the object. */
+  --draft: #b9c6d2;
+  --signal: #17429e;
+  --signal-deep: #102f74;
+  --good: #12603c;
 
-  --focus-ring: #d8402a;
+  --focus-ring: #17429e;
   --focus-radius: 0px;
 
-  /* ── Type ───────────────────────────────────────────────────────────────── */
-  /* Bricolage Grotesque for display, Instrument Sans for text. Bricolage
-     carries a width axis, so the same face can be a wide poster headline and a
-     narrower product name without a second file — and its slightly irregular
-     letterforms give a design-object brand the character that a neutral
-     grotesk deliberately withholds. Nothing here is shared with Aurelia or
-     Northwind: three sites on one type stack demonstrates one capability. */
-  --font-display: 'Bricolage Grotesque', 'Bricolage Fallback', system-ui, sans-serif;
-  --font-sans: 'Instrument Sans', 'Instrument Fallback', system-ui, sans-serif;
-  --font-mono: 'Instrument Sans', 'Instrument Fallback', ui-monospace, monospace;
+  /* ── Type ───────────────────────────────────────────────────────────────────
+   *
+   * Chivo and Chivo Mono — one superfamily, drawn together. The mono carries
+   * dimensions, part codes, counts and prices; the sans carries everything
+   * else; and the two agree because they were designed to, which is what makes
+   * a spec table look drawn rather than assembled.
+   *
+   * This replaces Bricolage Grotesque and Instrument Sans. Bricolage's
+   * irregularity was doing the opposite of the brief — it gave a hand-drawn
+   * character to a page whose whole argument is that these objects are
+   * precisely specified — and Instrument Sans is on every list of faces that
+   * signal a template.
+   */
+  --font-display: 'Chivo', 'Chivo Fallback', system-ui, sans-serif;
+  --font-sans: 'Chivo', 'Chivo Fallback', system-ui, sans-serif;
+  --font-mono: 'Chivo Mono', 'Chivo Mono Fallback', ui-monospace, monospace;
 
   --step--2: clamp(0.72rem, 0.7rem + 0.09vw, 0.78rem);
   --step--1: clamp(0.84rem, 0.81rem + 0.13vw, 0.92rem);
@@ -114,11 +131,15 @@ a {
   color: var(--paper);
 }
 
+/* On the dark band the ramp inverts. The greys were warm, left from the cream
+   ground; they are the same cold blue-grey as the rest of the sheet now. */
 .section--ink {
-  --ink-2: #b8b2a8;
-  --ink-3: #928c83;
-  --hairline: #33312d;
-  --focus-ring: #f0a394;
+  --ink-2: #b4bcc4;
+  --ink-3: #8d959e;
+  --hairline: #2c3037;
+  --draft: #3a414a;
+  --signal: #8fb0ee;
+  --focus-ring: #8fb0ee;
 }
 
 /* ── Typography ────────────────────────────────────────────────────────────── */
@@ -133,23 +154,25 @@ a {
   text-wrap: balance;
 }
 
+/* Sentence case, not uppercase.
+   The previous build set every display line in heavy uppercase, which shouts —
+   and a shop whose argument is that each object carries one idea should not be
+   raising its voice about it. Chivo at 600 with the fit closed up is emphatic
+   enough, and it stays readable at the sizes uppercase stops being. */
 .display {
   font-size: var(--step-6);
-  font-weight: 700;
-  letter-spacing: -0.045em;
-  line-height: 0.92;
-  text-transform: uppercase;
+  font-weight: 600;
+  letter-spacing: -0.038em;
+  line-height: 0.94;
 }
 
-/* Only the hero is viewport-scaled. `font-stretch` reaches for Bricolage's
-   width axis: condensing a headline this large lets it hold more words per
-   line without dropping the size, which is the whole reason to carry a
-   variable-width face rather than a second file. */
+/* Only the hero is viewport-scaled. Chivo carries no width axis, so the density
+   that Bricolage's `font-stretch` used to buy comes from the tracking instead —
+   which is the honest substitute rather than a synthetic condense. */
 .hero__title {
   font-size: var(--step-hero);
-  font-stretch: 88%;
-  letter-spacing: -0.05em;
-  line-height: 0.88;
+  letter-spacing: -0.048em;
+  line-height: 0.9;
 }
 
 .h1 {
@@ -173,16 +196,27 @@ a {
   line-height: 1.2;
 }
 
+/* A title-block line: what the drawing above it is, in the face the
+   dimensions use. It follows a heading and never precedes one. */
 .tag {
-  font-family: var(--font-sans);
+  margin-top: var(--space-2xs);
+  font-family: var(--font-mono);
   font-size: var(--step--2);
-  font-weight: 600;
-  letter-spacing: 0.18em;
+  font-weight: 500;
+  letter-spacing: 0.12em;
   text-transform: uppercase;
+  font-variant-numeric: tabular-nums;
   color: var(--ink-3);
   display: flex;
   align-items: center;
   gap: 0.7em;
+}
+
+/* On a product page the specification sits under the object's name, so it
+   takes the ink colour rather than the muted one — it is content there, not
+   metadata. */
+.tag--after {
+  color: var(--ink-2);
 }
 
 .tag::after {
@@ -456,7 +490,7 @@ a {
 }
 
 .hero__title {
-  max-width: 12ch;
+  max-width: 15ch;
 }
 
 .hero__actions {

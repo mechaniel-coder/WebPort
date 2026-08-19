@@ -55,7 +55,6 @@ ${pageHead({
 <section class="section section--fill section--ruled" aria-labelledby="drawn-heading">
   <div class="shell">
     <div style="max-width:60ch;margin-bottom:var(--space-l)">
-      <p class="tag">A note on the pictures</p>
       <h2 class="h2" id="drawn-heading" style="margin-top:var(--space-2xs)">
         Everything here is drawn, not photographed.</h2>
       <p class="lede" style="margin-top:var(--space-s)">
@@ -88,7 +87,6 @@ ${pageHead({
 <section class="section" aria-labelledby="makers-heading">
   <div class="shell">
     <div class="prose">
-      <p class="tag">Who makes it</p>
       <h2 class="h2" id="makers-heading" style="color:var(--ink);margin-top:var(--space-2xs)">
         Five workshops, all of which we have stood in.</h2>
       <p>The aluminium is spun in Rhode Island by a shop that has been doing it since the

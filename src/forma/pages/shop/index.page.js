@@ -40,8 +40,8 @@ ${facetLabelIsland()}
 <section class="page-head">
   <div class="shell">
     ${crumbs(meta.breadcrumbs, url)}
-    <p class="tag">${products.length} products</p>
     <h1 class="h1 page-head__title">Shop.</h1>
+    <p class="tag">${products.length} products</p>
   </div>
 </section>
 

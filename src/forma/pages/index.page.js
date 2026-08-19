@@ -23,9 +23,10 @@ ${catalogueIsland(url)}
 <section class="hero">
   <div class="shell hero__grid">
     <div>
-      <p class="tag">Since ${brand.founded} · Brooklyn</p>
-      <h1 class="display hero__title" data-reveal="lines" data-stagger="0.08"
-          style="margin-top:var(--space-s)">Objects with one idea each.</h1>
+      <h1 class="display hero__title" data-reveal="lines" data-stagger="0.08">
+        Objects with one idea each.</h1>
+      <p class="tag" data-reveal data-delay="0.24"
+         style="margin-top:var(--space-s)">Since ${brand.founded} · Brooklyn</p>
       <p class="lede" data-reveal data-delay="0.3" style="margin-top:var(--space-m)">${esc(brand.lede)}</p>
       <div class="hero__actions" data-reveal data-delay="0.42">
         <a class="btn" href="${esc(url('/forma/shop/'))}">Shop everything</a>
@@ -51,8 +52,7 @@ ${strip([
 <section class="section" aria-labelledby="featured-heading">
   <div class="shell">
     ${sectionHead({
-      tag: 'The range',
-      title: 'Six things we would put in our own flat.',
+        title: 'Six things we would put in our own flat.',
       id: 'featured-heading',
       link: { href: '/forma/shop/', label: 'All eight products' },
       url,
@@ -66,8 +66,7 @@ ${strip([
 <section class="section section--fill section--ruled" aria-labelledby="collections-heading">
   <div class="shell">
     ${sectionHead({
-      tag: 'Collections',
-      title: 'Grouped by the problem they solve.',
+        title: 'Grouped by the problem they solve.',
       id: 'collections-heading',
     })}
 
@@ -97,8 +96,7 @@ ${strip([
   <div class="shell">
     <div style="display:grid;gap:var(--space-xl)">
       ${sectionHead({
-        tag: 'Materials',
-        title: 'Five materials, chosen for how they age.',
+            title: 'Five materials, chosen for how they age.',
         body: `Nothing here is finished to look new forever. Oak darkens, steel patinas at the
           edges, and the aluminium picks up a satin from being handled.`,
         id: 'materials-heading',

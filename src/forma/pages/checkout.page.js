@@ -30,7 +30,6 @@ ${catalogueIsland(url)}
 <section class="page-head">
   <div class="shell">
     ${crumbs(meta.breadcrumbs, url)}
-    <p class="tag">Checkout</p>
     <h1 class="h1 page-head__title">Checkout.</h1>
   </div>
 </section>

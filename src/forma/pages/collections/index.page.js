@@ -36,11 +36,11 @@ ${pageHead({
       <div style="display:flex;flex-wrap:wrap;align-items:baseline;
                   justify-content:space-between;gap:var(--space-s)">
         <div>
-          <p class="tag">${String(index + 1).padStart(2, '0')} · ${items.length} pieces</p>
-          <h2 class="h2" style="margin-top:var(--space-2xs)">
+          <h2 class="h2">
             <a href="${esc(url(`/forma/collections/${collection.slug}/`))}"
                style="text-decoration:none">${esc(collection.name)}</a>
           </h2>
+          <p class="tag">${items.length} pieces</p>
         </div>
         <a class="link-under" href="${esc(url(`/forma/collections/${collection.slug}/`))}">
           See the collection</a>

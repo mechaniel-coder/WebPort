@@ -31,7 +31,6 @@ ${pageHead({
 <section class="section section--tight">
   <div class="shell">
     <div style="border:2px solid var(--rule);padding:var(--space-l);background:var(--paper-2)">
-      <p class="tag">Our studio</p>
       <h2 class="h2" style="margin-top:var(--space-2xs)">${esc(own.name)}</h2>
       <address style="margin-top:var(--space-s);font-size:var(--step-1);line-height:1.5">
         ${esc(brand.studio)}<br>
@@ -49,7 +48,6 @@ ${pageHead({
 
 <section class="section" aria-labelledby="stockists-heading">
   <div class="shell">
-    <p class="tag">Elsewhere</p>
     <h2 class="h2" id="stockists-heading" style="margin:var(--space-2xs) 0 var(--space-l)">
       ${rest.length} stockists.</h2>
 

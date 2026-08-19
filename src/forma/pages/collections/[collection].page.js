@@ -58,8 +58,8 @@ ${catalogueIsland(url)}
       ],
       url,
     )}
-    <p class="tag">${items.length} pieces</p>
     <h1 class="h1 page-head__title">${esc(collection.name)}</h1>
+    <p class="tag">${items.length} pieces</p>
     <p class="lede">${esc(collection.blurb)}</p>
     <ul style="display:flex;gap:0.4rem;list-style:none;padding:0;margin:var(--space-m) 0 0">
       ${each(
@@ -80,7 +80,6 @@ ${catalogueIsland(url)}
 
 <section class="section section--fill section--ruled" aria-labelledby="others-heading">
   <div class="shell">
-    <p class="tag">Also</p>
     <h2 class="h2" id="others-heading" style="margin:var(--space-2xs) 0 var(--space-l)">
       The other collections.</h2>
 

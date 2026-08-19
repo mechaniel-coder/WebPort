@@ -105,7 +105,7 @@ ${catalogueIsland(url)}
     </div>
 
     <div class="product__panel">
-      <p class="tag">${esc(label(categories, product.category))} ·
+      <p class="tag tag--after">${esc(label(categories, product.category))} ·
         ${esc(label(materials, product.material))}</p>
       <h1 class="h1" style="margin-top:var(--space-2xs)">${esc(product.name)}</h1>
       <p class="lede">${esc(product.lede)}</p>
@@ -190,7 +190,6 @@ ${catalogueIsland(url)}
   <div class="shell" style="display:grid;gap:var(--space-xl)">
     <div style="display:grid;gap:var(--space-l)">
       <div>
-        <p class="tag">Detail</p>
         <h2 class="h2" id="detail-heading" style="margin-top:var(--space-2xs);max-width:20ch">
           ${esc(product.tagline)}</h2>
       </div>
@@ -214,7 +213,6 @@ ${catalogueIsland(url)}
 
 <section class="section" aria-labelledby="related-heading">
   <div class="shell">
-    <p class="tag">Also</p>
     <h2 class="h2" id="related-heading" style="margin:var(--space-2xs) 0 var(--space-l)">
       You might want one of these too.</h2>
   </div>

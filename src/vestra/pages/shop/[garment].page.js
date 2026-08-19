@@ -60,8 +60,8 @@ export const pages = garments.map((garment) => {
     </div>
 
     <div class="garment__detail">
+      <h1 class="h1">${esc(garment.name)}</h1>
       <p class="label">${esc(garment.category)}</p>
-      <h1 class="h1" style="margin-top:var(--s-2xs)">${esc(garment.name)}</h1>
       <p class="garment__price figure">${esc(money(garment.price))}</p>
       <p class="lede" style="margin-top:var(--s-s)">${esc(garment.lede)}</p>
 
@@ -98,7 +98,6 @@ export const pages = garments.map((garment) => {
       </div>
 
       <div style="margin-top:var(--s-l)">
-        <p class="label">Care</p>
         <ul class="ticks">${each(garment.care, (c) => `<li>${esc(c)}</li>`)}</ul>
       </div>
     </div>
@@ -107,7 +106,6 @@ export const pages = garments.map((garment) => {
 
 <section class="section section--fill" aria-labelledby="grade-heading">
   <div class="shell shell--narrow">
-    <p class="label">Measurements</p>
     <h2 class="h2" id="grade-heading" style="margin-top:var(--s-2xs)">The grade.</h2>
     <p class="muted" style="margin-top:var(--s-s)">
       This garment is cut with <strong>${

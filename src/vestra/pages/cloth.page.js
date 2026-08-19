@@ -19,7 +19,6 @@ export function render({ url }) {
 <section class="page-head">
   <div class="shell">
     ${crumbs(meta.breadcrumbs, url)}
-    <p class="label">Six cloths</p>
     <h1 class="h1" data-reveal="lines" data-stagger="0.07"
         style="margin-top:var(--s-2xs)">What the collection is made of.</h1>
     <p class="lede" data-reveal data-delay="0.28" style="margin-top:var(--s-m)">
@@ -41,8 +40,8 @@ export function render({ url }) {
           ${swatch({ cloth, title: `${cloth.name}, ${cloth.weave} weave`, scale: 0.5 })}
         </div>
         <div class="cloth-entry__text">
+          <h2 class="h2">${esc(cloth.name)}</h2>
           <p class="label">${esc(cloth.weave)} weave</p>
-          <h2 class="h2" style="margin-top:var(--s-2xs)">${esc(cloth.name)}</h2>
           <dl class="spec">
             <div><dt>Weight</dt><dd class="figure">${esc(cloth.weight)}</dd></div>
             <div><dt>Mill</dt><dd>${esc(cloth.mill)}</dd></div>

@@ -23,7 +23,6 @@ export function render({ url }) {
 <section class="page-head">
   <div class="shell">
     ${crumbs(meta.breadcrumbs, url)}
-    <p class="label">Fit</p>
     <h1 class="h1" data-reveal="lines" data-stagger="0.07"
         style="margin-top:var(--s-2xs)">Which size, and why.</h1>
     <p class="lede" data-reveal data-delay="0.28" style="margin-top:var(--s-m)">
@@ -111,7 +110,6 @@ export function render({ url }) {
 
 <section class="section section--fill" aria-labelledby="ease-heading">
   <div class="shell shell--narrow">
-    <p class="label">The idea</p>
     <h2 class="h2" id="ease-heading" data-reveal="lines" data-stagger="0.06"
         style="margin-top:var(--s-2xs)">Why you are not one size.</h2>
     <div class="prose muted measure" style="margin-top:var(--s-m)">
@@ -147,7 +145,6 @@ export function render({ url }) {
 
 <section class="section" aria-labelledby="grade-heading">
   <div class="shell">
-    <p class="label">Every grade</p>
     <h2 class="h2" id="grade-heading" style="margin-top:var(--s-2xs)">
       Published in full.</h2>
     <p class="muted" style="margin-top:var(--s-s);max-width:52ch">

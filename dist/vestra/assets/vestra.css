@@ -1,42 +1,61 @@
 /**
  * Vestra design system.
  *
- * A didone on warm paper. The whole system leans on one contrast — Bodoni's
- * hairline-to-stem ratio against a plain grotesk — and otherwise gets out of
- * the way, because on this site the cloth is supposed to be the loudest thing
- * on the page.
+ * One grotesque at two extremes on cloth-white, with heavy rule doing the
+ * structural work. The system deliberately holds no brand colour: the cloth is
+ * supposed to be the loudest thing on the page, and on this site the cloth is
+ * real — procedural weave drafts and colourway swatches rather than decoration.
  */
 
 :root {
-  /* ── Colour ─────────────────────────────────────────────────────────────── */
-  --paper: #f7f5f1;
-  --paper-2: #efece5;
-  --paper-3: #e4e0d6;
-  --ink: #1c1b19;
-  --ink-2: #55534e;
-  --ink-3: #85817a;
-  --line: #d9d4c8;
-  --line-strong: #1c1b19;
-  --accent: #7d4f43;
-  --accent-deep: #5f3a30;
-  --good: #43604a;
-  --warn: #8a5a1f;
+  /* ── Colour ───────────────────────────────────────────────────────────────
+   *
+   * Vestra's argument is published measurement: it prints the finished size of
+   * every garment and the ease each cut is designed around. That is a pattern
+   * room, not a magazine — and the previous build dressed it as a magazine,
+   * with the same warm cream three other sites here were using and the same
+   * muted terracotta Aurelia had.
+   *
+   * So the ground is cloth-white and the structure is heavy rule. The house has
+   * no brand colour on purpose: the only chromatic thing on any page is the
+   * cloth itself, through the colourway swatches and the procedural weave
+   * drafts, which is a defensible position for a business whose product is
+   * fabric. Indigo appears only on affordances — links, focus, the state of a
+   * control — because indigo is a dye a cloth house actually owns.
+   */
+  --paper: #fbfbf9;
+  --paper-2: #f0f0ec;
+  --paper-3: #e2e2dc;
+  --ink: #121210;
+  --ink-2: #4d4d48;
+  --ink-3: #6f6f69;
+  --line: #cfcfc7;
+  --line-strong: #121210;
+  --accent: #26314f;
+  --accent-deep: #171e33;
+  --good: #2f5a3c;
+  --warn: #7a4a12;
 
-  --focus-ring: #7d4f43;
+  --focus-ring: #26314f;
   --focus-radius: 2px;
 
   /* ── Type ───────────────────────────────────────────────────────────────────
    *
-   * Bodoni Moda for display, Archivo for everything read at length.
+   * One family, set at two extremes.
    *
-   * A didone is the fashion face, and it is also the most fragile class of type
-   * there is: the hairlines that make it elegant at 200px vanish at 14px. That
-   * is what `opsz` is for, and why the `standard` cut was vendored rather than
-   * the smaller weight-only one — without optical sizing this face cannot be
-   * used for captions at all, which would mean carrying a third family.
+   * The fashion default is a didone, and the previous build used one. It is
+   * also the most decorative class of type there is, which is the wrong voice
+   * for a house whose whole case is that it publishes its numbers — Bodoni made
+   * the size charts look like an editorial spread rather than a specification.
+   *
+   * Epilogue runs 100–900 in one file: very large and tight for display, light
+   * and open for reading, and nothing else in this portfolio uses it. Spline
+   * Sans Mono is here for one job — the size grades, where a column of
+   * centimetres has to line up and a proportional face will not.
    */
-  --font-display: 'Bodoni Moda', 'Bodoni Fallback', Didot, Georgia, serif;
-  --font-sans: 'Archivo', 'Archivo Fallback', system-ui, sans-serif;
+  --font-display: 'Epilogue', 'Epilogue Fallback', system-ui, sans-serif;
+  --font-sans: 'Epilogue', 'Epilogue Fallback', system-ui, sans-serif;
+  --font-mono: 'Spline Sans Mono', 'Spline Mono Fallback', ui-monospace, monospace;
 
   --step--2: clamp(0.7rem, 0.68rem + 0.09vw, 0.76rem);
   --step--1: clamp(0.82rem, 0.79rem + 0.13vw, 0.9rem);
@@ -47,11 +66,9 @@
   --step-4: clamp(2.05rem, 1.65rem + 2vw, 3.3rem);
   --step-5: clamp(2.45rem, 1.8rem + 3.2vw, 4.6rem);
 
-  /* The hero. Largest in the portfolio, because a didone is the one class of
-     face that genuinely rewards it — the hairlines only resolve at scale. */
+  /* The hero. Largest in the portfolio: with no colour and no ornament, scale
+     is most of what this site has to make a page feel composed. */
   --step-hero: clamp(3rem, 12vw, 12rem);
-
-  --opsz-display: 96;
 
   /* ── Space ──────────────────────────────────────────────────────────────── */
   --s-3xs: 0.25rem;
@@ -104,14 +121,19 @@ a {
 .section--tight { padding-block: var(--s-xl); }
 .section--fill { background: var(--paper-2); }
 .section--ink { background: var(--ink); color: var(--paper); }
-.section--ink { --ink-2: #b5b0a6; --ink-3: #8d887e; --line: #35332f; --focus-ring: #d8b6a6; }
+/* The dark band inverts the ramp. The greys were warm, from the cream ground;
+   they are neutral now, and the affordance colour lifts to stay legible. */
+.section--ink { --ink-2: #b3b3ad; --ink-3: #8b8b85; --line: #2f2f2c; --accent: #a8b6dd; --focus-ring: #a8b6dd; }
 
 /* ── Typography ────────────────────────────────────────────────────────────── */
 
+/* One family, so the hierarchy is carried by weight and tracking rather than by
+   a change of voice. Epilogue has no optical-size axis — the previous system
+   set one on every heading, which did nothing at all once the didone left — so
+   the display sizes take weight *down* as they grow: at 190px a 300 has all the
+   presence it needs and a 600 would be a slab. */
 .display, .h1, .h2, .h3 {
   font-family: var(--font-display);
-  font-weight: 400;
-  font-variation-settings: 'opsz' var(--opsz-display);
   letter-spacing: -0.02em;
   line-height: 1;
   text-wrap: balance;
@@ -120,21 +142,23 @@ a {
 
 .display {
   font-size: var(--step-hero);
+  font-weight: 300;
   line-height: 0.86;
-  letter-spacing: -0.035em;
+  letter-spacing: -0.042em;
 }
 
-.h1 { font-size: var(--step-5); line-height: 0.94; }
-.h2 { font-size: var(--step-4); line-height: 0.98; --opsz-display: 64; }
-.h3 { font-size: var(--step-2); line-height: 1.14; --opsz-display: 28; letter-spacing: -0.01em; }
+.h1 { font-size: var(--step-5); font-weight: 350; line-height: 0.94; letter-spacing: -0.035em; }
+.h2 { font-size: var(--step-4); font-weight: 400; line-height: 0.98; letter-spacing: -0.028em; }
+.h3 { font-size: var(--step-2); font-weight: 500; line-height: 1.14; letter-spacing: -0.012em; }
 
-/* Small display type needs a much lower optical size or the hairlines break up.
-   This is the rule that lets one family serve a 190px hero and a 12px label. */
+/* A docket line: the cloth, the weave, the count. It follows its heading. */
 .label {
-  font-family: var(--font-sans);
+  margin-top: var(--s-2xs);
+  font-family: var(--font-mono);
   font-size: var(--step--2);
   font-weight: 500;
-  letter-spacing: 0.2em;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0.12em;
   text-transform: uppercase;
   color: var(--ink-3);
   display: flex;
@@ -189,7 +213,6 @@ a {
   gap: 0.5rem;
   text-decoration: none;
   font-family: var(--font-display);
-  font-variation-settings: 'opsz' 18;
   font-size: var(--step-1);
   letter-spacing: 0.16em;
   text-transform: uppercase;
@@ -391,7 +414,7 @@ a {
 .card__cloth svg { width: 100%; height: 100%; display: block; transition: transform 0.5s var(--ease); }
 .card__link:hover .card__cloth svg { transform: scale(1.03); }
 .card__body { display: grid; gap: 0.15rem; }
-.card__name { font-family: var(--font-display); font-variation-settings: 'opsz' 24; font-size: var(--step-1); }
+.card__name { font-family: var(--font-display); font-size: var(--step-1); }
 .card__meta { font-size: var(--step--2); color: var(--ink-3); letter-spacing: 0.08em; text-transform: uppercase; }
 .card__price { font-size: var(--step--1); }
 
@@ -401,7 +424,7 @@ a {
 @media (min-width: 52em) { .cloth-row, .look-row { grid-template-columns: repeat(3, 1fr); } }
 .cloth-card a { text-decoration: none; display: grid; gap: var(--s-xs); }
 .cloth-card svg { aspect-ratio: 4 / 3; width: 100%; }
-.cloth-card__name { font-family: var(--font-display); font-variation-settings: 'opsz' 22; font-size: var(--step-1); }
+.cloth-card__name { font-family: var(--font-display); font-size: var(--step-1); }
 .cloth-card__meta { font-size: var(--step--2); color: var(--ink-3); }
 
 .cloth-list { display: grid; gap: var(--s-2xl); }
@@ -424,8 +447,8 @@ a {
 .look__link { display: grid; gap: var(--s-s); text-decoration: none; }
 .look__cloths { display: grid; grid-template-columns: 1fr 1fr; gap: 2px; }
 .look__cloths svg { width: 100%; aspect-ratio: 2 / 3; }
-.look__index, .look-card__index { font-family: var(--font-display); font-variation-settings: 'opsz' 20; font-size: var(--step--1); color: var(--ink-3); }
-.look__name, .look-card__name { display: block; font-family: var(--font-display); font-variation-settings: 'opsz' 30; font-size: var(--step-2); }
+.look__index, .look-card__index { font-family: var(--font-display); font-size: var(--step--1); color: var(--ink-3); }
+.look__name, .look-card__name { display: block; font-family: var(--font-display); font-size: var(--step-2); }
 .look__lede, .look-card__lede { display: block; color: var(--ink-2); font-size: var(--step--1); margin-top: 0.2rem; }
 .look__count, .look-card__season { display: block; font-size: var(--step--2); color: var(--ink-3); letter-spacing: 0.1em; text-transform: uppercase; margin-top: 0.4rem; }
 .look-card a { text-decoration: none; display: grid; gap: 0.1rem; border-top: 1px solid var(--line-strong); padding-top: var(--s-s); }
@@ -449,7 +472,7 @@ a {
 @media (min-width: 56em) { .garment { grid-template-columns: 1fr 1fr; gap: var(--s-2xl); align-items: start; } }
 .garment__cloth svg { width: 100%; aspect-ratio: 3 / 4; }
 .garment__clothnote { font-size: var(--step--1); margin-top: var(--s-s); }
-.garment__price { font-family: var(--font-display); font-variation-settings: 'opsz' 40; font-size: var(--step-3); margin-top: var(--s-xs); }
+.garment__price { font-family: var(--font-display); font-size: var(--step-3); margin-top: var(--s-xs); }
 .garment__form { margin-top: var(--s-l); border-top: 1px solid var(--line); padding-top: var(--s-m); }
 .garment__form fieldset { border: 0; padding: 0; margin: 0; }
 .garment__stock { margin-left: auto; letter-spacing: 0; text-transform: none; color: var(--ink-3); }
@@ -511,7 +534,7 @@ a {
 
 .principles { list-style: none; margin: var(--s-l) 0 0; padding: 0; display: grid; gap: var(--s-l); }
 @media (min-width: 52em) { .principles { grid-template-columns: repeat(2, 1fr); gap: var(--s-xl); } }
-.principles__index { font-family: var(--font-display); font-variation-settings: 'opsz' 20; color: var(--ink-3); font-size: var(--step--1); }
+.principles__index { font-family: var(--font-display); color: var(--ink-3); font-size: var(--step--1); }
 .principles h3 { margin-top: 0.2rem; }
 .principles p { margin-top: var(--s-2xs); font-size: var(--step--1); }
 
@@ -524,7 +547,7 @@ a {
 .foot__inner { display: grid; gap: var(--s-xl); }
 @media (min-width: 52em) { .foot__inner { grid-template-columns: 1fr auto; } }
 .foot__mark { width: 1.6rem; }
-.foot__line { font-family: var(--font-display); font-variation-settings: 'opsz' 30; font-size: var(--step-2); margin-top: var(--s-xs); max-width: 18ch; }
+.foot__line { font-family: var(--font-display); font-size: var(--step-2); margin-top: var(--s-xs); max-width: 18ch; }
 .foot__address { font-style: normal; font-size: var(--step--1); color: var(--ink-2); margin-top: var(--s-m); }
 .foot__cols { display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap: var(--s-xl); }
 .foot__head { font-size: var(--step--2); letter-spacing: 0.16em; text-transform: uppercase; color: var(--ink-3); margin-bottom: var(--s-xs); }
@@ -535,7 +558,7 @@ a {
 /* ── Accordion ─────────────────────────────────────────────────────────────── */
 
 .accordion__item { border-bottom: 1px solid var(--line); }
-.accordion__trigger { display: flex; width: 100%; justify-content: space-between; align-items: center; gap: var(--s-s); padding: var(--s-s) 0; background: none; border: 0; cursor: pointer; text-align: left; font-size: var(--step-1); font-family: var(--font-display); font-variation-settings: 'opsz' 24; }
+.accordion__trigger { display: flex; width: 100%; justify-content: space-between; align-items: center; gap: var(--s-s); padding: var(--s-s) 0; background: none; border: 0; cursor: pointer; text-align: left; font-size: var(--step-1); font-family: var(--font-display); }
 .accordion__icon { width: 0.85rem; height: 0.85rem; position: relative; flex: none; }
 .accordion__icon::before, .accordion__icon::after { content: ''; position: absolute; inset: 50% 0 auto; height: 1px; background: currentColor; }
 .accordion__icon::after { transform: rotate(90deg); transition: transform 0.2s var(--ease); }

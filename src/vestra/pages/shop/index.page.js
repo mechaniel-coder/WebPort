@@ -18,9 +18,8 @@ export function render({ url }) {
 <section class="page-head">
   <div class="shell">
     ${crumbs(meta.breadcrumbs, url)}
+    <h1 class="h1" data-reveal="lines" data-stagger="0.07">The collection.</h1>
     <p class="label">${garments.length} garments</p>
-    <h1 class="h1" data-reveal="lines" data-stagger="0.07"
-        style="margin-top:var(--s-2xs)">The collection.</h1>
     <p class="lede" data-reveal data-delay="0.28" style="margin-top:var(--s-m)">
       Six cloths, nine styles, graded across six sizes. Each garment lists the cloth it
       is cut from, because that is the decision everything else follows from.

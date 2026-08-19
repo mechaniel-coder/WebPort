@@ -45,9 +45,8 @@ export function render({ url }) {
 <section class="page-head">
   <div class="shell">
     ${crumbs(meta.breadcrumbs, url)}
+    <h1 class="h1" data-reveal="lines" data-stagger="0.07">Forty-one people, nine styles.</h1>
     <p class="label">Since ${brand.founded}</p>
-    <h1 class="h1" data-reveal="lines" data-stagger="0.07"
-        style="margin-top:var(--s-2xs)">Forty-one people, nine styles.</h1>
     <p class="lede" data-reveal data-delay="0.28" style="margin-top:var(--s-m)">
       ${esc(brand.lede)}
     </p>
@@ -73,7 +72,6 @@ export function render({ url }) {
 
 <section class="section section--fill" aria-labelledby="how-heading">
   <div class="shell">
-    <p class="label">How it works</p>
     <h2 class="h2" id="how-heading" style="margin-top:var(--s-2xs)">Four rules.</h2>
     <ul class="principles" data-reveal data-stagger="0.08">
       ${each(
@@ -90,7 +88,6 @@ export function render({ url }) {
 
 <section class="section">
   <div class="shell shell--narrow">
-    <p class="label">Where</p>
     <h2 class="h2" style="margin-top:var(--s-2xs)">${esc(brand.city)}, and a workshop in Porto.</h2>
     <address class="prose muted" style="margin-top:var(--s-m);font-style:normal">
       <p>${esc(brand.address.street)}<br>

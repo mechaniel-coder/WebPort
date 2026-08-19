@@ -17,12 +17,17 @@ export function crumbs(trail, u = url) {
   </ol></nav>`;
 }
 
+/**
+ * `label` follows the heading and is optional. A pattern room's dockets carry
+ * the cloth, the weave, the piece count — facts. They do not carry a word that
+ * repeats the heading immediately under them.
+ */
 export function sectionHead({ label, title, link, id, u = url }) {
   return `<div class="section-head">
     <div>
-      <p class="label">${esc(label)}</p>
-      <h2 class="h2"${id ? ` id="${esc(id)}"` : ''} data-reveal="lines" data-stagger="0.06"
-         style="margin-top:var(--s-2xs)">${esc(title)}</h2>
+      <h2 class="h2"${id ? ` id="${esc(id)}"` : ''} data-reveal="lines" data-stagger="0.06">
+        ${esc(title)}</h2>
+      ${label ? `<p class="label">${esc(label)}</p>` : ''}
     </div>
     ${link ? `<a class="link-arrow" href="${esc(u(link.href))}">${esc(link.label)}</a>` : ''}
   </div>`;

@@ -50,7 +50,6 @@ export function render({ url }) {
 <section class="page-head">
   <div class="shell">
     ${crumbs(meta.breadcrumbs, url)}
-    <p class="label">Care</p>
     <h1 class="h1" data-reveal="lines" data-stagger="0.07"
         style="margin-top:var(--s-2xs)">Keeping it.</h1>
     <p class="lede" data-reveal data-delay="0.28" style="margin-top:var(--s-m)">
@@ -62,7 +61,6 @@ export function render({ url }) {
 
 <section class="section section--tight">
   <div class="shell">
-    <p class="label">By cloth</p>
     <div class="grade-scroll" data-scroll-region tabindex="0" role="region" aria-label="Care by garment, scrollable">
       <table class="grade" style="margin-top:var(--s-m)">
         <caption class="visually-hidden">Cloth and care instruction by garment</caption>
@@ -86,7 +84,6 @@ export function render({ url }) {
 
 <section class="section section--fill" aria-labelledby="faq-heading">
   <div class="shell shell--narrow">
-    <p class="label">Questions</p>
     <h2 class="h2" id="faq-heading" style="margin-top:var(--s-2xs)">Asked often.</h2>
     <div class="accordion" data-accordion style="margin-top:var(--s-l)">
       ${each(

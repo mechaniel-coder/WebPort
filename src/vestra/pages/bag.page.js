@@ -20,7 +20,6 @@ export function render({ url }) {
 <section class="page-head">
   <div class="shell">
     ${crumbs(meta.breadcrumbs, url)}
-    <p class="label">Your bag</p>
     <h1 class="h1" style="margin-top:var(--s-2xs)">Bag.</h1>
   </div>
 </section>

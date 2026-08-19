@@ -27,9 +27,8 @@ export function render({ url }) {
           data-weft="${esc(hero.weft)}"></canvas>
 
   <div class="hero__inner">
-    <p class="label">${esc(brand.city)} · Since ${brand.founded}</p>
-    <h1 class="display" data-reveal="lines" data-stagger="0.09"
-        style="margin-top:var(--s-s)">Cloth first,<br>then the cut.</h1>
+    <h1 class="display" data-reveal="lines" data-stagger="0.09">Cloth first,<br>then the cut.</h1>
+    <p class="label hero__label" data-reveal data-delay="0.3">${esc(brand.city)} · Since ${brand.founded}</p>
     <p class="lede" data-reveal data-delay="0.34" style="margin-top:var(--s-m)">
       ${esc(brand.lede)}</p>
     <div class="hero__actions" data-reveal data-delay="0.46">
@@ -42,7 +41,6 @@ export function render({ url }) {
 <section class="section section--tight">
   <div class="shell split grid">
     <div>
-      <p class="label">The premise</p>
       <h2 class="h2" data-reveal="lines" data-stagger="0.06"
           style="margin-top:var(--s-2xs)">We buy the cloth before we draw the garment.</h2>
       <div class="prose muted" style="margin-top:var(--s-m);max-width:46ch">
@@ -67,7 +65,6 @@ export function render({ url }) {
 <section class="section section--fill" aria-labelledby="cloth-heading">
   <div class="shell">
     ${sectionHead({
-      label: 'Cloth',
       title: 'Six cloths, and what each one will do.',
       link: { href: '/vestra/cloth/', label: 'All six' },
       id: 'cloth-heading',

@@ -19,7 +19,6 @@ export function render({ url }) {
 <section class="page-head">
   <div class="shell">
     ${crumbs(meta.breadcrumbs, url)}
-    <p class="label">Autumn/Winter</p>
     <h1 class="h1" data-reveal="lines" data-stagger="0.07"
         style="margin-top:var(--s-2xs)">Worn together.</h1>
     <p class="lede" data-reveal data-delay="0.28" style="margin-top:var(--s-m)">

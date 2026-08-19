@@ -37,8 +37,8 @@ export const pages = looks.map((look) => ({
     </div>
 
     <div class="look-detail__text">
+      <h1 class="h1">${esc(look.name)}</h1>
       <p class="label">Look ${esc(look.index)} · ${esc(look.season)}</p>
-      <h1 class="h1" style="margin-top:var(--s-2xs)">${esc(look.name)}</h1>
       <p class="lede" style="margin-top:var(--s-s)">${esc(look.lede)}</p>
       <div class="prose muted" style="margin-top:var(--s-m)"><p>${esc(look.note)}</p></div>
 

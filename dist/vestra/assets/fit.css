@@ -67,14 +67,12 @@
 
 .result__size {
   font-family: var(--font-display);
-  /* Weight 600, not 400.
-     This is the single number the whole page exists to produce, and at 400 the
-     didone's hairlines were thin enough that "12" read as "|2" and "14" as
-     "|/|" — the elegance that makes Bodoni right for a fashion headline makes
-     it actively unreadable for a figure this size. Optical sizing alone did not
-     recover it; the strokes needed real weight. */
+  /* Weight 600, against the 300-350 the display sizes use.
+     This is the single number the whole page exists to produce, so it is the
+     one place the type gets heavier as it gets bigger rather than lighter. The
+     didone this replaced could not be set here at all: at 400 its hairlines
+     broke up so badly that "12" read as "|2". */
   font-weight: 600;
-  font-variation-settings: 'opsz' 34;
   font-size: var(--step-3);
   line-height: 1;
 }

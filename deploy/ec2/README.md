@@ -39,6 +39,54 @@ Port 80 is not optional — it carries the ACME challenge and the HTTP→HTTPS r
 
 ---
 
+## SSH access
+
+The host authenticates this key:
+
+```
+ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAICTz+tXgIFqufNm/kGJNNNQydwnYOmAMBKhZ8TUOEgMe
+```
+
+```
+SHA256:k6dqVwHPpXIP80/9rrqMXgLVHcmOeNWO2jrDBfDj/W8
+```
+
+That is the **public** half, and it is public by design — it lives in
+`~ubuntu/.ssh/authorized_keys` on the host and is safe to keep in this file. The matching
+**private** half never belongs in this repository, in a commit, or in a chat message. It
+stays on the machine that runs the deploy.
+
+To confirm the key you hold is the right one, print its fingerprint and compare:
+
+```bash
+ssh-keygen -lf ~/.ssh/your-private-key      # prints SHA256:… — must match above
+```
+
+`deploy.sh` deliberately sets no default identity file, because a repository cannot know
+what you called yours. Rather than passing `SSH_KEY=` on every run, bind the host to the
+key once in `~/.ssh/config`:
+
+```
+Host 18.226.86.97 *.exostech.pro
+  User ubuntu
+  IdentityFile ~/.ssh/your-private-key
+  IdentitiesOnly yes
+```
+
+With that in place `./deploy/ec2/deploy.sh` needs no arguments at all. `IdentitiesOnly yes`
+matters if you have several keys loaded — without it ssh offers them in turn and can be
+refused for too many attempts before it reaches the right one.
+
+If the deploy cannot connect it prints which situation you are in, so the fix is never a
+guess:
+
+```
+Cannot reach ubuntu@18.226.86.97
+  ssh used its own default identities — set SSH_KEY to name one.
+```
+
+---
+
 ## What it does
 
 | Step | Detail |

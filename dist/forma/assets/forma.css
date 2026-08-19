@@ -730,7 +730,8 @@ a {
 }
 
 .qty button {
-  width: 2.5rem;
+  width: 2.75rem;
+  min-height: 44px;
   display: grid;
   place-items: center;
   font-size: var(--step-1);

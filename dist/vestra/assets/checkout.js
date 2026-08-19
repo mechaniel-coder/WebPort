@@ -52,7 +52,50 @@ if (root) {
     }
   }
 
+  /**
+   * Name the problem on the field itself, not only in the form-level status.
+   * "Some details are missing" tells a keyboard user to go hunting; the message
+   * belongs next to the control, wired into its accessible description so it is
+   * still there when they tab back to it.
+   */
+  function messageFor(field) {
+    const label = form.querySelector(`label[for="${field.id}"]`);
+    const name = label ? label.textContent.trim().toLowerCase() : 'this field';
+    if (field.value.trim() === '') return `Enter your ${name}.`;
+    if (field.type === 'email') return 'Enter an email address, including the @.';
+    return `Check the ${name}.`;
+  }
+
+  function setError(field, message) {
+    const wrap = field.closest('.field');
+    const error = wrap ? wrap.querySelector('.field__error') : null;
+    if (wrap) wrap.dataset.invalid = message ? 'true' : 'false';
+    field.setAttribute('aria-invalid', String(Boolean(message)));
+    if (!error) return;
+
+    error.textContent = message;
+    if (!error.id) error.id = `${field.id}-error`;
+
+    const described = (field.getAttribute('aria-describedby') || '')
+      .split(/\s+/)
+      .filter((id) => id && id !== error.id);
+    if (message) described.push(error.id);
+
+    if (described.length) field.setAttribute('aria-describedby', described.join(' '));
+    else field.removeAttribute('aria-describedby');
+  }
+
   if (form) {
+    // Clear a field's error as soon as it becomes valid, so the page stops
+    // saying something is wrong the moment it stops being wrong.
+    for (const field of form.querySelectorAll('input')) {
+      field.addEventListener('input', () => {
+        if (field.getAttribute('aria-invalid') === 'true' && field.checkValidity()) {
+          setError(field, '');
+        }
+      });
+    }
+
     form.addEventListener('submit', (event) => {
       event.preventDefault();
 
@@ -60,9 +103,8 @@ if (root) {
       let firstBad = null;
 
       for (const field of required) {
-        const wrap = field.closest('.field');
         const ok = field.value.trim() !== '' && field.checkValidity();
-        if (wrap) wrap.dataset.invalid = ok ? 'false' : 'true';
+        setError(field, ok ? '' : messageFor(field));
         if (!ok && !firstBad) firstBad = field;
       }
 

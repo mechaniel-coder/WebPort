@@ -143,12 +143,32 @@ export function initForms({ successMessage } = {}) {
   for (const form of document.querySelectorAll('[data-validate]')) {
     const status = form.querySelector('[data-form-status]');
 
+    // An error the field does not point at is announced once and then lost: a
+    // screen-reader user who tabs back hears the label and nothing else. So the
+    // message element gets an id and joins the control's accessible
+    // description, alongside whatever help text was already there.
+    let errorSeq = 0;
+
     const setError = (input, message) => {
       const field = input.closest('.field');
       const error = field?.querySelector('.field__error');
       field?.setAttribute('data-invalid', String(Boolean(message)));
       input.setAttribute('aria-invalid', String(Boolean(message)));
-      if (error) error.textContent = message || '';
+      if (!error) return;
+
+      error.textContent = message || '';
+      if (!error.id) {
+        errorSeq += 1;
+        error.id = `${input.id || `field-${errorSeq}`}-error`;
+      }
+
+      const described = (input.getAttribute('aria-describedby') || '')
+        .split(/\s+/)
+        .filter((id) => id && id !== error.id);
+      if (message) described.push(error.id);
+
+      if (described.length) input.setAttribute('aria-describedby', described.join(' '));
+      else input.removeAttribute('aria-describedby');
     };
 
     for (const input of form.querySelectorAll('input, textarea, select')) {

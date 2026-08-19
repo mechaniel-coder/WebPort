@@ -686,7 +686,6 @@ a:hover {
 .code pre {
   margin: 0;
   padding: var(--space-s);
-  overflow-x: auto;
   font-family: var(--font-mono);
   font-size: var(--step--1);
   line-height: 1.7;

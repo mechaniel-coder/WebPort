@@ -376,6 +376,7 @@ a {
   display: inline-flex;
   align-items: center;
   justify-content: center;
+  min-height: 44px;
   gap: 0.45rem;
   padding: 0.65rem 1.2rem;
   background: var(--accent);

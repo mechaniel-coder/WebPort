@@ -37,6 +37,11 @@ export function render({ url }) {
         See the collection</a>
     </div>
 
+    <!-- Quantity lives in a <span>, so nothing about pressing + or - reaches
+         assistive tech on its own. This says what changed and what it changed
+         to, which is the part a listener actually needs. -->
+    <p class="visually-hidden" role="status" aria-live="polite" data-bag-announce></p>
+
     <div class="bag" data-bag-filled hidden>
       <div>
         <ul class="bag__lines" data-lines></ul>

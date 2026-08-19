@@ -59,6 +59,19 @@ if (root) {
     }
   }
 
+  const announcer = document.querySelector('[data-bag-announce]');
+
+  /**
+   * Repeating identical text into a live region is not re-announced by most
+   * screen readers, and pressing + twice must be heard twice. A trailing
+   * no-break space toggles the string without changing what is read.
+   */
+  function say(message) {
+    if (!announcer) return;
+    announcer.textContent =
+      announcer.textContent === message ? `${message}\u00a0` : message;
+  }
+
   root.addEventListener('click', (event) => {
     const inc = event.target.closest('[data-inc]');
     const dec = event.target.closest('[data-dec]');
@@ -68,11 +81,24 @@ if (root) {
     if (inc || dec) {
       const id = (inc || dec).dataset[inc ? 'inc' : 'dec'];
       const line = getBag().find((l) => lineId(l.slug, l.colour, l.size) === id);
-      if (line) setQuantity(id, line.quantity + (inc ? 1 : -1));
+      if (line) {
+        const next = line.quantity + (inc ? 1 : -1);
+        setQuantity(id, next);
+        const name = garmentBySlug[line.slug] ? garmentBySlug[line.slug].name : 'Item';
+        // Dropping to zero removes the line, which is a different event from
+        // changing a number and needs to be said as one.
+        say(next < 1 ? `${name} removed from the bag.` : `${name}, quantity ${next}.`);
+      }
     } else if (rm) {
+      const line = getBag().find(
+        (l) => lineId(l.slug, l.colour, l.size) === rm.dataset.remove,
+      );
       removeLine(rm.dataset.remove);
+      const name = line && garmentBySlug[line.slug] ? garmentBySlug[line.slug].name : 'Item';
+      say(`${name} removed from the bag.`);
     } else if (clear) {
       clearBag();
+      say('Bag emptied.');
     }
   });
 

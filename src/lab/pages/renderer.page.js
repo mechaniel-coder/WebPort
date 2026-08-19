@@ -29,10 +29,14 @@ ${experimentHead({ experiment, url })}
         <div class="stage__readout" data-readout aria-hidden="true"></div>
 
         <!-- tabindex makes the camera reachable without a pointer; the label and
-             description are what assistive technology gets instead of pixels. -->
+             description are what assistive technology gets instead of pixels.
+             The role is application rather than img because this canvas takes
+             arrow keys: an image is not operable, and claiming to be one here
+             would tell a screen reader to swallow exactly the keys the camera
+             needs. -->
         <canvas class="stage__canvas" data-canvas
                 tabindex="0"
-                role="img"
+                role="application"
                 aria-label="Interactive 3D view of a procedurally generated torus knot, lit and shaded in real time."
                 aria-describedby="canvas-help"></canvas>
 

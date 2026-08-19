@@ -46,7 +46,8 @@ ${pageHead({
           <div class="field">
             <label class="field__label" for="c-email">Email</label>
             <input id="c-email" name="email" type="email" required data-label="Email"
-                   autocomplete="email">
+                   autocomplete="email"
+               spellcheck="false" autocapitalize="off">
             <p class="field__error" aria-live="polite"></p>
           </div>
 

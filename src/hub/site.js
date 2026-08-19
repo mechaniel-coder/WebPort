@@ -58,7 +58,13 @@ export default {
           <span class="wordmark__mark" aria-hidden="true">${mark}</span>
           <span class="wordmark__text">${esc(studio.name)}</span>
         </a>
-        <nav aria-label="Primary">
+        <button class="masthead__toggle" type="button" aria-expanded="false"
+                aria-controls="hub-nav" data-nav-toggle>
+          <span class="masthead__bars" aria-hidden="true"><i></i><i></i><i></i></span>
+          <span class="visually-hidden">Menu</span>
+        </button>
+
+        <nav id="hub-nav" aria-label="Primary" data-nav data-nav-breakpoint="46em">
           <ul class="masthead__nav">
             ${each(
               nav,

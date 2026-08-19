@@ -115,6 +115,8 @@
 }
 
 .calendar__nav {
+  min-width: 44px;
+  min-height: 44px;
   width: 2.5rem;
   height: 2.5rem;
   display: grid;

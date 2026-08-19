@@ -181,7 +181,8 @@
       <span>otel-collector.yaml</span>
       <span>yaml</span>
     </div>
-    <pre><code><span class="tok-com"># The whole integration. Eleven lines.</span>
+    <pre data-scroll-region tabindex="0" role="region"
+         aria-label="otel-collector.yaml, scrollable code"><code><span class="tok-com"># The whole integration. Eleven lines.</span>
 <span class="tok-key">processors</span>:
   <span class="tok-key">redact</span>:
     <span class="tok-com"># Never leaves the VPC unredacted</span>
@@ -263,7 +264,8 @@
       <span>One query, three signals</span>
       <span>nwql</span>
     </div>
-    <pre><code><span class="tok-com"># p95 latency by endpoint, last hour</span>
+    <pre data-scroll-region tabindex="0" role="region"
+         aria-label="One query, three signals, scrollable code"><code><span class="tok-com"># p95 latency by endpoint, last hour</span>
 metric(<span class="tok-str">&quot;http.server.duration&quot;</span>)
   | where service == <span class="tok-str">&quot;checkout-api&quot;</span>
   | percentile(<span class="tok-num">95</span>) by endpoint

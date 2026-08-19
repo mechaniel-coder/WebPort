@@ -87,6 +87,12 @@ export function render({ url }) {
     </form>
 
     <div class="fit__results">
+      <!-- The recommendation recomputes on every keystroke, and without this the
+           whole system is silent to a screen reader. Only the one-line summary is
+           announced, and only once typing settles: making the list itself a live
+           region would re-read nine garments per digit, which is worse than
+           saying nothing at all. -->
+      <p class="visually-hidden" role="status" aria-live="polite" data-fit-announce></p>
       <!-- The no-JavaScript state is not an apology: it is the full grade for
            every garment, which is more than most sites publish at all. -->
       <div class="fit__empty" data-fit-empty>
@@ -149,7 +155,7 @@ export function render({ url }) {
       recommendation above is computed from — there is no second set.
     </p>
 
-    <div class="grade-scroll" tabindex="0" role="region" aria-label="Size grades, scrollable">
+    <div class="grade-scroll" data-scroll-region tabindex="0" role="region" aria-label="Size grades, scrollable">
       <table class="grade figure" style="margin-top:var(--s-m)">
         <thead>
           <tr>

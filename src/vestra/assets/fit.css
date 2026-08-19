@@ -14,6 +14,9 @@
 .unit input, .fit .field input[type='radio'] { position: absolute; opacity: 0; pointer-events: none; }
 
 .unit span {
+  min-height: 44px;
+  display: inline-flex;
+  align-items: center;
   display: inline-block;
   padding: 0.45rem 0.9rem;
   border: 1px solid var(--line);
@@ -110,5 +113,7 @@
 .grade thead th { border-bottom: 1px solid var(--line-strong); font-weight: 500; color: var(--ink-3); letter-spacing: 0.08em; text-transform: uppercase; font-size: var(--step--2); }
 .grade__alt { display: block; font-size: var(--step--2); color: var(--ink-3); font-weight: 400; letter-spacing: 0.06em; }
 
-.grade-scroll { overflow-x: auto; }
+/* overflow-x comes from [data-scroll-region], which pairs it with the tabindex
+   that makes the region reachable. */
+.grade-scroll { scrollbar-color: var(--line-strong) transparent; }
 .grade-scroll:focus-visible { outline: 3px solid var(--focus-ring); outline-offset: 3px; }

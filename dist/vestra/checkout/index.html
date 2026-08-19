@@ -91,11 +91,17 @@
           <div class="field-row">
             <div class="field">
               <label for="c-first">First name</label>
-              <div class="field__input"><input id="c-first" name="first" required></div>
+              <div class="field__input">
+                <input id="c-first" name="first" required autocomplete="given-name">
+              </div>
+              <p class="field__error" aria-live="polite"></p>
             </div>
             <div class="field">
               <label for="c-last">Last name</label>
-              <div class="field__input"><input id="c-last" name="last" required></div>
+              <div class="field__input">
+                <input id="c-last" name="last" required autocomplete="family-name">
+              </div>
+              <p class="field__error" aria-live="polite"></p>
             </div>
           </div>
 
@@ -103,24 +109,36 @@
             <label for="c-email">Email</label>
             <div class="field__input">
               <input id="c-email" name="email" type="email" required
+                     autocomplete="email" spellcheck="false" autocapitalize="off"
                      aria-describedby="c-email-help">
             </div>
             <p class="field__help" id="c-email-help">For the dispatch note only.</p>
+            <p class="field__error" aria-live="polite"></p>
           </div>
 
           <div class="field">
             <label for="c-address">Address</label>
-            <div class="field__input"><input id="c-address" name="address" required></div>
+            <div class="field__input">
+              <input id="c-address" name="address" required autocomplete="street-address">
+            </div>
+            <p class="field__error" aria-live="polite"></p>
           </div>
 
           <div class="field-row">
             <div class="field">
               <label for="c-city">City</label>
-              <div class="field__input"><input id="c-city" name="city" required></div>
+              <div class="field__input">
+                <input id="c-city" name="city" required autocomplete="address-level2">
+              </div>
+              <p class="field__error" aria-live="polite"></p>
             </div>
             <div class="field">
               <label for="c-postal">Postcode</label>
-              <div class="field__input"><input id="c-postal" name="postal" required></div>
+              <div class="field__input">
+                <input id="c-postal" name="postal" required autocomplete="postal-code"
+                       inputmode="text" autocapitalize="characters" spellcheck="false">
+              </div>
+              <p class="field__error" aria-live="polite"></p>
             </div>
           </div>
         </fieldset>

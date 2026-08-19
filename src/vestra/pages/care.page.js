@@ -63,8 +63,9 @@ export function render({ url }) {
 <section class="section section--tight">
   <div class="shell">
     <p class="label">By cloth</p>
-    <div class="grade-scroll" tabindex="0" role="region" aria-label="Care by garment, scrollable">
+    <div class="grade-scroll" data-scroll-region tabindex="0" role="region" aria-label="Care by garment, scrollable">
       <table class="grade" style="margin-top:var(--s-m)">
+        <caption class="visually-hidden">Cloth and care instruction by garment</caption>
         <thead>
           <tr><th scope="col">Garment</th><th scope="col">Cloth</th><th scope="col">Care</th></tr>
         </thead>

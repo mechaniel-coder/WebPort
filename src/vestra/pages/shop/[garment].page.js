@@ -116,7 +116,7 @@ export const pages = garments.map((garment) => {
           : `${garment.ease.waist > 0 ? '+' : ''}${garment.ease.waist} cm of ease at the waist`
       }</strong> — ${esc(garment.cut.toLowerCase())}.
     </p>
-    <div class="grade-scroll" tabindex="0" role="region"
+    <div class="grade-scroll" data-scroll-region tabindex="0" role="region"
          aria-label="Size grade for ${esc(garment.name)}, scrollable"
          style="margin-top:var(--s-m)">
       ${sizeTable(garment)}

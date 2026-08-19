@@ -59,7 +59,10 @@
   display: flex;
   align-items: center;
   gap: 0.55rem;
-  padding: 0.3rem 0;
+  /* The checkbox is 1.05rem; the row is what you actually press, so the row
+     carries the target size. */
+  min-height: 44px;
+  padding: 0.35rem 0;
   cursor: pointer;
   font-size: var(--step--1);
 }

@@ -33,6 +33,9 @@ if (form && list && empty) {
     return body;
   }
 
+  const announcer = document.querySelector('[data-fit-announce]');
+  let announceTimer = 0;
+
   const VERDICT_CLASS = { snug: 'is-snug', relaxed: 'is-relaxed', 'as intended': 'is-true' };
 
   function renderPoints(result) {
@@ -56,15 +59,22 @@ if (form && list && empty) {
       empty.hidden = false;
       list.hidden = true;
       list.innerHTML = '';
+      clearTimeout(announceTimer);
+      if (announcer) announcer.textContent = '';
       return;
     }
 
     empty.hidden = true;
     list.hidden = false;
 
+    const decided = [];
+
     list.innerHTML = garments
       .map((garment) => {
         const result = recommendSize(garment, body);
+        if (result.status === 'confident' || result.status === 'between') {
+          decided.push({ garment, result });
+        }
         const cloth = cloths[garment.cloth];
 
         if (result.status === 'insufficient') {
@@ -98,6 +108,41 @@ if (form && list && empty) {
         </li>`;
       })
       .join('');
+
+    announce(decided, system);
+  }
+
+  /**
+   * One sentence, spoken once typing settles.
+   *
+   * The visible list is nine garments deep and changes on every keystroke;
+   * announcing it would bury the answer under its own working. What a listener
+   * needs is the shape of the result — how many garments the measurements now
+   * decide, and the sizes they land on — and they get it from the list itself
+   * once they go looking.
+   */
+  function announce(decided, system) {
+    if (!announcer) return;
+    clearTimeout(announceTimer);
+
+    announceTimer = setTimeout(() => {
+      if (!decided.length) {
+        announcer.textContent = 'No garment is graded on the measurements given so far.';
+        return;
+      }
+
+      const sizes = [...new Set(decided.map((d) => sizeLabel(d.result.best.size, system)))];
+      const between = decided.filter((d) => d.result.status === 'between').length;
+
+      const spread =
+        sizes.length === 1
+          ? `size ${sizes[0]} throughout`
+          : `sizes ${sizes.slice(0, -1).join(', ')} and ${sizes[sizes.length - 1]}`;
+
+      announcer.textContent =
+        `${decided.length} of ${garments.length} garments sized: ${spread}.` +
+        (between ? ` ${between} sit between two sizes.` : '');
+    }, 600);
   }
 
   /**

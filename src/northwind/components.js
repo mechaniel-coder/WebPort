@@ -111,7 +111,8 @@ export function codeBlock({ language, filename, code }) {
       <span>${esc(filename)}</span>
       <span>${esc(language)}</span>
     </div>
-    <pre><code>${highlight(code)}</code></pre>
+    <pre data-scroll-region tabindex="0" role="region"
+         aria-label="${esc(filename)}, scrollable code"><code>${highlight(code)}</code></pre>
   </div>`;
 }
 

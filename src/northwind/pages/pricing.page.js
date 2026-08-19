@@ -170,7 +170,8 @@ ${pageHead({
       id: 'compare-heading',
     })}
 
-    <div class="compare-wrap">
+    <div class="compare-wrap" data-scroll-region tabindex="0" role="region"
+         aria-label="Plan comparison, scrollable">
       <table class="compare">
         <caption class="visually-hidden">Plan limits and rates</caption>
         <thead>

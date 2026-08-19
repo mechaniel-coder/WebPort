@@ -119,7 +119,8 @@
       <span>Terminal</span>
       <span>shell</span>
     </div>
-    <pre><code><span class="tok-com"># <span class="tok-num">1</span>. Install the collector</span>
+    <pre data-scroll-region tabindex="0" role="region"
+         aria-label="Terminal, scrollable code"><code><span class="tok-com"># <span class="tok-num">1</span>. Install the collector</span>
 curl -fsSL https://get.northwind.example/install.sh | sh
 
 <span class="tok-com"># <span class="tok-num">2</span>. Point it at your account</span>
@@ -142,7 +143,8 @@ northwind test --signal metrics
       <span>otel-collector.yaml</span>
       <span>yaml</span>
     </div>
-    <pre><code><span class="tok-key">receivers</span>:
+    <pre data-scroll-region tabindex="0" role="region"
+         aria-label="otel-collector.yaml, scrollable code"><code><span class="tok-key">receivers</span>:
   <span class="tok-key">otlp</span>:
     <span class="tok-key">protocols</span>:
       <span class="tok-key">grpc</span>:
@@ -188,7 +190,8 @@ northwind test --signal metrics
       <span>NWQL</span>
       <span>nwql</span>
     </div>
-    <pre><code>metric(<span class="tok-str">&quot;http.server.duration&quot;</span>)
+    <pre data-scroll-region tabindex="0" role="region"
+         aria-label="NWQL, scrollable code"><code>metric(<span class="tok-str">&quot;http.server.duration&quot;</span>)
   | where service == <span class="tok-str">&quot;checkout-api&quot;</span>
   | percentile(<span class="tok-num">95</span>) by endpoint
   | over(<span class="tok-num">1h</span>)</code></pre>
@@ -206,7 +209,8 @@ northwind test --signal metrics
       <span>prometheus.yml</span>
       <span>yaml</span>
     </div>
-    <pre><code><span class="tok-key">remote_write</span>:
+    <pre data-scroll-region tabindex="0" role="region"
+         aria-label="prometheus.yml, scrollable code"><code><span class="tok-key">remote_write</span>:
   - url: <span class="tok-str">&quot;https://ingest.northwind.example/api/v1/write&quot;</span>
     <span class="tok-key">authorization</span>:
       <span class="tok-key">credentials_file</span>: /etc/northwind/api-key</code></pre>
@@ -223,7 +227,8 @@ northwind test --signal metrics
       <span>sampling-policy.yaml</span>
       <span>yaml</span>
     </div>
-    <pre><code><span class="tok-key">policies</span>:
+    <pre data-scroll-region tabindex="0" role="region"
+         aria-label="sampling-policy.yaml, scrollable code"><code><span class="tok-key">policies</span>:
   - name: keep-all-errors
     <span class="tok-key">type</span>: status_code
     <span class="tok-key">status_codes</span>: [ERROR]
@@ -248,7 +253,8 @@ northwind test --signal metrics
       <span>NWQL</span>
       <span>nwql</span>
     </div>
-    <pre><code>log()
+    <pre data-scroll-region tabindex="0" role="region"
+         aria-label="NWQL, scrollable code"><code>log()
   | where service == <span class="tok-str">&quot;checkout-api&quot;</span> and level &gt;= <span class="tok-str">&quot;warn&quot;</span>
   | where body ~ <span class="tok-str">&quot;timeout&quot;</span>
   | count() by host

@@ -360,7 +360,9 @@
 /* ── Comparison table ──────────────────────────────────────────────────────── */
 
 .compare-wrap {
-  overflow-x: auto;
+  /* overflow-x comes from [data-scroll-region] in the shared reset, which keeps
+     it tied to the tabindex that makes it reachable. */
+  scrollbar-color: var(--border-strong) transparent;
 }
 
 .compare {

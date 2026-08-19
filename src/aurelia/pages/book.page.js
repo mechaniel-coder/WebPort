@@ -216,7 +216,8 @@ function detailsPanel() {
       <div class="field">
         <label class="field__label" for="email">Email</label>
         <input id="email" name="email" type="email" required
-               data-label="Email address" autocomplete="email">
+               data-label="Email address" autocomplete="email"
+               spellcheck="false" autocapitalize="off">
         <p class="field__error" aria-live="polite"></p>
       </div>
 

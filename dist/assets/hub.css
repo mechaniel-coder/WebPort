@@ -114,12 +114,67 @@ a {
   width: 1.65rem;
 }
 
+/* The toggle only exists below the breakpoint the nav declares; above it the
+   four links fit on one line and a hamburger would be a control that hides
+   something already visible. */
+.masthead__toggle {
+  display: none;
+  color: var(--ink);
+}
+
+.masthead__bars {
+  display: grid;
+  gap: 4px;
+  width: 1.15rem;
+}
+
+.masthead__bars i {
+  display: block;
+  height: 2px;
+  background: currentColor;
+}
+
 .masthead__nav {
   display: flex;
   gap: var(--space-m);
   font-size: var(--step--1);
   letter-spacing: 0.04em;
   text-transform: uppercase;
+}
+
+/* Four uppercase words plus the wordmark measure wider than a 360px screen, so
+   below 46em the list becomes a disclosure panel rather than overflowing the
+   page. Without JavaScript `[data-open]` is never written and the nav stays
+   open, which is the correct failure. */
+@media (max-width: 45.99em) {
+  .masthead__toggle {
+    display: inline-grid;
+  }
+
+  .masthead__inner {
+    flex-wrap: wrap;
+  }
+
+  [data-nav][data-open='false'] {
+    display: none;
+  }
+
+  [data-nav] {
+    order: 3;
+    width: 100%;
+    padding-block: var(--space-s);
+    border-top: 1px solid var(--rule);
+  }
+
+  .masthead__nav {
+    flex-direction: column;
+    gap: var(--space-2xs);
+  }
+
+  .masthead__nav a {
+    display: block;
+    padding-block: 0.7rem;
+  }
 }
 
 .masthead__nav a {

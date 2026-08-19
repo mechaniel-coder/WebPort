@@ -35,7 +35,7 @@ ${experimentHead({ experiment, url })}
 
         <canvas class="stage__canvas" data-canvas
                 tabindex="0"
-                role="img"
+                role="application"
                 aria-label="A cloth simulation: a grid of points joined by distance constraints, hanging from pinned anchors and swinging under gravity."
                 aria-describedby="verlet-help"></canvas>
       </div>

@@ -14,6 +14,7 @@
 }
 
 html {
+  scroll-padding-top: 6rem;
   -webkit-text-size-adjust: 100%;
   text-size-adjust: 100%;
 }
@@ -109,6 +110,31 @@ address {
    then show a focus ring, because it is a scroll target rather than a control. */
 main:focus {
   outline: none;
+}
+
+/* Controls owned by the shared widgets carry a shared floor. The nav toggle is
+   the only route to navigation on a phone, so it gets a full 44x44 target no
+   matter what padding each site's own design system works out to. */
+/* A range input's hit area is the whole element, but its default box is only as
+   tall as the track it draws. Height here is the target; the track keeps its own
+   thickness through the vendor pseudo-elements each site styles. */
+input[type='range'] {
+  min-height: 44px;
+}
+
+[data-nav-toggle] {
+  display: inline-grid;
+  place-items: center;
+  min-width: 44px;
+  min-height: 44px;
+}
+
+/* A box that scrolls sideways is unusable by keyboard unless it can be focused,
+   so the markup pairs this attribute with `tabindex="0"` and a label. Declaring
+   the overflow here keeps the two halves of that contract in one place — a
+   region that scrolls but was never made focusable cannot happen by omission. */
+[data-scroll-region] {
+  overflow-x: auto;
 }
 
 .skip-link {

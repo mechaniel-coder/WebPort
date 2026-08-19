@@ -22,7 +22,7 @@ export function render({ url }) {
       built and shipped end to end — design system, front end, interaction, accessibility.
     </p>
     <div class="hero__meta" data-reveal data-delay="0.45">
-      <span>Three case studies</span>
+      <span>${work.length} case studies</span>
       <span>Design systems built from scratch</span>
       <span>No templates, no page builders</span>
     </div>

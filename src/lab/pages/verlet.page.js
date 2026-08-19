@@ -22,7 +22,7 @@ const chip = (name, value, label, checked) => `<label class="chip">
 
 export function render({ url }) {
   return `
-<div style="--accent:${esc(experiment.accent)};--accent-ink:#1a0016">
+<div style="--accent:${esc(experiment.accent)};--accent-ink:#1a0600">
 
 ${experimentHead({ experiment, url })}
 

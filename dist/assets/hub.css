@@ -7,24 +7,49 @@
  */
 
 :root {
-  /* Colour */
-  --paper: #f4f1ea;
-  --paper-raised: #fffdf8;
-  --ink: #14130f;
-  --ink-muted: #605c52;
-  --rule: #d9d3c5;
-  --accent: #14130f;
-  --focus-ring: #14130f;
+  color-scheme: dark;
+
+  /* ── Colour ───────────────────────────────────────────────────────────────
+   *
+   * The studio's own site was on the same warm cream as three of the four
+   * client sites it exists to present, which meant it competed with them
+   * instead of framing them. It is dark now, and achromatic: a wall, and the
+   * work hung on it.
+   *
+   * There is no brand accent here at all. Every colour on this site belongs to
+   * one of the four client brands, arriving through the case studies as their
+   * own --accent. That is the strongest form of the claim the site is making —
+   * a studio whose site has no colour of its own because the colour is always
+   * the client's.
+   */
+  --ground: #17181a;
+  --ground-2: #1f2124;
+  --ground-3: #292c30;
+  --ink: #f0efec;
+  --ink-muted: #adaba5;
+  --ink-faint: #84827c;
+  --rule: #33363a;
+  --rule-bright: #4a4e54;
+
+  /* Kept as aliases so components that ask for paper still work; on this site
+     "paper" is the wall. */
+  --paper: var(--ground);
+  --paper-raised: var(--ground-2);
+  --accent: var(--ink);
+
+  --focus-ring: #f0efec;
   --focus-radius: 3px;
 
-  /* Type — fluid, clamped between the 360px and 1440px breakpoints */
-  /* Schibsted Grotesk and JetBrains Mono — both already vendored for Aurelia,
-     so the hub costs no additional font bytes.
-     That is the frugal reason. The real one: this is the studio's own site, and
-     it exists to make three client brands look good. Giving it a fourth
-     signature typeface would put it in competition with the work it is
-     presenting. It is deliberately the quietest thing in the portfolio, and
-     leans on scale and layout instead of a voice of its own. */
+  /* ── Type ───────────────────────────────────────────────────────────────────
+   *
+   * Schibsted Grotesk and JetBrains Mono, shared with the lab and used by
+   * nothing else in the repo. The four client brands are separate businesses
+   * and each gets a face no one else has; the hub and the lab are the same
+   * studio speaking, so they share one voice.
+   *
+   * Aurelia used to borrow this pair, which quietly undercut that rule. It has
+   * its own faces now, so the pair genuinely belongs to the studio.
+   */
   --font-display: 'Schibsted Grotesk', 'Schibsted Fallback', system-ui, sans-serif;
   --font-sans: 'Schibsted Grotesk', 'Schibsted Fallback', system-ui, sans-serif;
   --font-mono: 'JetBrains Mono', 'JetBrains Fallback', ui-monospace, monospace;
@@ -781,12 +806,12 @@ a {
 
 .field[data-invalid='true'] input,
 .field[data-invalid='true'] textarea {
-  border-color: #a33a2a;
+  border-color: #e08070;
 }
 
 .field__error {
   font-size: var(--step--1);
-  color: #a33a2a;
+  color: #e08070;
 }
 
 .field__error:empty {
@@ -815,13 +840,13 @@ a {
 }
 
 .form-status[data-tone='error'] {
-  border-color: #a33a2a;
-  color: #a33a2a;
+  border-color: #e08070;
+  color: #e08070;
 }
 
 .form-status[data-tone='success'] {
-  border-color: #2f6b45;
-  color: #2f6b45;
+  border-color: #5fbf86;
+  color: #5fbf86;
 }
 
 .form-status:empty {

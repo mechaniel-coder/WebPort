@@ -25,9 +25,15 @@
   --dim: #9a9a96;
   --faint: #6a6a66;
 
-  /* Default accent; each experiment overrides it on a wrapper. */
-  --accent: #c3f53c;
-  --accent-ink: #0a0f00;
+  /* The lab has no colour of its own — the same position the studio hub takes,
+     for the same reason. Each experiment supplies one on a wrapper, drawn from
+     what that experiment actually renders: the renderer's rim light, the
+     tension colour a physics debug view uses, the blue a water column goes at
+     depth, the amber of a plotter. The default this replaced was #c3f53c, a
+     lime that is the single most predictable choice a dark technical page can
+     make. */
+  --accent: #e8e6e0;
+  --accent-ink: #000000;
 
   --focus-ring: var(--accent);
   --focus-radius: 0px;

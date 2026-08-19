@@ -29,7 +29,7 @@ export const experiments = [
     index: '01',
     name: 'Renderer',
     kicker: '3D interface',
-    accent: '#c3f53c',
+    accent: '#8fb8ff',
     summary: 'A WebGL renderer with no engine underneath it.',
     lede: `Perspective projection, orbit camera, procedural geometry and Blinn–Phong shading,
       written from the matrix maths up. The GUI drives real uniforms, not a wrapper.`,
@@ -50,7 +50,7 @@ export const experiments = [
     index: '02',
     name: 'Verlet',
     kicker: 'Physics',
-    accent: '#ff5cf0',
+    accent: '#ff7a66',
     summary: 'Cloth, rope and constraint solving with a hand-written integrator.',
     lede: `Position-based dynamics: no velocities stored, no forces integrated. Each particle
       remembers where it was, and constraints are satisfied by moving points directly.`,
@@ -72,7 +72,7 @@ export const experiments = [
     index: '03',
     name: 'Descent',
     kicker: 'Storytelling',
-    accent: '#4fd8ff',
+    accent: '#56c8e0',
     summary: 'A freedive to a hundred metres, told by scrolling down it.',
     lede: `Scroll position is depth. The visualisation is driven by real physics — Boyle's law
       compressing lung volume, light attenuating exponentially — rather than keyframes.`,
@@ -94,7 +94,7 @@ export const experiments = [
     index: '04',
     name: 'Motion',
     kicker: 'Frontier CSS',
-    accent: '#ffb648',
+    accent: '#e0b45c',
     summary: 'Four browser features new enough to still need a fallback.',
     lede: `The counterweight to the other three: no JavaScript at all. Scroll-driven
       animation, view transitions, animatable custom properties and container queries —

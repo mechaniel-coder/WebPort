@@ -17,7 +17,7 @@ export const meta = {
 
 export function render({ url }) {
   return `
-<div style="--accent:${esc(experiment.accent)};--accent-ink:#0a0f00">
+<div style="--accent:${esc(experiment.accent)};--accent-ink:#00080f">
 
 ${experimentHead({ experiment, url })}
 

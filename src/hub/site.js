@@ -26,8 +26,8 @@ const nav = [
 export { studies as work } from './data.js';
 
 const mark = `<svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
-  <rect width="32" height="32" rx="7" fill="#12110f"/>
-  <path d="M8 22V10l8 7 8-7v12" fill="none" stroke="#f5f1e8" stroke-width="2.6"
+  <rect width="32" height="32" rx="7" fill="#f0efec"/>
+  <path d="M8 22V10l8 7 8-7v12" fill="none" stroke="#17181a" stroke-width="2.6"
         stroke-linecap="square" stroke-linejoin="miter"/>
 </svg>`;
 
@@ -35,7 +35,7 @@ export default {
   key: 'hub',
   name: studio.name,
   mount: '/',
-  themeColor: '#12110f',
+  themeColor: '#17181a',
   styles: ['hub.css'],
 
   // Shared type and motion layers.
@@ -112,8 +112,9 @@ export default {
         </nav>
 
         <p class="colophon__legal">
-          © ${new Date().getFullYear()} ${esc(studio.name)}. Aurelia, Northwind and Forma are
-          fictional brands created to demonstrate design and engineering capability.
+          © ${new Date().getFullYear()} ${esc(studio.name)}. Aurelia, Northwind, Forma and
+          Vestra are fictional brands created to demonstrate design and engineering
+          capability.
         </p>
       </div>
     </footer>`;

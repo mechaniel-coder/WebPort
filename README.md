@@ -5,7 +5,7 @@ and an experimental lab, each with its own design system and at least one substa
 interactive system built from scratch.
 
 **Everything is static HTML, CSS and JavaScript. No framework, no bundler, and no
-`node_modules` needed to host it** — the four third-party libraries and nine font files are
+`node_modules` needed to host it** — the four third-party libraries and eleven font files are
 vendored into the repo and committed, so hosting stays clone-and-serve. See
 **[HOSTING.md](HOSTING.md)** and [`src/_lib/vendor/`](src/_lib/vendor/README.md).
 
@@ -177,8 +177,10 @@ them, and the rest are driven in a real browser by `npm run check:browser`.
   else. Zero layout shift, including from the webfont swap.
 - **Imagery** — all artwork is original: generated SVG, CSS, and two WebGL shaders written
   for the sites that use them. Nothing is hotlinked. The only third-party licences are the
-  fonts (SIL OFL), Lenis (MIT) and GSAP (its standard no-charge licence), with full texts
-  committed alongside the files in `src/_lib/vendor/licences/`.
+  fonts (SIL OFL), Lenis (MIT) and GSAP (its standard no-charge licence). Full texts are
+  committed alongside the files in `src/_lib/vendor/licences/`, except GSAP's — GreenSock
+  ships no licence file in its npm package, only a README pointing at a URL, so what is
+  committed is the copyright notice and that link rather than a text invented here.
 
 ### What "verified" means here
 
@@ -186,7 +188,9 @@ them, and the rest are driven in a real browser by `npm run check:browser`.
 canonical targets), missing or duplicated metadata, heading structure, malformed JSON-LD,
 duplicate ids, unlabelled form controls, and inline SVG with no accessible name.
 
-`browser-check.js` loads all 60 pages in Chromium asserting zero console errors, then drives
+`browser-check.js` sweeps all 74 indexed routes in Chromium asserting zero console errors — the
+five `noindex` pages (two carts, two checkouts, the 404) are driven by the commerce
+scenarios instead — then drives
 each signature system end to end. The assertions check **exact figures**, not that something
 appeared — Team costs `$359` at 100 GB and 25 hosts; a Forma order of `$225.00` produces
 `$20.66` tax and a `$263.66` total; the booking reference matches `AUR-YYYY-XXXXX`. The lab
@@ -228,8 +232,8 @@ Stated plainly rather than left to be discovered:
 ### On valuation
 
 This repository cannot certify what it is worth — no codebase can. What it can do is state
-the scope precisely so it can be compared against a real quote: **60 pages, three
-independent design systems, four hand-built interactive subsystems, WCAG 2.2 AA with
-keyboard-operable custom widgets, structured data per page type, a zero-dependency delivery
-target, and an automated integrity gate.** Whether that is worth a given number is a
+the scope precisely so it can be compared against a real quote: **79 pages, six independent
+design systems on eleven self-hosted typefaces, five hand-built interactive subsystems,
+WCAG 2.2 AA with keyboard-operable custom widgets, structured data per page type, a
+zero-dependency delivery target, and an automated integrity gate of 234 browser checks.** Whether that is worth a given number is a
 judgement for whoever is paying; the itemisation above is the honest input to it.

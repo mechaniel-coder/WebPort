@@ -126,6 +126,11 @@ const ASSETS = [
     to('licences', 'OFL-JetBrainsMono.txt'),
   ],
   [from('lenis', 'LICENSE'), to('licences', 'MIT-Lenis.txt')],
+
+  // GSAP is deliberately absent from this list. GreenSock ships no licence file
+  // in the npm package — only a README pointing at a URL — so there is nothing
+  // to copy. `licences/GSAP-standard-license.txt` is hand-written and states
+  // the terms by reference, which is why it must not be regenerated here.
 ];
 
 const exists = async (path) => {

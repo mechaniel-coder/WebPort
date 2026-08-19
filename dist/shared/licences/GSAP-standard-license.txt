@@ -1,0 +1,27 @@
+GSAP — GreenSock standard "no charge" license
+=============================================
+
+Copyright (c) 2008-2026, GreenSock. All rights reserved.
+
+GreenSock does not ship a licence file in the `gsap` npm package; its README
+states the terms by reference:
+
+    GreenSock's standard "no charge" license can be viewed at
+    https://gsap.com/standard-license
+
+The full text therefore lives at that URL and is deliberately not reproduced
+here — copying it into this repository would create a second copy that could
+drift from the one GreenSock maintains.
+
+What the licence permits, in short: GSAP may be used at no charge on websites
+and in applications, including commercial ones. It is not an OSI open-source
+licence. What it restricts is redistributing GSAP *itself* as part of a
+competing product, or inside a tool that lets other people build animations.
+
+Serving it as part of a website — which is what this repository does, with the
+minified files vendored into `../js/` — is exactly what it is for.
+
+Files covered:
+  ../js/gsap.min.js
+  ../js/ScrollTrigger.min.js
+  ../js/SplitText.min.js

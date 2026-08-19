@@ -68,6 +68,22 @@
   font-display: swap;
 }
 
+@font-face {
+  font-family: 'Bodoni Moda';
+  src: url('fonts/bodoni-var.woff2') format('woff2-variations');
+  font-weight: 400 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Archivo';
+  src: url('fonts/archivo-var.woff2') format('woff2-variations');
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+
 /**
  * Metric-matched fallbacks.
  *
@@ -134,6 +150,24 @@
   descent-override: 24%;
   line-gap-override: 0%;
   size-adjust: 100%;
+}
+
+@font-face {
+  font-family: 'Bodoni Fallback';
+  src: local('Didot'), local('Bodoni MT'), local('Georgia'), local('Liberation Serif');
+  ascent-override: 90%;
+  descent-override: 24%;
+  line-gap-override: 0%;
+  size-adjust: 107%;
+}
+
+@font-face {
+  font-family: 'Archivo Fallback';
+  src: local('Helvetica Neue'), local('Arial'), local('Liberation Sans');
+  ascent-override: 94%;
+  descent-override: 25%;
+  line-gap-override: 0%;
+  size-adjust: 102%;
 }
 
 @font-face {

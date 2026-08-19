@@ -212,6 +212,79 @@ export const studies = [
 
     signature: 'Faceted catalogue, variant pricing and persistent cart',
   },
+
+  {
+    slug: 'vestra',
+    name: 'Vestra',
+    sector: 'Fashion',
+    live: '/vestra/',
+    accent: '#7d4f43',
+    year: '2026',
+    role: 'Design system, front end, fit engine, cloth simulation',
+    pages: 18,
+    summary: 'A ready-to-wear label with a measurement-based fit engine and simulated cloth.',
+    oneLiner: `A clothing label that wanted to sell online without pretending sizing is
+      simple.`,
+
+    brief: `Vestra grade nine styles across six sizes in six very different cloths. Their
+      returns were almost entirely sizing, and their size chart was the usual thing: a table
+      of body measurements with no opinion, leaving a customer to guess whether a coat cut
+      with 24 cm of ease and a rib top cut with minus 6 are the same size on them. They are
+      not.`,
+
+    constraints: [
+      'No photography — and unlike furniture, clothing cannot simply be drawn.',
+      'Sizing had to give an answer, not a table, and admit when it was uncertain.',
+      'Five markets, so every size needed UK, US, EU, IT and JP labels.',
+      'No payment details collected anywhere, at any point.',
+    ],
+
+    approach: [
+      {
+        title: 'Ease, not size',
+        text: `The engine holds the finished garment measurements and the ease each cut is
+          designed around, then scores every size on how close the actual gap lands to the
+          intended one. That is why the same body gets different sizes across the collection
+          — and why the site can explain each one rather than just asserting it.`,
+      },
+      {
+        title: 'It says when it does not know',
+        text: `When two sizes score within a threshold the answer is both, with the tradeoff
+          in words: which point is snug in one and as intended in the other. The threshold
+          was tuned against a spread of body types — at its first value it hedged on half of
+          all combinations, which is a fit finder that has told you nothing.`,
+      },
+      {
+        title: 'The cloth is simulated, not photographed',
+        text: `Cloth is not an object to depict, it is a behaviour — how it falls and how
+          long it takes to settle is what separates 420 gsm flannel from 110 gsm crepe, and
+          a still photograph cannot show it. The hero runs the studio's own Verlet solver
+          with parameters derived from each cloth's real weight and stiffness.`,
+      },
+      {
+        title: 'Swatches are woven, not filled',
+        text: `Every material is drawn from its actual weave draft — which yarns pass over
+          which, and on what diagonal. A twill leans, a herringbone reverses, poplin carries
+          a finer warp than weft. It costs a few hundred bytes per cloth and it is the
+          difference between a swatch and a paint chip.`,
+      },
+    ],
+
+    tradeoff: `The fit engine models the body as four circumferences, which is what a tape
+      measure gives you and not what a body is. It cannot see posture, proportion or where
+      someone carries their height, so it is honest about ease and silent about drape. A
+      brand with the budget should pair it with real fit photography on more than one body —
+      the engine narrows the question, it does not close it.`,
+
+    verified: [
+      'Fit recommendations asserted against exact figures, including negative ease on the rib knit.',
+      'Between-sizes and off-chart paths driven in Chromium, not just the confident case.',
+      'Cloth simulation asserted for stability and for settling, not merely for running.',
+      'Absence of payment fields asserted by inspecting form controls, not the copy.',
+    ],
+
+    signature: 'Measurement-based fit engine and simulated cloth',
+  },
 ];
 
 export const studyBySlug = Object.fromEntries(studies.map((study) => [study.slug, study]));

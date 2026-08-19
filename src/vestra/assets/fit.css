@@ -1,0 +1,114 @@
+/* The fit finder. */
+
+.fit { display: grid; gap: var(--s-xl); }
+
+@media (min-width: 62em) {
+  .fit { grid-template-columns: 20rem minmax(0, 1fr); gap: var(--s-2xl); align-items: start; }
+  .fit__form { position: sticky; top: 5.5rem; }
+}
+
+.fit__form fieldset { border: 0; padding: 0; margin: 0; }
+
+.fit__units { display: flex; gap: var(--s-2xs); margin-bottom: var(--s-m); }
+
+.unit input, .fit .field input[type='radio'] { position: absolute; opacity: 0; pointer-events: none; }
+
+.unit span {
+  display: inline-block;
+  padding: 0.45rem 0.9rem;
+  border: 1px solid var(--line);
+  font-size: var(--step--2);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+
+.unit input:checked + span { background: var(--ink); color: var(--paper); border-color: var(--ink); }
+.unit input:focus-visible + span { outline: 3px solid var(--focus-ring); outline-offset: 2px; }
+
+.field { margin-bottom: var(--s-m); }
+.field > label { display: block; font-size: var(--step--1); font-weight: 500; margin-bottom: 0.3rem; }
+.field__input { display: flex; align-items: center; border: 1px solid var(--line-strong); }
+.field__input input { flex: 1; border: 0; padding: 0.7rem 0.8rem; background: transparent; font-variant-numeric: tabular-nums; }
+.field__input input:focus-visible { outline: 3px solid var(--focus-ring); outline-offset: -3px; }
+.field__unit { padding-inline: 0.8rem; color: var(--ink-3); font-size: var(--step--1); }
+.field__help { font-size: var(--step--2); color: var(--ink-3); margin-top: 0.3rem; }
+
+.fit select {
+  width: 100%;
+  padding: 0.7rem 0.8rem;
+  border: 1px solid var(--line-strong);
+  background: transparent;
+  font: inherit;
+}
+
+.fit__privacy {
+  font-size: var(--step--2);
+  color: var(--ink-3);
+  border-top: 1px solid var(--line);
+  padding-top: var(--s-s);
+}
+
+.fit__empty { border: 1px dashed var(--line); padding: var(--s-l); }
+
+.fit__list { list-style: none; margin: 0; padding: 0; display: grid; gap: var(--s-s); }
+
+.result { border: 1px solid var(--line); padding: var(--s-m); background: var(--paper); }
+.result--between { border-left: 3px solid var(--warn); }
+.result--off { border-left: 3px solid var(--accent); }
+
+.result__head { display: flex; flex-wrap: wrap; gap: var(--s-xs); justify-content: space-between; align-items: baseline; }
+.result__name { font-size: var(--step-1); }
+.result__name a { text-decoration: none; }
+.result__cloth { display: block; font-size: var(--step--2); color: var(--ink-3); letter-spacing: 0.1em; text-transform: uppercase; }
+
+.result__size {
+  font-family: var(--font-display);
+  /* Weight 600, not 400.
+     This is the single number the whole page exists to produce, and at 400 the
+     didone's hairlines were thin enough that "12" read as "|2" and "14" as
+     "|/|" — the elegance that makes Bodoni right for a fashion headline makes
+     it actively unreadable for a figure this size. Optical sizing alone did not
+     recover it; the strokes needed real weight. */
+  font-weight: 600;
+  font-variation-settings: 'opsz' 34;
+  font-size: var(--step-3);
+  line-height: 1;
+}
+
+.result__size span { font-size: var(--step-1); color: var(--ink-3); }
+.result__why { color: var(--ink-2); font-size: var(--step--1); margin-top: var(--s-2xs); }
+.result__none { color: var(--ink-3); font-size: var(--step--1); }
+
+.points { list-style: none; margin: var(--s-s) 0 0; padding: 0; display: grid; gap: 1px; background: var(--line); border: 1px solid var(--line); }
+
+.point {
+  display: grid;
+  grid-template-columns: 1fr auto auto;
+  gap: var(--s-s);
+  padding: 0.45rem 0.7rem;
+  background: var(--paper);
+  font-size: var(--step--2);
+  align-items: baseline;
+}
+
+.point__ease { color: var(--ink-2); }
+
+/* Verdict is carried by a word, never by colour alone — the colour is a second,
+   redundant channel for people who read it faster that way. */
+.point__verdict { letter-spacing: 0.08em; text-transform: uppercase; }
+.is-true .point__verdict { color: var(--good); }
+.is-snug .point__verdict { color: var(--accent); }
+.is-relaxed .point__verdict { color: var(--warn); }
+
+/* ── Grade tables ──────────────────────────────────────────────────────────── */
+
+.grade { width: 100%; border-collapse: collapse; font-size: var(--step--1); }
+.grade caption { text-align: left; color: var(--ink-3); font-size: var(--step--2); padding-bottom: var(--s-xs); }
+.grade th, .grade td { padding: 0.55rem 0.7rem; text-align: right; border-bottom: 1px solid var(--line); }
+.grade th[scope='row'] { text-align: left; font-weight: 500; }
+.grade thead th { border-bottom: 1px solid var(--line-strong); font-weight: 500; color: var(--ink-3); letter-spacing: 0.08em; text-transform: uppercase; font-size: var(--step--2); }
+.grade__alt { display: block; font-size: var(--step--2); color: var(--ink-3); font-weight: 400; letter-spacing: 0.06em; }
+
+.grade-scroll { overflow-x: auto; }
+.grade-scroll:focus-visible { outline: 3px solid var(--focus-ring); outline-offset: 3px; }

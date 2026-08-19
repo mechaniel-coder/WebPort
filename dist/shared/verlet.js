@@ -211,14 +211,20 @@ export class World {
 /* ── Structures ────────────────────────────────────────────────────────────── */
 
 /** A grid of points pinned along the top edge. The classic cloth. */
-export function buildCloth(world, { cols = 26, rows = 18, spacing = 22, originX, originY }) {
+export function buildCloth(
+  world,
+  // `tearAt` is the stretch ratio at which a link snaps. The lab wants cloth
+  // that can be torn; a shop hero must never rip, so it passes Infinity.
+  { cols = 26, rows = 18, spacing = 22, originX, originY, tearAt = 3.2, pinEvery = 4 },
+) {
   const index = (col, row) => row * cols + col;
 
   for (let row = 0; row < rows; row += 1) {
     for (let col = 0; col < cols; col += 1) {
       world.addPoint(originX + col * spacing, originY + row * spacing, {
-        // Every fourth point along the top, so the cloth swags between pins.
-        pinned: row === 0 && col % 4 === 0,
+        // Pins along the top edge; the cloth swags between them. Spacing them
+        // further apart gives fewer, deeper swags.
+        pinned: row === 0 && col % pinEvery === 0,
       });
     }
   }
@@ -226,10 +232,10 @@ export function buildCloth(world, { cols = 26, rows = 18, spacing = 22, originX,
   for (let row = 0; row < rows; row += 1) {
     for (let col = 0; col < cols; col += 1) {
       if (col < cols - 1) {
-        world.addConstraint(index(col, row), index(col + 1, row), { tearAt: 3.2 });
+        world.addConstraint(index(col, row), index(col + 1, row), { tearAt });
       }
       if (row < rows - 1) {
-        world.addConstraint(index(col, row), index(col, row + 1), { tearAt: 3.2 });
+        world.addConstraint(index(col, row), index(col, row + 1), { tearAt });
       }
     }
   }

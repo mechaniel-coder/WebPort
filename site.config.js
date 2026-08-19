@@ -58,6 +58,6 @@ function normalizeBase(value) {
  * client sites follow. Adding a directory under src/ and listing it here is all
  * that is required to add a site.
  */
-export const sites = ['hub', 'aurelia', 'northwind', 'forma', 'lab'];
+export const sites = ['hub', 'aurelia', 'northwind', 'forma', 'vestra', 'lab'];
 
 export default { studio, origin, basePath, sites };

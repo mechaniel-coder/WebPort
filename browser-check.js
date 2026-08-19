@@ -321,6 +321,14 @@ await withServer(async () => {
     await lab.motionScenario(page, ORIGIN, check);
   }
 
+  if (has('/vestra/fit/')) {
+    const vestra = await import('./checks/vestra.js');
+    await vestra.fitScenario(page, ORIGIN, check);
+    await vestra.garmentScenario(page, ORIGIN, check);
+    await vestra.bagScenario(page, ORIGIN, check);
+    await vestra.clothScenario(page, ORIGIN, check);
+  }
+
   let motion = null;
   if (has('/aurelia/')) {
     motion = await import('./checks/motion.js');

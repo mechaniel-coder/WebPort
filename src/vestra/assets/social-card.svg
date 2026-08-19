@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" width="1200" height="630" role="img" aria-label="Vestra — Cloth first, then the cut.">
+  <title>Vestra — Cloth first, then the cut.</title>
+  <defs><pattern id="wv1" width="48" height="48" patternUnits="userSpaceOnUse"><rect x="0" y="0" width="12" height="12" fill="#5c5f66"/><rect x="0" y="11" width="12" height="1" fill="#3e4147" opacity="0.55"/><rect x="12" y="0" width="12" height="12" fill="#5c5f66"/><rect x="12" y="11" width="12" height="1" fill="#3e4147" opacity="0.55"/><rect x="24" y="0" width="12" height="12" fill="#5e626a"/><rect x="24" y="11" width="12" height="1" fill="#747881" opacity="0.55"/><rect x="36" y="0" width="12" height="12" fill="#5e626a"/><rect x="36" y="11" width="12" height="1" fill="#747881" opacity="0.55"/><rect x="0" y="12" width="12" height="12" fill="#5e626a"/><rect x="0" y="23" width="12" height="1" fill="#747881" opacity="0.55"/><rect x="12" y="12" width="12" height="12" fill="#5c5f66"/><rect x="12" y="23" width="12" height="1" fill="#3e4147" opacity="0.55"/><rect x="24" y="12" width="12" height="12" fill="#5c5f66"/><rect x="24" y="23" width="12" height="1" fill="#3e4147" opacity="0.55"/><rect x="36" y="12" width="12" height="12" fill="#5e626a"/><rect x="36" y="23" width="12" height="1" fill="#747881" opacity="0.55"/><rect x="0" y="24" width="12" height="12" fill="#5e626a"/><rect x="0" y="35" width="12" height="1" fill="#747881" opacity="0.55"/><rect x="12" y="24" width="12" height="12" fill="#5e626a"/><rect x="12" y="35" width="12" height="1" fill="#747881" opacity="0.55"/><rect x="24" y="24" width="12" height="12" fill="#5c5f66"/><rect x="24" y="35" width="12" height="1" fill="#3e4147" opacity="0.55"/><rect x="36" y="24" width="12" height="12" fill="#5c5f66"/><rect x="36" y="35" width="12" height="1" fill="#3e4147" opacity="0.55"/><rect x="0" y="36" width="12" height="12" fill="#5c5f66"/><rect x="0" y="47" width="12" height="1" fill="#3e4147" opacity="0.55"/><rect x="12" y="36" width="12" height="12" fill="#5e626a"/><rect x="12" y="47" width="12" height="1" fill="#747881" opacity="0.55"/><rect x="24" y="36" width="12" height="12" fill="#5e626a"/><rect x="24" y="47" width="12" height="1" fill="#747881" opacity="0.55"/><rect x="36" y="36" width="12" height="12" fill="#5c5f66"/><rect x="36" y="47" width="12" height="1" fill="#3e4147" opacity="0.55"/></pattern>
+    <linearGradient id="veil" x1="0" y1="1" x2="0.3" y2="0">
+      <stop offset="0" stop-color="#f7f5f1" stop-opacity="0.97"/>
+      <stop offset="0.55" stop-color="#f7f5f1" stop-opacity="0.72"/>
+      <stop offset="1" stop-color="#f7f5f1" stop-opacity="0.1"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="630" fill="#f7f5f1"/>
+  <rect width="1200" height="630" fill="url(#wv1)"/>
+  <rect width="1200" height="630" fill="url(#veil)"/>
+  <text x="80" y="150" font-family="Archivo, Helvetica, Arial, sans-serif" font-size="24"
+    letter-spacing="6" fill="#85817a">LISBON · SINCE 2017</text>
+  <text x="72" y="360" font-family="Bodoni Moda, Didot, Georgia, serif" font-size="150"
+    fill="#1c1b19">Cloth first,</text>
+  <text x="72" y="490" font-family="Bodoni Moda, Didot, Georgia, serif" font-size="150"
+    fill="#1c1b19">then the cut.</text>
+  <text x="80" y="570" font-family="Archivo, Helvetica, Arial, sans-serif" font-size="26"
+    fill="#55534e">Vestra — ready-to-wear, graded and published in full</text>
+</svg>

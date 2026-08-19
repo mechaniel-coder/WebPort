@@ -6,7 +6,7 @@
  * canvas cannot provide for itself.
  */
 
-import { STRUCTURES, World } from './verlet.js';
+import { STRUCTURES, World } from '../../shared/verlet.js';
 
 const root = document.querySelector('[data-verlet]');
 if (root) init(root);

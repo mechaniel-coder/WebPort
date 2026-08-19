@@ -1,11 +1,11 @@
 # WebPort
 
-A portfolio of five production-grade websites — a studio hub, three complete client builds
+A portfolio of six production-grade websites — a studio hub, four complete client builds
 and an experimental lab, each with its own design system and at least one substantial
 interactive system built from scratch.
 
 **Everything is static HTML, CSS and JavaScript. No framework, no bundler, and no
-`node_modules` needed to host it** — the four third-party libraries and seven font files are
+`node_modules` needed to host it** — the four third-party libraries and nine font files are
 vendored into the repo and committed, so hosting stays clone-and-serve. See
 **[HOSTING.md](HOSTING.md)** and [`src/_lib/vendor/`](src/_lib/vendor/README.md).
 
@@ -13,21 +13,23 @@ vendored into the repo and committed, so hosting stays clone-and-serve. See
 
 ## The sites
 
-**60 pages. 0 errors and 0 warnings from the integrity checker. 202 browser checks passing.**
+**79 pages. 0 errors and 0 warnings from the integrity checker. 234 browser checks passing.**
 
 | Path | Site | Sector | Pages | Signature system |
 | --- | --- | --- | --- | --- |
-| `/` | Studio hub | Portfolio | 7 | Case studies for the three client builds |
+| `/` | Studio hub | Portfolio | 8 | Case studies for the four client builds |
 | `/aurelia/` | Aurelia | Boutique hospitality | 15 | Accessible date-range booking engine |
 | `/northwind/` | Northwind | B2B observability SaaS | 13 | Live SVG dashboard + pricing calculator |
 | `/forma/` | Forma | Design-object e-commerce | 19 | Faceted catalog, variants, persistent cart |
+| `/vestra/` | Vestra | Fashion ready-to-wear | 18 | Measurement-based size & fit engine, simulated cloth |
 | `/lab/` | Meridian Lab | In-house R&D | 6 | WebGL renderer, Verlet physics, scrollytelling, frontier CSS |
 
 The lab is the studio’s own research rather than client work: four experiments in techniques that normally arrive with a library attached — a WebGL renderer written from the matrix maths up, a hand-written Verlet physics solver, scroll-driven storytelling that never takes the scrollbar, and frontier CSS with no JavaScript at all. No three.js, no physics engine, no scroll library.
 
-Aurelia, Northwind and Forma are **fictional brands**, created to demonstrate design and
-engineering capability across three very different problem shapes: art direction, technical
-communication, and transactional UX.
+Aurelia, Northwind, Forma and Vestra are **fictional brands**, created to demonstrate design
+and engineering capability across four very different problem shapes: art direction,
+technical communication, transactional UX, and sizing — which is the hard problem in
+clothing and the cause of most of its returns.
 
 ---
 
@@ -67,6 +69,7 @@ src/
   aurelia/            "
   northwind/          "
   forma/              "
+  vestra/             "
   lab/                "
 
 dist/                 committed build output — this is what gets hosted
@@ -104,7 +107,7 @@ and product detail pages).
 
 ## What each site demonstrates
 
-Three problems that need genuinely different answers, which is why the sites do not look
+Four problems that need genuinely different answers, which is why the sites do not look
 alike:
 
 - **Aurelia** — art direction and a hard accessibility problem. The calendar is a real
@@ -117,10 +120,18 @@ alike:
 - **Forma** — transactional correctness. Faceted filtering is AND across facets and OR
   within one, with state in the URL so it survives sharing and the back button. Tax is
   charged on goods *plus* shipping. No payment details are collected anywhere.
+- **Vestra** — the sizing problem, answered rather than tabulated. The fit engine holds the
+  finished measurement of every garment and the *ease* each cut is designed around, then
+  scores each size on how close the actual gap lands to the intended one. The same body
+  therefore gets different sizes across the collection — a coat cut with +24 cm of ease and
+  a rib knit cut with −6 are not the same size on anyone — and the page explains each
+  answer instead of asserting it. When two sizes are genuinely close it says so, with the
+  tradeoff in words.
 
 Where the server and browser both need the same logic — rates, chart data, prices, cart
-maths — it lives in one module both import (`src/aurelia/assets/rates.js`,
-`src/northwind/assets/charts.js`, `src/forma/assets/commerce.js`). There is no second
+maths, fit recommendations — it lives in one module both import
+(`src/aurelia/assets/rates.js`, `src/northwind/assets/charts.js`,
+`src/forma/assets/commerce.js`, `src/vestra/assets/fit.js`). There is no second
 implementation to drift.
 
 ---
@@ -132,11 +143,13 @@ them, and the rest are driven in a real browser by `npm run check:browser`.
 
 - **Design systems** — every site defines its own colour, type, space and motion tokens as
   CSS custom properties. Fluid type via `clamp()`. Verified at 360 / 768 / 1024 / 1440px.
-- **Typography** — four sites, four typefaces, self-hosted as variable fonts: Fraunces and
-  Schibsted Grotesk (Aurelia), Geist and Geist Mono (Northwind), Bricolage Grotesque and
-  Instrument Sans (Forma). The hub reuses Schibsted deliberately — it exists to present the
-  client work, so it is the quietest thing here. Every family has a metric-matched local
-  fallback, so the webfont swap moves no line and costs nothing in layout shift.
+- **Typography** — four client brands, four typeface pairings, self-hosted as variable
+  fonts: Fraunces and Schibsted Grotesk (Aurelia), Geist and Geist Mono (Northwind),
+  Bricolage Grotesque and Instrument Sans (Forma), Bodoni Moda and Archivo (Vestra). The
+  hub and the lab share Schibsted and JetBrains deliberately: the client brands are separate
+  businesses and get faces nothing else uses, while the two studio-owned surfaces are the
+  same studio speaking. Every family has a metric-matched local fallback, so the webfont
+  swap moves no line and costs nothing in layout shift.
 - **Motion** — GSAP, ScrollTrigger, SplitText and Lenis, vendored into the repo rather than
   loaded from a CDN. Pages ask for animation with data attributes; the timing, easing and
   reduced-motion behaviour come with it. Content above the fold animates on load, content
@@ -188,6 +201,16 @@ Stated plainly rather than left to be discovered:
 - **Forma's products are drawn, not photographed.** Generated vector artwork communicates
   proportion, finish and form honestly, and material texture not at all. The recommendation
   for a real brand is drawn art for the catalogue and photography on detail pages.
+- **Vestra's fit engine models the body as four circumferences.** That is what a tape
+  measure gives you and not what a body is: it cannot see posture, proportion, or where
+  someone carries their height. It is therefore honest about ease and silent about drape.
+  The recommendation narrows the question; it does not close it.
+- **Vestra's cloth simulation is a 2D sheet, not a cloth solver.** A flat sheet seen
+  face-on cannot show folds, because a fold is depth — two earlier versions of that hero
+  tried to shade one in and produced a flat grey rectangle, which is genuinely all the
+  information a 2D simulation has. So it does not pretend: it shows silhouette, motion and
+  the real weave, and leaves depth alone. There is no bending resistance, no self-collision
+  and no shear stiffness, and it would not survive being asked to drape over a form.
 - **Northwind's dashboard runs on generated data**, stated on the page itself. It uses a
   seeded generator rather than `Math.random()`, so it is at least internally consistent and
   identical on every reload.

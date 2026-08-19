@@ -199,6 +199,7 @@ async function main() {
   await cp(join(srcDir, '_lib', 'widgets.js'), join(outDir, 'shared', 'widgets.js'));
   await cp(join(srcDir, '_lib', 'motion.js'), join(outDir, 'shared', 'motion.js'));
   await cp(join(srcDir, '_lib', 'surface.js'), join(outDir, 'shared', 'surface.js'));
+  await cp(join(srcDir, '_lib', 'verlet.js'), join(outDir, 'shared', 'verlet.js'));
   await cp(join(srcDir, '_lib', 'motion.css'), join(outDir, 'shared', 'motion.css'));
   await cp(join(srcDir, '_lib', 'type.css'), join(outDir, 'shared', 'type.css'));
 

@@ -62,6 +62,19 @@ const ASSETS = [
     to('fonts', 'instrument-var.woff2'),
   ],
 
+  // Vestra's pair. Bodoni Moda is the archetypal fashion didone; the `standard`
+  // cut carries optical sizing, which is not optional for this class of face —
+  // a didone's hairline serifs disappear entirely at caption sizes unless the
+  // design compensates, and `opsz` is what does that compensating.
+  [
+    from('@fontsource-variable', 'bodoni-moda', 'files', 'bodoni-moda-latin-standard-normal.woff2'),
+    to('fonts', 'bodoni-var.woff2'),
+  ],
+  [
+    from('@fontsource-variable', 'archivo', 'files', 'archivo-latin-wght-normal.woff2'),
+    to('fonts', 'archivo-var.woff2'),
+  ],
+
   // Licence texts travel with the files they cover.
   [from('@fontsource-variable', 'fraunces', 'LICENSE'), to('licences', 'OFL-Fraunces.txt')],
   [
@@ -76,6 +89,8 @@ const ASSETS = [
   [from('@fontsource-variable', 'geist-mono', 'LICENSE'), to('licences', 'OFL-GeistMono.txt')],
   [from('@fontsource-variable', 'bricolage-grotesque', 'LICENSE'), to('licences', 'OFL-BricolageGrotesque.txt')],
   [from('@fontsource-variable', 'instrument-sans', 'LICENSE'), to('licences', 'OFL-InstrumentSans.txt')],
+  [from('@fontsource-variable', 'bodoni-moda', 'LICENSE'), to('licences', 'OFL-BodoniModa.txt')],
+  [from('@fontsource-variable', 'archivo', 'LICENSE'), to('licences', 'OFL-Archivo.txt')],
   [from('lenis', 'LICENSE'), to('licences', 'MIT-Lenis.txt')],
 ];
 

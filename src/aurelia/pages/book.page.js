@@ -45,7 +45,6 @@ export function render({ url }) {
 <section class="page-head">
   <div class="shell">
     ${crumbs(meta.breadcrumbs, url)}
-    <p class="eyebrow">Booking</p>
     <h1 class="display-2 page-head__title">Check availability.</h1>
     <p class="lede page-head__lede">The whole price — facilities fee and county tax
       included — is shown before you enter a single detail.</p>

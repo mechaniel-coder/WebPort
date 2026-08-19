@@ -15,37 +15,46 @@ import { esc } from '../_lib/html.js';
 /* ── Palettes ──────────────────────────────────────────────────────────────── */
 
 export const PALETTES = {
+  /*
+   * Six conditions on one stretch of coast, not six times of day on a
+   * postcard. The marine layer holds here for most of the year, so the set is
+   * built cold: the warmest entry is a dull rose over cypress rather than an
+   * orange sunset, because that is what the light actually does when the fog
+   * thins at seven in the evening. Every band ramp ends in the same green-black
+   * the page uses for ink, so the artwork and the type share a bottom note.
+   */
   dawn: {
-    sky: ['#f6e3d2', '#efc9ad'],
-    sun: '#e8996b',
-    bands: ['#c9a184', '#a87f66', '#7e5f4e', '#57443a', '#332924'],
+    sky: ['#dfe4ea', '#bfc8d4'],
+    sun: '#eef1f3',
+    bands: ['#a3aeb8', '#818e9a', '#616e7b', '#45505b', '#232f31'],
   },
   noon: {
-    sky: ['#dfeaea', '#bcd3d3'],
-    sun: '#f2f0e6',
-    bands: ['#9fb9b5', '#7d9d99', '#5c7d7a', '#415c5b', '#2b3d3e'],
+    sky: ['#dde7e4', '#b8cbc6'],
+    sun: '#f0f4f2',
+    bands: ['#98b1aa', '#74948c', '#53736c', '#3a534e', '#1f312c'],
   },
   dusk: {
-    sky: ['#f0d9c4', '#d9a689'],
-    sun: '#c96f4e',
-    bands: ['#a9765f', '#87594b', '#65403a', '#452c2a', '#281b1c'],
+    sky: ['#dfdcda', '#bdb4b1'],
+    sun: '#cbbdb7',
+    bands: ['#9a908d', '#7c7573', '#5b5859', '#3f4142', '#212a28'],
   },
   fog: {
-    sky: ['#e8e6df', '#cfd2cc'],
-    sun: '#f4f2ea',
-    bands: ['#b3b7b0', '#949a94', '#757c78', '#565c5a', '#383d3c'],
+    sky: ['#e9ecea', '#ccd4d1'],
+    sun: '#f4f6f5',
+    bands: ['#b0bab6', '#909c98', '#717d79', '#525d5a', '#303936'],
   },
   winter: {
-    sky: ['#dde5ea', '#b9c9d4'],
-    sun: '#eef3f5',
-    bands: ['#9aadb9', '#7a8f9d', '#5c6f7e', '#42525e', '#2b363f'],
+    sky: ['#d6e0e6', '#adc0cc'],
+    sun: '#e9f0f3',
+    bands: ['#8fa4b0', '#6e8593', '#516674', '#3a4a55', '#212d33'],
   },
   garden: {
-    sky: ['#eeeade', '#d7d8c3'],
-    sun: '#f4f1e4',
-    bands: ['#b2b494', '#93976f', '#727856', '#535840', '#363a2c'],
+    sky: ['#e4e8dd', '#c4cdb9', ],
+    sun: '#eff2e9',
+    bands: ['#a6b295', '#849174', '#647159', '#495340', '#272e24'],
   },
 };
+
 
 /* ── Seeded noise ──────────────────────────────────────────────────────────── */
 

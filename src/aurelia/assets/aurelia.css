@@ -7,40 +7,58 @@
  */
 
 :root {
-  /* ── Colour ─────────────────────────────────────────────────────────────── */
-  --sand: #eae2d6;
-  --paper: #f6f2ea;
-  --paper-deep: #ded4c4;
-  --ink: #1a1714;
-  --ink-soft: #574f45;
-  --ink-faint: #857b6d;
-  --line: #d3c9b9;
-  --line-soft: #e2dacc;
-  --terracotta: #9a5f3f;
-  --terracotta-deep: #7d4a30;
-  --sea: #2f4a48;
-  --positive: #43664f;
-  --negative: #8c3d32;
+  /* ── Colour ───────────────────────────────────────────────────────────────
+   *
+   * Aurelia sits on the Sonoma coast, and that coast is fog. The marine layer
+   * holds for most of the year; the water is cold, the light is diffuse and
+   * blue-grey, and the built landscape is weathered board, cypress windbreaks
+   * and dark redwood. The golden-hour palette every boutique hotel reaches for
+   * describes about six weeks of the year there.
+   *
+   * So: no cream, no terracotta, no sunset. The ground is a cool oyster with
+   * green in it, the ink is a wet slate rather than a warm black, and the only
+   * saturated colour on the site is sea glass — sampled from the caustics
+   * shader in the hero, so the brand colour and the artwork are the same
+   * decision rather than two.
+   */
+  --haze: #eff2f0;
+  --fog: #e4e8e6;
+  --fog-2: #d9e0dd;
+  --fog-deep: #c8d2ce;
+  --slate: #16211e;
+  --slate-2: #45534e;
+  --slate-3: #6f7d77;
+  --line: #c2ccc7;
+  --line-soft: #d7dedb;
+  --cypress: #0c221d;
+  --seaglass: #1d6a5c;
+  --seaglass-deep: #144d43;
+  --positive: #2f5f45;
+  --negative: #8a3a30;
 
-  --focus-ring: var(--terracotta-deep);
+  --focus-ring: var(--seaglass-deep);
   --focus-radius: 3px;
 
   /* ── Type ───────────────────────────────────────────────────────────────────
    *
-   * Fraunces for display, Schibsted Grotesk for text, JetBrains Mono for
-   * metadata. The serif/mono pairing is doing deliberate work: the mono is
-   * never body copy, only labels, rates, dates and counts, so the eye learns
-   * that monospaced means "a fact" and the serif means "a voice".
+   * Newsreader for display, Familjen Grotesk for everything read at length.
    *
-   * The fallbacks are the metric-matched faces declared in /shared/type.css,
-   * so the swap when the webfont lands moves no line.
+   * Newsreader's `opsz` axis runs 6–72 and does real work across this site: the
+   * same file draws an 11rem hero with the strokes thinned and the fit tightened
+   * the way display type wants, and a 13px caption with them opened back up. A
+   * face without that axis needs two files or looks wrong at one end.
+   *
+   * There is no monospace here. The previous build set rates, dates and counts
+   * in JetBrains Mono, which is a costume: a hotel's nightly rate is not
+   * terminal output, and dressing it as one borrows credibility from a
+   * different industry. Figures are Familjen with `tabular-nums`, which is what
+   * actually makes a column line up.
    */
-  --font-display: 'Fraunces', 'Fraunces Fallback', Georgia, serif;
-  --font-sans: 'Schibsted Grotesk', 'Schibsted Fallback', system-ui, sans-serif;
-  --font-mono: 'JetBrains Mono', 'JetBrains Fallback', ui-monospace, monospace;
+  --font-display: 'Newsreader', 'Newsreader Fallback', 'Times New Roman', serif;
+  --font-sans: 'Familjen Grotesk', 'Familjen Fallback', system-ui, sans-serif;
 
-  --step--2: clamp(0.72rem, 0.7rem + 0.09vw, 0.77rem);
-  --step--1: clamp(0.83rem, 0.8rem + 0.13vw, 0.9rem);
+  --step--2: clamp(0.74rem, 0.72rem + 0.09vw, 0.79rem);
+  --step--1: clamp(0.85rem, 0.82rem + 0.13vw, 0.92rem);
   --step-0: clamp(1rem, 0.97rem + 0.17vw, 1.09rem);
   --step-1: clamp(1.2rem, 1.13rem + 0.35vw, 1.42rem);
   --step-2: clamp(1.44rem, 1.31rem + 0.63vw, 1.85rem);
@@ -50,18 +68,14 @@
 
   /* The hero step. Set in vw with a rem floor and ceiling rather than taken
      from the modular scale: at this size the type is a piece of art direction
-     sized against the viewport, not a heading three steps up from body copy.
-     The old scale topped out at 5.28rem (~84px), which is why every hero on
-     this site read as a large paragraph rather than as a statement. */
+     sized against the viewport, not a heading three steps up from body copy. */
   --step-hero: clamp(3.2rem, 11.5vw, 11rem);
 
-  /* Optical sizing. Fraunces' `opsz` axis is the reason one file can serve a
-     176px hero and a 12px caption: it thins the strokes and tightens the
-     spacing as the size goes up, and thickens them as it comes down. Left to
-     `auto` browsers get this right, but the display sizes want a nudge past
-     what the automatic mapping picks. */
-  --opsz-display: 128;
-  --opsz-text: 14;
+  /* Optical sizing, in the axis' own units. 72 is the top of Newsreader's
+     range; 12 sits below the 18 default so captions and table figures thicken
+     rather than thin. */
+  --opsz-display: 72;
+  --opsz-text: 12;
 
   /* ── Space ──────────────────────────────────────────────────────────────── */
   --space-3xs: 0.25rem;
@@ -83,8 +97,8 @@
 /* ── Base ──────────────────────────────────────────────────────────────────── */
 
 body {
-  background: var(--sand);
-  color: var(--ink);
+  background: var(--fog-2);
+  color: var(--slate);
   font-family: var(--font-sans);
   font-size: var(--step-0);
   line-height: 1.65;
@@ -165,19 +179,23 @@ a {
   padding-block: var(--space-xl);
 }
 
-.section--paper {
-  background: var(--paper);
+.section--fog {
+  background: var(--fog);
 }
 
 .section--deep {
-  background: var(--ink);
-  color: var(--sand);
+  background: var(--slate);
+  color: var(--fog-2);
 }
 
+/* On the dark band the ramp inverts: the tokens are redefined rather than
+   overridden per rule, so every component inside it keeps working without
+   knowing it moved. */
 .section--deep {
-  --line: #3d3830;
-  --ink-soft: #b3a99a;
-  --focus-ring: #d8b79c;
+  --line: #2b3a35;
+  --slate-2: #a7b7b1;
+  --slate-3: #849790;
+  --focus-ring: #7fc3b3;
 }
 
 /* ── Typography ────────────────────────────────────────────────────────────── */
@@ -193,7 +211,11 @@ a {
   /* Kerning and discretionary ligatures matter at display size, where the gap
      between a badly-spaced pair is 8px rather than 1px. */
   font-kerning: normal;
-  font-feature-settings: 'kern' 1, 'liga' 1, 'dlig' 1;
+  /* Kerning and standard ligatures only. Newsreader's discretionary set
+     includes a Th ligature that, at hero size, reads as a damaged glyph rather
+     than a flourish — "The coast" came out looking like "'I'he coast". `dlig`
+     is opt-in for a reason and this face is the reason. */
+  font-feature-settings: 'kern' 1, 'liga' 1;
   text-wrap: balance;
 }
 
@@ -224,44 +246,49 @@ a {
    down and a hair lighter, so a clause can be set apart without leaving the
    family or introducing a second colour. */
 .display-quiet {
-  color: var(--ink-soft);
+  color: var(--slate-2);
   font-variation-settings: 'opsz' 48;
   font-weight: 300;
 }
 
-.eyebrow {
-  font-family: var(--font-mono);
+/* A caption under a heading, never a label above one. It carries a place, a
+   date, a count — something the heading did not already say — and the rule
+   grows out of it rather than sitting under it. */
+.note {
+  margin-top: var(--space-xs);
   font-size: var(--step--2);
   font-weight: 500;
-  letter-spacing: 0.22em;
+  letter-spacing: 0.16em;
   text-transform: uppercase;
-  color: var(--ink-faint);
+  font-variant-numeric: tabular-nums;
+  color: var(--slate-3);
   display: flex;
   align-items: center;
   gap: 0.7em;
 }
 
-/* A rule that grows out of the label rather than sitting under it. Costs one
-   pseudo-element and does more to make a section feel composed than any
-   amount of extra spacing. */
-.eyebrow::after {
+.note::after {
   content: '';
   flex: 1;
   height: 1px;
   background: currentColor;
-  opacity: 0.28;
+  opacity: 0.3;
   max-width: 5rem;
+}
+
+.note time {
+  font-variant-numeric: tabular-nums;
 }
 
 .lede {
   font-size: var(--step-1);
   line-height: 1.5;
-  color: var(--ink-soft);
+  color: var(--slate-2);
   max-width: 46ch;
 }
 
 .text-soft {
-  color: var(--ink-soft);
+  color: var(--slate-2);
 }
 
 /* ── Masthead ──────────────────────────────────────────────────────────────── */
@@ -270,7 +297,7 @@ a {
   position: sticky;
   top: 0;
   z-index: 40;
-  background: color-mix(in srgb, var(--sand) 92%, transparent);
+  background: color-mix(in srgb, var(--fog-2) 92%, transparent);
   backdrop-filter: blur(12px);
   border-bottom: 1px solid var(--line);
 }
@@ -306,7 +333,7 @@ a {
 .brand__mark {
   display: block;
   width: 1.6rem;
-  color: var(--terracotta);
+  color: var(--seaglass);
 }
 
 .masthead__toggle {
@@ -364,7 +391,7 @@ a {
   font-size: var(--step--1);
   letter-spacing: 0.12em;
   text-transform: uppercase;
-  color: var(--ink-soft);
+  color: var(--slate-2);
   padding-block: 0.35rem;
   display: inline-block;
   border-bottom: 1px solid transparent;
@@ -373,8 +400,8 @@ a {
 
 .masthead__nav ul a:hover,
 .masthead__nav ul a[aria-current='page'] {
-  color: var(--ink);
-  border-bottom-color: var(--terracotta);
+  color: var(--slate);
+  border-bottom-color: var(--seaglass);
 }
 
 @media (min-width: 62em) {
@@ -403,9 +430,9 @@ a {
   justify-content: center;
   gap: 0.5rem;
   padding: 0.9rem 1.6rem;
-  background: var(--ink);
-  color: var(--sand);
-  border: 1px solid var(--ink);
+  background: var(--slate);
+  color: var(--fog-2);
+  border: 1px solid var(--slate);
   border-radius: 100px;
   font-size: var(--step--1);
   font-weight: 500;
@@ -416,8 +443,8 @@ a {
 }
 
 .button:hover:not(:disabled) {
-  background: var(--terracotta-deep);
-  border-color: var(--terracotta-deep);
+  background: var(--seaglass-deep);
+  border-color: var(--seaglass-deep);
   transform: translateY(-1px);
 }
 
@@ -433,17 +460,17 @@ a {
 
 .button--ghost {
   background: transparent;
-  color: var(--ink);
+  color: var(--slate);
 }
 
 .button--ghost:hover:not(:disabled) {
-  background: var(--ink);
-  color: var(--sand);
-  border-color: var(--ink);
+  background: var(--slate);
+  color: var(--fog-2);
+  border-color: var(--slate);
 }
 
 .section--deep .button--ghost {
-  color: var(--sand);
+  color: var(--fog-2);
   border-color: #5c544a;
 }
 
@@ -455,7 +482,7 @@ a {
   letter-spacing: 0.1em;
   text-transform: uppercase;
   text-decoration: none;
-  border-bottom: 1px solid var(--terracotta);
+  border-bottom: 1px solid var(--seaglass);
   padding-bottom: 0.2rem;
 }
 
@@ -514,7 +541,8 @@ a {
   position: absolute;
   right: max(1rem, calc((100vw - var(--shell)) / 2));
   bottom: var(--space-m);
-  font-family: var(--font-mono);
+  font-family: var(--font-sans);
+  font-variant-numeric: tabular-nums;
   font-size: var(--step--2);
   letter-spacing: 0.24em;
   text-transform: uppercase;
@@ -575,15 +603,14 @@ a {
   width: min(100% - 2rem, var(--shell));
   margin-inline: auto;
   padding-block: var(--space-2xl) var(--space-xl);
-  color: #f6f1e8;
+  color: var(--haze);
 }
 
-/* The eyebrow sits highest in the hero, where the overlay is lightest, so it
-   gets a lighter tone than the muted colour used on paper backgrounds. */
-.hero__inner .eyebrow {
-  color: #e7dccc;
-  text-shadow: 0 1px 12px rgba(20, 17, 14, 0.75);
-}
+/* The hero carries no note. The line that used to sit above the headline said
+   "Sea Ranch, California", and the lede two lines below already opens with "a
+   twenty-two room retreat on the northern Sonoma coast" — so it was a label
+   restating its own paragraph. Removing it also puts the buttons back above the
+   fold, which the motion check caught the moment they slipped below it. */
 
 @media (min-width: 48em) {
   .hero__inner {
@@ -612,19 +639,19 @@ a {
 
 .hero__actions .button {
   background: #f6f1e8;
-  color: var(--ink);
+  color: var(--slate);
   border-color: #f6f1e8;
 }
 
 .hero__actions .button--ghost {
   background: transparent;
-  color: #f6f1e8;
+  color: var(--haze);
   border-color: rgba(246, 241, 232, 0.5);
 }
 
 .hero__actions .button--ghost:hover {
   background: #f6f1e8;
-  color: var(--ink);
+  color: var(--slate);
 }
 
 /* Page header used on interior pages, in place of the full hero. */
@@ -646,7 +673,7 @@ a {
 
 .crumbs {
   font-size: var(--step--1);
-  color: var(--ink-faint);
+  color: var(--slate-3);
   margin-bottom: var(--space-m);
 }
 
@@ -712,7 +739,7 @@ a {
   overflow: hidden;
   border-radius: 200px 200px var(--radius) var(--radius);
   aspect-ratio: 3 / 4;
-  background: var(--paper-deep);
+  background: var(--fog-deep);
 }
 
 .room-card__art .art {
@@ -734,7 +761,7 @@ a {
 
 .room-card__meta {
   font-size: var(--step--1);
-  color: var(--ink-faint);
+  color: var(--slate-3);
   display: flex;
   flex-wrap: wrap;
   gap: 0.4rem 0.9rem;
@@ -748,7 +775,7 @@ a {
 .room-card__rate span {
   font-family: var(--font-sans);
   font-size: var(--step--1);
-  color: var(--ink-faint);
+  color: var(--slate-3);
 }
 
 .room-card a {
@@ -756,7 +783,7 @@ a {
 }
 
 .room-card a:hover .room-card__name {
-  color: var(--terracotta-deep);
+  color: var(--seaglass-deep);
 }
 
 /* ── Split feature ─────────────────────────────────────────────────────────── */
@@ -781,7 +808,7 @@ a {
   border-radius: var(--radius);
   overflow: hidden;
   aspect-ratio: 4 / 3;
-  background: var(--paper-deep);
+  background: var(--fog-deep);
 }
 
 .split__art .art {
@@ -811,7 +838,7 @@ a {
 .feature-list li {
   padding-left: 1.5rem;
   position: relative;
-  color: var(--ink-soft);
+  color: var(--slate-2);
 }
 
 .feature-list li::before {
@@ -821,7 +848,7 @@ a {
   top: 0.65em;
   width: 0.6rem;
   height: 1px;
-  background: var(--terracotta);
+  background: var(--seaglass);
 }
 
 /* ── Tag row ───────────────────────────────────────────────────────────────── */
@@ -842,7 +869,7 @@ a {
   font-size: var(--step--2);
   letter-spacing: 0.06em;
   text-transform: uppercase;
-  color: var(--ink-soft);
+  color: var(--slate-2);
 }
 
 /* ── Stat row ──────────────────────────────────────────────────────────────── */
@@ -865,8 +892,9 @@ a {
   font-size: var(--step--2);
   letter-spacing: 0.14em;
   text-transform: uppercase;
-  color: var(--ink-faint);
-  font-family: var(--font-mono);
+  color: var(--slate-3);
+  font-family: var(--font-sans);
+  font-variant-numeric: tabular-nums;
 }
 
 .stats dd {
@@ -891,13 +919,13 @@ a {
   font-size: var(--step--1);
   letter-spacing: 0.12em;
   text-transform: uppercase;
-  color: var(--ink-faint);
+  color: var(--slate-3);
   transition: color 0.2s var(--ease), border-color 0.2s var(--ease);
 }
 
 .menu-tabs button[aria-selected='true'] {
-  color: var(--ink);
-  border-bottom-color: var(--terracotta);
+  color: var(--slate);
+  border-bottom-color: var(--seaglass);
 }
 
 .menu-course + .menu-course {
@@ -905,11 +933,12 @@ a {
 }
 
 .menu-course__name {
-  font-family: var(--font-mono);
+  font-family: var(--font-sans);
+  font-variant-numeric: tabular-nums;
   font-size: var(--step--2);
   letter-spacing: 0.16em;
   text-transform: uppercase;
-  color: var(--ink-faint);
+  color: var(--slate-3);
   padding-bottom: var(--space-2xs);
   border-bottom: 1px solid var(--line-soft);
   margin-bottom: var(--space-s);
@@ -925,7 +954,7 @@ a {
 }
 
 .dish__detail {
-  color: var(--ink-soft);
+  color: var(--slate-2);
   font-size: var(--step--1);
 }
 
@@ -967,7 +996,7 @@ a {
 
 .experience__meta {
   font-size: var(--step--1);
-  color: var(--ink-faint);
+  color: var(--slate-3);
   display: flex;
   flex-wrap: wrap;
   gap: 0.4rem 0.9rem;
@@ -996,7 +1025,7 @@ a {
 .gallery__frame {
   overflow: hidden;
   border-radius: var(--radius);
-  background: var(--paper-deep);
+  background: var(--fog-deep);
   aspect-ratio: 1;
 }
 
@@ -1007,7 +1036,7 @@ a {
 
 .gallery figcaption {
   font-size: var(--step--2);
-  color: var(--ink-faint);
+  color: var(--slate-3);
   letter-spacing: 0.05em;
 }
 
@@ -1050,9 +1079,10 @@ a {
 }
 
 .timeline__year {
-  font-family: var(--font-mono);
+  font-family: var(--font-sans);
+  font-variant-numeric: tabular-nums;
   font-size: var(--step--1);
-  color: var(--terracotta);
+  color: var(--seaglass);
   letter-spacing: 0.1em;
 }
 
@@ -1064,7 +1094,7 @@ a {
 
 .timeline p {
   margin-top: var(--space-2xs);
-  color: var(--ink-soft);
+  color: var(--slate-2);
   font-size: var(--step--1);
 }
 
@@ -1092,7 +1122,7 @@ a {
   overflow: hidden;
   border-radius: var(--radius);
   aspect-ratio: 4 / 3;
-  background: var(--paper-deep);
+  background: var(--fog-deep);
 }
 
 .post-card__frame .art {
@@ -1106,11 +1136,12 @@ a {
 }
 
 .post-card__meta {
-  font-family: var(--font-mono);
+  font-family: var(--font-sans);
+  font-variant-numeric: tabular-nums;
   font-size: var(--step--2);
   letter-spacing: 0.12em;
   text-transform: uppercase;
-  color: var(--ink-faint);
+  color: var(--slate-3);
 }
 
 .post-card__title {
@@ -1120,7 +1151,7 @@ a {
 }
 
 .post-card__excerpt {
-  color: var(--ink-soft);
+  color: var(--slate-2);
   font-size: var(--step--1);
 }
 
@@ -1150,7 +1181,7 @@ a {
 .article blockquote {
   margin: var(--space-xl) 0;
   padding-left: var(--space-m);
-  border-left: 2px solid var(--terracotta);
+  border-left: 2px solid var(--seaglass);
   font-family: var(--font-display);
   font-size: var(--step-2);
   line-height: 1.35;
@@ -1162,7 +1193,7 @@ a {
   font-family: var(--font-sans);
   font-size: var(--step--1);
   font-style: normal;
-  color: var(--ink-faint);
+  color: var(--slate-3);
   letter-spacing: 0.05em;
 }
 
@@ -1213,7 +1244,7 @@ a {
   position: absolute;
   inset: 50% 0 auto 0;
   height: 1px;
-  background: var(--terracotta);
+  background: var(--seaglass);
   transition: transform 0.25s var(--ease);
 }
 
@@ -1227,7 +1258,7 @@ a {
 
 .accordion__panel {
   padding-bottom: var(--space-m);
-  color: var(--ink-soft);
+  color: var(--slate-2);
   max-width: var(--measure);
 }
 
@@ -1246,12 +1277,12 @@ a {
   font-size: var(--step--1);
   letter-spacing: 0.08em;
   text-transform: uppercase;
-  color: var(--ink-soft);
+  color: var(--slate-2);
 }
 
 .field__hint {
   font-size: var(--step--1);
-  color: var(--ink-faint);
+  color: var(--slate-3);
 }
 
 .field input,
@@ -1259,17 +1290,17 @@ a {
 .field textarea {
   width: 100%;
   padding: 0.8rem 0.95rem;
-  background: var(--paper);
+  background: var(--fog);
   border: 1px solid var(--line);
   border-radius: var(--radius);
-  color: var(--ink);
+  color: var(--slate);
   transition: border-color 0.2s var(--ease);
 }
 
 .field input:hover,
 .field select:hover,
 .field textarea:hover {
-  border-color: var(--ink-faint);
+  border-color: var(--slate-3);
 }
 
 .field textarea {
@@ -1310,7 +1341,7 @@ a {
   padding: var(--space-s) var(--space-m);
   border-radius: var(--radius);
   border: 1px solid var(--line);
-  background: var(--paper);
+  background: var(--fog);
 }
 
 .form-status[data-tone='error'] {
@@ -1330,7 +1361,7 @@ a {
 /* ── Footer ────────────────────────────────────────────────────────────────── */
 
 .footer {
-  background: var(--ink);
+  background: var(--slate);
   color: #d9d1c3;
   padding-block: var(--space-2xl) var(--space-m);
   margin-top: var(--space-3xl);
@@ -1357,7 +1388,7 @@ a {
 .footer__mark {
   display: block;
   width: 2rem;
-  color: var(--terracotta);
+  color: var(--seaglass);
   margin-bottom: var(--space-s);
 }
 
@@ -1376,7 +1407,8 @@ a {
 }
 
 .footer__heading {
-  font-family: var(--font-mono);
+  font-family: var(--font-sans);
+  font-variant-numeric: tabular-nums;
   font-size: var(--step--2);
   letter-spacing: 0.16em;
   text-transform: uppercase;
@@ -1439,20 +1471,30 @@ a {
   position: absolute;
   inset: 0;
   z-index: -1;
-  background: rgba(24, 21, 18, 0.55);
+  /* Cypress rather than a warm black, and heavy enough that the lede below
+     clears AA over whichever palette the band's artwork rolled. */
+  background: rgba(12, 34, 29, 0.68);
 }
 
 .cta__inner {
-  color: #f6f1e8;
+  color: var(--haze);
   display: grid;
   justify-items: center;
   gap: var(--space-s);
 }
 
+/* The band's lede previously carried a hardcoded cream in an inline style, and
+   when the palette changed it stayed cream and then went invisible. It is a
+   class on the design system now, so it moves when the system moves. */
+.cta__lede {
+  color: #d5e0dc;
+  max-width: 46ch;
+}
+
 .cta .button {
-  background: #f6f1e8;
-  color: var(--ink);
-  border-color: #f6f1e8;
+  background: var(--haze);
+  color: var(--cypress);
+  border-color: var(--haze);
 }
 
 /* ── Cypress rule ──────────────────────────────────────────────────────────── */

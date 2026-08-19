@@ -23,12 +23,13 @@ import { studio } from '../../site.config.js';
  * than not preloading at all.
  */
 const PRELOAD_FONTS = {
-  aurelia: ['fraunces-var.woff2', 'schibsted-var.woff2'],
-  northwind: ['geist-var.woff2', 'geist-mono-var.woff2'],
-  forma: ['bricolage-var.woff2', 'instrument-var.woff2'],
+  aurelia: ['newsreader-var.woff2', 'familjen-var.woff2'],
+  northwind: ['redhat-display-var.woff2', 'redhat-text-var.woff2'],
+  forma: ['chivo-var.woff2', 'chivo-mono-var.woff2'],
   hub: ['schibsted-var.woff2', 'jetbrains-var.woff2'],
   lab: ['jetbrains-var.woff2', 'schibsted-var.woff2'],
-  vestra: ['bodoni-var.woff2', 'archivo-var.woff2'],
+  // Vestra runs on one family, so there is only one file worth the priority.
+  vestra: ['epilogue-var.woff2'],
 };
 
 /**

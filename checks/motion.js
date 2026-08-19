@@ -22,8 +22,8 @@ export const SITES = {
     headline: 'very little else',
     cta: '.hero__actions',
     cards: '.rooms > li',
-    faces: ['Fraunces', 'Schibsted Grotesk'],
-    display: 'Fraunces',
+    faces: ['Newsreader', 'Familjen Grotesk'],
+    display: 'Newsreader',
     minHero: 120,
   },
   northwind: {
@@ -33,8 +33,8 @@ export const SITES = {
     headline: 'roll up your data',
     cta: '.hero__actions',
     cards: '.feature-grid > *, .logos > li',
-    faces: ['Geist', 'Geist Mono'],
-    display: 'Geist',
+    faces: ['Red Hat Display', 'Red Hat Text'],
+    display: 'Red Hat Display',
     minHero: 70,
   },
   hub: {
@@ -55,8 +55,8 @@ export const SITES = {
     headline: 'one idea each',
     cta: '.hero__actions',
     cards: '.grid-products > li',
-    faces: ['Bricolage Grotesque', 'Instrument Sans'],
-    display: 'Bricolage Grotesque',
+    faces: ['Chivo', 'Chivo Mono'],
+    display: 'Chivo',
     minHero: 80,
   },
 };

@@ -19,7 +19,6 @@ export const meta = {
 export function render({ url }) {
   return `
 ${pageHead({
-  eyebrow: 'Contact',
   title: 'Ask us anything first.',
   lede: `The phone is answered by someone standing in the courtyard, not a call centre. If a
     date is not showing online, it is worth asking — we hold rooms back for repairs.`,
@@ -119,7 +118,6 @@ ${pageHead({
   <div class="shell shell--narrow">
     <div class="section-head">
       <div>
-        <p class="eyebrow">Before you book</p>
         <h2 class="display-2" id="faq-heading">Questions we get.</h2>
       </div>
     </div>

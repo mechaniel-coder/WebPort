@@ -35,7 +35,6 @@ const frames = [
 export function render({ url }) {
   return `
 ${pageHead({
-  eyebrow: 'Gallery',
   title: 'The property, through the year.',
   lede: `Twelve views of a mile of bluff. The light here changes more than the buildings do,
     which is why most of these are really pictures of weather.`,

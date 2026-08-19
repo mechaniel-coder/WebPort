@@ -18,7 +18,7 @@ export const meta = {
 export function render({ url }) {
   return `
 ${pageHead({
-  eyebrow: `${hotel.rooms} rooms`,
+  note: `${hotel.rooms} rooms`,
   title: 'Three kinds of room.',
   lede: `Eight ocean-facing suites, three freestanding cliff houses, and eleven courtyard
     rooms on the sheltered side. Every rate includes breakfast, the sauna, and parking.`,
@@ -57,7 +57,6 @@ ${pageHead({
   <div class="shell">
     <div class="section-head">
       <div>
-        <p class="eyebrow">How rates work</p>
         <h2 class="display-2" id="rates-heading">No surprises at checkout.</h2>
       </div>
     </div>

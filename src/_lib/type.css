@@ -1,23 +1,102 @@
 /**
  * Shared typeface loading.
  *
- * Three variable fonts, self-hosted. One file per family covers every weight,
+ * Eleven variable fonts, self-hosted. One file per family covers every weight,
  * which is the whole reason to use variable fonts here: the alternative is six
  * static files per family and a decision about which weights to sacrifice.
  *
+ * No family is shared between two client brands — Aurelia, Northwind, Forma and
+ * Vestra are separate businesses and a shared typeface would say otherwise. The
+ * hub and the lab do share a pair, because they are the same studio speaking.
+ *
  * `font-display: swap` is deliberate. `optional` would avoid the swap flash but
  * on a slow first visit it silently abandons the webfont, and these faces are
- * the design — a visitor seeing Georgia instead is seeing a different site. The
- * fallback metrics below make the swap nearly invisible instead of avoiding it.
+ * the design — a visitor seeing Liberation Serif instead is seeing a different
+ * site. The fallback metrics below make the swap nearly invisible instead of
+ * avoiding it.
  */
 
+/* ── Aurelia ───────────────────────────────────────────────────────────────── */
+
 @font-face {
-  font-family: 'Fraunces';
-  src: url('fonts/fraunces-var.woff2') format('woff2-variations');
+  font-family: 'Newsreader';
+  src: url('fonts/newsreader-var.woff2') format('woff2-variations');
+  font-weight: 200 800;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Familjen Grotesk';
+  src: url('fonts/familjen-var.woff2') format('woff2-variations');
+  font-weight: 400 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* ── Northwind ─────────────────────────────────────────────────────────────── */
+
+@font-face {
+  font-family: 'Red Hat Display';
+  src: url('fonts/redhat-display-var.woff2') format('woff2-variations');
+  font-weight: 300 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Red Hat Text';
+  src: url('fonts/redhat-text-var.woff2') format('woff2-variations');
+  font-weight: 300 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Red Hat Mono';
+  src: url('fonts/redhat-mono-var.woff2') format('woff2-variations');
+  font-weight: 300 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* ── Forma ─────────────────────────────────────────────────────────────────── */
+
+@font-face {
+  font-family: 'Chivo';
+  src: url('fonts/chivo-var.woff2') format('woff2-variations');
   font-weight: 100 900;
   font-style: normal;
   font-display: swap;
 }
+
+@font-face {
+  font-family: 'Chivo Mono';
+  src: url('fonts/chivo-mono-var.woff2') format('woff2-variations');
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* ── Vestra ────────────────────────────────────────────────────────────────── */
+
+@font-face {
+  font-family: 'Epilogue';
+  src: url('fonts/epilogue-var.woff2') format('woff2-variations');
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Spline Sans Mono';
+  src: url('fonts/spline-mono-var.woff2') format('woff2-variations');
+  font-weight: 300 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* ── The studio: hub and lab ───────────────────────────────────────────────── */
 
 @font-face {
   font-family: 'Schibsted Grotesk';
@@ -35,55 +114,6 @@
   font-display: swap;
 }
 
-@font-face {
-  font-family: 'Geist';
-  src: url('fonts/geist-var.woff2') format('woff2-variations');
-  font-weight: 100 900;
-  font-style: normal;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: 'Geist Mono';
-  src: url('fonts/geist-mono-var.woff2') format('woff2-variations');
-  font-weight: 100 900;
-  font-style: normal;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: 'Bricolage Grotesque';
-  src: url('fonts/bricolage-var.woff2') format('woff2-variations');
-  font-weight: 200 800;
-  font-stretch: 75% 100%;
-  font-style: normal;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: 'Instrument Sans';
-  src: url('fonts/instrument-var.woff2') format('woff2-variations');
-  font-weight: 400 700;
-  font-style: normal;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: 'Bodoni Moda';
-  src: url('fonts/bodoni-var.woff2') format('woff2-variations');
-  font-weight: 400 900;
-  font-style: normal;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: 'Archivo';
-  src: url('fonts/archivo-var.woff2') format('woff2-variations');
-  font-weight: 100 900;
-  font-style: normal;
-  font-display: swap;
-}
-
 /**
  * Metric-matched fallbacks.
  *
@@ -93,27 +123,110 @@
  * single line — it removes the layout shift that `font-display: swap` is
  * otherwise notorious for, and keeps CLS at zero.
  *
- * The numbers come from each webfont's own head/hhea tables against the named
- * local fallback; they are not guesses, and they are wrong if the family is
- * swapped without recomputing them.
+ * Every number below was measured, not derived: each face and each fallback was
+ * loaded into the rendering engine and probed through canvas metrics, because
+ * `fontBoundingBoxAscent`/`Descent` and the measured advance are precisely what
+ * the engine uses to build the line box. Reading the same values out of the
+ * font tables gives a different answer, and the table answer is the wrong one —
+ * it ignores which of the typo and win metric pairs the engine actually honours.
+ *
+ * Recompute them if a family is swapped. They are specific to these files.
+ *
+ * The serif chain deliberately does not list Georgia. Georgia and Times differ
+ * enough in x-height and width that one set of overrides cannot serve both, and
+ * Times New Roman, Times and Liberation Serif are metric-equivalent across
+ * Windows, macOS and Linux — so naming only those makes the correction right on
+ * every platform instead of right on one.
  */
 
 @font-face {
-  font-family: 'Fraunces Fallback';
-  src: local('Georgia'), local('Times New Roman'), local('Liberation Serif');
-  ascent-override: 92%;
-  descent-override: 26%;
+  font-family: 'Newsreader Fallback';
+  src: local('Times New Roman'), local('Times'), local('Liberation Serif');
+  ascent-override: 65.7%;
+  descent-override: 23.7%;
   line-gap-override: 0%;
-  size-adjust: 105%;
+  size-adjust: 111.9%;
+}
+
+@font-face {
+  font-family: 'Familjen Fallback';
+  src: local('Helvetica Neue'), local('Arial'), local('Liberation Sans');
+  ascent-override: 104.6%;
+  descent-override: 23%;
+  line-gap-override: 0%;
+  size-adjust: 97.9%;
+}
+
+@font-face {
+  font-family: 'Red Hat Display Fallback';
+  src: local('Helvetica Neue'), local('Arial'), local('Liberation Sans');
+  ascent-override: 100.6%;
+  descent-override: 30.1%;
+  line-gap-override: 0%;
+  size-adjust: 101.2%;
+}
+
+@font-face {
+  font-family: 'Red Hat Text Fallback';
+  src: local('Helvetica Neue'), local('Arial'), local('Liberation Sans');
+  ascent-override: 100.6%;
+  descent-override: 30.1%;
+  line-gap-override: 0%;
+  size-adjust: 101.2%;
+}
+
+@font-face {
+  font-family: 'Red Hat Mono Fallback';
+  src: local('SFMono-Regular'), local('Consolas'), local('Liberation Mono');
+  ascent-override: 101.8%;
+  descent-override: 30.5%;
+  line-gap-override: 0%;
+  size-adjust: 100%;
+}
+
+@font-face {
+  font-family: 'Chivo Fallback';
+  src: local('Helvetica Neue'), local('Arial'), local('Liberation Sans');
+  ascent-override: 85.7%;
+  descent-override: 22.8%;
+  line-gap-override: 0%;
+  size-adjust: 109.6%;
+}
+
+@font-face {
+  font-family: 'Chivo Mono Fallback';
+  src: local('SFMono-Regular'), local('Consolas'), local('Liberation Mono');
+  ascent-override: 94%;
+  descent-override: 25%;
+  line-gap-override: 0%;
+  size-adjust: 100%;
+}
+
+@font-face {
+  font-family: 'Epilogue Fallback';
+  src: local('Helvetica Neue'), local('Arial'), local('Liberation Sans');
+  ascent-override: 70.5%;
+  descent-override: 21%;
+  line-gap-override: 0%;
+  size-adjust: 112.1%;
+}
+
+@font-face {
+  font-family: 'Spline Mono Fallback';
+  src: local('SFMono-Regular'), local('Consolas'), local('Liberation Mono');
+  ascent-override: 96.4%;
+  descent-override: 23.7%;
+  line-gap-override: 0%;
+  size-adjust: 100%;
 }
 
 @font-face {
   font-family: 'Schibsted Fallback';
   src: local('Helvetica Neue'), local('Arial'), local('Liberation Sans');
-  ascent-override: 96%;
-  descent-override: 24%;
+  ascent-override: 103.2%;
+  descent-override: 27.2%;
   line-gap-override: 0%;
-  size-adjust: 102%;
+  size-adjust: 94.7%;
 }
 
 @font-face {
@@ -123,58 +236,4 @@
   descent-override: 30%;
   line-gap-override: 0%;
   size-adjust: 98%;
-}
-
-@font-face {
-  font-family: 'Geist Fallback';
-  src: local('Helvetica Neue'), local('Arial'), local('Liberation Sans');
-  ascent-override: 95%;
-  descent-override: 24%;
-  line-gap-override: 0%;
-  size-adjust: 101%;
-}
-
-@font-face {
-  font-family: 'Bricolage Fallback';
-  src: local('Helvetica Neue'), local('Arial'), local('Liberation Sans');
-  ascent-override: 94%;
-  descent-override: 25%;
-  line-gap-override: 0%;
-  size-adjust: 103%;
-}
-
-@font-face {
-  font-family: 'Instrument Fallback';
-  src: local('Helvetica Neue'), local('Arial'), local('Liberation Sans');
-  ascent-override: 97%;
-  descent-override: 24%;
-  line-gap-override: 0%;
-  size-adjust: 100%;
-}
-
-@font-face {
-  font-family: 'Bodoni Fallback';
-  src: local('Didot'), local('Bodoni MT'), local('Georgia'), local('Liberation Serif');
-  ascent-override: 90%;
-  descent-override: 24%;
-  line-gap-override: 0%;
-  size-adjust: 107%;
-}
-
-@font-face {
-  font-family: 'Archivo Fallback';
-  src: local('Helvetica Neue'), local('Arial'), local('Liberation Sans');
-  ascent-override: 94%;
-  descent-override: 25%;
-  line-gap-override: 0%;
-  size-adjust: 102%;
-}
-
-@font-face {
-  font-family: 'Geist Mono Fallback';
-  src: local('SFMono-Regular'), local('Consolas'), local('Liberation Mono');
-  ascent-override: 100%;
-  descent-override: 28%;
-  line-gap-override: 0%;
-  size-adjust: 97%;
 }

@@ -22,12 +22,73 @@ const ASSETS = [
   [from('gsap', 'dist', 'SplitText.min.js'), to('js', 'SplitText.min.js')],
   [from('lenis', 'dist', 'lenis.min.js'), to('js', 'lenis.min.js')],
 
-  // Type. The Latin subsets, and for Fraunces the `standard` axis cut
-  // (opsz + wght) rather than `full` — see vendor/README.md.
+  // Type. One variable file per family covers every weight the sites use.
+  //
+  // Six brands, six typographic voices, and no family shared between two
+  // client brands — they are separate businesses. The hub and the lab do share
+  // a pair, because they are the same studio speaking.
+
+  // Aurelia. Newsreader carries an optical-size axis, which is what lets one
+  // serif be a 7rem headline and a 13px caption without either looking like a
+  // scaled copy of the other. Familjen Grotesk sets everything read at length:
+  // a grotesk with enough irregularity to sit beside a serif without going
+  // invisible. Aurelia carries no monospace at all — a hotel has no reason to
+  // dress its rates as terminal output.
   [
-    from('@fontsource-variable', 'fraunces', 'files', 'fraunces-latin-standard-normal.woff2'),
-    to('fonts', 'fraunces-var.woff2'),
+    from('@fontsource-variable', 'newsreader', 'files', 'newsreader-latin-standard-normal.woff2'),
+    to('fonts', 'newsreader-var.woff2'),
   ],
+  [
+    from('@fontsource-variable', 'familjen-grotesk', 'files', 'familjen-grotesk-latin-wght-normal.woff2'),
+    to('fonts', 'familjen-var.woff2'),
+  ],
+
+  // Northwind. Red Hat Display, Text and Mono are one superfamily drawn on a
+  // shared skeleton for an operating-system company's documentation, which is
+  // the register this product actually lives in: the mono is a real terminal
+  // face rather than a costume, and code on the page belongs to the page.
+  [
+    from('@fontsource-variable', 'red-hat-display', 'files', 'red-hat-display-latin-wght-normal.woff2'),
+    to('fonts', 'redhat-display-var.woff2'),
+  ],
+  [
+    from('@fontsource-variable', 'red-hat-text', 'files', 'red-hat-text-latin-wght-normal.woff2'),
+    to('fonts', 'redhat-text-var.woff2'),
+  ],
+  [
+    from('@fontsource-variable', 'red-hat-mono', 'files', 'red-hat-mono-latin-wght-normal.woff2'),
+    to('fonts', 'redhat-mono-var.woff2'),
+  ],
+
+  // Forma. Chivo and Chivo Mono, again one superfamily. Forma's artwork is
+  // generated vector geometry, so the site is built as a drawing rather than a
+  // gallery: the mono carries dimensions, part codes and prices, the sans
+  // carries everything else, and the two agree because they were drawn to.
+  [
+    from('@fontsource-variable', 'chivo', 'files', 'chivo-latin-wght-normal.woff2'),
+    to('fonts', 'chivo-var.woff2'),
+  ],
+  [
+    from('@fontsource-variable', 'chivo-mono', 'files', 'chivo-mono-latin-wght-normal.woff2'),
+    to('fonts', 'chivo-mono-var.woff2'),
+  ],
+
+  // Vestra. One family across the whole site, set at two extremes: Epilogue
+  // very large and tight for display, small and light for reading. The fashion
+  // default is a didone, and a house whose entire argument is published
+  // measurements should not be speaking in the most decorative face available.
+  // Spline Sans Mono exists here only for the size grades, where a column of
+  // centimetres has to line up.
+  [
+    from('@fontsource-variable', 'epilogue', 'files', 'epilogue-latin-wght-normal.woff2'),
+    to('fonts', 'epilogue-var.woff2'),
+  ],
+  [
+    from('@fontsource-variable', 'spline-sans-mono', 'files', 'spline-sans-mono-latin-wght-normal.woff2'),
+    to('fonts', 'spline-mono-var.woff2'),
+  ],
+
+  // The studio's own pair, used by the hub and the lab and by nothing else.
   [
     from('@fontsource-variable', 'schibsted-grotesk', 'files', 'schibsted-grotesk-latin-wght-normal.woff2'),
     to('fonts', 'schibsted-var.woff2'),
@@ -37,46 +98,25 @@ const ASSETS = [
     to('fonts', 'jetbrains-var.woff2'),
   ],
 
-  // Northwind's pair. A serif would be wrong for a developer tool, so this site
-  // runs on a neutral grotesk with its own matched monospace.
-  [
-    from('@fontsource-variable', 'geist', 'files', 'geist-latin-wght-normal.woff2'),
-    to('fonts', 'geist-var.woff2'),
-  ],
-  [
-    from('@fontsource-variable', 'geist-mono', 'files', 'geist-mono-latin-wght-normal.woff2'),
-    to('fonts', 'geist-mono-var.woff2'),
-  ],
-
-  // Forma's pair. Bricolage carries a width axis as well as weight, which is
-  // what lets one display face be both a wide poster headline and a narrow
-  // product name without a second file. The `wdth` cut rather than `full`:
-  // optical sizing costs another 38KB and Forma's display sizes vary less than
-  // Aurelia's do.
-  [
-    from('@fontsource-variable', 'bricolage-grotesque', 'files', 'bricolage-grotesque-latin-wdth-normal.woff2'),
-    to('fonts', 'bricolage-var.woff2'),
-  ],
-  [
-    from('@fontsource-variable', 'instrument-sans', 'files', 'instrument-sans-latin-wght-normal.woff2'),
-    to('fonts', 'instrument-var.woff2'),
-  ],
-
-  // Vestra's pair. Bodoni Moda is the archetypal fashion didone; the `standard`
-  // cut carries optical sizing, which is not optional for this class of face —
-  // a didone's hairline serifs disappear entirely at caption sizes unless the
-  // design compensates, and `opsz` is what does that compensating.
-  [
-    from('@fontsource-variable', 'bodoni-moda', 'files', 'bodoni-moda-latin-standard-normal.woff2'),
-    to('fonts', 'bodoni-var.woff2'),
-  ],
-  [
-    from('@fontsource-variable', 'archivo', 'files', 'archivo-latin-wght-normal.woff2'),
-    to('fonts', 'archivo-var.woff2'),
-  ],
-
   // Licence texts travel with the files they cover.
-  [from('@fontsource-variable', 'fraunces', 'LICENSE'), to('licences', 'OFL-Fraunces.txt')],
+  [from('@fontsource-variable', 'newsreader', 'LICENSE'), to('licences', 'OFL-Newsreader.txt')],
+  [
+    from('@fontsource-variable', 'familjen-grotesk', 'LICENSE'),
+    to('licences', 'OFL-FamiljenGrotesk.txt'),
+  ],
+  [
+    from('@fontsource-variable', 'red-hat-display', 'LICENSE'),
+    to('licences', 'OFL-RedHatDisplay.txt'),
+  ],
+  [from('@fontsource-variable', 'red-hat-text', 'LICENSE'), to('licences', 'OFL-RedHatText.txt')],
+  [from('@fontsource-variable', 'red-hat-mono', 'LICENSE'), to('licences', 'OFL-RedHatMono.txt')],
+  [from('@fontsource-variable', 'chivo', 'LICENSE'), to('licences', 'OFL-Chivo.txt')],
+  [from('@fontsource-variable', 'chivo-mono', 'LICENSE'), to('licences', 'OFL-ChivoMono.txt')],
+  [from('@fontsource-variable', 'epilogue', 'LICENSE'), to('licences', 'OFL-Epilogue.txt')],
+  [
+    from('@fontsource-variable', 'spline-sans-mono', 'LICENSE'),
+    to('licences', 'OFL-SplineSansMono.txt'),
+  ],
   [
     from('@fontsource-variable', 'schibsted-grotesk', 'LICENSE'),
     to('licences', 'OFL-SchibstedGrotesk.txt'),
@@ -85,12 +125,6 @@ const ASSETS = [
     from('@fontsource-variable', 'jetbrains-mono', 'LICENSE'),
     to('licences', 'OFL-JetBrainsMono.txt'),
   ],
-  [from('@fontsource-variable', 'geist', 'LICENSE'), to('licences', 'OFL-Geist.txt')],
-  [from('@fontsource-variable', 'geist-mono', 'LICENSE'), to('licences', 'OFL-GeistMono.txt')],
-  [from('@fontsource-variable', 'bricolage-grotesque', 'LICENSE'), to('licences', 'OFL-BricolageGrotesque.txt')],
-  [from('@fontsource-variable', 'instrument-sans', 'LICENSE'), to('licences', 'OFL-InstrumentSans.txt')],
-  [from('@fontsource-variable', 'bodoni-moda', 'LICENSE'), to('licences', 'OFL-BodoniModa.txt')],
-  [from('@fontsource-variable', 'archivo', 'LICENSE'), to('licences', 'OFL-Archivo.txt')],
   [from('lenis', 'LICENSE'), to('licences', 'MIT-Lenis.txt')],
 ];
 

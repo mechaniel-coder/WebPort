@@ -17,7 +17,6 @@ export const meta = {
 export function render({ url }) {
   return `
 ${pageHead({
-  eyebrow: 'Journal',
   title: 'Notes from the bluff.',
   lede: `Occasional writing about the coast, the kitchen and the seasons — mostly by people
     who work here and have strong opinions about the weather.`,

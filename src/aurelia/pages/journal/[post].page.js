@@ -48,11 +48,11 @@ function renderPost(post, url) {
         ],
         url,
       )}
-      <p class="eyebrow">
+      <h1 class="display-2 page-head__title" style="max-width:22ch">${esc(post.title)}</h1>
+      <p class="note">
         ${esc(post.section)} ·
         <time datetime="${esc(date.iso)}">${esc(date.label)}</time>
       </p>
-      <h1 class="display-2 page-head__title" style="max-width:22ch">${esc(post.title)}</h1>
       <p class="lede page-head__lede">${esc(post.excerpt)}</p>
     </div>
   </header>
@@ -78,7 +78,6 @@ function renderPost(post, url) {
   <div class="shell">
     <div class="section-head">
       <div>
-        <p class="eyebrow">Also in the journal</p>
         <h2 class="display-2" id="more-heading">Keep reading.</h2>
       </div>
     </div>

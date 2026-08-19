@@ -21,7 +21,6 @@ export function render({ url }) {
 
   return `
 ${pageHead({
-  eyebrow: 'Experiences',
   title: 'Led by people who live here.',
   lede: `Nothing on this list is run by a contractor from town. Ren has counted the sea stars
     on our reef for eleven years; the bread morning is taught by the person who bakes it.`,
@@ -33,7 +32,6 @@ ${pageHead({
   <div class="shell">
     <div class="section-head">
       <div>
-        <p class="eyebrow">Book ahead</p>
         <h2 class="display-2" id="booked-heading">Add to a stay.</h2>
       </div>
     </div>
@@ -50,7 +48,6 @@ ${cypressRow({ className: 'cypress-rule' })}
   <div class="shell">
     <div class="section-head">
       <div>
-        <p class="eyebrow">No charge</p>
         <h2 class="display-2" id="included-heading">Included with every room.</h2>
       </div>
     </div>
@@ -65,7 +62,6 @@ ${cypressRow({ className: 'cypress-rule' })}
   <div class="shell">
     <div class="split">
       <div class="split__body">
-        <p class="eyebrow">Practical</p>
         <h2 class="display-2" id="tides-heading">Everything here runs on the tide.</h2>
         <p class="text-soft">The reef walk and the paddle are scheduled against the tide
           table rather than the clock, which means the time changes every day and sometimes

@@ -148,10 +148,20 @@ void main() {
   gl_FragColor = vec4(colour, 1.0);
 }`;
 
+/*
+ * Linear-light values: the shader applies the sRGB transfer curve at the end,
+ * so these are pre-gamma and look darker here than they render.
+ *
+ * The previous light colour was a warm sandy yellow, which is what caustics do
+ * in a Mediterranean swimming pool and not what they do in the Pacific eighty
+ * miles north of San Francisco. Cold water under a marine layer throws a pale
+ * green-white. The deep and shallow tones are the cypress and sea-glass the
+ * page uses for ink and accent, so the hero and the type are the same decision.
+ */
 const PALETTE = {
-  deep: [0.031, 0.075, 0.098],
-  shallow: [0.114, 0.243, 0.259],
-  light: [0.85, 0.79, 0.62],
+  deep: [0.0078, 0.0329, 0.0303],
+  shallow: [0.0385, 0.1835, 0.145],
+  light: [0.6, 0.82, 0.75],
 };
 
 function compile(gl, type, source) {

@@ -38,7 +38,6 @@ export const meta = {
 export function render({ url }) {
   return `
 ${pageHead({
-  eyebrow: 'Salt & Ember',
   title: 'One seating. Twenty-eight people.',
   lede: restaurant.lede,
   trail: meta.breadcrumbs,
@@ -49,7 +48,6 @@ ${pageHead({
   <div class="shell">
     <div class="split">
       <div class="split__body">
-        <p class="eyebrow">The kitchen</p>
         <h2 class="display-2">Written after the deliveries.</h2>
         <p class="text-soft">${esc(restaurant.chef)} cooks a five-course menu that is decided
           in the morning and printed in the afternoon. There is no à la carte, no substitution
@@ -76,7 +74,6 @@ ${pageHead({
   <div class="shell shell--narrow">
     <div class="section-head">
       <div>
-        <p class="eyebrow">Menus</p>
         <h2 class="display-2" id="menus-heading">A recent week.</h2>
       </div>
     </div>
@@ -125,7 +122,6 @@ ${pageHead({
         ${vignette({ seed: 'dining-cellar', palette: 'dusk', motif: 'glass' })}
       </div>
       <div class="split__body">
-        <p class="eyebrow">The cellar</p>
         <h2 class="display-2" id="cellar-heading">Cold, difficult vineyards.</h2>
         <p class="text-soft">The list is almost entirely from the coastal ridges within an
           hour of here — the marginal, fog-bound sites that struggle in a way that turns out

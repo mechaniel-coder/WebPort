@@ -677,9 +677,9 @@ function start(root) {
     save();
 
     el.confirmation.innerHTML = `
-      <p class="eyebrow">Reservation held</p>
       <h2 class="display-2" tabindex="-1" data-panel-title>We will see you on
         ${formatDate(state.checkIn, { month: 'long', day: 'numeric' })}.</h2>
+      <p class="note">Reservation held</p>
       <p class="confirmation__ref">${state.reference}</p>
       <p class="lede">${room.name} for ${priced.nightCount} night${priced.nightCount === 1 ? '' : 's'},
         ${state.guests} guest${state.guests === 1 ? '' : 's'}. A confirmation would normally be sent to

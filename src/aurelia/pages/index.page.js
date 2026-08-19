@@ -25,7 +25,6 @@ export function render({ url }) {
   <canvas class="hero__surface" data-caustics aria-hidden="true"></canvas>
 
   <div class="hero__inner">
-    <p class="eyebrow">${esc(hotel.address.locality)}, California</p>
     <h1 class="display-1 hero__title" data-reveal="lines" data-stagger="0.09">
       The coast,<br>and very little else.</h1>
     <p class="hero__lede" data-reveal data-delay="0.35">${esc(hotel.tagline)} Built into the
@@ -44,7 +43,6 @@ export function render({ url }) {
   <div class="shell">
     <div class="split">
       <div class="split__body">
-        <p class="eyebrow">The property</p>
         <h2 class="display-2" data-reveal="lines" data-stagger="0.07">Ninety minutes past the last coffee shop.</h2>
         <p class="text-soft">Aurelia sits on a mile of bluff between Highway 1 and the open
           Pacific, at the point where the road stops pretending to be convenient. There is no
@@ -64,7 +62,6 @@ export function render({ url }) {
 <section class="section section--paper" aria-labelledby="rooms-heading">
   <div class="shell">
     ${sectionHead({
-      eyebrow: 'Rooms',
       title: 'Three kinds of room, all facing something.',
       link: { href: '/aurelia/rooms/', label: 'All rooms and rates' },
       id: 'rooms-heading',
@@ -102,7 +99,6 @@ export function render({ url }) {
         ${horizon({ seed: 'dining-home', palette: 'dusk', ratio: 0.75 })}
       </div>
       <div class="split__body">
-        <p class="eyebrow">Dining</p>
         <h2 class="display-2" id="dining-heading" data-reveal="lines" data-stagger="0.07">${esc(restaurant.name)}</h2>
         <p class="text-soft">${esc(restaurant.lede)} Ines Okafor cooks what came out of the
           water and off the ridge that day, which means the menu is written after the
@@ -124,7 +120,6 @@ ${cypressRow({ className: 'cypress-rule' })}
 <section class="section section--paper" aria-labelledby="experiences-heading">
   <div class="shell">
     ${sectionHead({
-      eyebrow: 'Experiences',
       title: 'Things to do that are not sitting down.',
       link: { href: '/aurelia/experiences/', label: 'All experiences' },
       id: 'experiences-heading',
@@ -153,7 +148,6 @@ ${cypressRow({ className: 'cypress-rule' })}
 <section class="section" aria-labelledby="journal-heading">
   <div class="shell">
     ${sectionHead({
-      eyebrow: 'Journal',
       title: 'Notes from the bluff.',
       link: { href: '/aurelia/journal/', label: 'All writing' },
       id: 'journal-heading',

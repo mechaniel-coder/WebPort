@@ -21,23 +21,30 @@ export function crumbs(trail, url) {
   </nav>`;
 }
 
-/** Page header used on every interior page. */
-export function pageHead({ eyebrow, title, lede, trail, url }) {
+/**
+ * Page header used on every interior page.
+ *
+ * `note` is optional and renders *after* the heading. The previous build put a
+ * small label above every title — "Rates" over "What it costs, by season." —
+ * which is a label the heading had already earned. Where the line carries
+ * something the heading does not (a date, a room count, a place), it belongs
+ * under the title as a caption; where it does not, it belongs nowhere.
+ */
+export function pageHead({ note, title, lede, trail, url }) {
   return `<section class="page-head">
     <div class="shell">
       ${trail ? crumbs(trail, url) : ''}
-      <p class="eyebrow">${esc(eyebrow)}</p>
       <h1 class="display-2 page-head__title">${esc(title)}</h1>
+      ${note ? `<p class="note">${esc(note)}</p>` : ''}
       ${lede ? `<p class="lede page-head__lede">${esc(lede)}</p>` : ''}
     </div>
   </section>`;
 }
 
 /** Section heading with an optional link on the right. */
-export function sectionHead({ eyebrow, title, link, url, id, split = true }) {
+export function sectionHead({ title, link, url, id, split = true }) {
   return `<div class="section-head${split ? ' section-head--split' : ''}">
     <div>
-      <p class="eyebrow">${esc(eyebrow)}</p>
       <h2 class="display-2"${id ? ` id="${esc(id)}"` : ''}>${esc(title)}</h2>
     </div>
     ${link ? `<a class="link-arrow" href="${esc(url(link.href))}">${esc(link.label)}</a>` : ''}
@@ -50,7 +57,7 @@ export function cta({ url, title = 'Check the calendar', body, seed = 'cta' }) {
     ${horizon({ seed, palette: 'dusk', ratio: 0.4 })}
     <div class="shell cta__inner">
       <h2 class="display-2">${esc(title)}</h2>
-      ${body ? `<p class="lede" style="color:#ece5d9">${esc(body)}</p>` : ''}
+      ${body ? `<p class="lede cta__lede">${esc(body)}</p>` : ''}
       <a class="button" href="${esc(url('/aurelia/book/'))}">Check availability</a>
     </div>
   </section>`;

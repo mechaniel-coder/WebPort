@@ -200,13 +200,31 @@
         type: 'lines',
         mask: 'lines',
         aria: 'auto',
+        // Named so the generated mask wrappers get `.split-line-mask`, which
+        // motion.css needs to widen — see the note there.
+        linesClass: 'split-line',
         autoSplit: true, // re-split on resize; line breaks move when the box does
         onSplit: function (self) {
           return reveal(
             el,
             self.lines,
             { yPercent: 110 },
-            { yPercent: 0, stagger: stagger },
+            {
+              yPercent: 0,
+              stagger: stagger,
+              // The mask exists to hide the line while it is below its own
+              // edge. Once it has arrived the clip has no job left, and
+              // keeping it is actively harmful: `overflow: clip` cuts both
+              // axes, so any glyph reaching outside the line box loses the part
+              // that overhangs. On a face with tall caps set at a tight display
+              // leading that is visible damage — Newsreader's capital T came
+              // out with its crossbar sliced into pieces.
+              onComplete: function () {
+                self.masks.forEach(function (mask) {
+                  mask.style.overflow = 'visible';
+                });
+              },
+            },
             delay,
           );
         },

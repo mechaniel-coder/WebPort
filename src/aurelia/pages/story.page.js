@@ -17,7 +17,7 @@ export const meta = {
 export function render({ url }) {
   return `
 ${pageHead({
-  eyebrow: 'Since 1974',
+  note: 'Open since 1974',
   title: 'Restored, not replaced.',
   lede: `Almost everything here is the building an architect from Berkeley put into this bluff
     fifty years ago. The 2019 work was mostly a matter of taking things off.`,
@@ -32,7 +32,6 @@ ${pageHead({
         ${arch({ seed: 'story-arch', palette: 'dawn' })}
       </div>
       <div class="split__body">
-        <p class="eyebrow">The building</p>
         <h2 class="display-2">Douglas fir, stone, and a great deal of glass.</h2>
         <p class="text-soft">The original compound was eleven rooms and two caretaker
           cottages, framed in fir milled twenty miles inland and faced in stone taken off the
@@ -52,7 +51,6 @@ ${pageHead({
   <div class="shell">
     <div class="section-head">
       <div>
-        <p class="eyebrow">Fifty years</p>
         <h2 class="display-2" id="timeline-heading">Four dates that matter.</h2>
       </div>
     </div>
@@ -76,7 +74,6 @@ ${cypressRow({ className: 'cypress-rule' })}
   <div class="shell">
     <div class="section-head">
       <div>
-        <p class="eyebrow">How it is run</p>
         <h2 class="display-2" id="values-heading">Three decisions that cost money.</h2>
       </div>
     </div>
@@ -100,16 +97,15 @@ ${cypressRow({ className: 'cypress-rule' })}
         ${horizon({ seed: 'story-land', palette: 'winter', ratio: 0.75 })}
       </div>
       <div class="split__body">
-        <p class="eyebrow" style="color:#8a8175">The land</p>
         <h2 class="display-2" id="land-heading">A mile of bluff, held in easement.</h2>
-        <p style="color:#c9c0b1">The trail that runs north from the gate crosses a
+        <p class="band__body">The trail that runs north from the gate crosses a
           conservation easement rather than private ground. That arrangement predates us: the
           family who built the compound put the bluff into it in 1991, which is why there is
           nothing between here and the point and why there never will be.</p>
-        <p style="color:#c9c0b1">It also means the trail is genuinely public. You will meet
+        <p class="band__body">It also means the trail is genuinely public. You will meet
           people on it who are not staying here, and that is the arrangement working
           correctly.</p>
-        <p style="color:#c9c0b1">${esc(hotel.rooms)} rooms is the maximum the septic and the
+        <p class="band__body">${esc(hotel.rooms)} rooms is the maximum the septic and the
           water table on this parcel will carry. It is not a scarcity strategy — it is a
           number from a 1973 engineering report that has never stopped being true.</p>
       </div>

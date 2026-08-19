@@ -64,8 +64,8 @@ function renderRoom(room, url) {
       ],
       url,
     )}
-    <p class="eyebrow">${esc(room.short)}</p>
     <h1 class="display-2 page-head__title">${esc(room.name)}</h1>
+    <p class="note">${esc(room.short)}</p>
     <p class="lede page-head__lede">${esc(room.lede)}</p>
   </div>
 </section>
@@ -108,7 +108,6 @@ function renderRoom(room, url) {
         ${horizon({ seed: `room-detail-${room.slug}`, palette: ROOM_PALETTE[room.art], ratio: 0.75 })}
       </div>
       <div class="split__body">
-        <p class="eyebrow">In the room</p>
         <h2 class="display-2" id="in-the-room">What is actually in it.</h2>
         <ul class="feature-list">
           ${each(room.features, (feature) => `<li>${esc(feature)}</li>`)}
@@ -122,7 +121,6 @@ function renderRoom(room, url) {
   <div class="shell">
     <div class="section-head">
       <div>
-        <p class="eyebrow">Rates</p>
         <h2 class="display-2" id="rate-heading">What it costs, by season.</h2>
       </div>
     </div>
@@ -167,7 +165,6 @@ function renderRoom(room, url) {
   <div class="shell">
     <div class="section-head">
       <div>
-        <p class="eyebrow">Also here</p>
         <h2 class="display-2" id="other-rooms">The other rooms.</h2>
       </div>
     </div>

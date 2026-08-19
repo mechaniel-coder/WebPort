@@ -28,7 +28,7 @@ const mark = `<svg viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg"
 export default {
   key: 'aurelia',
   name: hotel.name,
-  themeColor: '#1a1714',
+  themeColor: '#16211e',
   styles: ['aurelia.css'],
   socialImage: '/aurelia/assets/social-card.svg',
 
@@ -37,8 +37,8 @@ export default {
   webfonts: true,
   motion: true,
   favicon: `<svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-    <rect width="32" height="32" rx="6" fill="#23201c"/>
-    <path d="M7 26V16a9 9 0 0 1 18 0v10" fill="none" stroke="#efe9df" stroke-width="2.2"/>
+    <rect width="32" height="32" rx="6" fill="#0c221d"/>
+    <path d="M7 26V16a9 9 0 0 1 18 0v10" fill="none" stroke="#e4e8e6" stroke-width="2.2"/>
   </svg>`,
 
   organization: () => ({

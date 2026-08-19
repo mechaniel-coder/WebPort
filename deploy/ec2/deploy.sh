@@ -219,9 +219,17 @@ check /aurelia/                      200 || rc=1
 check /aurelia/rooms/                200 || rc=1
 check /northwind/                    200 || rc=1
 check /forma/shop/prism-vase/        200 || rc=1
+check /vestra/fit/                   200 || rc=1
+check /lab/renderer/                 200 || rc=1
+check /work/vestra/                  200 || rc=1
 check /shared/reset.css              200 || rc=1
+check /assets/hub.css                200 || rc=1
+check /vestra/assets/vestra.css      200 || rc=1
+check /lab/assets/lab.css            200 || rc=1
 check /sitemap.xml                   200 || rc=1
 check /robots.txt                    200 || rc=1
+# Extensionless, to prove try_files handles the form a visitor types.
+check /aurelia/rooms                 200 || rc=1
 check /definitely-not-a-page/        404 || rc=1
 
 sudo pkill -f verify.Caddyfile >/dev/null 2>&1

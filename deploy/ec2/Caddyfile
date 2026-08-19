@@ -2,7 +2,7 @@
 	root * {$SITE_ROOT}
 	encode zstd gzip
 
-	# Clean URLs: every page is a directory containing index.html (54 of them),
+	# Clean URLs: every page is a directory containing index.html (79 of them),
 	# so /aurelia/rooms/ must resolve to /aurelia/rooms/index.html. try_files
 	# handles the directory form and the extensionless form a visitor may type.
 	try_files {path} {path}/index.html {path}.html
@@ -14,7 +14,15 @@
 	@html path *.html /
 	header @html Cache-Control "public, max-age=0, must-revalidate"
 
-	@assets path /shared/* /aurelia/assets/* /northwind/assets/* /forma/assets/* /hub/assets/*
+	# Matched by extension, not by directory.
+	#
+	# This previously listed the asset directories one by one, which rots: it
+	# named /hub/assets/* (the hub's files are served from /assets/) and it
+	# predated Vestra and the lab, so 28 files across three sites were being
+	# served with no Cache-Control header at all and left to the browser's
+	# heuristics. Extensions cover every site the build emits, including the
+	# next one.
+	@assets path *.css *.js *.woff2 *.svg *.xml *.txt
 	header @assets Cache-Control "public, max-age=3600"
 
 	header {

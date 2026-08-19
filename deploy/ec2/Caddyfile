@@ -1,0 +1,40 @@
+{$SITE_DOMAIN} {
+	root * {$SITE_ROOT}
+	encode zstd gzip
+
+	# Clean URLs: every page is a directory containing index.html (54 of them),
+	# so /aurelia/rooms/ must resolve to /aurelia/rooms/index.html. try_files
+	# handles the directory form and the extensionless form a visitor may type.
+	try_files {path} {path}/index.html {path}.html
+
+	file_server
+
+	# Nothing in the build is content-hashed, so HTML must revalidate or a deploy
+	# stays invisible until the browser cache expires. Assets can be cached hard.
+	@html path *.html /
+	header @html Cache-Control "public, max-age=0, must-revalidate"
+
+	@assets path /shared/* /aurelia/assets/* /northwind/assets/* /forma/assets/* /hub/assets/*
+	header @assets Cache-Control "public, max-age=3600"
+
+	header {
+		# Sent on every response; the site is static so these are cheap wins.
+		X-Content-Type-Options nosniff
+		Referrer-Policy strict-origin-when-cross-origin
+		-Server
+	}
+
+	handle_errors {
+		@404 expression {err.status_code} == 404
+		rewrite @404 /404/index.html
+		file_server
+	}
+
+	log {
+		output file /var/log/caddy/access.log {
+			roll_size 10MiB
+			roll_keep 5
+		}
+		format console
+	}
+}

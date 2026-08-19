@@ -53,8 +53,8 @@ function renderFeature(feature, url) {
       ],
       url,
     )}
-    <p class="kicker">${esc(feature.kicker)}</p>
     <h1 class="h1 page-head__title">${esc(feature.name)}</h1>
+    <p class="note">${esc(feature.kicker)}</p>
     <p class="lede">${esc(feature.lede)}</p>
   </div>
 </section>
@@ -87,7 +87,6 @@ function renderFeature(feature, url) {
     <div class="grid grid--2" style="gap:var(--space-2xl);align-items:start">
       <div>
         ${sectionHead({
-          kicker: 'Specification',
           title: 'The numbers that matter.',
           id: 'specs-heading',
         })}
@@ -110,7 +109,6 @@ function renderFeature(feature, url) {
 <section class="section" aria-labelledby="others-heading">
   <div class="shell">
     ${sectionHead({
-      kicker: 'Also on the platform',
       title: 'The other two signals.',
       id: 'others-heading',
     })}
@@ -119,8 +117,8 @@ function renderFeature(feature, url) {
         others,
         (other) => `<a class="card card--link"
         href="${esc(url(`/northwind/features/${other.slug}/`))}">
-        <p class="kicker">${esc(other.kicker)}</p>
-        <h3 class="card__title" style="margin-top:var(--space-2xs)">${esc(other.name)}</h3>
+        <h3 class="card__title">${esc(other.name)}</h3>
+        <p class="note">${esc(other.kicker)}</p>
         <p class="card__body">${esc(other.summary)}</p>
       </a>`,
       )}

@@ -38,23 +38,32 @@ export function crumbs(trail, url) {
   </nav>`;
 }
 
-export function pageHead({ kicker, title, lede, trail, url, actions = '' }) {
+/**
+ * `note` renders after the heading, never before it.
+ *
+ * Every heading on this site used to carry a small label above it, and the
+ * labels mostly restated the heading they sat on — "Documentation" over "The
+ * docs", "Pricing" over "Billed on bytes, not on people." Where the line
+ * genuinely adds something (a sector, a signal type) it belongs under the
+ * title as a caption.
+ */
+export function pageHead({ note, title, lede, trail, url, actions = '' }) {
   return `<section class="page-head">
     <div class="shell">
       ${trail ? crumbs(trail, url) : ''}
-      <p class="kicker">${esc(kicker)}</p>
       <h1 class="h1 page-head__title">${esc(title)}</h1>
+      ${note ? `<p class="note">${esc(note)}</p>` : ''}
       ${lede ? `<p class="lede">${esc(lede)}</p>` : ''}
       ${actions}
     </div>
   </section>`;
 }
 
-export function sectionHead({ kicker, title, body, id, link, url, split = false }) {
+export function sectionHead({ note, title, body, id, link, url, split = false }) {
   return `<div class="section-head${split ? ' section-head--split' : ''}">
     <div>
-      ${kicker ? `<p class="kicker">${esc(kicker)}</p>` : ''}
       <h2 class="h2"${id ? ` id="${esc(id)}"` : ''}>${esc(title)}</h2>
+      ${note ? `<p class="note">${esc(note)}</p>` : ''}
       ${body ? `<p class="lede" style="margin-top:var(--space-xs)">${esc(body)}</p>` : ''}
     </div>
     ${link ? `<a class="arrow-link" href="${esc(url(link.href))}">${esc(link.label)}</a>` : ''}

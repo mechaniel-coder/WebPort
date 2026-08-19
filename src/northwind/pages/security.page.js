@@ -17,7 +17,6 @@ export const meta = {
 export function render({ url }) {
   return `
 ${pageHead({
-  kicker: 'Security & compliance',
   title: 'The data never leaves unredacted.',
   lede: `Most vendors scrub sensitive fields after they arrive. Northwind redacts in the
     collector, inside your network, so the control is demonstrable at the config rather than
@@ -41,7 +40,6 @@ ${pageHead({
 <section class="section" aria-labelledby="practices-heading">
   <div class="shell">
     ${sectionHead({
-      kicker: 'Practices',
       title: 'What we actually do.',
       id: 'practices-heading',
     })}
@@ -61,7 +59,6 @@ ${pageHead({
 <section class="section section--raised" aria-labelledby="compliance-heading">
   <div class="shell">
     ${sectionHead({
-      kicker: 'Compliance',
       title: 'Certifications and attestations.',
       body: 'Reports and questionnaires are available under NDA without going through sales.',
       id: 'compliance-heading',
@@ -87,7 +84,6 @@ ${pageHead({
     <div class="grid grid--2" style="gap:var(--space-2xl);align-items:start">
       <div>
         ${sectionHead({
-          kicker: 'Disclosure',
           title: 'How we behave when it goes wrong.',
           id: 'incident-heading',
         })}

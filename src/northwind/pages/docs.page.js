@@ -36,7 +36,6 @@ export function render({ url }) {
 
     <div class="docs__body">
       ${crumbs(meta.breadcrumbs, url)}
-      <p class="kicker">Documentation</p>
       <h1 class="h1" style="margin-block:var(--space-2xs) var(--space-m)">Getting data in.</h1>
       <p class="lede">Northwind ingests OpenTelemetry, Prometheus remote-write and syslog.
         If you already run an OTel collector, the integration is one exporter block.</p>

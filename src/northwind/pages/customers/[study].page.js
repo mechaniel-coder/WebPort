@@ -47,8 +47,8 @@ function renderStudy(customer, url) {
         ],
         url,
       )}
-      <p class="kicker">${esc(customer.sector)}</p>
       <h1 class="h1 page-head__title">${esc(customer.name)}</h1>
+      <p class="note">${esc(customer.sector)}</p>
       <p class="lede">${esc(customer.summary)}</p>
     </div>
   </header>
@@ -100,8 +100,8 @@ function renderStudy(customer, url) {
         others,
         (other) => `<a class="card card--link"
         href="${esc(url(`/northwind/customers/${other.slug}/`))}">
-        <p class="kicker">${esc(other.sector)}</p>
-        <h3 class="card__title" style="margin-top:var(--space-2xs)">${esc(other.name)}</h3>
+        <h3 class="card__title">${esc(other.name)}</h3>
+        <p class="note">${esc(other.sector)}</p>
         <p class="card__body">${esc(other.summary)}</p>
       </a>`,
       )}

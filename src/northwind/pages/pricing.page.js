@@ -49,7 +49,6 @@ export function render({ url }) {
 <script type="application/json" id="pricing-data">${escJson(pricingData)}</script>
 
 ${pageHead({
-  kicker: 'Pricing',
   title: 'Billed on bytes, not on people.',
   lede: `Unlimited users, dashboards and alerts on every plan. You pay for what you ingest
     and how long you keep it, and both numbers are on this page.`,
@@ -92,7 +91,6 @@ ${pageHead({
 <section class="section" aria-labelledby="calc-heading">
   <div class="shell">
     ${sectionHead({
-      kicker: 'Calculator',
       title: 'Work out your actual bill.',
       body: `Real tiered arithmetic against the rates above — including the crossover where
         Business stops being the expensive option.`,
@@ -165,7 +163,6 @@ ${pageHead({
 <section class="section section--raised" aria-labelledby="compare-heading">
   <div class="shell">
     ${sectionHead({
-      kicker: 'Comparison',
       title: 'Every rate, in one table.',
       id: 'compare-heading',
     })}
@@ -222,7 +219,7 @@ ${pageHead({
 
 <section class="section" aria-labelledby="faq-heading">
   <div class="shell" style="max-width:52rem">
-    ${sectionHead({ kicker: 'Questions', title: 'Before you commit.', id: 'faq-heading' })}
+    ${sectionHead({ title: 'Before you commit.', id: 'faq-heading' })}
     ${accordion(pricingFaqs, 'pfaq')}
   </div>
 </section>

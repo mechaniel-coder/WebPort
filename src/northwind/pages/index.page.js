@@ -18,12 +18,11 @@ export function render({ url }) {
   <!-- Decoration over a CSS gradient that stands alone: if WebGL is missing the
        canvas hides itself and the gradient is what remains. aria-hidden because
        describing an abstract field of moving light to a screen-reader user
-       conveys nothing they can use, and the kicker below already names what the
+       conveys nothing they can use, and the headline below says what the
        product does. -->
   <canvas class="hero__surface" data-signal aria-hidden="true"></canvas>
 
   <div class="shell">
-    <p class="kicker">Metrics · Traces · Logs</p>
     <h1 class="h1 hero__title" data-reveal="lines" data-stagger="0.07"
         style="margin-top:var(--space-xs)">
       Observability that does not roll up your data the week you need it.</h1>
@@ -54,7 +53,7 @@ export function render({ url }) {
 
 <section class="section--tight" aria-label="Customers">
   <div class="shell">
-    <p class="kicker" style="margin-bottom:var(--space-s)">
+    <p class="note" style="margin-bottom:var(--space-s)">
       Trusted by ${esc(product.customers.toLocaleString('en-US'))} engineering teams</p>
     <ul class="logos">
       ${each(logos, (name) => `<li>${esc(name)}</li>`)}
@@ -65,7 +64,6 @@ export function render({ url }) {
 <section class="section section--raised" aria-labelledby="signals-heading">
   <div class="shell">
     ${sectionHead({
-      kicker: 'One platform',
       title: 'Three signals, one query language.',
       body: `You stop translating between three dialects during an incident, because the same
         NWQL expression filters all of them.`,
@@ -79,8 +77,8 @@ export function render({ url }) {
       ${each(
         features,
         (feature) => `<a class="card card--link" href="${esc(url(`/northwind/features/${feature.slug}/`))}">
-        <p class="kicker">${esc(feature.kicker)}</p>
-        <h3 class="card__title" style="margin-top:var(--space-2xs)">${esc(feature.name)}</h3>
+        <h3 class="card__title">${esc(feature.name)}</h3>
+        <p class="note">${esc(feature.kicker)}</p>
         <p class="card__body">${esc(feature.summary)}</p>
         <p class="arrow-link" style="margin-top:var(--space-s)">Read more</p>
       </a>`,
@@ -94,7 +92,6 @@ export function render({ url }) {
     <div class="grid grid--2" style="align-items:center;gap:var(--space-2xl)">
       <div>
         ${sectionHead({
-          kicker: 'Pricing',
           title: 'Billed on bytes, not on people.',
           id: 'pricing-heading',
         })}
@@ -111,7 +108,6 @@ export function render({ url }) {
       </div>
 
       <div class="card">
-        <p class="kicker">Typical</p>
         <p style="font-size:var(--step-4);font-weight:660;letter-spacing:-0.035em;line-height:1;
                   margin-top:var(--space-2xs)">$233<span
           style="font-size:var(--step-0);color:var(--text-muted);font-weight:400">/month</span></p>
@@ -128,7 +124,6 @@ export function render({ url }) {
 <section class="section section--raised" aria-labelledby="proof-heading">
   <div class="shell">
     ${sectionHead({
-      kicker: 'Customers',
       title: 'What changed after the migration.',
       id: 'proof-heading',
       split: true,
@@ -141,8 +136,8 @@ export function render({ url }) {
         customers,
         (customer) => `<a class="card card--link"
         href="${esc(url(`/northwind/customers/${customer.slug}/`))}">
-        <p class="kicker">${esc(customer.sector)}</p>
-        <h3 class="card__title" style="margin-top:var(--space-2xs)">${esc(customer.name)}</h3>
+        <h3 class="card__title">${esc(customer.name)}</h3>
+        <p class="note">${esc(customer.sector)}</p>
         <p class="card__body">${esc(customer.summary)}</p>
         <ul class="metrics" style="margin-top:var(--space-m)">
           ${each(

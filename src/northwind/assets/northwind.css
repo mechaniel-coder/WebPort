@@ -9,52 +9,68 @@
  */
 
 :root {
-  color-scheme: dark;
+  /* ── The page and the instrument ────────────────────────────────────────────
+   *
+   * Every observability vendor ships a near-black page with a blue accent, and
+   * the previous build was one of them: #0b0e14 under #4f8ff7. That look is
+   * borrowed from the product's own console, and borrowing it puts the website
+   * in a costume — the marketing page pretends to be the tool while showing a
+   * picture of the tool inside itself.
+   *
+   * This site does the opposite. The page is a cold white read at a desk in the
+   * afternoon; the dashboard keeps the dark surfaces an on-call engineer
+   * actually looks at, scoped to itself further down. The product then sits on
+   * the page as an object rather than as wallpaper, and the screenshot is the
+   * darkest thing on screen — which is the point of showing it.
+   *
+   * The accent is amber. Blue is the category's default and it is also the one
+   * hue an alerting tool cannot spend, because blue means nothing in a severity
+   * scale. Amber is what an instrument uses.
+   */
+  --surface-0: #f5f6f8;
+  --surface-1: #ffffff;
+  --surface-2: #eceef2;
+  --surface-3: #e3e6ec;
+  --border: rgba(12, 16, 22, 0.13);
+  --border-strong: rgba(12, 16, 22, 0.26);
 
-  /* ── Surfaces ───────────────────────────────────────────────────────────── */
-  --surface-0: #0b0e14;
-  --surface-1: #111620;
-  --surface-2: #161d2a;
-  --surface-3: #1c2433;
-  --border: rgba(255, 255, 255, 0.09);
-  --border-strong: rgba(255, 255, 255, 0.16);
+  --text-primary: #0c1016;
+  --text-secondary: #454e5d;
+  --text-muted: #616c7e;
 
-  /* ── Ink ────────────────────────────────────────────────────────────────── */
-  --text-primary: #f2f5fa;
-  --text-secondary: #a9b6cc;
-  --text-muted: #7b88a0;
-
-  /* ── Accent ─────────────────────────────────────────────────────────────── */
-  --accent: #4f8ff7;
-  --accent-hover: #7dabfa;
-  --accent-ink: #06101f;
-
-  /* ── Chart palette (validated against --surface-1) ──────────────────────── */
-  --series-1: #3987e5;
-  --series-2: #d95926;
-  --series-3: #199e70;
-  --chart-surface: #111620;
-  --chart-grid: #1b2331;
-  --chart-axis: #313a4c;
+  --accent: #8a4c08;
+  --accent-hover: #6d3c06;
+  --accent-ink: #fffaf3;
 
   /* ── Status (icon + label always; never colour alone) ───────────────────── */
-  --status-good: #0ca30c;
-  --status-warning: #fab219;
-  --status-serious: #ec835a;
-  --status-critical: #d03b3b;
+  --status-good: #16704a;
+  --status-warning: #8a5a00;
+  --status-serious: #9c4a15;
+  --status-critical: #a32020;
 
-  --focus-ring: #7dabfa;
+  --focus-ring: #8a4c08;
   --focus-radius: 4px;
 
-  /* ── Type ───────────────────────────────────────────────────────────────── */
-  /* Geist and its matched monospace. A developer tool is read by people who
-     look at monospaced text all day, and a mono drawn against the same skeleton
-     as the sans is the difference between a code sample that belongs on the
-     page and one that was pasted onto it. No serif anywhere: Aurelia's Fraunces
-     would be actively wrong here, which is why the sites do not share a stack. */
-  --font-sans: 'Geist', 'Geist Fallback', system-ui, sans-serif;
-  --font-mono: 'Geist Mono', 'Geist Mono Fallback', ui-monospace, monospace;
-  --font-display: var(--font-sans);
+  /* ── Type ───────────────────────────────────────────────────────────────────
+   *
+   * Red Hat Display, Text and Mono: one superfamily drawn on a shared skeleton
+   * for an operating-system company's documentation. That is the register this
+   * product lives in, and it means the mono is a real terminal face rather than
+   * a costume — a code sample belongs to the page instead of being pasted onto
+   * it. Geist, which this replaced, has become one of the faces that signals a
+   * template rather than a decision.
+   */
+  --font-display: 'Red Hat Display', 'Red Hat Display Fallback', system-ui, sans-serif;
+  --font-sans: 'Red Hat Text', 'Red Hat Text Fallback', system-ui, sans-serif;
+  --font-mono: 'Red Hat Mono', 'Red Hat Mono Fallback', ui-monospace, monospace;
+
+  /* ── Syntax, on the light page ──────────────────────────────────────────── */
+  /* Code samples are read, not compared, so these are chosen for legibility on
+     the code block's own ground rather than for categorical separation. All
+     four clear 4.5:1 on --surface-2. */
+  --tok-key: #1c5fb4;
+  --tok-str: #1a6b4a;
+  --tok-num: #a33d0a;
 
   --step--2: clamp(0.72rem, 0.7rem + 0.08vw, 0.76rem);
   --step--1: clamp(0.83rem, 0.81rem + 0.11vw, 0.89rem);
@@ -86,6 +102,62 @@
   --radius: 10px;
   --radius-sm: 6px;
   --ease: cubic-bezier(0.2, 0.6, 0.3, 1);
+}
+
+/* ── The instrument ─────────────────────────────────────────────────────────
+ *
+ * The dashboard is the one dark thing on the site. Redefining the tokens here
+ * rather than overriding rules means every component inside keeps working
+ * unchanged — dashboard.css still asks for --surface-1 and --text-secondary and
+ * simply gets the console's values instead of the page's.
+ *
+ * ── On the chart palette ────────────────────────────────────────────────────
+ *
+ * The previous three series were blue #3987e5, orange #d95926 and green
+ * #199e70, and the repo claimed they had been run through a colour-vision
+ * validator. Re-running that check found the claim was only true for two of the
+ * three dichromacies: under tritanopia the blue and the green land 4.3 dE
+ * apart, which is not a difference — the two lines on the latency chart become
+ * the same line.
+ *
+ * Violet, cyan and red separate on lightness as well as hue, which is what
+ * survives the blue-yellow axis collapsing. Worst pair across normal, protan,
+ * deutan and tritan is 44.3 dE, and every one clears 4.5:1 against the chart
+ * surface. Charts still carry direct labels, because a palette is a second line
+ * of defence and never the first.
+ */
+.dashboard {
+  --surface-0: #0b0f15;
+  --surface-1: #10151d;
+  --surface-2: #161d27;
+  --surface-3: #1d2532;
+  --border: rgba(255, 255, 255, 0.1);
+  --border-strong: rgba(255, 255, 255, 0.19);
+
+  --text-primary: #eef2f8;
+  --text-secondary: #a6b3c6;
+  --text-muted: #78859a;
+
+  --accent: #e2932c;
+  --accent-hover: #f0a747;
+  --accent-ink: #14100a;
+
+  --series-1: #a46ce5;
+  --series-2: #7be0e0;
+  --series-3: #dd4b57;
+  --chart-surface: #10151d;
+  --chart-grid: #1b2331;
+  --chart-axis: #38445a;
+
+  --status-good: #35c07a;
+  --status-warning: #f0b429;
+  --status-serious: #f08a4b;
+  --status-critical: #f26b6b;
+
+  --focus-ring: #f0a747;
+
+  background: var(--surface-1);
+  color: var(--text-primary);
 }
 
 /* ── Base ──────────────────────────────────────────────────────────────────── */
@@ -137,6 +209,12 @@ a:hover {
 .h1,
 .h2,
 .h3 {
+  /* Display rather than Text. They are the same superfamily on one skeleton, so
+     nothing about the page's voice changes — but Display is drawn with tighter
+     spacing and shorter extenders for exactly these sizes, and Text is drawn to
+     stay open at 16px. Using one file for both is what makes a heading look
+     like enlarged body copy. */
+  font-family: var(--font-display);
   font-weight: 620;
   letter-spacing: -0.028em;
   line-height: 1.08;
@@ -144,7 +222,7 @@ a:hover {
   /* Optical kerning matters more once headings are set this large — at 96px a
      badly-spaced pair is an 8px gap rather than a 1px one. */
   font-kerning: normal;
-  font-feature-settings: 'kern' 1, 'liga' 1, 'ss01' 1;
+  font-feature-settings: 'kern' 1, 'liga' 1;
 }
 
 .h1 {
@@ -169,20 +247,27 @@ a:hover {
   letter-spacing: -0.015em;
 }
 
-.kicker {
+/* A caption under a heading, never a label above one — the sector a customer
+   works in, the signal a feature handles, the number of teams. Monospace is
+   right here in a way it is not on a hotel site: this is the face the product's
+   own console uses, and these lines are classifications rather than prose. */
+.note {
+  margin-top: var(--space-2xs);
   font-family: var(--font-mono);
   font-size: var(--step--2);
-  letter-spacing: 0.14em;
+  font-weight: 500;
+  letter-spacing: 0.1em;
   text-transform: uppercase;
+  font-variant-numeric: tabular-nums;
   color: var(--accent);
   display: flex;
   align-items: center;
   gap: 0.7em;
 }
 
-/* A rule growing out of the label. One pseudo-element, and it does more to make
-   a section feel composed than any amount of extra margin. */
-.kicker::after {
+/* A rule growing out of the caption. One pseudo-element, and it does more to
+   make a block feel composed than any amount of extra margin. */
+.note::after {
   content: '';
   flex: 1;
   height: 1px;
@@ -419,8 +504,9 @@ a:hover {
   height: 60rem;
   z-index: -1;
   background:
-    radial-gradient(60rem 30rem at 22% 12%, rgba(79, 143, 247, 0.16), transparent 70%),
-    radial-gradient(44rem 24rem at 82% 0%, rgba(25, 158, 112, 0.1), transparent 70%);
+    radial-gradient(60rem 30rem at 22% 12%, rgba(122, 84, 178, 0.1), transparent 70%),
+    radial-gradient(44rem 24rem at 82% 0%, rgba(24, 132, 132, 0.09), transparent 70%),
+    linear-gradient(to bottom, rgba(206, 211, 218, 0.5), transparent 60%);
 }
 
 .hero__surface {
@@ -433,8 +519,10 @@ a:hover {
 }
 
 /* The shader fades its own lower-left quadrant, but a scrim is still needed for
-   the guarantee: the headline has to clear AA against the *brightest* frame the
-   animation can produce, not the average one. */
+   the guarantee: the headline has to clear AA against the *densest* frame the
+   animation can produce, not the average one.
+   Inverted along with the page — this was a near-black wash protecting light
+   type, and against dark type on a white ground it did the exact opposite. */
 .hero::after {
   content: '';
   position: absolute;
@@ -442,10 +530,10 @@ a:hover {
   z-index: -1;
   background: linear-gradient(
     100deg,
-    rgba(11, 14, 20, 0.94) 0%,
-    rgba(11, 14, 20, 0.82) 38%,
-    rgba(11, 14, 20, 0.36) 72%,
-    rgba(11, 14, 20, 0.12) 100%
+    rgba(245, 246, 248, 0.95) 0%,
+    rgba(245, 246, 248, 0.86) 38%,
+    rgba(245, 246, 248, 0.26) 72%,
+    rgba(245, 246, 248, 0.0) 100%
   );
 }
 
@@ -693,17 +781,17 @@ a:hover {
 }
 
 .code .tok-key {
-  color: var(--series-1);
+  color: var(--tok-key);
 }
 .code .tok-str {
-  color: var(--series-3);
+  color: var(--tok-str);
 }
 .code .tok-com {
   color: var(--text-muted);
   font-style: italic;
 }
 .code .tok-num {
-  color: var(--series-2);
+  color: var(--tok-num);
 }
 
 /* ── Logos ─────────────────────────────────────────────────────────────────── */

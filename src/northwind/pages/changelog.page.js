@@ -16,7 +16,6 @@ export const meta = {
 export function render({ url }) {
   return `
 ${pageHead({
-  kicker: 'Changelog',
   title: 'What shipped, when.',
   lede: `Monthly releases, written by the engineers who did the work. Breaking changes get
     ninety days' notice and never arrive in a patch.`,

@@ -16,7 +16,6 @@ export const meta = {
 export function render({ url }) {
   return `
 ${pageHead({
-  kicker: 'Customers',
   title: 'What actually changed.',
   lede: `Two migrations written up properly — the constraint, what we did about it, and the
     number afterwards. Both companies are fictional; the engineering problems are not.`,
@@ -31,9 +30,8 @@ ${pageHead({
         customers,
         (customer) => `<a class="card card--link"
         href="${esc(url(`/northwind/customers/${customer.slug}/`))}">
-        <p class="kicker">${esc(customer.sector)}</p>
-        <h2 class="card__title" style="margin-top:var(--space-2xs);font-size:var(--step-2)">
-          ${esc(customer.name)}</h2>
+        <h2 class="card__title" style="font-size:var(--step-2)">${esc(customer.name)}</h2>
+        <p class="note">${esc(customer.sector)}</p>
         <p class="card__body" style="font-size:var(--step-0)">${esc(customer.summary)}</p>
 
         <ul class="metrics" style="margin-top:var(--space-l)">
@@ -56,7 +54,7 @@ ${pageHead({
 <section class="section" aria-labelledby="who-heading">
   <div class="shell">
     ${sectionHead({
-      kicker: `${product.customers.toLocaleString('en-US')} teams`,
+      note: `${product.customers.toLocaleString('en-US')} teams`,
       title: 'Who runs on Northwind.',
       body: `Mostly platform and infrastructure teams between ten and four hundred engineers,
         in industries where an outage is a regulatory event rather than an inconvenience.`,

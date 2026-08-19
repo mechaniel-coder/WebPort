@@ -17,7 +17,6 @@ export const meta = {
 export function render({ url }) {
   return `
 ${pageHead({
-  kicker: 'Platform',
   title: 'One pipeline, three signals.',
   lede: `Metrics, traces and logs share a collector, a storage engine and a query language.
     That is the whole architecture, and it is why correlating them does not require exporting
@@ -39,7 +38,6 @@ ${pageHead({
     <div class="grid grid--2" style="gap:var(--space-2xl);align-items:start">
       <div>
         ${sectionHead({
-          kicker: 'Collector',
           title: 'The boundary is yours, not ours.',
           id: 'collector-heading',
         })}
@@ -76,7 +74,6 @@ exporters:
 <section class="section section--raised" aria-labelledby="signals-heading">
   <div class="shell">
     ${sectionHead({
-      kicker: 'Signals',
       title: 'Three ways in, one way out.',
       body: 'Each signal has its own ingest path and its own trade-offs. They share a query language.',
       id: 'signals-heading',
@@ -87,8 +84,8 @@ exporters:
         features,
         (feature) => `<a class="card card--link"
         href="${esc(url(`/northwind/features/${feature.slug}/`))}">
-        <p class="kicker">${esc(feature.kicker)}</p>
-        <h3 class="card__title" style="margin-top:var(--space-2xs)">${esc(feature.name)}</h3>
+        <h3 class="card__title">${esc(feature.name)}</h3>
+        <p class="note">${esc(feature.kicker)}</p>
         <p class="card__body">${esc(feature.summary)}</p>
         <table class="spec-table" style="margin-top:var(--space-m)">
           <caption class="visually-hidden">${esc(feature.name)} specifications</caption>
@@ -130,7 +127,6 @@ log() | where trace_id in above()`,
 
       <div>
         ${sectionHead({
-          kicker: 'NWQL',
           title: 'Stop translating between dialects.',
           id: 'query-heading',
         })}

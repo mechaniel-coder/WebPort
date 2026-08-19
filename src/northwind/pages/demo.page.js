@@ -16,7 +16,6 @@ export const meta = {
 export function render({ url }) {
   return `
 ${pageHead({
-  kicker: 'Demo',
   title: 'Thirty minutes, your own data.',
   lede: `We give you a working account and help you point a collector at it. If it does not
     tell you something useful about your system inside the call, we have wasted your time

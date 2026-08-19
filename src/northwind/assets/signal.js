@@ -97,19 +97,35 @@ void main() {
   float gridY = smoothstep(0.985, 1.0, abs(laneY * 2.0 - 1.0)) * 0.035;
   float gridX = smoothstep(0.99, 1.0, abs(fract(uv.x * 28.0) * 2.0 - 1.0)) * 0.018;
 
-  colour += vec3(0.42, 0.55, 0.78) * (gridY + gridX);
+  colour += vec3(0.35, 0.42, 0.55) * (gridY + gridX);
+  light += (gridY + gridX) * 2.0;
 
   // Fade toward the bottom, where the headline and buttons sit. The type has to
-  // clear AA against the brightest frame this can produce, and the cheapest way
-  // to guarantee that is to make sure the bright part is never down there.
-  colour *= smoothstep(-0.15, 0.75, uv.y);
+  // clear AA against the densest frame this can produce, and the cheapest way
+  // to guarantee that is to make sure the dense part is never down there.
+  float mask = smoothstep(-0.15, 0.75, uv.y);
+  // And fade at the left, so the first column of text sits on clean ground.
+  mask *= mix(0.25, 1.0, smoothstep(0.0, 0.55, uv.x));
 
-  // And fade at the left, so the first column of text is over near-black.
-  colour *= mix(0.35, 1.0, smoothstep(0.0, 0.55, uv.x));
+  colour *= mask;
+  light *= mask;
 
-  // Base surface — matches --surface-0 so the canvas edge is invisible.
-  vec3 base = vec3(0.043, 0.055, 0.078);
-  colour += base;
+  /* ── Ink, not light ─────────────────────────────────────────────────────
+   *
+   * The page around this is a cold white, so the traces are laid down as ink on
+   * it rather than added as glow to a dark field. The accumulated density is
+   * subtracted from the base to darken the ground, and subtracting the
+   * complement of the packet's own hue keeps that darkening tinted rather than
+   * merely grey. Clamped, so a pile-up of overlapping packets saturates to a
+   * solid mark instead of wrapping to a bright one.
+   *
+   * The headline sits on top of this at --text-primary, and the mask above
+   * guarantees the lower-left quadrant it occupies stays close to the base.
+   */
+  vec3 base = vec3(0.87, 0.885, 0.91);
+  vec3 tint = light > 0.0 ? colour / max(light, 0.001) : vec3(1.0);
+  colour = base - light * 0.85 * (vec3(1.0) - tint * 0.8);
+  colour = clamp(colour, vec3(0.0), vec3(1.0));
 
   // Dither before 8-bit truncation, or the long gradients band.
   float dither = fract(sin(dot(gl_FragCoord.xy, vec2(12.9898, 78.233))) * 43758.5453);
@@ -119,11 +135,16 @@ void main() {
   gl_FragColor = vec4(colour, 1.0);
 }`;
 
-// Taken from the site's validated chart palette rather than invented here.
+/*
+ * Taken from the site's chart palette rather than invented here — the same
+ * violet, cyan and red the dashboard uses, which are the three that survive all
+ * three dichromacies with 44 dE between the closest pair. See the note beside
+ * `.dashboard` in northwind.css for why the previous set did not.
+ */
 const PALETTE = {
-  accent: [0.224, 0.529, 0.898], // --series-1
-  warn: [0.851, 0.349, 0.149], // --series-2
-  good: [0.098, 0.62, 0.439], // --series-3
+  accent: [0.643, 0.424, 0.898], // --series-1, violet
+  warn: [0.867, 0.294, 0.341], // --series-3, red — the slow packets
+  good: [0.482, 0.878, 0.878], // --series-2, cyan
 };
 
 function compile(gl, type, source) {

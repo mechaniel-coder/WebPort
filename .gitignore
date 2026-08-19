@@ -19,3 +19,7 @@ Thumbs.db
 # NOTE: dist/ is intentionally NOT ignored.
 # The built output is committed so the sites can be hosted straight from a clone
 # with no toolchain. See HOSTING.md.
+
+# graphify local-only cache (graphify-out/ itself is committed for the team)
+graphify-out/cache/
+graphify-out/cost.json

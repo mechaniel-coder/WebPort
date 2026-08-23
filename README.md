@@ -33,6 +33,37 @@ clothing and the cause of most of its returns.
 
 ---
 
+## The Cinematic kit (`cinematic/`)
+
+A second, deliberately different subproject lives in [`cinematic/`](cinematic/): eight full
+landing pages — one per site category from a third-party "cinematic websites" prompt kit
+(SaaS, portfolio, limited-run launch, agency, e-commerce, app, event, luxury membership) —
+built in Next.js, Tailwind CSS and Framer Motion, sharing one design-token system (near-black
+ground, a giant italic serif for display type, film grain, glass surfaces) with only the
+accent colour changing per site.
+
+This is **not** the zero-dependency, `dist/`-committed architecture the six sites above use —
+npm is `cinematic/`'s real toolchain, not an optional convenience, and it has its own
+`package-lock.json`, committed for reproducible installs. It exists as a separate,
+self-contained app inside this repo rather than as a seventh site in `src/`, because the brief
+it follows and the stack it demonstrates are both intentionally different from the rest of the
+portfolio.
+
+```bash
+cd cinematic
+npm install
+npm run dev     # http://localhost:3000
+npm run build   # production build; every route is static
+```
+
+All eight routes (`/saas`, `/portfolio`, `/launch`, `/agency`, `/ecommerce`, `/app`,
+`/event`, `/luxury`) prerender as static content — there are no API routes or server
+actions — and `/` is an index linking to all eight. Motion respects
+`prefers-reduced-motion` globally via Framer Motion's `MotionConfig`. As with the rest of the
+portfolio, all names, copy and metrics are fictional demonstration content.
+
+---
+
 ## Quick start
 
 Hosting requires no tooling at all — serve `dist/`. To work on the source you need Node 20+:

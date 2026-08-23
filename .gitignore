@@ -3,6 +3,10 @@ node_modules/
 npm-debug.log*
 package-lock.json
 
+# cinematic/ is a real Next.js app (npm is its actual toolchain, not optional),
+# so its lockfile is committed for reproducible installs.
+!cinematic/package-lock.json
+
 # Verification artefacts
 .playwright/
 screenshots/

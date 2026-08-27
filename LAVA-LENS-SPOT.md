@@ -154,9 +154,11 @@ to absorb the impact.
 
 > **The 180 is made in the edit, not in the generator.** Do not ask one clip to
 > swap environments mid-shot — models fail at this almost every time. Generate
-> Clip 4 ending in blur and Clip 5 opening in blur, then cut between them on the
-> blurriest frame. Match the light direction and color temperature exactly and it
-> reads as one continuous camera move.
+> Clip 4 ending in its whip, generate Clip 5 clean on the skatepark, and build
+> the blur between them as a directional motion-blur transition in your editor.
+> Match the light direction and color temperature exactly and it reads as one
+> continuous camera move. See §4, Still 5 for why the blur is built in post
+> rather than generated.
 
 **Physics:** Grinds always decelerate — friction converts speed into heat and
 sound, so exit speed is visibly lower than entry. Weight sits over the trucks,
@@ -218,12 +220,157 @@ type lands.
 
 ---
 
-## 4. GROK WORKFLOW NOTES
+## 4. KEY-FRAME PROMPTS (generate these stills first)
 
-- **Generate a still first, then animate it.** For Clips 1–6, make the key frame
-  as an image, check that the glasses look right, *then* animate. Fixing the
-  design at the still stage costs one generation; fixing it after animating costs
-  many.
+Make the still, verify the glasses, *then* animate. Fixing the design at the
+still stage costs one generation; fixing it after animating costs many.
+
+### The rule that makes this work
+
+**Key-frame the moment *before* the peak, never the peak itself.** Image-to-video
+animates forward from your still. Keyframe the shaka and the clip animates away
+from it. Keyframe the moment before and the payoff lands mid-clip, right where
+you'll be cutting.
+
+Every still below is deliberately the *first* frame of its clip, not its best
+frame.
+
+### Still prompts differ from video prompts
+
+Strip every camera-motion verb — no "tracking," "pulls back," "descends." A still
+prompt describes a photograph: frame, lens, frozen action, light. Motion lives in
+the *evidence* — spray already thrown, rail already buried, water already
+streaming off a forearm.
+
+---
+
+### STILL 1 → Clip 1
+
+```
+Aerial photograph from drone altitude of a packed Hawaiian beach at golden hour,
+wide establishing frame, 35mm equivalent. A competition banner strung between two
+lifeguard towers. Spectators crowd the wet sand, many wearing [PRODUCT LOCK].
+Offshore wind bends every palm frond in the same direction and blows spray
+backward off the wave crests. A reef break peels in the background with two waves
+mid-break and open water between them. Low sun camera-left, warm rim light, heat
+shimmer over the sand. Sharp, high detail, cinematic color.
+```
+
+**Check before animating:** shield lenses read as one continuous curve, not two
+round lenses. Palm fronds all lean the same way.
+
+---
+
+### STILL 2 → Clip 2
+
+```
+Water-level photograph of a teenage surfer lying prone on a shortboard,
+mid-paddle stroke, one arm extended and entering the water, the other lifting
+clear with water streaming off the forearm. A 25-foot wave face rises and
+steepens behind him, its crest feathering with spray blown backward by offshore
+wind. He wears [PRODUCT LOCK]. Low sun camera-left, 24mm wide angle close to the
+subject, water droplets on the lens, golden hour, cinematic.
+```
+
+**This is the character-lock frame.** Get this kid right — he carries Clips 2, 3
+and 4. Once you have a take you like, feed *this image* back as the reference
+input when generating Stills 3 and 4 so the same face and build carry across.
+
+**Check before animating:** nose notch visible in the lens, chrome brow trim
+present, he is still prone (not standing — the pop-up is the animation).
+
+---
+
+### STILL 3 → Clip 3
+
+```
+Photograph of a surfer entering a bottom turn on a large wave face, inside rail
+just beginning to bury, inside shoulder dropped, knees compressed, the first
+sheet of spray starting to lift off the tail. The wave face is smooth and near
+vertical above him. He wears [PRODUCT LOCK], the mirrored lens catching a flash
+of low sun. 85mm compressed telephoto from water level, shallow depth of field,
+golden hour, motion frozen at high shutter speed, cinematic.
+```
+
+**Check before animating:** the turn is *starting* — rail entering water, spray
+not yet fanned. If the still already shows a huge spray fan, regenerate; you've
+lost the animation.
+
+---
+
+### STILL 4 → Clip 4
+
+```
+Elevated wide photograph of a packed Hawaiian beach crowd erupting in cheers,
+people mid-jump with fists raised, dozens wearing [PRODUCT LOCK] catching low sun
+across their mirrored lenses. A judge's tower with flags snapping in offshore
+wind. Ocean and breaking waves behind. Golden hour, sun camera-left, 35mm, warm
+cinematic color grade, sharp detail.
+```
+
+**Check before animating:** sun position and color temperature match Still 1 —
+this and Still 5 are the transition pair and any mismatch kills the cut.
+
+---
+
+### STILL 5 → Clip 5
+
+```
+Low-angle photograph parallel to a metal handrail in a sunlit outdoor concrete
+skatepark, golden hour. A skater is airborne mid-ollie just above the rail,
+trucks about to make contact, body weight centered over the board, arms out for
+balance. Other kids skating bowls in the soft-focus background, several wearing
+[PRODUCT LOCK]. Low sun camera-left, warm color temperature, concrete dust in the
+light, 28mm, shallow depth of field, cinematic.
+```
+
+**Check before animating:** the trucks have **not** landed yet — the grind is the
+animation. Sun still camera-left, same warmth as Still 4.
+
+> **Revision to the transition method:** build the whip blur in post rather than
+> asking Grok for it. Generate Clip 5 clean, opening on this skatepark frame, and
+> add a directional motion-blur transition between Clips 4 and 5 in your editor.
+> Fully controllable, and it beats spending generations on a blur-in the model
+> may not produce. The Clip 4 prompt's closing whip is still worth keeping — it
+> gives the editor real motion to blend into.
+
+---
+
+### STILL 6 → Clip 6
+
+```
+Photograph of a skater balanced on the coping at the lip of a concrete bowl, back
+trucks hooked on the edge, board nose tipped down over the transition, weight
+still held back, knees bent, an instant before committing to the drop. Golden
+hour skatepark, low sun camera-left, other skaters soft in the background wearing
+[PRODUCT LOCK]. The skater wears [PRODUCT LOCK]. 28mm low angle from inside the
+bowl, warm cinematic color, sharp detail.
+```
+
+**Check before animating:** he is balanced on the coping, not already descending.
+All the potential energy, none of it spent.
+
+---
+
+### Glasses QC pass — run on every still before you animate
+
+1. One continuous shield lens, not two separate lenses
+2. Scalloped notch cut at the nose bridge
+3. Thin chrome line along the top brow
+4. Lava gradient: red-purple edges → orange-amber center
+5. Gloss black frame, flat side-shield panels
+
+Miss on any of the first two and regenerate — those are the silhouette. Items 3–5
+are worth one retry, then move on; at action scale nobody in the audience is
+checking.
+
+---
+
+## 5. GROK WORKFLOW NOTES
+
+- **Reuse stills as reference inputs.** Once a character or environment looks
+  right, feed that image back in when generating the next still in the same
+  scene. This is the cheapest continuity tool you have.
 - **Keep prompts tight.** Long prose gets truncated in practice — detail at the
   end of an overlong prompt is the first thing dropped. Each prompt above is
   sized to survive.
@@ -235,7 +382,7 @@ type lands.
   temperature. A single grade pass across all seven is what makes it read as one
   spot instead of seven generations.
 
-## 5. PICKUPS WORTH GENERATING
+## 6. PICKUPS WORTH GENERATING
 
 Cheap inserts that give the editor somewhere to cut when a clip goes bad:
 
